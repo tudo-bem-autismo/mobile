@@ -9,7 +9,10 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo-google-fonts/mandali": "^0.2.2",
+    "@expo-google-fonts/outfit": "^0.2.2",
     "@expo-google-fonts/poppins": "^0.2.2",
+    "@expo/vector-icons": "^13.0.0",
     "@react-navigation/native": "^6.0.12",
     "expo": "~46.0.9",
     "expo-font": "^10.2.0",
