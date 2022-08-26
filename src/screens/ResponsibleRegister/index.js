@@ -1,13 +1,12 @@
 import React from "react";
-import { View, SafeAreaView, Text, ImageBackground, TouchableOpacity, Image, TextInput } from "react-native";
+import { View, SafeAreaView, Text, ImageBackground, TouchableOpacity, Image, TextInput, KeyboardAvoidingView } from "react-native";
 import { MaterialIcons, FontAwesome5, FontAwesome } from "@expo/vector-icons";
 
 
 import styles from "./style.js";
 import background from '../../assets/images/background.png';
-// import ButtonBack from "../../components/buttonBack.js";
 import headerImg from "../../assets/images/friends.png";
-import { COLORS } from "../../assets/const/colors.js";
+import google from "../../assets/icons/google.png";
 
 
 export function ResponsiveRegister() {
@@ -20,6 +19,7 @@ export function ResponsiveRegister() {
                 source={background}
                 resizeMode="cover"
                 style={styles.background}>
+
                 <View style={styles.backContainer}>
                     <TouchableOpacity style={styles.backButton}>
                         <MaterialIcons name="arrow-back-ios" size={27} color="black" />
@@ -47,29 +47,32 @@ export function ResponsiveRegister() {
                             </View>
                         </View>
                         <View style={styles.slideContainer}>
-                            <TouchableOpacity style={styles.selectedSlideButton}/>
-                            <TouchableOpacity style={styles.slideButton}/>
+                            <TouchableOpacity style={styles.selectedSlideButton} />
+                            <TouchableOpacity style={styles.slideButton} />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <TouchableOpacity>
+                            <TouchableOpacity style={styles.button}>
                                 <Text>PRÓXIMO</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
                     <View style={styles.loginContainer}>
-                        <View>
-                            <View />
-                            <Text>ou entre com</Text>
-                            <View />
+                        <View style={styles.loginTitleContainer}>
+                            <View style={styles.loginLine} />
+                            <Text style={styles.loginTitleText}>ou entre com</Text>
+                            <View style={styles.loginLine} />
                         </View>
-                        <View>
+                        <View style={styles.loginIconContainer}>
                             <TouchableOpacity>
-                                <Image></Image>
+                                <Image source={google} />
                             </TouchableOpacity>
                         </View>
-                        <View>
-                            <Text>Você já tem uma conta?</Text>
-                            <Text>Entrar</Text>
+                        <View style={styles.loginDescriptionContainer}>
+                            <Text style={styles.loginQuestionText}>Você já tem uma conta?</Text>
+                            <TouchableOpacity style={styles.loginButton}>
+                                <Text style={styles.loginButtonText}>Entrar</Text>
+                            </TouchableOpacity>
+
                         </View>
                     </View>
                 </View>
