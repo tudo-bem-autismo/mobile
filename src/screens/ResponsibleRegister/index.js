@@ -1,11 +1,14 @@
 import React from "react";
 import { View, SafeAreaView, Text, ImageBackground, TouchableOpacity, Image, TextInput, KeyboardAvoidingView } from "react-native";
-import { MaterialIcons, FontAwesome5, FontAwesome } from "@expo/vector-icons";
+import { FontAwesome5, FontAwesome } from "@expo/vector-icons";
 
 
 import styles from "./style.js";
+import Input from "../../components/Input.js";
+import { BackButton } from "../../components/BackButton.js";
+import Header from "../../components/Header.js";
+import Title from "../../components/Title.js";
 import background from '../../assets/images/background.png';
-import headerImg from "../../assets/images/friends.png";
 import google from "../../assets/icons/google.png";
 
 
@@ -19,27 +22,17 @@ export function ResponsiveRegister() {
                 source={background}
                 resizeMode="cover"
                 style={styles.background}>
-
-                <View style={styles.backContainer}>
-                    <TouchableOpacity style={styles.backButton}>
-                        <MaterialIcons name="arrow-back-ios" size={27} color="black" />
-                        <Text style={styles.backContainerText}>Voltar</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.headerContainer}>
-                    <Image source={headerImg} style={styles.headerImg} />
-                </View>
+                <BackButton title="Voltar" />
+                <Header />
                 <View style={styles.formContainer}>
-                    <View style={styles.titleContainer}>
-                        <Text style={styles.titleText}>Crie sua conta</Text>
-                    </View>
+
+                    <Title title="Crie sua conta"/>
+
                     <View style={styles.registerContainer}>
                         <View style={styles.infoContainer}>
-                            <View style={styles.inputContainer}>
-                                <Text style={styles.inputText}>Nome</Text>
-                                <TextInput placeholder="seu nome completo" style={styles.firstInput}></TextInput>
-                                <FontAwesome5 name="user-alt" size={20} color="gray" style={styles.inputIcon} />
-                            </View>
+                            
+                            <Input />
+
                             <View style={styles.inputContainer}>
                                 <Text style={styles.inputText}>Telefone</Text>
                                 <TextInput placeholder="(99) 99999-9999" style={styles.secondInput}></TextInput>

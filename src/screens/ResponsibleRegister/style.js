@@ -1,6 +1,8 @@
 import { StyleSheet, StatusBar } from "react-native";
 
-import { FONTS, COLORS } from "../../assets/const/index"
+// import { FONTS, COLORS } from "../../assets/const/index"
+import  {FONTS}  from "../../assets/const/fonts";
+import COLORS from "../../assets/const/colors";
 
 const shadow = {
   shadowOffset: { width: 0, height: -10, },
@@ -31,13 +33,6 @@ const style = StyleSheet.create({
     flex: 1,
     alignSelf: 'stretch',
   },
-  headerContainer: {
-    flex: 8,
-    alignSelf: 'stretch',
-    alignItems: 'center',
-    justifyContent: 'flex-end'
-    // backgroundColor: COLORS.darkBlue,
-  },
   formContainer: {
     flex: 24,
     alignSelf: 'stretch',
@@ -45,36 +40,6 @@ const style = StyleSheet.create({
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
     ...shadow
-  },
-  backContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    color: COLORS.black,
-    padding: 8,
-    // backgroundColor: COLORS.blue,
-  },
-  backButton: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  backContainerText: {
-    fontSize: 20,
-    fontFamily: FONTS.text,
-    color: COLORS.black,
-  },
-  headerImg: {
-    width: '75%',
-    height: '75%',
-  },
-  titleContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    // backgroundColor: COLORS.blue,
-  },
-  titleText: {
-    fontSize: 30,
-    fontFamily: FONTS.title
   },
   registerContainer: {
     flex: 6,
@@ -88,40 +53,6 @@ const style = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     // backgroundColor: COLORS.red,
-  },
-  inputContainer: {
-    flex: 1,
-    position: 'relative',
-    // justifyContent: 'flex-end',
-    // backgroundColor: COLORS.darkBlue,
-  },
-  inputIcon: {
-    position: 'absolute',
-    right: 15,
-    top: 55,
-  },
-  inputText: {
-    fontSize: 20,
-    fontFamily: FONTS.mandali,
-    marginLeft: 10,
-  },
-  firstInput: {
-    width: '100%',
-    height: 50,
-    borderWidth: 1,
-    borderRadius: 10,
-    borderColor: COLORS.blue,
-    padding: 10,
-    fontSize: 17,
-  },
-  secondInput: {
-    width: '100%',
-    height: 50,
-    borderWidth: 1,
-    borderRadius: 10,
-    borderColor: COLORS.purple,
-    padding: 10,
-    fontSize: 17,
   },
   slideContainer: {
     flex: 0.5,
