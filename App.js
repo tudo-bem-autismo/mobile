@@ -7,6 +7,8 @@ import { Text } from 'react-native';
 
 import { ResponsiveRegister } from './src/screens/ResponsibleRegister';
 
+import { ResponsiveLogin } from './src/screens/Login';
+
 export default function App() {
 
   const [fontsLoaded] = useFonts({
@@ -20,7 +22,7 @@ export default function App() {
     return <Text>Carregando...</Text>;
   } else {
     return (
-      <ResponsiveRegister />
+      <ResponsiveLogin/>
     );
   }
 

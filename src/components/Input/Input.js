@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
     inputContainer: {
         width: '100%',
         height: '40%',
-        position: 'relative',
-        justifyContent: 'flex-start',
+        //position: 'relative',
+        //justifyContent: 'flex-start',
     },
     icon: {
         position: 'absolute',

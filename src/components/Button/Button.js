@@ -4,21 +4,12 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { COLORS } from "../../assets/const";
 
 
-export const Button = ({ label, handleFormIndex, formIndex }) => {
+export const Button = ({ label}) => {
 
-    const handleSubmit = () => {
-        if(formIndex === 1){
-            
-            return console.log('é')
-        }
-
-        handleFormIndex()
-    }
-
+    
     return (
         <View style={styles.buttonContainer}>
             <TouchableOpacity
-                onPress={ () => handleSubmit()}
                 style={styles.button}
             >
                 <Text>{label}</Text>
@@ -36,7 +27,7 @@ const bottomShadow = {
 }
 
 const styles = StyleSheet.create({
-    buttonContainer: {
+   buttonContainer: {
         flex: 1,
         alignSelf: 'stretch',
         alignItems: 'center',
@@ -51,6 +42,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         alignItems: 'center',
         justifyContent: 'center',
+        marginVertical: 40,
         ...bottomShadow
     },
 });

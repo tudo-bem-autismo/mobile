@@ -1,13 +1,13 @@
 import React from "react";
 import { Image, StyleSheet, View } from "react-native";
 
-import headerImg from "../../assets/images/friends.png";
 
-export const Header = () => {
+
+export const Header = ({image}) => {
 
     return (
         <View style={styles.headerContainer}>
-            <Image source={headerImg} style={styles.headerImg} />
+            <Image source={image} style={styles.headerImg} />
         </View>
     );
 }
@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end'
     },
     headerImg: {
-        width: '75%',
-        height: '75%',
+        maxWidth: '80%',
+        maxHeight: '80%',
     },
 });
+ //80 90
