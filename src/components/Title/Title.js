@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import { FONTS } from "../assets/const/fonts";
+import { FONTS } from "../../assets/const/fonts";
 
-const Title = ({ title }) => {
+export const Title = ({ title }) => {
 
     return (
         <View style={styles.titleContainer}>
@@ -23,5 +23,3 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.title
       },
 });
-
-export default Title;

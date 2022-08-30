@@ -1,11 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
-import { Icon } from "react-native-vector-icons/MaterialCommunityIcons";
+import { FontAwesome } from "@expo/vector-icons";
 
-import { FONTS } from "../assets/const/fonts";
-import COLORS from "../assets/const/colors"
+import { FONTS, COLORS } from "../../assets/const";
 
-const Input = ({ title, iconName }) => {
+export const Input = ({ title, iconName, placeholder, borderColor }) => {
 
     return (
         <View style={styles.inputContainer}>
@@ -13,8 +12,11 @@ const Input = ({ title, iconName }) => {
             <Text style={styles.inputText}>{title}</Text>
 
             <View>
-                {/* <Icon name={iconName} style={styles.icon} /> */}
-                <TextInput style={styles.firstInput} ></TextInput>      
+                <FontAwesome 
+                    name={iconName} 
+                    style={styles.icon}
+                    />
+                <TextInput style={{...styles.input, borderColor}} placeholder={placeholder}></TextInput>
             </View>
 
         </View>
@@ -23,13 +25,17 @@ const Input = ({ title, iconName }) => {
 
 const styles = StyleSheet.create({
     inputContainer: {
-        flex: 1,
-        // justifyContent: 'flex-end',
-        // backgroundColor: COLORS.darkBlue,
+        width: '100%',
+        height: '40%',
+        position: 'relative',
+        justifyContent: 'flex-start',
     },
     icon: {
+        position: 'absolute',
+        top: 12,
+        right: 10,
         fontSize: 22,
-        color: COLORS.darkBlue,
+        color: COLORS.gray,
         marginRight: 10,
     },
     inputText: {
@@ -37,7 +43,7 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.mandali,
         marginLeft: 10,
     },
-    firstInput: {
+    input: {
         width: '100%',
         height: 50,
         borderWidth: 1,
@@ -45,7 +51,7 @@ const styles = StyleSheet.create({
         borderColor: COLORS.blue,
         padding: 10,
         fontSize: 17,
+        
     },
 });
 
-export default Input;

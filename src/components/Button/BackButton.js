@@ -2,9 +2,7 @@ import React from "react";
 import { TouchableOpacity, StyleSheet, Text, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-import { FONTS } from "../assets/const/fonts";
-import COLORS from "../assets/const/colors";
-
+import { FONTS, COLORS } from "../../assets/const";
 
 export const BackButton = ({ title }) => {
 
@@ -25,7 +23,6 @@ const styles = StyleSheet.create({
     backContainer: {
         flex: 1,
         flexDirection: 'row',
-        // color: COLORS.black,
         padding: 8,
     },
     backButton: {
@@ -38,3 +35,4 @@ const styles = StyleSheet.create({
         color: COLORS,
     },
 });
+

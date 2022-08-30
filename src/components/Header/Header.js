@@ -1,9 +1,9 @@
 import React from "react";
 import { Image, StyleSheet, View } from "react-native";
 
-import headerImg from "../assets/images/friends.png";
+import headerImg from "../../assets/images/friends.png";
 
-const Header = () => {
+export const Header = () => {
 
     return (
         <View style={styles.headerContainer}>
@@ -24,5 +24,3 @@ const styles = StyleSheet.create({
         height: '75%',
     },
 });
-
-export default Header;
