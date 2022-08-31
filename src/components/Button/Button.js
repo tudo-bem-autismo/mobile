@@ -4,15 +4,11 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { COLORS } from "../../assets/const";
 
 
-export const Button = ({ label, handleFormIndex, formIndex }) => {
+export const Button = ({ label, handleForm}) => {
 
     const handleSubmit = () => {
-        if(formIndex === 1){
-            
-            return console.log('é')
-        }
 
-        handleFormIndex()
+        handleForm()
     }
 
     return (

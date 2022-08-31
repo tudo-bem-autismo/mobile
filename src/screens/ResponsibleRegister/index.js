@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, SafeAreaView, ImageBackground } from "react-native";
+import { View, SafeAreaView, ImageBackground, KeyboardAvoidingView, Platform } from "react-native";
 
 import styles from "./style.js";
 import {
@@ -21,37 +21,44 @@ export function ResponsiveRegister() {
 
     const [formIndex, setFormIndex] = useState(0)
 
-    const handleFormIndex = () => {
+    const handleForm = () => {
 
-        const currentIndex = formIndex === 0 ? 1 : 0
-        console.log(currentIndex)
+        // if(formIndex === 0)
+
+        //     return setFormIndex(1)
+
+        const currentIndex = formIndex ? 0 : 1
         setFormIndex(currentIndex)
+        
     }
 
     return (
 
-        <SafeAreaView style={styles.mainContainer}>
+        <View style={styles.mainContainer}>
 
             <ImageBackground
+
                 source={background}
                 resizeMode="cover"
                 style={styles.background}>
+
                 <BackButton title="Voltar" />
                 <Header />
                 <View style={styles.formContainer}>
 
                     <Title title="Crie sua conta" />
 
-                    <View style={styles.registerContainer}>
-                        <View style={styles.infoContainer}>
+                        <View style={styles.registerContainer}>
+                            <View style={styles.infoContainer}>
 
-                            <FormSwiper formIndex={formIndex} handleFormIndex={handleFormIndex}/>
+                                <FormSwiper formIndex={formIndex} />
 
-                        </View>
-                        {/* 
+                            </View>
+                            {/* 
                         <SlideButton /> */}
-                        <Button label="PRÓXIMO" handleFormIndex={handleFormIndex}/>
-                    </View>
+                            <Button label={formIndex === 1 ? "CADASTRAR" : "PRÓXIMO"} handleForm={handleForm} />
+                        </View>
+
                     <View style={styles.loginContainer}>
                         <Login label="ou entre com" />
                         <Google />
@@ -62,10 +69,9 @@ export function ResponsiveRegister() {
                     </View>
                 </View>
 
-
             </ImageBackground>
 
-        </SafeAreaView>
+        </View >
 
     );
 

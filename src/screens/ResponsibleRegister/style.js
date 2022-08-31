@@ -50,6 +50,9 @@ const style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  container: {
+    flex: 6,
+  }
 });
 
 export default style;

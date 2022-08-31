@@ -5,7 +5,7 @@ import Swiper from 'react-native-swiper';
 import { COLORS } from '../../assets/const';
 import { Input } from '../Input';
 
-export const FormSwiper = ({ formIndex, handleFormIndex }) => {
+export const FormSwiper = ({ formIndex }) => {
     return (
         <Swiper
             style={styles.wrapper}
@@ -14,7 +14,8 @@ export const FormSwiper = ({ formIndex, handleFormIndex }) => {
             activeDotStyle={styles.selectedDot}
             index={formIndex}
             loop={false}
-            onIndexChanged={(index) => handleFormIndex(index)}>
+            scrollEnabled={false}
+            >
             <View style={styles.slide1}>
                 <Input
                     title="Nome"
@@ -40,7 +41,7 @@ export const FormSwiper = ({ formIndex, handleFormIndex }) => {
                 <Input
                     title="Senha"
                     iconName="phone"
-                    placeholder="com no mínimo 6 caracteres"
+                    placeholder="com no mínimo 4 caracteres"
                     borderColor={COLORS.yellow}
                 />
             </View>
@@ -66,7 +67,6 @@ const styles = StyleSheet.create({
         paddingRight: 20,
     },
     slideButton: {
-        // backgroundColor: COLORS.blue,
         height: 55,
         marginTop: 60,
         justifyContent: 'center',
@@ -90,7 +90,6 @@ const styles = StyleSheet.create({
     },
     paginationStyle: {
         height: 20,
-        // backgroundColor: COLORS.darkBlue,
 
     }
 });
