@@ -22,6 +22,9 @@ export const Form = () => {
 
         const result = await responsibleRegisterService(data)
 
+        // console.log(result)
+
+       
         // const currentIndex = formIndex ? 0 : 1
         // setFormIndex(currentIndex)
 

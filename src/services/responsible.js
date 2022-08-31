@@ -1,10 +1,26 @@
+
 import api from "./api";
 
 export const responsibleRegisterService = async (data) => {
 
-    // const result = await api.post("/responsibles", data);
+    const formattedData = {
+        nome: data.name,
+        telefone: data.phone,
+        email: data.email,
+        senha: data.password
+    }
 
-    // return result.status === 200
+    try {
 
-    return false
+        const result = await api.post("/responsavel", formattedData);
+
+        console.log(result)
+
+        return await result.status === 200
+
+    } catch (error) {
+        return error
+    }
+
+
 }
