@@ -4,17 +4,34 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { COLORS } from "../../assets/const";
 
 
-export const Button = ({ label, handleForm}) => {
+export const Button = ({ label, handleForm, submit, formIndex, errors, values }) => {
 
     const handleSubmit = () => {
 
-        handleForm()
+        // Campos do primeiro formulário
+        const firstFields = ["name", "phone"]
+        // Array com todos os campos que estão com erro
+        const fieldsWithError = Object.keys(errors)
+
+        // Função para verificar se os primeiros campos estão dentre os campos com erro
+        const firstFieldsIsValid = firstFields.reduce((acc, curr) => {
+
+            if (!acc)
+                return acc
+
+            return !fieldsWithError.includes(curr)
+        }, true)
+
+        if (firstFieldsIsValid && values?.name && values?.phone)
+            handleForm()
+
+        submit()
     }
 
     return (
         <View style={styles.buttonContainer}>
             <TouchableOpacity
-                onPress={ () => handleSubmit()}
+                onPress={() => handleSubmit()}
                 style={styles.button}
             >
                 <Text>{label}</Text>

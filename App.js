@@ -1,9 +1,10 @@
-import { useFonts, Poppins_400Regular } from '@expo-google-fonts/poppins'
-import { Outfit_400Regular } from '@expo-google-fonts/outfit'
-import { Mandali_400Regular } from '@expo-google-fonts/mandali'
+import { useFonts, Poppins_400Regular } from '@expo-google-fonts/poppins';
+import { Outfit_400Regular } from '@expo-google-fonts/outfit';
+import { Mandali_400Regular } from '@expo-google-fonts/mandali';
 
 import React from "react";
 import { Text } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 import { ResponsiveRegister } from './src/screens/ResponsibleRegister';
 
@@ -13,14 +14,17 @@ export default function App() {
     Poppins_400Regular,
     Outfit_400Regular,
     Mandali_400Regular
-    
+
   });
 
   if (!fontsLoaded) {
     return <Text>Carregando...</Text>;
   } else {
     return (
-      <ResponsiveRegister />
+      <>
+        <ResponsiveRegister />
+        <Toast />
+      </>
     );
   }
 

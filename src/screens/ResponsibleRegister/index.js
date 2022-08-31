@@ -13,24 +13,12 @@ import {
     SlideButton,
     FormSwiper,
     Title,
+    Form,
 } from "../../components";
 
 import background from '../../assets/images/background.png';
 
 export function ResponsiveRegister() {
-
-    const [formIndex, setFormIndex] = useState(0)
-
-    const handleForm = () => {
-
-        // if(formIndex === 0)
-
-        //     return setFormIndex(1)
-
-        const currentIndex = formIndex ? 0 : 1
-        setFormIndex(currentIndex)
-        
-    }
 
     return (
 
@@ -49,14 +37,7 @@ export function ResponsiveRegister() {
                     <Title title="Crie sua conta" />
 
                         <View style={styles.registerContainer}>
-                            <View style={styles.infoContainer}>
-
-                                <FormSwiper formIndex={formIndex} />
-
-                            </View>
-                            {/* 
-                        <SlideButton /> */}
-                            <Button label={formIndex === 1 ? "CADASTRAR" : "PRÓXIMO"} handleForm={handleForm} />
+                           <Form/>
                         </View>
 
                     <View style={styles.loginContainer}>

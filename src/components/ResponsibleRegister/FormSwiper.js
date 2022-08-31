@@ -1,3 +1,4 @@
+import { Form, Formik } from 'formik';
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Swiper from 'react-native-swiper';
@@ -15,20 +16,26 @@ export const FormSwiper = ({ formIndex }) => {
             index={formIndex}
             loop={false}
             scrollEnabled={false}
-            >
+        >
             <View style={styles.slide1}>
-                <Input
-                    title="Nome"
-                    iconName="user-circle-o"
-                    placeholder="seu nome completo"
-                    borderColor={COLORS.blue}
-                />
-                <Input
-                    title="Telefone"
-                    iconName="phone"
-                    placeholder="(99) 99999-9999"
-                    borderColor={COLORS.purple}
-                />
+                <Formik
+                    onSubmit={values => console.log(values)}
+                >
+                    <>
+                        <Input
+                            title="Nome"
+                            iconName="user-circle-o"
+                            placeholder="seu nome completo"
+                            borderColor={COLORS.blue}
+                        />
+                        <Input
+                            title="Telefone"
+                            iconName="phone"
+                            placeholder="(99) 99999-9999"
+                            borderColor={COLORS.purple}
+                        />
+                    </>
+                </Formik>
             </View>
             <View style={styles.slide2}>
 
