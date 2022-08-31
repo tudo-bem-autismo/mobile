@@ -36,17 +36,18 @@ const style = StyleSheet.create({
     flex: 6,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: COLORS.darkBlue,
+    //backgroundColor: COLORS.darkBlue,
   },
   infoContainer: {
-    flex: 24,
+    flex: 7,
     alignSelf: 'stretch',
     paddingLeft: 20,
     paddingRight: 20,
-    backgroundColor: COLORS.red,
+    //backgroundColor: COLORS.red,
+
   },
   loginContainer: {
-    flex: 1,
+    flex: 4,
     alignItems: 'center',
     justifyContent: 'center',
   },

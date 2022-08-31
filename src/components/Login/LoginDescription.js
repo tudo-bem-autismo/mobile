@@ -3,12 +3,14 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { FONTS, COLORS } from "../../assets/const";
 
-export const LoginDescription = ({ question, answer }) => {
+export const LoginDescription = ({ question, answer, navigation }) => {
+
+    //console.log(navigation);
 
     return (
         <View style={styles.loginDescriptionContainer}>
             <Text style={styles.loginQuestionText}>{question}</Text>
-            <TouchableOpacity style={styles.loginButton}>
+            <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Register')}>
                 <Text style={styles.loginButtonText}>{answer}</Text>
             </TouchableOpacity>
         </View>

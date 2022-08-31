@@ -28,10 +28,11 @@ const bottomShadow = {
 
 const styles = StyleSheet.create({
    buttonContainer: {
-        flex: 1,
+        flex: 2,
         alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'center',
+        paddingBottom: 5
     },
     button: {
         width: 138,
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         alignItems: 'center',
         justifyContent: 'center',
-        marginVertical: 40,
+        //marginVertical: 20,
         ...bottomShadow
     },
 });

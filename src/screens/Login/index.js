@@ -17,7 +17,8 @@ import {
 import background from '../../assets/images/background.png';
 import headerImg from '../../assets/images/aa.png';
 
-export function ResponsiveLogin() {
+export function ResponsiveLogin({navigation}) {
+    //console.log(navigation);
 
     return (
         <SafeAreaView style={styles.mainContainer}>
@@ -31,7 +32,6 @@ export function ResponsiveLogin() {
 
                 <View style={styles.formContainer}>
 
-                    <KeyboardAvoidingView style={{height: 300}}>
                     
                     <Title title="Entre na sua conta"/>
         
@@ -47,17 +47,16 @@ export function ResponsiveLogin() {
                        
                     </View>
 
-                    </KeyboardAvoidingView>
-
-
                     <View style={styles.loginContainer}> 
                         <Login label="ou entre com"/>
                         <Google/>
                         <LoginDescription
                             question="Não tem uma conta?"
                             answer="Cadastre-se"
+                            navigation={navigation}
                         />
                     </View> 
+                    
                 </View>
 
             </ImageBackground>

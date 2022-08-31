@@ -8,6 +8,7 @@ import { Text } from 'react-native';
 import { ResponsiveRegister } from './src/screens/ResponsibleRegister';
 
 import { ResponsiveLogin } from './src/screens/Login';
+import Navigation from './src/navigation/navigation';
 
 export default function App() {
 
@@ -22,7 +23,7 @@ export default function App() {
     return <Text>Carregando...</Text>;
   } else {
     return (
-      <ResponsiveLogin/>
+      <Navigation/>
     );
   }
 
