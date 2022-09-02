@@ -13,18 +13,22 @@ import { responsibleRegisterService } from "../../services";
 
 export const Form = () => {
 
+    // Estado para definir qual parte do formulário está sendo preenchido
     const [formIndex, setFormIndex] = useState(0)
 
-    const handleForm = async (data) => {
-
+    const changeFormPage = () => {
+        // Verifica se está na primeira parte do formulário, se estiver, passará para a próxima  
         if (formIndex === 0)
             return setFormIndex(1)
+    }
 
+    // envio dos dados pra api
+    const handleForm = async (data) => {
+
+        // Chama a api enviando os dados do formulário, "data" são os "values"
         const result = await responsibleRegisterService(data)
 
         // console.log(result)
-
-       
         // const currentIndex = formIndex ? 0 : 1
         // setFormIndex(currentIndex)
 
@@ -42,6 +46,7 @@ export const Form = () => {
 
     }
 
+    // Todos os campos irão iniciar com esses valores, ou seja, vazios
     const initialValues = {
         name: '',
         phone: '',
@@ -51,10 +56,15 @@ export const Form = () => {
 
     return (
         <Formik
+            // Informa como deve ser o formato dos dados
             validationSchema={responsibleRegisterSchema}
+            // Informa com quais dados o formulário irá iniciar
             initialValues={initialValues}
+            // Evento de quando o formulário é enviado
+            // Ele recebe todos os dados dos inputs na variável "values"
             onSubmit={values => handleForm(values)}
         >
+            {/* Mais propriedades do Formik para manipular o formulário */}
             {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
                 <>
                     <View style={styles.infoContainer}>
@@ -78,7 +88,9 @@ export const Form = () => {
                                     onChangeText={handleChange('name')}
                                     onBlur={handleBlur('name')}
                                     value={values.name}
+                                    // Propriedade para saber se existe algum erro de validação do campo, convertendo para booleano
                                     hasError={!!errors.name}
+                                    // Mensagem de erro vinda do yup
                                     errorMessage={errors.name}
                                 />
                                 <Input
@@ -126,7 +138,8 @@ export const Form = () => {
                         <Button
                             label={formIndex === 0 ? "PRÓXIMO" : "CADASTRAR"}
                             submit={handleSubmit}
-                            handleForm={handleForm}
+                            changeFormPage={changeFormPage}
+                            formIndex={formIndex}
                             errors={errors}
                             values={values}
                         />

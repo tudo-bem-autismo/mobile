@@ -4,27 +4,20 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { COLORS } from "../../assets/const";
 
 
-export const Button = ({ label, handleForm, submit, formIndex, errors, values }) => {
+export const Button = ({ label, submit, formIndex, errors, values, changeFormPage }) => {
 
     const handleSubmit = () => {
 
-        // Campos do primeiro formulário
-        const firstFields = ["name", "phone"]
         // Array com todos os campos que estão com erro
         const fieldsWithError = Object.keys(errors)
-
-        // Função para verificar se os primeiros campos estão dentre os campos com erro
-        const firstFieldsIsValid = firstFields.reduce((acc, curr) => {
-
-            if (!acc)
-                return acc
-
-            return !fieldsWithError.includes(curr)
-        }, true)
-
-        if (firstFieldsIsValid && values?.name && values?.phone)
-            handleForm()
-
+        
+        // Variável para verificar se existe algum erro de validação do campo nome
+        const fieldsAreValid = !fieldsWithError.includes("name")
+        
+        if (fieldsAreValid && values.name) {
+            changeFormPage()
+        }
+        
         submit()
     }
 
