@@ -37,7 +37,7 @@ export function ResponsiveRegister() {
                     <Title title="Crie sua conta" />
 
                         <View style={styles.registerContainer}>
-                           <Form/>
+                           <FormSwiper/>
                         </View>
 
                     <View style={styles.loginContainer}>

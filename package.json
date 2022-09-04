@@ -22,6 +22,7 @@
     "react": "18.0.0",
     "react-native": "0.69.4",
     "react-native-app-intro-slider": "^4.0.4",
+    "react-native-masked-text": "^1.13.0",
     "react-native-swiper": "^1.6.0",
     "react-native-toast-message": "^2.1.5",
     "react-native-vector-icons": "^9.2.0",

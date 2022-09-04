@@ -1,4 +1,5 @@
 
+import { removePhoneMask } from "../utils/masks";
 import api from "./api";
 
 export const responsibleRegisterService = async (data) => {
@@ -6,11 +7,11 @@ export const responsibleRegisterService = async (data) => {
 
         const formattedData = {
             nome: data.name,
-            telefone: data.phone,
+            telefone: data.phone ? removePhoneMask(data.phone) : '',
             email: data.email,
             senha: data.password
         }
-        
+
         const result = await api.post("/responsavel", formattedData);
 
         return result.status === 201

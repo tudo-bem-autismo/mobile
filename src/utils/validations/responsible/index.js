@@ -1,17 +1,26 @@
 import * as yup from 'yup';
 
 // Variável que cria um Schema para descrever tais tipos de dados a serem requiridos para cada campo
-export const responsibleRegisterSchema = yup.object().shape({
+export const responsibleRegisterPersonalDataSchema = yup.object().shape({
     name: yup
         .string()
+        .min(4, 'No mínimo 4 caracteres')
+        .max(20, 'No máximo 20 caracteres')
         .required('Insira seu nome'),
     phone: yup
-        .string(),
+        .string()
+        .min(14, 'Insira um número válido')
+        .max(15, 'Insira um número válido')
+})
+
+export const responsibleRegisterLoginDataSchema = yup.object().shape({
     email: yup
         .string()
         .email('Insira um email válido')
         .required('Insira um email'),
     password: yup
         .string()
+        .min(4, 'No mínimo 4 caracteres')
+        .max(8, 'No máximo 8 caracteres')
         .required('Insira a senha')
 })

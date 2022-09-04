@@ -3,8 +3,9 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 
 import { FONTS, COLORS } from "../../assets/const";
+import { TextInputMask } from 'react-native-masked-text'
 
-export const Input = ({
+export const MaskedInput = ({
     title,
     iconName,
     placeholder,
@@ -13,7 +14,10 @@ export const Input = ({
     onBlur,
     value,
     hasError,
-    errorMessage }) => {
+    errorMessage,
+    type,
+    options
+}) => {
 
     return (
         <View style={styles.inputContainer}>
@@ -25,7 +29,9 @@ export const Input = ({
                     name={hasError ? "times-circle" : iconName}
                     style={hasError ? styles.errorIcon : styles.icon}
                 />
-                <TextInput
+                <TextInputMask
+                    type={type}
+                    options={options}
                     style={hasError ? styles.errorInput : { ...styles.input, borderColor }}
                     placeholder={placeholder}
                     onChangeText={onChangeText}

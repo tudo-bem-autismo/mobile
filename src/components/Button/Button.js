@@ -4,27 +4,12 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { COLORS } from "../../assets/const";
 
 
-export const Button = ({ label, submit, formIndex, errors, values, changeFormPage }) => {
-
-    const handleSubmit = () => {
-
-        // Array com todos os campos que estão com erro
-        const fieldsWithError = Object.keys(errors)
-        
-        // Variável para verificar se existe algum erro de validação do campo nome
-        const fieldsAreValid = !fieldsWithError.includes("name")
-        
-        if (fieldsAreValid && values.name) {
-            changeFormPage()
-        }
-        
-        submit()
-    }
+export const Button = ({ label, onPress }) => {
 
     return (
         <View style={styles.buttonContainer}>
             <TouchableOpacity
-                onPress={() => handleSubmit()}
+                onPress={() => onPress()}
                 style={styles.button}
             >
                 <Text>{label}</Text>

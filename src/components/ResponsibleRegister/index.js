@@ -1,4 +1,5 @@
 export * from "./SlideButton";
+export * from "./PersonalDataForm";
 export * from "./FormSwiper";
-export * from "./Form";
+export * from "./LoginDataForm";
 
