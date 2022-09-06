@@ -1,21 +1,22 @@
 import React from "react";
-import {View, SafeAreaView, ImageBackground, KeyboardAvoidingView, ScrollView} from "react-native";
+import {View, SafeAreaView, ImageBackground, } from "react-native";
 
 import styles from "./style.js";
 import {
-    Button,
     Google,
     Header,
     Input,
     Login,
     LoginDescription,
     Title,
-    FormLogin
+    FormLogin, 
+    Button
 
 } from "../../components";
 
 import background from '../../assets/images/background.png';
 import headerImg from '../../assets/images/aa.png';
+import { COLORS } from "../../assets/const/colors.js";
 
 export function ResponsiveLogin({navigation}) {
     //console.log(navigation);
@@ -39,11 +40,11 @@ export function ResponsiveLogin({navigation}) {
                         
                         <View style={styles.infoContainer}>
                            
-                            <FormLogin/>
-            
+                           <FormLogin/>
+
                         </View>
 
-                        <Button label="ENTRAR"/>
+                        
                        
                     </View>
 
@@ -55,7 +56,7 @@ export function ResponsiveLogin({navigation}) {
                             answer="Cadastre-se"
                             navigation={navigation}
                         />
-                    </View> 
+                    </View>
                     
                 </View>
 

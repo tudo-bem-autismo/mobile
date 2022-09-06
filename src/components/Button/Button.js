@@ -4,12 +4,13 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { COLORS } from "../../assets/const";
 
 
-export const Button = ({ label}) => {
+export const Button = ({ label, onPress}) => {
 
     
     return (
         <View style={styles.buttonContainer}>
             <TouchableOpacity
+                onPress={() => onPress()}
                 style={styles.button}
             >
                 <Text>{label}</Text>

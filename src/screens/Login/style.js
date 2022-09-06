@@ -37,6 +37,7 @@ const style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     //backgroundColor: COLORS.darkBlue,
+    //flexDirection: 'column'
   },
   infoContainer: {
     flex: 7,

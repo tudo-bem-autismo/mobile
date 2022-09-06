@@ -1,19 +1,22 @@
-import React from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 
 import { FONTS, COLORS } from "../../assets/const";
 
-export const Input = ({ 
-    title, 
-    iconName, 
-    placeholder, 
+export const PasswordInput = ({
+    title,
+    placeholder,
     borderColor,
     onChangeText,
     onBlur,
     value,
     hasError,
-    errorMessage}) => {
+    errorMessage }) => {
+
+    const [hiddenPassword, setHiddenPassword] = useState(true)
+
+
 
     return (
         <View style={styles.inputContainer}>
@@ -21,17 +24,26 @@ export const Input = ({
             <Text style={styles.inputText}>{title}</Text>
 
             <View>
-                <FontAwesome 
-                    name={hasError ? "times-circle" : iconName} 
-                    style={hasError ? styles.errorIcon : styles.icon}
+
+                <TouchableOpacity
+                    style={styles.iconButton}
+                    onPress={() => setHiddenPassword(!hiddenPassword)}
+                >
+                    <FontAwesome
+                        name={hasError ? "times-circle" : hiddenPassword ? "eye-slash" : "eye"}
+                        style={hasError ? styles.errorIcon : styles.icon}
+                        size={50}
                     />
-                <TextInput 
+                </TouchableOpacity>
+
+                <TextInput
                     style={hasError ? styles.errorInput : { ...styles.input, borderColor }}
                     placeholder={placeholder}
                     onChangeText={onChangeText}
                     onBlur={onBlur}
-                    value={value}>
-                </TextInput>
+                    value={value}
+                    secureTextEntry={hiddenPassword}
+                />
                 {hasError && (
                     <Text style={styles.errorText}>
                         {errorMessage}
@@ -47,8 +59,9 @@ const styles = StyleSheet.create({
     inputContainer: {
         width: '100%',
         height: '45%',
-        //position: 'relative',
-        //justifyContent: 'flex-start',
+        position: 'relative',
+        justifyContent: 'flex-start',
+        
     },
     icon: {
         position: 'absolute',
@@ -92,6 +105,9 @@ const styles = StyleSheet.create({
     errorText: {
         color: COLORS.red,
         marginLeft: 10
+    },
+    iconButton: {
+        zIndex: 3,
+        elevation: 3,
     }
 });
-

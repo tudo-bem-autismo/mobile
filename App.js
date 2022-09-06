@@ -5,6 +5,8 @@ import { Mandali_400Regular } from '@expo-google-fonts/mandali'
 import React from "react";
 import { Text } from 'react-native';
 
+import Toast from 'react-native-toast-message';
+
 import { ResponsiveRegister } from './src/screens/ResponsibleRegister';
 
 import { ResponsiveLogin } from './src/screens/Login';
@@ -23,7 +25,11 @@ export default function App() {
     return <Text>Carregando...</Text>;
   } else {
     return (
+      // <Navigation/>
+      <>
       <Navigation/>
+      <Toast/>
+      </>
     );
   }
 
