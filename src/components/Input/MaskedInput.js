@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         justifyContent: 'flex-start',
         padding: 10,
+        marginTop: 35,
     },
     icon: {
         position: 'absolute',

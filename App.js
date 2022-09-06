@@ -7,6 +7,7 @@ import { Text } from 'react-native';
 import Toast from 'react-native-toast-message';
 
 import { ResponsiveRegister } from './src/screens/ResponsibleRegister';
+import { ResponsibleManagement } from './src/screens/ResponsibleManagement';
 
 export default function App() {
 
@@ -22,8 +23,9 @@ export default function App() {
   } else {
     return (
       <>
-        <ResponsiveRegister />
-        <Toast />
+        {/* <ResponsiveRegister />
+        <Toast /> */}
+        <ResponsibleManagement />
       </>
     );
   }
