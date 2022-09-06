@@ -24,17 +24,12 @@ export const LoginDataForm = ({ responsibleData }) => {
         // Chama a api enviando os dados do formulário, "data" são os "values"
         const result = await responsibleRegisterService(responsible)
 
-        if (result) {
+        if (result.success) {
             return Toast.show({
                 type: 'success',
                 text1: 'Usuário cadastrado com sucesso',
             });
         }
-
-        return Toast.show({
-            type: 'error',
-            text1: 'Falha ao cadastrar o usuário',
-        });
 
     }
 
@@ -63,7 +58,7 @@ export const LoginDataForm = ({ responsibleData }) => {
                 {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
                     <>
                         <View style={styles.inputsContainer}>
-                            <Input 
+                            <Input
                                 title="Email"
                                 iconName="envelope"
                                 placeholder="exemplo@gmail.com"

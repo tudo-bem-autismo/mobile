@@ -1,4 +1,5 @@
 
+import { showToast } from "../utils/errors";
 import { removePhoneMask } from "../utils/masks";
 import api from "./api";
 
@@ -14,11 +15,19 @@ export const responsibleRegisterService = async (data) => {
 
         const result = await api.post("/responsavel", formattedData);
 
-        return result.status === 201
+        const success = result.status === 201
+
+        return {
+            success,
+            data: result.data
+        }
 
     } catch (error) {
-        console.log(error)
-        return false
+        showToast(error.response.data.message)
+        return {
+            success: false,
+            data: error.response.data
+        }
     }
 
 
