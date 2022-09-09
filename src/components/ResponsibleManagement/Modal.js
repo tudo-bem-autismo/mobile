@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
 
 import modalBackground from '../../assets/images/modalBackground.png';
 import { FONTS, COLORS } from "../../assets/const";
 import { Button } from "../Button";
 
-export const Modal = ({ label, setShowModal, showModal }) => {
+
+
+export const Modal = ({ label }) => {
+    
+    const [showModal, setShowModal] = useState(false);
 
     return (
 
