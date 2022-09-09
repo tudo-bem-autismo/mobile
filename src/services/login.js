@@ -1,4 +1,5 @@
 import api from './api';
+import { showToast } from '../utils/errors';
 
 export const responsibleLoginService = async (data) => {
     
@@ -7,15 +8,21 @@ export const responsibleLoginService = async (data) => {
             email: data.email,
             senha: data.password
         }
-        console.log(formattedData)
+        
         const result = await api.post("/responsavel/login/email", formattedData);
 
-        console.log(result.body)
+        const sucess = result.status === 202
 
-        return result.status === 202
+        return {
+            sucess,
+            data: result.data
+        } 
     } catch (error) {
-        console.log(error)
-        return false
+        showToast(error.response.data.message)
+        return {
+            sucess: false,
+            data: error.response.data
+        }
     }
 
 }

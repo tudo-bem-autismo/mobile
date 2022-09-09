@@ -9,6 +9,8 @@ import Toast from 'react-native-toast-message';
 
 import { ResponsiveRegister } from './src/screens/ResponsibleRegister';
 
+import {DependentRegister} from './src/screens/DependentRegister';
+
 import { ResponsiveLogin } from './src/screens/Login';
 import Navigation from './src/navigation/navigation';
 
@@ -26,10 +28,11 @@ export default function App() {
   } else {
     return (
       // <Navigation/>
-      <>
-      <Navigation/>
-      <Toast/>
-      </>
+      //<>
+      //<Navigation/>
+      //<Toast/>
+      //</>
+      <DependentRegister/>
     );
   }
 

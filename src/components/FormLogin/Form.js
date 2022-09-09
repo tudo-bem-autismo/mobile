@@ -17,17 +17,12 @@ export const FormLogin = () => {
     // Chama a api enviando os dados do formulário
     const result = await responsibleLoginService(data)
 
-    if (result) {
+    if (result.sucess) {
         return Toast.show({
             type: 'success',
             text1: 'Login realizado com sucesso',
         });
     }
-
-    return Toast.show({
-        type: 'error',
-        text1: 'Falha ao logar o usuário',
-    });
 
   }
 
@@ -95,16 +90,17 @@ export const FormLogin = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 5,
-        padding: 15,
+        flex: 3,
+        //padding: 15,
         //height: 300,
         //smarginBottom: 25
     },
     input: {
-        marginBottom: 15
+        //marginBottom: 15
     },
     inputsContainer: {
-        flex: 10,
+        flex: 8,
+        marginBottom: 2
     },
 
 });

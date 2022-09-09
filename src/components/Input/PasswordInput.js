@@ -58,7 +58,7 @@ export const PasswordInput = ({
 const styles = StyleSheet.create({
     inputContainer: {
         width: '100%',
-        height: '45%',
+        height: 100,
         position: 'relative',
         justifyContent: 'flex-start',
         
