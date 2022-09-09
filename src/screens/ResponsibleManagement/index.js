@@ -4,16 +4,15 @@ import { Image, ImageBackground, Text, View } from "react-native";
 import style from "./style.js";
 import { BackButton, Button, Input, MaskedInput, PasswordInput } from "../../components";
 
-import backgroundManagement from '../../assets/images/backgroundManagement.png'
-import profile from '../../assets/images/profile.png'
-import modalBackground from '../../assets/images/modalBackground.png'
+import backgroundManagement from '../../assets/images/backgroundManagement.png';
+import modalBackground from '../../assets/images/modalBackground.png';
+import profile from '../../assets/images/profile.png';
 import { COLORS } from "../../assets/const/colors.js";
+import { Modal } from "../../components/ResponsibleManagement/Modal.js";
 
 export function ResponsibleManagement() {
 
     const [showModal, setShowModal] = useState(false);
-
-
 
     return (
         <View style={style.mainContainer}>
@@ -84,6 +83,7 @@ export function ResponsibleManagement() {
                 {
                     showModal && (
                         <View style={style.modalContainer}>
+                            {/* <Modal label="Tem certeza que quer excluir o perfil?" /> */}
                             <View style={style.modal}>
                                 <ImageBackground
                                     source={modalBackground}

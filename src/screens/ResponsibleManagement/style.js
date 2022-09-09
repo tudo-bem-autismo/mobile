@@ -11,6 +11,7 @@ const style = StyleSheet.create({
         justifyContent: 'center',
         position: 'relative',
         marginTop: StatusBar.currentHeight,
+        
     },
     modalContainer: {
         position: 'absolute',
@@ -22,6 +23,11 @@ const style = StyleSheet.create({
         zIndex: 5,
         // backgroundColor: COLORS.blue,
     },
+    blurContainer: {
+        flex: 1,
+        padding: 20,
+        justifyContent: 'center',
+      },
     modal: {
         width: '100%',
         height: '50%',
