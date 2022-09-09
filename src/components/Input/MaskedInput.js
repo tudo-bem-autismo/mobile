@@ -52,11 +52,11 @@ export const MaskedInput = ({
 const styles = StyleSheet.create({
     inputContainer: {
         width: '100%',
-        height: '45%',
+        height: 100,
         position: 'relative',
         justifyContent: 'flex-start',
         padding: 10,
-        marginTop: 35,
+        // backgroundColor: COLORS.blue
     },
     icon: {
         position: 'absolute',

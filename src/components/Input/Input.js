@@ -46,7 +46,7 @@ export const Input = ({
 const styles = StyleSheet.create({
     inputContainer: {
         width: '100%',
-        height: '30%',
+        height: 100,
         position: 'relative',
         justifyContent: 'flex-start',
         padding: 10,

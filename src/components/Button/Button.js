@@ -4,17 +4,15 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { COLORS } from "../../assets/const";
 
 
-export const Button = ({ label, onPress }) => {
+export const Button = ({ label, onPress, backgroundColor, borderRadius }) => {
 
     return (
-        <View style={styles.buttonContainer}>
-            <TouchableOpacity
-                onPress={() => onPress()}
-                style={styles.button}
-            >
-                <Text>{label}</Text>
-            </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+            onPress={() => onPress()}
+            style={{ ...styles.button, backgroundColor, borderRadius }}
+        >
+            <Text>{label}</Text>
+        </TouchableOpacity>
     );
 }
 
@@ -27,16 +25,11 @@ const bottomShadow = {
 }
 
 const styles = StyleSheet.create({
-    buttonContainer: {
-        flex: 1,
-        alignSelf: 'stretch',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     button: {
-        width: 138,
-        height: 48,
-        backgroundColor: COLORS.blue,
+        // width: 138,
+        // height: 48,
+        paddingVertical: 10,
+        paddingHorizontal: 25,
         borderWidth: 1,
         borderColor: COLORS.black,
         borderRadius: 50,

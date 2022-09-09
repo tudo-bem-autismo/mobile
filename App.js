@@ -23,9 +23,9 @@ export default function App() {
   } else {
     return (
       <>
-        <ResponsiveRegister />
-        <Toast />
-        {/* <ResponsibleManagement /> */}
+        {/* <ResponsiveRegister />
+        <Toast /> */}
+        <ResponsibleManagement />
       </>
     );
   }

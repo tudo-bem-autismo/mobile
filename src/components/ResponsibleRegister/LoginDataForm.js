@@ -85,11 +85,14 @@ export const LoginDataForm = ({ responsibleData }) => {
                             <View style={styles.paginationButton} />
                             <View style={styles.selectedPaginationButton} />
                         </View>
-
-                        <Button
-                            label="CADASTRAR"
-                            onPress={handleSubmit}
-                        />
+                        <View style={styles.buttonContainer}>
+                            <Button
+                                label="CADASTRAR"
+                                onPress={handleSubmit}
+                                backgroundColor={COLORS.blue}
+                                borderRadius={50}
+                            />
+                        </View>
                     </>
                 )}
             </Formik>
@@ -132,5 +135,12 @@ const styles = StyleSheet.create({
     formContainer: {
         flex: 2.5,
         alignSelf: 'stretch',
+    },
+    buttonContainer: {
+        flex: 1,
+        alignSelf: 'stretch',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 1,
     },
 });

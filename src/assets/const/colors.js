@@ -9,4 +9,5 @@ export const COLORS = {
     purple: '#CCB7EF',
     pink: '#F2BED4',
     yellow: '#DDD361',
+    turquoise: '#C0F8DD'
 }
