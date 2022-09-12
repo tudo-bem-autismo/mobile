@@ -5,7 +5,6 @@ import style from "./style.js";
 import { BackButton, Button, Input, MaskedInput, PasswordInput } from "../../components";
 
 import backgroundManagement from '../../assets/images/backgroundManagement.png';
-import modalBackground from '../../assets/images/modalBackground.png';
 import profile from '../../assets/images/profile.png';
 import { COLORS } from "../../assets/const/colors.js";
 import { Modal } from "../../components/ResponsibleManagement/Modal.js";
@@ -71,7 +70,7 @@ export function ResponsibleManagement() {
                         label="EXCLUIR"
                         backgroundColor={COLORS.purple}
                         borderRadius={15}
-                        onPress={() => setShowModal(!showModal)}
+                        onPress={() => setShowModal(true)}
                     />
                     <Button
                         label="SALVAR"
@@ -83,33 +82,7 @@ export function ResponsibleManagement() {
                 {
                     showModal && (
                         <View style={style.modalContainer}>
-                            {/* <Modal label="Tem certeza que quer excluir o perfil?" /> */}
-                            <View style={style.modal}>
-                                <ImageBackground
-                                    source={modalBackground}
-                                    style={style.modalBackground}
-                                    resizeMode="cover"
-                                >
-
-                                    <View style={style.questionContainer}>
-                                        <Text style={style.questionText}> Tem certeza que quer excluir o perfil?</Text>
-                                    </View>
-
-                                    <View style={style.buttonsContainer}>
-                                        <Button
-                                            label="NÃO"
-                                            backgroundColor={COLORS.purple}
-                                            borderRadius={15}
-                                            onPress={() => setShowModal(!showModal)}
-                                        />
-                                        <Button
-                                            label="SIM"
-                                            backgroundColor={COLORS.turquoise}
-                                            borderRadius={15}
-                                        />
-                                    </View>
-                                </ImageBackground>
-                            </View>
+                            <Modal label="Tem certeza que quer excluir o perfil?" close={() => setShowModal(false)} show={showModal}/>
                         </View>
 
                     )
