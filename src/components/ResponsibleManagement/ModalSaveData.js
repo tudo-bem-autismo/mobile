@@ -8,7 +8,7 @@ import { Button } from "../Button";
 
 const { height } = Dimensions.get('window')
 
-export const Modal = ({ label, close, show }) => {
+export const ModalSaveData = ({ label, close, show }) => {
 
     const [state, setState] = useState({
         opacity: new Animated.Value(0),
@@ -20,7 +20,7 @@ export const Modal = ({ label, close, show }) => {
         Animated.sequence([
             Animated.timing(state.container, { toValue: 0, duration: 100, useNativeDriver: true }),
             Animated.timing(state.opacity, { toValue: 1, duration: 300, useNativeDriver: true }),
-            Animated.spring(state.modal, { toValue: 0, bounciness: 5, useNativeDriver: true })
+            Animated.spring(state.modal, { toValue: 0, bounciness: 2, useNativeDriver: true })
         ]).start()
     }
 

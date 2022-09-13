@@ -2,16 +2,30 @@ import React, { useState } from "react";
 import { Image, ImageBackground, Text, View } from "react-native";
 
 import style from "./style.js";
-import { BackButton, Button, Input, MaskedInput, PasswordInput } from "../../components";
+import { BackButton, Button, Input, LoginDescription, MaskedInput, PasswordInput } from "../../components";
 
 import backgroundManagement from '../../assets/images/backgroundManagement.png';
-import profile from '../../assets/images/profile.png';
 import { COLORS } from "../../assets/const/colors.js";
-import { Modal } from "../../components/ResponsibleManagement/Modal.js";
+import { ModalDeleteData } from "../../components/ResponsibleManagement/ModalDeleteData.js";
+import { ModalSaveData } from "../../components/ResponsibleManagement/ModalSaveData.js";
+import { Profile } from "../../components/ResponsibleManagement/Profile.js";
+import { responsibleManagementService } from "../../services/responsible.js";
+import { date } from "yup";
+import api from "../../services/api.js";
 
 export function ResponsibleManagement() {
 
     const [showModal, setShowModal] = useState(false);
+
+    const [showModalSaveData, setShowModalSaveData] = useState(false);
+
+    const [responsible, setResponsible] = useState([]);
+
+    React.useEffect(() => {
+        api.get("/responsavel/11").then((response) => {
+            setResponsible(response.data);
+        });
+    }, [])
 
     return (
         <View style={style.mainContainer}>
@@ -22,28 +36,21 @@ export function ResponsibleManagement() {
                 style={style.background}
             >
 
-
                 <BackButton title="Voltar" />
-
-                <View style={style.profileContainer}>
-                    <Image
-                        source={profile}
-                        style={style.iconProfile}
-                    />
-                    <Text style={style.nameProfile}> Elisa Ribeiro </Text>
-                </View>
+                <Profile />
 
                 <View style={style.formContainer}>
                     <Input
                         title="Nome"
                         iconName="user-circle-o"
-                        placeholder="seu nome completo"
+                        placeholder={responsible.nome}
                         borderColor={COLORS.blue}
+                        
                     />
                     <MaskedInput
                         title="Telefone"
                         iconName="phone"
-                        placeholder="(99) 99999-9999"
+                        placeholder={responsible.telefone}
                         borderColor={COLORS.purple}
                         type={'cel-phone'}
                         options={{
@@ -54,14 +61,25 @@ export function ResponsibleManagement() {
                     <Input
                         title="Email"
                         iconName="envelope"
-                        placeholder="exemplo@gmail.com"
+                        placeholder={responsible.email}
                         borderColor={COLORS.pink}
                     />
-                    <PasswordInput
-                        title="Senha"
+
+                    <LoginDescription
+                        question="Deseja redefinir a sua senha?"
+                        answer="Redefinir"
+                    /> 
+                    
+                    {/* <PasswordInput
+                        title="Senha atual"
                         placeholder="com no mínimo 4 caracteres"
                         borderColor={COLORS.yellow}
                     />
+                    <PasswordInput
+                        title="Nova senha"
+                        placeholder="com no mínimo 4 caracteres"
+                        borderColor={COLORS.yellow}
+                    /> */}
 
                 </View>
 
@@ -76,18 +94,28 @@ export function ResponsibleManagement() {
                         label="SALVAR"
                         backgroundColor={COLORS.turquoise}
                         borderRadius={15}
+                        onPress={() => setShowModalSaveData(true)}
                     />
                 </View>
 
                 {
                     showModal && (
                         <View style={style.modalContainer}>
-                            <Modal label="Tem certeza que quer excluir o perfil?" close={() => setShowModal(false)} show={showModal}/>
+                            <ModalDeleteData label="Tem certeza que quer excluir o perfil?" close={() => setShowModal(false)} show={showModal} />
                         </View>
 
                     )
                 }
 
+
+                {
+                    showModalSaveData && (
+                        <View style={style.modalContainer}>
+                            <ModalSaveData label="Tem certeza que quer redefinir o perfil?" close={() => setShowModalSaveData(false)} show={showModalSaveData} />
+                        </View>
+
+                    )
+                }
 
             </ImageBackground>
         </View>

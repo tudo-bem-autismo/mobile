@@ -69,22 +69,6 @@ const style = StyleSheet.create({
         flex: 1,
         alignSelf: 'stretch',
     },
-    profileContainer: {
-        flex: 4,
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        // backgroundColor: COLORS.blue,
-    },
-    iconProfile: {
-        width: 110,
-        height: 110,
-        // backgroundColor: COLORS.black,
-    },
-    nameProfile: {
-        fontSize: 25,
-        fontFamily: FONTS.title,
-        marginTop: 5,
-    },
     formContainer: {
         flex: 10,
         alignSelf: 'stretch',
