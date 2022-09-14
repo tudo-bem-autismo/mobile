@@ -70,7 +70,7 @@ const style = StyleSheet.create({
         alignSelf: 'stretch',
     },
     formContainer: {
-        flex: 10,
+        flex: 12,
         alignSelf: 'stretch',
         padding: 10,
         // backgroundColor: COLORS.darkBlue,
@@ -84,6 +84,17 @@ const style = StyleSheet.create({
         zIndex: 1,
         // backgroundColor: COLORS.gray,
     },
+    titleText: {
+        fontSize: 20,
+        // backgroundColor: COLORS.blue
+    },
+    titleContainer: {
+        flex: 0.5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 50,
+        // backgroundColor: COLORS.blue
+      },
 
 })
 

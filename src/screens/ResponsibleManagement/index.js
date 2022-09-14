@@ -5,8 +5,7 @@ import { Formik } from "formik";
 
 
 import { BackButton, Button, Input, LoginDescription, MaskedInput } from "../../components";
-import style from "./style.js";
-
+import style from "./style.js"; 
 import { COLORS } from "../../assets/const/colors.js";
 import backgroundManagement from '../../assets/images/backgroundManagement.png';
 import { ModalDeleteData } from "../../components/ResponsibleManagement/ModalDeleteData.js";
@@ -15,8 +14,9 @@ import { Profile } from "../../components/ResponsibleManagement/Profile.js";
 import { getResponsibleService, updateResponsibleService } from "../../services/responsible.js";
 import { responsibleUpdateSchema } from "../../utils/validations/responsible/index.js";
 
-export function ResponsibleManagement() {
+export function ResponsibleManagement({navigation}) {
 
+    console.log(navigation)
     const [showModal, setShowModal] = useState(false);
 
     const [showModalSaveData, setShowModalSaveData] = useState(false);
@@ -66,7 +66,6 @@ export function ResponsibleManagement() {
                 >
 
                     <BackButton title="Voltar" />
-                    <Profile />
 
                     <Formik
                         validationSchema={responsibleUpdateSchema}
@@ -77,6 +76,8 @@ export function ResponsibleManagement() {
                             <>
 
                                 <View style={style.formContainer}>
+
+                                    <Profile name={values.name} />
 
                                     <Input
                                         title="Nome"
@@ -121,6 +122,7 @@ export function ResponsibleManagement() {
                                     <LoginDescription
                                         question="Deseja redefinir a sua senha?"
                                         answer="Redefinir"
+                                        navigation={navigation}
                                     />
                                 </View>
 

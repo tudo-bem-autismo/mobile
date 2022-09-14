@@ -1,10 +1,10 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { FONTS } from "../../assets/const";
+import { COLORS, FONTS } from "../../assets/const";
 
 import profile from '../../assets/images/profile.png';
 
-export const Profile = () => {
+export const Profile = ({name}) => {
 
     return (
         <View style={styles.profileContainer}>
@@ -12,16 +12,18 @@ export const Profile = () => {
                 source={profile}
                 style={styles.iconProfile}
             />
-            <Text style={styles.nameProfile}> Elisa Ribeiro </Text>
+            <Text style={styles.nameProfile}>{name}</Text>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     profileContainer: {
-        flex: 4,
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'flex-end',
+        marginTop: 40,
+        // backgroundColor: COLORS.blue
     },
     iconProfile: {
         width: 110,
