@@ -9,6 +9,7 @@ import Toast from 'react-native-toast-message';
 import { ResponsiveRegister } from './src/screens/ResponsibleRegister';
 import { ResponsibleManagement } from './src/screens/ResponsibleManagement';
 import { ResponsiblePassword } from './src/screens/ResponsibleManagement/responsiblePassword';
+import Navigation from './src/navigation/navigation';
 
 export default function App() {
 
@@ -25,8 +26,9 @@ export default function App() {
     return (
       <>
         {/* <ResponsiveRegister /> */}
-        <ResponsibleManagement />
+        {/* <ResponsibleManagement /> */}
         {/* <ResponsiblePassword/> */}
+        <Navigation />
         <Toast />
       </>
     );

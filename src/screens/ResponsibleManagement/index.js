@@ -5,7 +5,7 @@ import { Formik } from "formik";
 
 
 import { BackButton, Button, Input, LoginDescription, MaskedInput } from "../../components";
-import style from "./style.js"; 
+import style from "./style.js";
 import { COLORS } from "../../assets/const/colors.js";
 import backgroundManagement from '../../assets/images/backgroundManagement.png';
 import { ModalDeleteData } from "../../components/ResponsibleManagement/ModalDeleteData.js";
@@ -14,9 +14,8 @@ import { Profile } from "../../components/ResponsibleManagement/Profile.js";
 import { getResponsibleService, updateResponsibleService } from "../../services/responsible.js";
 import { responsibleUpdateSchema } from "../../utils/validations/responsible/index.js";
 
-export function ResponsibleManagement({navigation}) {
+export function ResponsibleManagement({ navigation }) {
 
-    console.log(navigation)
     const [showModal, setShowModal] = useState(false);
 
     const [showModalSaveData, setShowModalSaveData] = useState(false);
@@ -40,7 +39,6 @@ export function ResponsibleManagement({navigation}) {
     const handleForm = async (data) => {
 
         setShowModalSaveData(false)
-        console.log(data)
 
         const result = await updateResponsibleService(data)
 

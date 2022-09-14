@@ -14,8 +14,9 @@ import { ModalSaveData } from "../../components/ResponsibleManagement/ModalSaveD
 import { Profile } from "../../components/ResponsibleManagement/Profile.js";
 import { getResponsibleService, updateResponsibleService } from "../../services/responsible.js";
 import { responsibleUpdateSchema } from "../../utils/validations/responsible/index.js";
+import { Navigation } from "swiper";
 
-export function ResponsiblePassword() {
+export function ResponsiblePassword({ navigation }) {
 
     const [showModal, setShowModal] = useState(false);
 
@@ -24,7 +25,6 @@ export function ResponsiblePassword() {
     const handleForm = async (data) => {
 
         setShowModalSaveData(false)
-        console.log(data)
 
         const result = await updateResponsibleService(data)
 
@@ -37,8 +37,9 @@ export function ResponsiblePassword() {
     }
 
     const initialValues = {
-        email: '',
-        password: '',
+        currentPassword: '',
+        newPassword: '',
+        confirmNewPassword: '',
     }
 
     return (
@@ -49,7 +50,10 @@ export function ResponsiblePassword() {
                 style={style.background}
             >
 
-                <BackButton title="Voltar" />
+                <BackButton
+                    title="Voltar"
+                    navigation={navigation}
+                />
 
                 <Formik
                     validationSchema={responsibleUpdateSchema}
@@ -90,7 +94,7 @@ export function ResponsiblePassword() {
                                 />
 
                                 <PasswordInput
-                                    title="Confirmar senha"
+                                    title="Confirmar nova senha"
                                     iconName="user-circle-o"
                                     placeholder=""
                                     borderColor={COLORS.pink}
@@ -109,7 +113,7 @@ export function ResponsiblePassword() {
                                     label="CANCELAR"
                                     backgroundColor={COLORS.purple}
                                     borderRadius={15}
-                                    onPress={() => setShowModal(true)}
+                                    onPress={() => navigation.goBack()}
                                 />
                                 <Button
                                     label="CONFIRMAR"
