@@ -8,7 +8,7 @@ import { Button } from "../Button";
 
 const { height } = Dimensions.get('window')
 
-export const ModalSaveData = ({ label, close, show }) => {
+export const ModalSaveData = ({ label, close, show, save }) => {
 
     const [state, setState] = useState({
         opacity: new Animated.Value(0),
@@ -59,29 +59,31 @@ export const ModalSaveData = ({ label, close, show }) => {
             >
 
                 {/* <View style={style.modal}> */}
-                    <ImageBackground
-                        source={modalBackground}
-                        style={style.modalBackground}
-                        resizeMode="cover"
-                    >
+                <ImageBackground
+                    source={modalBackground}
+                    style={style.modalBackground}
+                    resizeMode="cover"
+                >
 
-                        <View style={style.questionContainer}>
-                            <Text style={style.questionText}>{label}</Text>
-                        </View>
+                    <View style={style.questionContainer}>
+                        <Text style={style.questionText}>{label}</Text>
+                    </View>
 
-                        <View style={style.buttonsContainer}>
-                            <Button
-                                label="NÃO"
-                                backgroundColor={COLORS.purple}
-                                borderRadius={15} onPress={close}
-                            />
-                            <Button
-                                label="SIM"
-                                backgroundColor={COLORS.turquoise}
-                                borderRadius={15}
-                            />
-                        </View>
-                    </ImageBackground>
+                    <View style={style.buttonsContainer}>
+                        <Button
+                            label="NÃO"
+                            backgroundColor={COLORS.purple}
+                            borderRadius={15}
+                            onPress={close}
+                        />
+                        <Button
+                            label="SIM"
+                            backgroundColor={COLORS.turquoise}
+                            borderRadius={15}
+                            onPress={save}
+                        />
+                    </View>
+                </ImageBackground>
                 {/* </View> */}
 
             </Animated.View>

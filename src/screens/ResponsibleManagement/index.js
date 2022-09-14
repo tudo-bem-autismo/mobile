@@ -1,17 +1,19 @@
-import React, { useState } from "react";
-import { Image, ImageBackground, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ImageBackground, Text, View } from "react-native";
+import Toast from 'react-native-toast-message';
+import { Formik } from "formik";
 
+
+import { BackButton, Button, Input, LoginDescription, MaskedInput } from "../../components";
 import style from "./style.js";
-import { BackButton, Button, Input, LoginDescription, MaskedInput, PasswordInput } from "../../components";
 
-import backgroundManagement from '../../assets/images/backgroundManagement.png';
 import { COLORS } from "../../assets/const/colors.js";
+import backgroundManagement from '../../assets/images/backgroundManagement.png';
 import { ModalDeleteData } from "../../components/ResponsibleManagement/ModalDeleteData.js";
 import { ModalSaveData } from "../../components/ResponsibleManagement/ModalSaveData.js";
 import { Profile } from "../../components/ResponsibleManagement/Profile.js";
-import { responsibleManagementService } from "../../services/responsible.js";
-import { date } from "yup";
-import api from "../../services/api.js";
+import { getResponsibleService, updateResponsibleService } from "../../services/responsible.js";
+import { responsibleUpdateSchema } from "../../utils/validations/responsible/index.js";
 
 export function ResponsibleManagement() {
 
@@ -19,105 +21,160 @@ export function ResponsibleManagement() {
 
     const [showModalSaveData, setShowModalSaveData] = useState(false);
 
-    const [responsible, setResponsible] = useState([]);
+    const [responsible, setResponsible] = useState({});
 
-    React.useEffect(() => {
-        api.get("/responsavel/11").then((response) => {
-            setResponsible(response.data);
-        });
+    const [isLoading, setIsLoading] = useState(true);
+
+    const getUser = async () => {
+        const result = await getResponsibleService()
+        setResponsible(result.data)
+        setIsLoading(false)
+    }
+
+    useEffect(() => {
+        getUser()
     }, [])
+
+    const initialValues = responsible
+
+    const handleForm = async (data) => {
+
+        setShowModalSaveData(false)
+        console.log(data)
+
+        const result = await updateResponsibleService(data)
+
+        if (result.success) {
+            return Toast.show({
+                type: 'success',
+                text1: 'Dados atualizados com sucesso',
+            });
+        }
+    }
 
     return (
         <View style={style.mainContainer}>
-
-            <ImageBackground
-                source={backgroundManagement}
-                resizeMode="cover"
-                style={style.background}
-            >
-
-                <BackButton title="Voltar" />
-                <Profile />
-
-                <View style={style.formContainer}>
-                    <Input
-                        title="Nome"
-                        iconName="user-circle-o"
-                        placeholder={responsible.nome}
-                        borderColor={COLORS.blue}
-                        
-                    />
-                    <MaskedInput
-                        title="Telefone"
-                        iconName="phone"
-                        placeholder={responsible.telefone}
-                        borderColor={COLORS.purple}
-                        type={'cel-phone'}
-                        options={{
-                            maskType: 'BRL',
-                            withDDD: true
-                        }}
-                    />
-                    <Input
-                        title="Email"
-                        iconName="envelope"
-                        placeholder={responsible.email}
-                        borderColor={COLORS.pink}
-                    />
-
-                    <LoginDescription
-                        question="Deseja redefinir a sua senha?"
-                        answer="Redefinir"
-                    /> 
-                    
-                    {/* <PasswordInput
-                        title="Senha atual"
-                        placeholder="com no mínimo 4 caracteres"
-                        borderColor={COLORS.yellow}
-                    />
-                    <PasswordInput
-                        title="Nova senha"
-                        placeholder="com no mínimo 4 caracteres"
-                        borderColor={COLORS.yellow}
-                    /> */}
-
+            {isLoading ? (
+                <View>
+                    <Text>Carregando...</Text>
                 </View>
+            ) : (
+                <ImageBackground
+                    source={backgroundManagement}
+                    resizeMode="cover"
+                    style={style.background}
+                >
 
-                <View style={style.buttonContainer}>
-                    <Button
-                        label="EXCLUIR"
-                        backgroundColor={COLORS.purple}
-                        borderRadius={15}
-                        onPress={() => setShowModal(true)}
-                    />
-                    <Button
-                        label="SALVAR"
-                        backgroundColor={COLORS.turquoise}
-                        borderRadius={15}
-                        onPress={() => setShowModalSaveData(true)}
-                    />
-                </View>
+                    <BackButton title="Voltar" />
+                    <Profile />
 
-                {
-                    showModal && (
-                        <View style={style.modalContainer}>
-                            <ModalDeleteData label="Tem certeza que quer excluir o perfil?" close={() => setShowModal(false)} show={showModal} />
-                        </View>
+                    <Formik
+                        validationSchema={responsibleUpdateSchema}
+                        initialValues={initialValues}
+                        onSubmit={values => handleForm(values)}
+                    >
+                        {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+                            <>
 
-                    )
-                }
+                                <View style={style.formContainer}>
+
+                                    <Input
+                                        title="Nome"
+                                        iconName="user-circle-o"
+                                        placeholder="O seu nome completo"
+                                        borderColor={COLORS.blue}
+                                        onChangeText={handleChange('name')}
+                                        onBlur={handleBlur('name')}
+                                        value={values.name}
+                                        hasError={!!errors.name}
+                                        errorMessage={errors.name}
+
+                                    />
+                                    <MaskedInput
+                                        title="Telefone"
+                                        iconName="phone"
+                                        placeholder="(99) 99999-9999"
+                                        borderColor={COLORS.purple}
+                                        type={'cel-phone'}
+                                        options={{
+                                            maskType: 'BRL',
+                                            withDDD: true
+                                        }}
+                                        onChangeText={handleChange('phone')}
+                                        onBlur={handleBlur('phone')}
+                                        value={values.phone}
+                                        hasError={!!errors.phone}
+                                        errorMessage={errors.phone}
+                                    />
+                                    <Input
+                                        title="Email"
+                                        iconName="envelope"
+                                        placeholder="exemplo@gmail.com"
+                                        borderColor={COLORS.pink}
+                                        onChangeText={handleChange('email')}
+                                        onBlur={handleBlur('email')}
+                                        value={values.email}
+                                        hasError={!!errors.email}
+                                        errorMessage={errors.email}
+                                    />
+
+                                    <LoginDescription
+                                        question="Deseja redefinir a sua senha?"
+                                        answer="Redefinir"
+                                    />
+                                </View>
+
+                                <View style={style.buttonContainer}>
+                                    <Button
+                                        label="EXCLUIR"
+                                        backgroundColor={COLORS.purple}
+                                        borderRadius={15}
+                                        onPress={() => setShowModal(true)}
+                                    />
+                                    <Button
+                                        label="SALVAR"
+                                        backgroundColor={COLORS.turquoise}
+                                        borderRadius={15}
+                                        onPress={() => setShowModalSaveData(true)}
+                                    />
+                                </View>
 
 
-                {
-                    showModalSaveData && (
-                        <View style={style.modalContainer}>
-                            <ModalSaveData label="Tem certeza que quer redefinir o perfil?" close={() => setShowModalSaveData(false)} show={showModalSaveData} />
-                        </View>
 
-                    )
-                }
+                                {
+                                    showModal && (
+                                        <View style={style.modalContainer}>
+                                            <ModalDeleteData
+                                                label="Tem certeza que quer excluir o perfil?"
+                                                close={() => setShowModal(false)}
+                                                show={showModal}
+                                            />
+                                        </View>
 
-            </ImageBackground>
+                                    )
+                                }
+
+
+                                {
+                                    showModalSaveData && (
+                                        <View style={style.modalContainer}>
+                                            <ModalSaveData
+                                                label="Tem certeza que quer redefinir o perfil?"
+                                                close={() => setShowModalSaveData(false)}
+                                                show={showModalSaveData}
+                                                save={() => handleSubmit()}
+                                            />
+                                        </View>
+
+                                    )
+                                }
+                            </>
+                        )}
+                    </Formik>
+
+                </ImageBackground>
+            )}
+
         </View>
     );
 }

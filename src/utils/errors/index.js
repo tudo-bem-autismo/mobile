@@ -1,6 +1,6 @@
 import Toast from "react-native-toast-message"
 
-export const showToast = (message) => {
+export const showErrorToast = (message) => {
 
     Toast.show({
         type: 'error',
