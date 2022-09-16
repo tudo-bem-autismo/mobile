@@ -8,7 +8,7 @@ import { Button } from "../Button";
 
 const { height } = Dimensions.get('window')
 
-export const ModalSaveData = ({ label, close, show, save }) => {
+export const ModalSaveData = ({ label, close, show, password }) => {
 
     const [state, setState] = useState({
         opacity: new Animated.Value(0),
@@ -80,7 +80,7 @@ export const ModalSaveData = ({ label, close, show, save }) => {
                             label="SIM"
                             backgroundColor={COLORS.turquoise}
                             borderRadius={15}
-                            onPress={save}
+                            onPress={password}
                         />
                     </View>
                 </ImageBackground>

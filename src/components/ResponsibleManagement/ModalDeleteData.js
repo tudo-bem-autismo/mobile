@@ -9,7 +9,7 @@ import { responsibleManagementService } from "../../services";
 
 const { height } = Dimensions.get('window')
 
-export const ModalDeleteData = ({ label, close, show }) => {
+export const ModalDeleteData = ({ label, close, show, del }) => {
 
     const [state, setState] = useState({
         opacity: new Animated.Value(0),
@@ -74,12 +74,14 @@ export const ModalDeleteData = ({ label, close, show }) => {
                             <Button
                                 label="NÃO"
                                 backgroundColor={COLORS.purple}
-                                borderRadius={15} onPress={close}
+                                borderRadius={15} 
+                                onPress={close}
                             />
                             <Button
                                 label="SIM"
                                 backgroundColor={COLORS.turquoise}
                                 borderRadius={15}
+                                onPress={del}
                             />
                         </View>
                     </ImageBackground>

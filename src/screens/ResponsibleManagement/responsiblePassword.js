@@ -1,37 +1,34 @@
-import React, { useEffect, useState } from "react";
+import { Formik } from "formik";
+import { useState } from "react";
 import { ImageBackground, Text, View } from "react-native";
 import Toast from 'react-native-toast-message';
-import { Formik } from "formik";
 
 
-import { BackButton, Button, Input, LoginDescription, MaskedInput, PasswordInput, Title } from "../../components";
+import { BackButton, Button, PasswordInput } from "../../components";
 import style from "./style.js";
 
 import { COLORS } from "../../assets/const/colors.js";
 import backgroundManagement from '../../assets/images/backgroundManagement.png';
-import { ModalDeleteData } from "../../components/ResponsibleManagement/ModalDeleteData.js";
 import { ModalSaveData } from "../../components/ResponsibleManagement/ModalSaveData.js";
-import { Profile } from "../../components/ResponsibleManagement/Profile.js";
-import { getResponsibleService, updateResponsibleService } from "../../services/responsible.js";
-import { responsibleUpdateSchema } from "../../utils/validations/responsible/index.js";
-import { Navigation } from "swiper";
+import { updatePasswordResponsibleService } from "../../services/responsible.js";
+import { responsibleUpdatePasswordSchema } from "../../utils/validations/responsible/index.js";
 
 export function ResponsiblePassword({ navigation }) {
-
-    const [showModal, setShowModal] = useState(false);
 
     const [showModalSaveData, setShowModalSaveData] = useState(false);
 
     const handleForm = async (data) => {
 
+        console.log(data)
+
         setShowModalSaveData(false)
 
-        const result = await updateResponsibleService(data)
+        const result = await updatePasswordResponsibleService(data)
 
         if (result.success) {
             return Toast.show({
                 type: 'success',
-                text1: 'Dados atualizados com sucesso',
+                text1: 'Senha redefinida com sucesso',
             });
         }
     }
@@ -56,7 +53,7 @@ export function ResponsiblePassword({ navigation }) {
                 />
 
                 <Formik
-                    validationSchema={responsibleUpdateSchema}
+                    validationSchema={responsibleUpdatePasswordSchema}
                     initialValues={initialValues}
                     onSubmit={values => handleForm(values)}
                 >
@@ -131,7 +128,7 @@ export function ResponsiblePassword({ navigation }) {
                                             label="Tem certeza que quer redefinir a senha?"
                                             close={() => setShowModalSaveData(false)}
                                             show={showModalSaveData}
-                                            save={() => handleSubmit()}
+                                            password={() => handleSubmit()}
                                         />
                                     </View>
 

@@ -11,8 +11,9 @@ import backgroundManagement from '../../assets/images/backgroundManagement.png';
 import { ModalDeleteData } from "../../components/ResponsibleManagement/ModalDeleteData.js";
 import { ModalSaveData } from "../../components/ResponsibleManagement/ModalSaveData.js";
 import { Profile } from "../../components/ResponsibleManagement/Profile.js";
-import { getResponsibleService, updateResponsibleService } from "../../services/responsible.js";
+import { deleteResponsibleService, getResponsibleService, updateResponsibleService } from "../../services/responsible.js";
 import { responsibleUpdateSchema } from "../../utils/validations/responsible/index.js";
+import { Loading } from "../Loading";
 
 export function ResponsibleManagement({ navigation }) {
 
@@ -50,12 +51,25 @@ export function ResponsibleManagement({ navigation }) {
         }
     }
 
+    const deleteResponsible = async () => {
+
+        setShowModal(false)
+
+        const result = await deleteResponsibleService()
+
+        if (result.success) {
+            return Toast.show({
+                type: 'success',
+                text1: 'Conta apagada com sucesso',
+            });
+        }
+
+    }
+
     return (
         <View style={style.mainContainer}>
             {isLoading ? (
-                <View>
-                    <Text>Carregando...</Text>
-                </View>
+                <Loading/>
             ) : (
                 <ImageBackground
                     source={backgroundManagement}
@@ -148,6 +162,8 @@ export function ResponsibleManagement({ navigation }) {
                                                 label="Tem certeza que quer excluir o perfil?"
                                                 close={() => setShowModal(false)}
                                                 show={showModal}
+                                                del={() => deleteResponsible()}
+
                                             />
                                         </View>
 
