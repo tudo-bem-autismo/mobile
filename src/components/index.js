@@ -5,3 +5,4 @@ export * from "./Login";
 export * from "./ResponsibleRegister";
 export * from "./Title";
 export * from "./FormLogin";
+export * from "./FormRegisterDependent";

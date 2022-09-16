@@ -9,8 +9,6 @@ import { ResponsiveRegister } from "../screens/ResponsibleRegister";
 
 const Stack = createNativeStackNavigator();
 
-
-
 const Navigation = () => {
     return (
         <NavigationContainer>

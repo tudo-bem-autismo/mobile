@@ -24,4 +24,3 @@ const styles = StyleSheet.create({
         maxHeight: '80%',
     },
 });
- //80 90

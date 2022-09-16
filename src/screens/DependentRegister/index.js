@@ -1,5 +1,5 @@
 import React from "react";
-import { View, ImageBackground,  } from "react-native";
+import { View, ImageBackground, StyleSheet, Image, Text   } from "react-native";
 
 import styles from "./style.js";
 import {
@@ -12,9 +12,15 @@ import {
     Form,
 } from "../../components";
 
-import background from '../../assets/images/backgroundDependent.png';
-import headerImg from '../../assets/images/headerDependent.png'
+import background from '../../assets/images/background.png';
+import headerImg from '../../assets/images/gg.png'
 
+import {
+    FormDependentRegister,
+    FormLogin,
+    
+
+} from "../../components";
 export function DependentRegister() {
 
     return (
@@ -23,13 +29,16 @@ export function DependentRegister() {
 
             <ImageBackground
 
-                source={background}
+                source={headerImg}
                 resizeMode="cover"
                 style={styles.background}>
+                
 
-                <BackButton title="Voltar" />
-                <Header image={headerImg} />
-                <View style={styles.formContainer}>
+                <View style={aa.cont}>
+                    <Text>FOTO</Text>
+                    <FormDependentRegister/>
+                    
+                    
                 </View>
 
             </ImageBackground>
@@ -39,3 +48,13 @@ export function DependentRegister() {
     );
 
 }
+
+const aa = StyleSheet.create({
+    cont: {
+      marginTop: '60%',
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center'
+      
+    },
+})
