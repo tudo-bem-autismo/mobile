@@ -31,7 +31,7 @@ export const FormDependentRegister = () => {
             placeholder="Julio"
             borderColor={COLORS.pink}>
             </Input>
-    
+            <DataInput/>
           <InputGenero/>
         </View>
         

@@ -25,4 +25,5 @@ export const responsibleLoginService = async (data) => {
         }
     }
 
+
 }
