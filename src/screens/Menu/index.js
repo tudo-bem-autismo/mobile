@@ -38,6 +38,7 @@ export const Menu = ({ navigation }) => {
                         <SessionChild
                             image={profileChild}
                             label="Perfil criança"
+                            navigation={navigation}
                         />
                         <SessionCompany
                             image={profileCompany}

@@ -34,7 +34,7 @@ const style = StyleSheet.create({
     },
     profileIcon: {
         width: '15%',
-        height: '45%',
+        height: '50%'
 
     },
     textProfile: {

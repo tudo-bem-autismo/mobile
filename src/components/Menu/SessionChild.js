@@ -1,18 +1,21 @@
 import React from "react";
-import { TouchableOpacity, StyleSheet, View, Image, Text } from "react-native";
+import { TouchableOpacity, StyleSheet, Image, Text } from "react-native";
 import { COLORS, FONTS } from "../../assets/const";
 
-export const SessionChild = ({ image, label }) => {
+export const SessionChild = ({ image, label, navigation }) => {
 
     return (
 
-        <View style={style.sessionContainer}>
+        <TouchableOpacity
+            style={style.sessionContainer}
+            onPress={() => navigation.navigate('DependentListing')}
+        >
             <Image
                 style={style.profileIcon}
                 source={image}
             />
             <Text style={style.textProfile}>{label}</Text>
-        </View>
+        </TouchableOpacity>
 
     );
 
@@ -29,7 +32,7 @@ const style = StyleSheet.create({
     },
     profileIcon: {
         width: '15%',
-        height: '45%',
+        height: '50%',
 
     },
     textProfile: {

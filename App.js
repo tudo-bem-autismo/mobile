@@ -12,6 +12,7 @@ import { ResponsiblePassword } from './src/screens/ResponsibleManagement/respons
 import Navigation from './src/navigation/navigation';
 import { Loading } from './src/screens/Loading';
 import { Menu } from './src/screens/Menu';
+import { DependentListing } from './src/screens/DependentListing';
 
 export default function App() {
 
@@ -30,9 +31,10 @@ export default function App() {
         {/* <ResponsiveRegister /> */}
         {/* <ResponsibleManagement /> */}
         {/* <ResponsiblePassword/> */}
-        <Navigation />
+        {/* <Navigation /> */}
         {/* <Loading/> */}
         {/* <Menu /> */}
+        <DependentListing/>
         <Toast />
       </>
     );
