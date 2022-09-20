@@ -1,8 +1,9 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import { COLORS } from "../../assets/const";
 
-export const close = () => {
+export const Close = () => {
 
     return (
 
@@ -12,7 +13,7 @@ export const close = () => {
             >
                 <MaterialIcons
                     name="close"
-                    size={27}
+                    size={40}
                     color="black" />
             </TouchableOpacity>
         </View>

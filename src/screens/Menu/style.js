@@ -20,6 +20,16 @@ const style = StyleSheet.create({
         marginTop: StatusBar.currentHeight,
 
     },
+    modalContainer: {
+        bottom: 0,
+        position: 'absolute',
+        height: '50%',
+        width: '100%',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        paddingLeft: 25,
+        paddingRight: 25
+    },
     background: {
         flex: 1,
         alignSelf: 'stretch',
@@ -40,25 +50,6 @@ const style = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         // backgroundColor: COLORS.darkBlue,
-    },
-    sessionContainer: {
-        flex: 0.9,
-        // backgroundColor: COLORS.pink,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'flex-end',
-        borderColor: COLORS.black,
-        borderBottomWidth: 1,
-    },
-    profileIcon: {
-        width: '15%',
-        height: '45%',
-
-    },
-    textProfile: {
-        fontSize: 20,
-        fontFamily: FONTS.title,
-        marginBottom: 20,
     },
     buttonContainer: {
         flex: 1,

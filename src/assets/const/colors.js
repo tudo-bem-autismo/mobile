@@ -10,5 +10,5 @@ export const COLORS = {
     pink: '#F2BED4',
     yellow: '#DDD361',
     turquoise: '#C0F8DD',
-    pinkBold: '#DA98B4'
+    pinkBold: '#DA98B4',
 }
