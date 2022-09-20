@@ -77,7 +77,7 @@ export function ResponsibleManagement({ navigation }) {
                     style={style.background}
                 >
 
-                    <BackButton title="Voltar" />
+                    <BackButton title="Voltar" navigation={navigation}/>
 
                     <Formik
                         validationSchema={responsibleUpdateSchema}

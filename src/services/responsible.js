@@ -41,7 +41,6 @@ export const getResponsibleService = async () => {
 
         const result = await api.get("/responsavel/12")
 
-        console.log(result.data)
         const success = result.status === 200
 
         const formattedData = {

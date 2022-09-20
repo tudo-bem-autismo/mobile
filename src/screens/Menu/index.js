@@ -1,16 +1,19 @@
 import React, { useState } from "react";
-import { Image, ImageBackground, Text, TouchableOpacity, View, VirtualizedList } from "react-native";
+import { ImageBackground, Text, TouchableOpacity, View} from "react-native";
+
 
 import style from "./style";
 import backgroundMenu from "../../assets/images/backgroundMenu.png";
 import { Close } from "../../components/Menu/Close";
-import { Session } from "../../components/Menu/Session";
+import { SessionResponsible } from "../../components/Menu/SessionResponsible";
+import { SessionChild } from "../../components/Menu/SessionChild";
+import { SessionCompany } from "../../components/Menu/SessionCompany";
 import { ModalLogOutAccount } from "../../components/Menu/ModalLogOutAccount";
 import profileResponsible from "../../assets/images/profileResponsible.png";
 import profileChild from "../../assets/images/profileChild.png";
 import profileCompany from "../../assets/images/profileCompany.png";
 
-export const Menu = () => {
+export const Menu = ({ navigation }) => {
 
     const [show, setShow] = useState(false);
 
@@ -27,15 +30,16 @@ export const Menu = () => {
                 <View style={style.navContainer}>
                     <View style={style.infoContainer}>
 
-                        <Session
+                        <SessionResponsible
                             image={profileResponsible}
                             label="Perfil responsável"
+                            navigation={navigation}
                         />
-                        <Session
+                        <SessionChild
                             image={profileChild}
                             label="Perfil criança"
                         />
-                        <Session
+                        <SessionCompany
                             image={profileCompany}
                             label="Sobre nós"
                         />
