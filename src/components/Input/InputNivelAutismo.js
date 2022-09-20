@@ -10,7 +10,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { FONTS, COLORS } from "../../assets/const";
 import api from '../../services/api';
 
-export const InputGenero = () => {
+export const InputNivelAutismo = () => {
 
     const [dados, setDados] = React.useState([]);
 
@@ -18,23 +18,18 @@ export const InputGenero = () => {
 
   useEffect(() => {
 
-    setCont(0);
+    setCont(0);  
 
-    // setDados(0);
-    
-
-    api.get("/genero")
+    api.get("/nivelAutismo")
     .then(
-        (data)=>{
-          // console.log(data.data[2])
-            setDados(data.data);
-            // console.log(dados[1].genero)
+        (data)=>{    
+            setDados(data.data); 
         }
       )
 
   }, []);
 
-  const avancarOptionSexo = () => {
+  const avancarOptionNivel = () => {
     
     if(cont  == (dados.length - 1)) {
 
@@ -51,7 +46,7 @@ export const InputGenero = () => {
     
   }
 
-  const voltarOptionSexo = () => {
+  const voltarOptionNivel = () => {
     if(cont > 0){
       console.log(cont);
       let decremento = cont - 1;
@@ -61,19 +56,19 @@ export const InputGenero = () => {
     }
   }
 
-  let genero = (dados[cont] ? dados[cont].genero : null)
+  let nivelAutismo = (dados[cont] ? dados[cont].descricao : null)
 
   return (
     <View style={styles.container}>
 
-          <TouchableOpacity style={styles.button} onPress={()=>{voltarOptionSexo()}}>
-            <FontAwesome name="caret-left" style={styles.icons} />
+          <TouchableOpacity style={styles.button} onPress={()=>{voltarOptionNivel()}}>
+            <FontAwesome name="caret-left" style={styles.icons}/>
           </TouchableOpacity>
 
           {/* <Text style={styles.text}>{dados[cont].genero}</Text> */}
-          <Text style={styles.text}>{genero}</Text>
+          <Text style={styles.text}>{nivelAutismo}</Text>
 
-          <TouchableOpacity style={styles.button} onPress={()=>{avancarOptionSexo()}}>
+          <TouchableOpacity style={styles.button} onPress={()=>{avancarOptionNivel()}}>
             <FontAwesome name="caret-right" style={styles.icons} />
           </TouchableOpacity>
         
@@ -86,10 +81,11 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     height: "15%",
-    backgroundColor: COLORS.white,
+   //backgroundColor: COLORS.white,
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
+    marginBottom: '10%'
   },
   button: {
     width: 30,
@@ -108,7 +104,7 @@ const styles = StyleSheet.create({
   text: {
     borderColor: COLORS.black,
     borderWidth: 0.8,
-    width: "70%",
+    width: '75%',
     height: 30,
     textAlign: "center",
     padding: 5,
