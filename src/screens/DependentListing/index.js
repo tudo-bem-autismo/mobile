@@ -1,21 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, ImageBackground, Text, TouchableOpacity, View } from "react-native";
 
 import style from "../DependentListing/style";
 import backgroundMenu from "../../assets/images/backgroundMenu.png";
 import addIcon from "../../assets/images/addIcon.png";
-import júlia from "../../assets/images/júlia.png";
 import maria from "../../assets/images/maria.png";
 import { BackButton } from "../../components/Button";
-import symbolicateStackTrace from "react-native/Libraries/Core/Devtools/symbolicateStackTrace";
+import { Dependent } from "../../components/DependentListing/Dependent";
 import { Option } from "../../components/DependentListing/Option";
+import { getResponsibleDependentsService } from "../../services";
+import { Loading } from "../Loading";
 
 export const DependentListing = ({ navigation }) => {
 
     const [option, setOption] = useState(false);
 
+    // const [isLoading, setIsLoading] = useState(true);
+
+    const [dependents, setDependents] = useState([]);
+
+    const getDependents = async () => {
+        const result = await getResponsibleDependentsService()
+        setDependents(result.data)
+        console.log(setDependents)
+        // setIsLoading(false)
+
+    }
+
+    useEffect(() => {
+        getDependents()
+    }, [])
+
     return (
         <View style={style.mainContainer}>
+            {/* {isLoading ? (
+                <Loading />
+            ) : ( */}
             <ImageBackground
                 source={backgroundMenu}
                 resizeMode="cover"
@@ -41,21 +61,24 @@ export const DependentListing = ({ navigation }) => {
                                 <Text style={style.textAddOption}>ADICIONAR</Text>
                             </TouchableOpacity>
 
-                            <TouchableOpacity
-                                style={style.option}
-                                onPress={() => setOption(true)}
-                            >
-                                <Image source={júlia} />
-                                <Text style={style.textOption}>JÚLIA</Text>
-                            </TouchableOpacity>
-
+                            {
+                                dependents.map(item => (
+                                    <Dependent
+                                        name={item.nome}
+                                        photo={item.foto}
+                                        key={item.id}
+                                        onPress={() => setOption(true)}
+                                    />
+                                ))
+                            }
+{/* 
                             <TouchableOpacity
                                 onPress={() => setOption(true)}
                                 style={style.option}
                             >
                                 <Image source={maria} />
                                 <Text style={style.textOption}>MARIA</Text>
-                            </TouchableOpacity>
+                            </TouchableOpacity> */}
 
                         </View>
 
@@ -70,6 +93,7 @@ export const DependentListing = ({ navigation }) => {
                 </View>
 
             </ImageBackground>
+            {/* )} */}
 
         </View>
     );

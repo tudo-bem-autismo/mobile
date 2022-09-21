@@ -33,7 +33,7 @@ export function ResponsibleManagement({ navigation }) {
 
     useEffect(() => {
         getUser()
-    }, [])
+    }, []) 
 
     const initialValues = responsible
 

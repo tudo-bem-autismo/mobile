@@ -137,10 +137,32 @@ export const deleteResponsibleService = async () => {
     }
 }
 
-export const getResponsibleDependentsService = () => {
+export const getResponsibleDependentsService = async () => {
     try {
 
-    } catch (error) {
+        const result = await api.get("/responsavel/6")
 
+        const sucess = result.status === 200
+        // console.log(result.data)
+
+        const formattedData = result.data.tbl_crianca.map(item => {
+            return {
+                id: item.id,
+                name: item.nome,
+                photo: item.foto
+            }
+        })
+
+        return {
+            sucess,
+            data: formattedData
+        }
+
+    } catch (error) {
+        showErrorToast(error.response.data.message)
+        return {
+            success: false,
+            data: error.response.data
+        }
     }
 }

@@ -53,15 +53,6 @@ const style = StyleSheet.create({
         padding: 10,
         // backgroundColor: COLORS.purple
     },
-    option: {
-        padding: 10,
-        // backgroundColor: COLORS.blue
-    },
-    textOption: {
-        fontFamily: FONTS.title,
-        textAlign: 'center',
-        marginTop: 2,
-    },
     textAddOption: {
         fontFamily: FONTS.title,
         textAlign: 'center',
