@@ -23,12 +23,11 @@ const style = StyleSheet.create({
     modalContainer: {
         bottom: 0,
         position: 'absolute',
-        height: '50%',
+        height: '100%',
         width: '100%',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
-        paddingLeft: 25,
-        paddingRight: 25
+        // backgroundColor: COLORS.pink,
     },
     background: {
         flex: 1,

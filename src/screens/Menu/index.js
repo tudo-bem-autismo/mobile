@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ImageBackground, Text, TouchableOpacity, View} from "react-native";
+import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
 
 
 import style from "./style";
@@ -55,21 +55,20 @@ export const Menu = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
 
-                    {
-                        show && (
-                            <View style={style.modalContainer}>
-                                <ModalLogOutAccount
-                                    label="Deseja realmente sair da sua conta?"
-                                    close={() => setShow(false)}
-                                    show={show}
-
-                                />
-                            </View>
-
-                        )
-                    }
-
                 </View>
+
+                {
+                    show && (
+                        <View style={style.modalContainer}>
+                            <ModalLogOutAccount
+                                label="Deseja realmente sair da sua conta?"
+                                close={() => setShow(false)}
+                                show={show}
+                            />
+                        </View>
+
+                    )
+                }
 
             </ImageBackground>
         </View>

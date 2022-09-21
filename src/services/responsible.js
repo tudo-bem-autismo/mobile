@@ -1,6 +1,3 @@
-
-import axios from "axios";
-import React, { useState } from "react";
 import { showErrorToast } from "../utils/errors";
 import { removePhoneMask } from "../utils/masks";
 import api from "./api";
@@ -137,5 +134,13 @@ export const deleteResponsibleService = async () => {
             success: false,
             data: error.response.data
         }
+    }
+}
+
+export const getResponsibleDependentsService = () => {
+    try {
+
+    } catch (error) {
+
     }
 }

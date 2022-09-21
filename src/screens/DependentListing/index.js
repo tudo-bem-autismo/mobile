@@ -10,7 +10,7 @@ import { BackButton } from "../../components/Button";
 import symbolicateStackTrace from "react-native/Libraries/Core/Devtools/symbolicateStackTrace";
 import { Option } from "../../components/DependentListing/Option";
 
-export const DependentListing = () => {
+export const DependentListing = ({ navigation }) => {
 
     const [option, setOption] = useState(false);
 
@@ -24,6 +24,7 @@ export const DependentListing = () => {
 
                 <BackButton
                     title="Voltar"
+                    navigation={navigation}
                 />
 
                 <View style={style.selectionChildContainer}>

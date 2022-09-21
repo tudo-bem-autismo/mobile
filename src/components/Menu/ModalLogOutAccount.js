@@ -62,7 +62,7 @@ export const ModalLogOutAccount = ({ label, close, show, del }) => {
                     </View>
 
                     <View style={style.buttonsContainer}>
-                    
+
                         <TouchableOpacity
                             style={style.button}
                             onPress={close}
@@ -93,14 +93,14 @@ const style = StyleSheet.create({
     container: {
         width: '100%',
         height: '100%',
-        top: 100,
         position: 'absolute',
-        alignItems: 'stretch',
-        padding: 10,
-        marginLeft: 40,
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        // backgroundColor: COLORS.darkBlue,
     },
     modalContainer: {
-        position: 'absolute',
+        width: 300,
+        height: 140,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         backgroundColor: COLORS.blue,
@@ -122,7 +122,7 @@ const style = StyleSheet.create({
         alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 20,
+        padding: 10,
     },
     questionText: {
         fontSize: 20,
@@ -136,12 +136,10 @@ const style = StyleSheet.create({
         justifyContent: 'space-evenly',
         flexDirection: 'row',
         paddingHorizontal: 35,
-        bottom: 10,
     },
     button: {
         width: 80,
         height: 40,
-        paddingVertical: 10,
         paddingHorizontal: 25,
         borderRadius: 25,
         alignItems: 'center',
