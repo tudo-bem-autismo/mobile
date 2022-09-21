@@ -8,16 +8,35 @@ import {
   Image
 } from "react-native";
 import * as ImagePicker from 'expo-image-picker';
+import Toast  from 'react-native-toast-message';
 import { Formik } from "formik";
 import { COLORS } from "../../assets/const";
 import { Input, DataInput, InputGenero } from "../Input";
 import { InputNivelAutismo } from "../Input/InputNivelAutismo";
 import { Button } from "../Button/Button";
-import style from "../../screens/ResponsibleRegister/style";
+import { kidRegisterService } from "../../services/kid.js";
 
-
+import {kidRegisterDataSchema} from '../../utils/validations/dependent'
 
 export const FormDependentRegister = () => {
+
+  const handleForm = async (data) => {
+    const result = await kidRegisterService(data)
+    if (result.success) {
+        return Toast.show({
+            type: 'success',
+            text1: 'Criança cadastrada com sucesso',
+        });
+    }
+}
+
+  // Todos os campos irão iniciar com esses valores, ou seja, vazios
+  const initialValues = {
+      name: '',
+      date: '',
+      genero: '',
+      nivelAutismo: ''
+  }
 
   const [image, setImage] = useState(null);
 
@@ -40,34 +59,48 @@ export const FormDependentRegister = () => {
   return (
     <View style={styles.container}>
 
-      <Formik>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={values => console.log(values)}>
+        {/* // validationSchema={kidRegisterDataSchema}> */}
         
-        <View style={styles.containerInputs}>
-          <TouchableOpacity 
-            style={styles.contentImg}
-            onPress={pickImage}
-            >
-              {image && <Image source={{ uri: image }} style={styles.foto}/>}
+        {/* Mais propriedades do Formik para manipular o formulário */}
+        {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+        <>
+          <View style={styles.containerInputs}>
+            <TouchableOpacity 
+              style={styles.contentImg}
+              onPress={pickImage}
+              > 
+                {image && <Image source={{ uri: image }} style={styles.foto}/>}
+            </TouchableOpacity>
             <Text>FOTO</Text>
-          </TouchableOpacity>
-          <View style={styles.input}>
-          <Input  
-            title="Nome"
-            iconName="user-circle-o"
-            placeholder="Julio"
-            borderColor={COLORS.blue}>
-            </Input>
+            <View style={styles.input}>
+            <Input  
+              title="Nome"
+              iconName="user-circle-o"
+              placeholder="Julio"
+              borderColor={COLORS.blue}
+              onChangeText={handleChange('name')}
+              onBlur={handleBlur('name')}
+              value={values.name}
+              hasError={!!errors.name}
+              errorMessage={errors.name}>
+              </Input>
+            </View>
+            <DataInput 
+              value={values.date}
+              />
+            <InputGenero value={values.date}/>
+            <InputNivelAutismo/>
+            <View style={styles.buttons}>
+              <Button label="CANCELAR" backgroundColor={COLORS.purple}></Button>
+              <Button label="CRIAR" backgroundColor={COLORS.blue} onPress={handleSubmit}></Button>
+            </View>
+            
           </View>
-          <DataInput/>
-          <InputGenero/>
-          <InputNivelAutismo/>
-          <View style={styles.buttons}>
-            <Button label="CANCELAR" backgroundColor={COLORS.purple}></Button>
-            <Button label="CRIAR" backgroundColor={COLORS.blue}></Button>
-          </View>
-          
-        </View>
-        
+        </>
+        )}
       </Formik>
       
     </View>
@@ -83,18 +116,20 @@ const styles = StyleSheet.create({
     //backgroundColor: COLORS.red,
   },
   contentImg: {
-    width: 150,
+    width: 130,
     borderRadius: 200,
-    height: 150,
-    border: 5,
+    height: 130,
+   borderWidth: 1,
     borderColor: COLORS.black,
     justifyContent: "center",
     alignItems: "center",
-    //backgroundColor: COLORS.purple,
+    backgroundColor: COLORS.purple,
+    
   },
   input: {
     alignItems: 'center',
-    width: '75%'
+    width: '75%',
+    height: '20.6%'
   },
   containerInputs: {
     flex: 5,
@@ -110,9 +145,8 @@ const styles = StyleSheet.create({
     marginBottom: '40%'
   },
   foto: {
-    width: 150,
+    width: '100%',
     borderRadius: 200,
-    height: 150,
-    border: 5,
+    height: '100%',
   }
 });

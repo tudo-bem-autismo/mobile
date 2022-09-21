@@ -5,13 +5,15 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { FontAwesome } from "@expo/vector-icons";
 
 
-export function DataInput() {
+export function DataInput({
+    values,}) {
+
+
 
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
-    const [text, setText] = useState('00/00/2008');
-
+    const [text, setText] = useState('00/00/0000');
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
         setShow(Platform.OS === 'ios');
@@ -20,8 +22,9 @@ export function DataInput() {
         let tempDate = new Date(currentDate);
         let fDate = tempDate.getDate() + '/' + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear();
         setText(fDate);
-
-        console.log(fDate);
+        // console.log(fDate)
+        // values = fDate
+        console.log(setText);
     }
     
     const showMode = (currentMode) => {
@@ -37,7 +40,8 @@ export function DataInput() {
             <Text style={styles.labelCalendar}> Data de Nascimento</Text>
            
             <View style={styles.containerCalendar}>
-                <Text style={styles.text}>{text}</Text>
+                <Text style={styles.text} 
+                    values={text}>{text}</Text>
                 <TouchableOpacity onPress={() => showMode('date')}>
                     <FontAwesome style={styles.button} name="calendar"></FontAwesome>
                 </TouchableOpacity>
@@ -48,7 +52,7 @@ export function DataInput() {
                     testID='dateTimePicker'
                     value={date}
                     mode={mode}
-                    display='default'
+                    display='spinner'
                     onChange={onChange}/>
             )}
 

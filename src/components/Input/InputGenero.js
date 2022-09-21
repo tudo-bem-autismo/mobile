@@ -10,7 +10,8 @@ import { FontAwesome } from "@expo/vector-icons";
 import { FONTS, COLORS } from "../../assets/const";
 import api from '../../services/api';
 
-export const InputGenero = () => {
+export const InputGenero = ({
+  value}) => {
 
     const [dados, setDados] = React.useState([]);
 
@@ -71,7 +72,8 @@ export const InputGenero = () => {
           </TouchableOpacity>
 
           {/* <Text style={styles.text}>{dados[cont].genero}</Text> */}
-          <Text style={styles.text}>{genero}</Text>
+          <Text style={styles.text}
+                    value={value = dados[cont]}>{genero}</Text>
 
           <TouchableOpacity style={styles.button} onPress={()=>{avancarOptionSexo()}}>
             <FontAwesome name="caret-right" style={styles.icons} />
