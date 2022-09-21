@@ -3,12 +3,19 @@ import { Outfit_400Regular } from '@expo-google-fonts/outfit';
 import { Mandali_400Regular } from '@expo-google-fonts/mandali';
 
 import React from "react";
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import Toast from 'react-native-toast-message';
+import Swiper from 'react-native-swiper'
 
 import { ResponsiveRegister } from './src/screens/ResponsibleRegister';
 import { ResponsibleManagement } from './src/screens/ResponsibleManagement';
-
+import { Onboarding } from './src/screens/Onboarding';
+import { OnboardingGames } from './src/screens/OnboardingGames';
+import { OnboardingRoutines } from './src/screens/OnboardingRoutines';
+import { HomeScreen } from './src/screens/HomeScreen';
+import { SalutationScreen } from './src/screens/SalutationScreen';
+import Navigation from './src/navigation/navigation';
+import Swipper from './src/swiper/swiper';
 export default function App() {
 
   const [fontsLoaded] = useFonts({
@@ -25,7 +32,11 @@ export default function App() {
       <>
         {/* <ResponsiveRegister />
         <Toast /> */}
-        <ResponsibleManagement />
+        {/* <Navigation/> */}
+        <SalutationScreen/>
+       
+        
+        
       </>
     );
   }

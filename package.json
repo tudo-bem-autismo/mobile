@@ -13,7 +13,8 @@
     "@expo-google-fonts/outfit": "^0.2.2",
     "@expo-google-fonts/poppins": "^0.2.2",
     "@expo/vector-icons": "^13.0.0",
-    "@react-navigation/native": "^6.0.12",
+    "@react-navigation/native": "^6.0.13",
+    "@react-navigation/native-stack": "^6.9.0",
     "axios": "^0.27.2",
     "expo": "~46.0.9",
     "expo-blur": "^11.2.0",
@@ -26,9 +27,10 @@
     "react-native-blur": "^3.2.2",
     "react-native-masked-text": "^1.13.0",
     "react-native-swiper": "^1.6.0",
+    "react-native-swiper-flatlist": "^3.0.17",
     "react-native-toast-message": "^2.1.5",
     "react-native-vector-icons": "^9.2.0",
-    "swiper": "^8.3.2",
+    "swiper": "^8.4.2",
     "yup": "^0.32.11"
   },
   "devDependencies": {

@@ -16,7 +16,7 @@ export function ResponsibleManagement() {
 
     return (
         <View style={style.mainContainer}>
-
+            
             <ImageBackground
                 source={backgroundManagement}
                 resizeMode="cover"
