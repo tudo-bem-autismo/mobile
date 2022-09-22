@@ -15,85 +15,80 @@ export const DependentListing = ({ navigation }) => {
 
     const [option, setOption] = useState(false);
 
-    // const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
 
     const [dependents, setDependents] = useState([]);
 
     const getDependents = async () => {
         const result = await getResponsibleDependentsService()
         setDependents(result.data)
-        console.log(setDependents)
-        // setIsLoading(false)
 
     }
 
     useEffect(() => {
         getDependents()
+        setIsLoading(false)
+
     }, [])
 
     return (
         <View style={style.mainContainer}>
-            {/* {isLoading ? (
+            {isLoading ? (
                 <Loading />
-            ) : ( */}
-            <ImageBackground
-                source={backgroundMenu}
-                resizeMode="cover"
-                style={style.background}
-            >
+            ) : (
+                <ImageBackground
+                    source={backgroundMenu}
+                    resizeMode="cover"
+                    style={style.background}
+                >
 
-                <BackButton
-                    title="Voltar"
-                    navigation={navigation}
-                />
+                    <BackButton
+                        title="Voltar"
+                        navigation={navigation}
+                    />
 
-                <View style={style.selectionChildContainer}>
-                    <View style={style.container}>
+                    <View style={style.selectionChildContainer}>
+                        <View style={style.container}>
 
-                        <View style={style.textContainer}>
-                            <Text style={style.textSelect}>SELECIONE A CRIANÇA</Text>
-                        </View>
+                            <View style={style.textContainer}>
+                                <Text style={style.textSelect}>SELECIONE A CRIANÇA</Text>
+                            </View>
 
-                        <View style={style.selectedContainer}>
+                            <View style={style.selectedContainer}>
 
-                            <TouchableOpacity style={style.option}>
-                                <Image source={addIcon} />
-                                <Text style={style.textAddOption}>ADICIONAR</Text>
-                            </TouchableOpacity>
+                                <TouchableOpacity style={style.addButton}>
+                                    <Image
+                                        style={style.addIcon}
+                                        source={addIcon}
+                                    />
+                                    <Text style={style.textAddOption}>ADICIONAR</Text>
+                                </TouchableOpacity>
+
+                                {
+                                    dependents.map(item => (
+                                        <Dependent
+                                            name={item.name}
+                                            photo={item.photo}
+                                            key={item.id}
+                                            onPress={() => setOption(true)}
+                                        />
+                                    ))
+                                }
+
+                            </View>
 
                             {
-                                dependents.map(item => (
-                                    <Dependent
-                                        name={item.nome}
-                                        photo={item.foto}
-                                        key={item.id}
-                                        onPress={() => setOption(true)}
-                                    />
-                                ))
+                                option && (
+                                    <Option />
+                                )
+
                             }
-{/* 
-                            <TouchableOpacity
-                                onPress={() => setOption(true)}
-                                style={style.option}
-                            >
-                                <Image source={maria} />
-                                <Text style={style.textOption}>MARIA</Text>
-                            </TouchableOpacity> */}
 
                         </View>
-
-                        {
-                            option && (
-                                <Option />
-                            )
-
-                        }
-
                     </View>
-                </View>
 
-            </ImageBackground>
-            {/* )} */}
+                </ImageBackground>
+            )}
 
         </View>
     );

@@ -1,10 +1,10 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet, Text, Image } from "react-native";
 
-import júlia from "../../assets/images/júlia.png";
-import { FONTS } from "../../assets/const";
+import julia from "../../assets/images/júlia.png";
+import { COLORS, FONTS } from "../../assets/const";
 
-export const Dependent= ({ name, photo, onPress }) => {
+export const Dependent = ({ name, photo, onPress }) => {
 
     return (
 
@@ -12,7 +12,9 @@ export const Dependent= ({ name, photo, onPress }) => {
             style={style.option}
             onPress={() => onPress()}
         >
-            <Image source={júlia} />
+            <Image
+                style={style.photo}
+                source={{ uri: photo }} />
             <Text style={style.textOption}>{name}</Text>
         </TouchableOpacity>
 
@@ -28,7 +30,13 @@ const style = StyleSheet.create({
     textOption: {
         fontFamily: FONTS.title,
         textAlign: 'center',
-        marginTop: 2,
+        textTransform: 'uppercase',
+        marginTop: 5,
     },
+    photo: {
+        width: 90,
+        height: 90,
+        borderRadius: 50,
+    }
 });
 

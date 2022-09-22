@@ -51,12 +51,19 @@ const style = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'center',
         padding: 10,
-        // backgroundColor: COLORS.purple
+    },
+    addButton: {
+        padding: 10,
+    },
+    addIcon: {
+        width: 90,
+        height: 90,
+        borderRadius: 50,
     },
     textAddOption: {
         fontFamily: FONTS.title,
         textAlign: 'center',
-        marginTop: 10,
+        marginTop: 5,
     },
 
 });
