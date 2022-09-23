@@ -9,7 +9,7 @@ import Toast from 'react-native-toast-message';
 
 import { ResponsiveRegister } from './src/screens/ResponsibleRegister';
 
-import {DependentRegister} from './src/screens/DependentRegister';
+import { DependentRegister } from './src/screens/DependentRegister';
 
 import { ResponsiveLogin } from './src/screens/Login';
 import Navigation from './src/navigation/navigation';
@@ -20,7 +20,7 @@ export default function App() {
     Poppins_400Regular,
     Outfit_400Regular,
     Mandali_400Regular
-    
+
   });
 
   if (!fontsLoaded) {
@@ -30,9 +30,11 @@ export default function App() {
       // <Navigation/>
       //<>
       //<Navigation/>
-      //<Toast/>
       //</>
-      <DependentRegister/>
+      <>
+        <DependentRegister />
+        <Toast />
+      </>
     );
   }
 

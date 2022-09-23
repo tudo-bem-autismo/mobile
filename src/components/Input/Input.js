@@ -4,16 +4,16 @@ import { FontAwesome } from "@expo/vector-icons";
 
 import { FONTS, COLORS } from "../../assets/const";
 
-export const Input = ({ 
-    title, 
-    iconName, 
-    placeholder, 
+export const Input = ({
+    title,
+    iconName,
+    placeholder,
     borderColor,
     onChangeText,
     onBlur,
     value,
     hasError,
-    errorMessage}) => {
+    errorMessage }) => {
 
     return (
         <View style={styles.inputContainer}>
@@ -21,11 +21,11 @@ export const Input = ({
             <Text style={styles.inputText}>{title}</Text>
 
             <View>
-                <FontAwesome 
-                    name={hasError ? "times-circle" : iconName} 
+                <FontAwesome
+                    name={hasError ? "times-circle" : iconName}
                     style={hasError ? styles.errorIcon : styles.icon}
-                    />
-                <TextInput 
+                />
+                <TextInput
                     style={hasError ? styles.errorInput : { ...styles.input, borderColor }}
                     placeholder={placeholder}
                     onChangeText={onChangeText}
@@ -47,8 +47,7 @@ const styles = StyleSheet.create({
     inputContainer: {
         width: '100%',
         height: 100,
-        //position: 'relative',
-        //justifyContent: 'flex-start',
+        // backgroundColor: COLORS.black
     },
     icon: {
         position: 'absolute',

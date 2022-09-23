@@ -1,24 +1,24 @@
-import {showToast} from "../utils/errors"
+import { showToast } from "../utils/errors"
 import api from './api'
 
 export const kidRegisterService = async (data) => {
     try {
         const formattedData = {
 
-            "foto": null,
+            "foto": data.image,
             "nome": data.name,
             "data_nascimento": data.date,
-            "id_genero": data.genero,
-            "id_nivel_autismo": data.nivelAutismo,
+            "id_genero": data.genderId,
+            "id_nivel_autismo": data.autismLevelId,
             "id_responsavel": 7
         }
 
-        const result = await api.post("/crianca", formattedData);
+        const result = await api.post("/crianca", formattedData, { headers: { "Content-Type": "multipart/form-data" } });
 
-        const sucess = result.status === 201
+        const success = result.status === 201
 
         return {
-            sucess,
+            success,
             data: result.data
         }
 
@@ -31,5 +31,5 @@ export const kidRegisterService = async (data) => {
         }
     }
 
-    
+
 }

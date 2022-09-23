@@ -18,13 +18,16 @@
     "@react-navigation/native-stack": "^6.8.0",
     "@rpldy/native-uploady": "^1.1.0",
     "axios": "^0.27.2",
+    "date-fns": "^2.29.3",
     "expo": "~46.0.9",
     "expo-font": "^10.2.0",
+    "expo-image-picker": "~13.3.1",
     "expo-status-bar": "~1.4.0",
     "formik": "^2.2.9",
     "react": "18.0.0",
     "react-native": "0.69.4",
     "react-native-app-intro-slider": "^4.0.4",
+    "react-native-date-picker": "^4.2.5",
     "react-native-datepicker": "^1.7.2",
     "react-native-paper": "^4.12.4",
     "react-native-swiper": "^1.6.0",
@@ -32,8 +35,7 @@
     "react-native-vector-icons": "^9.2.0",
     "swiper": "^8.3.2",
     "toast": "^0.5.4",
-    "yup": "^0.32.11",
-    "expo-image-picker": "~13.3.1"
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
