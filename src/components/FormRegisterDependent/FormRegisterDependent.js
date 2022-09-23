@@ -61,12 +61,19 @@ export const FormDependentRegister = () => {
     setGenderHasError(false)
     setAutismLevelHasError(false)
 
+    // console.log(image)
+    const photo = {
+      name: "profilePhoto",
+      type: image.type,
+      uri: Platform.OS === 'ios'? image.uri.replace('file://', "") : image.uri,
+    }
+
     const newData = {
       ...data,
       date,
       genderId,
       autismLevelId,
-      image
+      photo
     }
 
     const result = await kidRegisterService(newData)
@@ -93,7 +100,7 @@ export const FormDependentRegister = () => {
     });
 
     if (!result.cancelled) {
-      setImage(result.uri);
+      setImage(result);
     }
   }
 
@@ -115,7 +122,7 @@ export const FormDependentRegister = () => {
                 style={styles.contentImg}
                 onPress={pickImage}
               >
-                {image && <Image source={{ uri: image }} style={styles.foto} />}
+                {image && <Image source={{ uri: image.uri }} style={styles.foto} />}
               </TouchableOpacity>
 
               <Text>FOTO</Text>
