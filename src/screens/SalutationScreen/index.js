@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Image, Text, TouchableOpacity} from 'react-native';
 
-import kids from '../../assets/images/kids.png'
+import kids from '../../assets/images/kids.gif'
 
 import styles from './style.js';
 

@@ -13,6 +13,7 @@ import { Onboarding } from './src/screens/Onboarding';
 import { OnboardingGames } from './src/screens/OnboardingGames';
 import { OnboardingRoutines } from './src/screens/OnboardingRoutines';
 import { HomeScreen } from './src/screens/HomeScreen';
+import { KidsManagement } from './src/screens/KidsManagement';
 import { SalutationScreen } from './src/screens/SalutationScreen';
 import Navigation from './src/navigation/navigation';
 import Swipper from './src/swiper/swiper';
@@ -33,7 +34,7 @@ export default function App() {
         {/* <ResponsiveRegister />
         <Toast /> */}
         {/* <Navigation/> */}
-        <SalutationScreen/>
+        <KidsManagement/>
        
         
         

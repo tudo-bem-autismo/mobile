@@ -7,12 +7,14 @@ import { COLORS } from "../../assets/const";
 export const Button = ({ label, onPress, backgroundColor, borderRadius }) => {
 
     return (
-        <TouchableOpacity
-            onPress={() => onPress()}
-            style={{ ...styles.button, backgroundColor, borderRadius }}
-        >
-            <Text>{label}</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonContainer}>
+            <TouchableOpacity
+                onPress={() => onPress()}
+                style={{...styles.button, backgroundColor}}
+            >
+                <Text>{label}</Text>
+            </TouchableOpacity>
+        </View>
     );
 }
 
@@ -25,17 +27,23 @@ const bottomShadow = {
 }
 
 const styles = StyleSheet.create({
+   buttonContainer: {
+        flex: 2,
+        alignSelf: 'stretch',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingBottom: 5
+    },
     button: {
-        // width: 138,
-        // height: 48,
-        paddingVertical: 10,
-        paddingHorizontal: 25,
+        width: 138,
+        height: 48,
+        backgroundColor: COLORS.blue,
         borderWidth: 1,
         borderColor: COLORS.black,
         borderRadius: 50,
         alignItems: 'center',
         justifyContent: 'center',
+        //marginVertical: 20,
         ...bottomShadow
     },
 });
-
