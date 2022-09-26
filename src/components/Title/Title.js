@@ -22,6 +22,6 @@ const styles = StyleSheet.create({
       },
       titleText: {
         fontSize: 30,
-        fontFamily: FONTS.title
+        fontFamily: FONTS.title,
       },
 });

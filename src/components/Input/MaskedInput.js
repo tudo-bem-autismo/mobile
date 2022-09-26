@@ -1,22 +1,23 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import React from "react";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 
 import { FONTS, COLORS } from "../../assets/const";
+import { TextInputMask } from 'react-native-masked-text'
 
-export const PasswordInput = ({
+export const MaskedInput = ({
     title,
+    iconName,
     placeholder,
     borderColor,
     onChangeText,
     onBlur,
     value,
     hasError,
-    errorMessage }) => {
-
-    const [hiddenPassword, setHiddenPassword] = useState(true)
-
-
+    errorMessage,
+    type,
+    options
+}) => {
 
     return (
         <View style={styles.inputContainer}>
@@ -24,25 +25,18 @@ export const PasswordInput = ({
             <Text style={styles.inputText}>{title}</Text>
 
             <View>
-
-                <TouchableOpacity
-                    style={styles.iconButton}
-                    onPress={() => setHiddenPassword(!hiddenPassword)}
-                >
-                    <FontAwesome
-                        name={hasError ? "times-circle" : hiddenPassword ? "eye-slash" : "eye"}
-                        style={hasError ? styles.errorIcon : styles.icon}
-                        size={50}
-                    />
-                </TouchableOpacity>
-
-                <TextInput
+                <FontAwesome
+                    name={hasError ? "times-circle" : iconName}
+                    style={hasError ? styles.errorIcon : styles.icon}
+                />
+                <TextInputMask
+                    type={type}
+                    options={options}
                     style={hasError ? styles.errorInput : { ...styles.input, borderColor }}
                     placeholder={placeholder}
                     onChangeText={onChangeText}
                     onBlur={onBlur}
                     value={value}
-                    secureTextEntry={hiddenPassword}
                 />
                 {hasError && (
                     <Text style={styles.errorText}>
@@ -62,7 +56,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         justifyContent: 'flex-start',
         padding: 10,
-        zIndex: 1,
+        // backgroundColor: COLORS.blue
     },
     icon: {
         position: 'absolute',
@@ -106,11 +100,6 @@ const styles = StyleSheet.create({
     errorText: {
         color: COLORS.red,
         marginLeft: 10
-    },
-    iconButton: {
-        zIndex: 3,
-        elevation: 3,
     }
-
 });
 

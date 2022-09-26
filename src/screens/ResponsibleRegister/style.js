@@ -38,18 +38,14 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     // backgroundColor: COLORS.darkBlue,
   },
-  infoContainer: {
-    flex: 5,
-    alignSelf: 'stretch',
-    paddingLeft: 20,
-    paddingRight: 20,
-    // backgroundColor: COLORS.red,
-  },
   loginContainer: {
     flex: 3,
     alignItems: 'center',
     justifyContent: 'center',
   },
+  container: {
+    flex: 6,
+  }
 });
 
 export default style;

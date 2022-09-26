@@ -30,8 +30,9 @@ export const Input = ({
                     placeholder={placeholder}
                     onChangeText={onChangeText}
                     onBlur={onBlur}
-                    value={value}>
-                </TextInput>
+                    value={value}
+                />
+
                 {hasError && (
                     <Text style={styles.errorText}>
                         {errorMessage}
@@ -47,7 +48,9 @@ const styles = StyleSheet.create({
     inputContainer: {
         width: '100%',
         height: 100,
-        // backgroundColor: COLORS.black
+        position: 'relative',
+        justifyContent: 'flex-start',
+        padding: 10,
     },
     icon: {
         position: 'absolute',

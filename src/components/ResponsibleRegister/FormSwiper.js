@@ -1,98 +1,84 @@
-import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, View } from "react-native";
 import Swiper from 'react-native-swiper';
 
-import { COLORS } from '../../assets/const';
-import { Input } from '../Input';
+import { COLORS } from "../../assets/const";
+import { LoginDataForm } from "./LoginDataForm";
+import { PersonalDataForm } from "./PersonalDataForm";
 
-export const FormSwiper = ({ formIndex, handleFormIndex }) => {
+
+export const FormSwiper = () => {
+
+    const [formPage, setFormPage] = useState(0)
+
+    const [responsibleData, setResponsibleData] = useState({})
+
+    const nextFormPage = () => {
+        setFormPage(formPage + 1)
+    }
+
+    const changeFormPage = (page) => {
+        setFormPage(page)
+    }
+
     return (
-        <Swiper
-            style={styles.wrapper}
-            paginationStyle={styles.paginationStyle}
-            dotStyle={styles.dot}
-            activeDotStyle={styles.selectedDot}
-            index={formIndex}
-            loop={false}
-            onIndexChanged={(index) => handleFormIndex(index)}>
-            <View style={styles.slide1}>
-                <Input
-                    title="Nome"
-                    iconName="user-circle-o"
-                    placeholder="seu nome completo"
-                    borderColor={COLORS.blue}
-                />
-                <Input
-                    title="Telefone"
-                    iconName="phone"
-                    placeholder="(99) 99999-9999"
-                    borderColor={COLORS.purple}
-                />
-            </View>
-            <View style={styles.slide2}>
 
-                <Input
-                    title="Email"
-                    iconName="envelope"
-                    placeholder="exemplo@gmail.com"
-                    borderColor={COLORS.pink}
+        <View style={styles.infoContainer}>
+
+            <Swiper 
+                index={formPage}
+                showsPagination={false}
+                scrollEnabled={false}
+                loop={false}
+            >
+                <PersonalDataForm
+                    nextFormPage={nextFormPage}
+                    setResponsibleData={setResponsibleData}
+                    changeFormPage={changeFormPage}
                 />
-                <Input
-                    title="Senha"
-                    iconName="phone"
-                    placeholder="com no mínimo 6 caracteres"
-                    borderColor={COLORS.yellow}
+                <LoginDataForm 
+                    responsibleData={responsibleData}
+                    changeFormPage={changeFormPage}
                 />
-            </View>
-        </Swiper>
+            </Swiper>
+
+        </View>
+
     );
+
+}
+
+
+const bottomShadow = {
+    shadowOffset: { width: 0, height: 0, },
+    shadowColor: 'black',
+    shadowOpacity: 1,
+    shadowRadius: 5,
+    elevation: 5,
 }
 
 const styles = StyleSheet.create({
-    wrapper: {
-        // paddingBottom: 10,
-        // backgroundColor: COLORS.blue
-    },
-    slide1: {
-        flex: 2.5,
+    buttonContainer: {
+        flex: 1,
         alignSelf: 'stretch',
-        paddingLeft: 20,
-        paddingRight: 20,
-    },
-    slide2: {
-        flex: 2.5,
-        alignSelf: 'stretch',
-        paddingLeft: 20,
-        paddingRight: 20,
-    },
-    slideButton: {
-        // backgroundColor: COLORS.blue,
-        height: 55,
-        marginTop: 60,
+        alignItems: 'center',
         justifyContent: 'center',
-        alignItems: 'flex-end'
     },
-    dot: {
-        height: 20,
-        width: 20,
-        backgroundColor: COLORS.white,
-        borderRadius: 15,
+    button: {
+        width: 138,
+        height: 48,
+        backgroundColor: COLORS.blue,
         borderWidth: 1,
         borderColor: COLORS.black,
+        borderRadius: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        ...bottomShadow
     },
-    selectedDot: {
-        height: 20,
-        width: 20,
-        backgroundColor: COLORS.purple,
-        borderRadius: 15,
-        borderWidth: 1,
-        borderColor: COLORS.black,
+    infoContainer: {
+        flex: 5,
+        alignSelf: 'stretch',
+        paddingLeft: 20,
+        paddingRight: 20,
     },
-    paginationStyle: {
-        height: 20,
-        // backgroundColor: COLORS.darkBlue,
-
-    }
 });
-
-// AppRegistry.registerComponent('myproject', () => SwiperComponent)
