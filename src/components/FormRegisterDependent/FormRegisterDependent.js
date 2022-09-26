@@ -5,10 +5,10 @@ import {
   StyleSheet,
   TouchableOpacity,
   Platform,
-  Image
+  Image,
 } from "react-native";
-import * as ImagePicker from 'expo-image-picker';
-import Toast from 'react-native-toast-message';
+import * as ImagePicker from "expo-image-picker";
+import Toast from "react-native-toast-message";
 import { Formik } from "formik";
 import { isEqual } from "date-fns";
 
@@ -17,10 +17,9 @@ import { Input, DataInput, InputGenero } from "../Input";
 import { InputNivelAutismo } from "../Input/InputNivelAutismo";
 import { Button } from "../Button/Button";
 import { kidRegisterService } from "../../services/kid.js";
-import { kidRegisterDataSchema } from '../../utils/validations/dependent'
+import { kidRegisterDataSchema } from "../../utils/validations/dependent";
 
 export const FormDependentRegister = () => {
-
   const now = new Date();
 
   const [date, setDate] = useState(now);
@@ -38,58 +37,61 @@ export const FormDependentRegister = () => {
   const [image, setImage] = useState(null);
 
   const handleForm = async (data) => {
-
     if (isEqual(date, now)) {
-      setDateHasError(true)
+      setDateHasError(true);
 
-      return
+      return;
     }
 
     if (genderId === 0) {
-      setGenderHasError(true)
+      setGenderHasError(true);
 
-      return
+      return;
     }
 
     if (autismLevelId === 0) {
-      setAutismLevelHasError(true)
+      setAutismLevelHasError(true);
 
-      return
+      return;
     }
 
-    setDateHasError(false)
-    setGenderHasError(false)
-    setAutismLevelHasError(false)
+    setDateHasError(false);
+    setGenderHasError(false);
+    setAutismLevelHasError(false);
 
-    // console.log(image)
+    // Criando as configurações da imagem
+    const filename = image.split("/").pop();
+    const match = /\.(\w+)$/.exec(filename);
+    const type = match ? `image/${match[1]}` : `image`;
+
     const photo = {
-      name: "profilePhoto",
-      type: image.type,
-      uri: Platform.OS === 'ios'? image.uri.replace('file://', "") : image.uri,
-    }
+      name: filename,
+      type,
+      uri: image,
+    };
 
     const newData = {
       ...data,
       date,
       genderId,
       autismLevelId,
-      photo
-    }
+      photo,
+    };
 
-    const result = await kidRegisterService(newData)
+    const result = await kidRegisterService(newData);
 
     if (result.success) {
       return Toast.show({
-        type: 'success',
-        text1: 'Criança cadastrada com sucesso',
+        type: "success",
+        text1: "Criança cadastrada com sucesso",
       });
     }
-  }
+  };
 
   // Todos os campos irão iniciar com esses valores, ou seja, vazios
   const initialValues = {
-    name: ''
-  }
+    name: "",
+  };
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -100,29 +102,23 @@ export const FormDependentRegister = () => {
     });
 
     if (!result.cancelled) {
-      setImage(result);
+      setImage(result.uri);
     }
-  }
-
+  };
 
   return (
     <View style={styles.container}>
-
       <Formik
         initialValues={initialValues}
-        onSubmit={values => handleForm(values)}
-        validationSchema={kidRegisterDataSchema}>
-
+        onSubmit={(values) => handleForm(values)}
+        validationSchema={kidRegisterDataSchema}
+      >
         {/* Mais propriedades do Formik para manipular o formulário */}
         {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
           <>
             <View style={styles.containerInputs}>
-
-              <TouchableOpacity
-                style={styles.contentImg}
-                onPress={pickImage}
-              >
-                {image && <Image source={{ uri: image.uri }} style={styles.foto} />}
+              <TouchableOpacity style={styles.contentImg} onPress={pickImage}>
+                {image && <Image source={{ uri: image }} style={styles.foto} />}
               </TouchableOpacity>
 
               <Text>FOTO</Text>
@@ -133,12 +129,12 @@ export const FormDependentRegister = () => {
                   iconName="user-circle-o"
                   placeholder="seu nome completo"
                   borderColor={COLORS.blue}
-                  onChangeText={handleChange('name')}
-                  onBlur={handleBlur('name')}
+                  onChangeText={handleChange("name")}
+                  onBlur={handleBlur("name")}
                   value={values.name}
                   hasError={!!errors.name}
-                  errorMessage={errors.name}>
-                </Input>
+                  errorMessage={errors.name}
+                ></Input>
               </View>
 
               <DataInput
@@ -158,26 +154,30 @@ export const FormDependentRegister = () => {
               />
 
               <View style={styles.buttons}>
-                <Button label="CANCELAR" backgroundColor={COLORS.purple}></Button>
-                <Button label="CRIAR" backgroundColor={COLORS.blue} onPress={handleSubmit}></Button>
+                <Button
+                  label="CANCELAR"
+                  backgroundColor={COLORS.purple}
+                ></Button>
+                <Button
+                  label="CRIAR"
+                  backgroundColor={COLORS.blue}
+                  onPress={handleSubmit}
+                ></Button>
               </View>
-
             </View>
           </>
         )}
       </Formik>
-
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
     alignItems: "center",
     justifyContent: "center",
-    //backgroundColor: COLORS.red,
   },
   contentImg: {
     width: 130,
@@ -188,29 +188,27 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: COLORS.purple,
-
   },
   input: {
-    alignItems: 'center',
-    width: '75%',
-    height: '20.6%'
+    alignItems: "center",
+    width: "75%",
+    height: "20.6%",
   },
   containerInputs: {
     flex: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    //backgroundColor: COLORS.blue,
+    alignItems: "center",
+    justifyContent: "center",
     width: "100%",
   },
   buttons: {
-    width: '90%',
+    width: "90%",
     flex: 1,
-    flexDirection: 'row',
-    marginBottom: '40%'
+    flexDirection: "row",
+    marginBottom: "40%",
   },
   foto: {
-    width: '100%',
+    width: "100%",
     borderRadius: 200,
-    height: '100%',
-  }
+    height: "100%",
+  },
 });
