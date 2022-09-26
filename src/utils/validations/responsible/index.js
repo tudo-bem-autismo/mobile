@@ -1,5 +1,6 @@
-import { yupToFormErrors } from 'formik';
 import * as yup from 'yup';
+import { yupToFormErrors } from 'formik';
+
 
 // Variável que cria um Schema para descrever tais tipos de dados a serem requiridos para cada campo
 export const responsibleRegisterPersonalDataSchema = yup.object().shape({

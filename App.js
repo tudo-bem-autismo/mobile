@@ -6,6 +6,8 @@ import React from "react";
 import { Text } from 'react-native';
 import Toast from 'react-native-toast-message';
 
+import Toast from 'react-native-toast-message';
+
 import { ResponsiveRegister } from './src/screens/ResponsibleRegister';
 import { ResponsibleManagement } from './src/screens/ResponsibleManagement';
 import { ResponsiblePassword } from './src/screens/ResponsibleManagement/responsiblePassword';
@@ -13,6 +15,11 @@ import Navigation from './src/navigation/navigation';
 import { Loading } from './src/screens/Loading';
 import { Menu } from './src/screens/Menu';
 import { DependentListing } from './src/screens/DependentListing';
+
+import { DependentRegister } from './src/screens/DependentRegister';
+
+import { ResponsiveLogin } from './src/screens/Login';
+import Navigation from './src/navigation/navigation';
 
 export default function App() {
 
