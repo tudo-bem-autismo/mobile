@@ -140,10 +140,9 @@ export const deleteResponsibleService = async () => {
 export const getResponsibleDependentsService = async () => {
     try {
 
-        const result = await api.get("/responsavel/6")
+        const result = await api.get("/responsavel/15")
 
         const sucess = result.status === 200
-        // console.log(result.data)
 
         const formattedData = result.data.tbl_crianca.map(item => {
             return {

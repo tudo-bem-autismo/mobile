@@ -31,10 +31,10 @@ export default function App() {
         {/* <ResponsiveRegister /> */}
         {/* <ResponsibleManagement /> */}
         {/* <ResponsiblePassword/> */}
-        {/* <Navigation /> */}
+        <Navigation />
         {/* <Loading/> */}
         {/* <Menu /> */}
-        <DependentListing/>
+        {/* <DependentListing/> */}
         <Toast />
       </>
     );
