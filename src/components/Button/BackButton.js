@@ -4,13 +4,19 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 import { FONTS, COLORS } from "../../assets/const";
 
-export const BackButton = ({ title }) => {
+export const BackButton = ({ title, navigation }) => {
 
     return (
 
         <View style={styles.backContainer}>
-            <TouchableOpacity style={styles.backButton}>
-                <MaterialIcons name="arrow-back-ios" size={27} color="black" />
+            <TouchableOpacity
+                style={styles.backButton}
+                onPress={() => navigation.goBack()}
+            >
+                <MaterialIcons
+                    name="arrow-back-ios"
+                    size={27}
+                    color="black" />
                 <Text style={styles.backContainerText}>{title}</Text>
             </TouchableOpacity>
         </View>

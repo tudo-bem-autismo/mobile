@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { COLORS } from "../../assets/const";
 
 import { FONTS } from "../../assets/const/fonts";
 
@@ -17,9 +18,10 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: COLORS.black
       },
       titleText: {
         fontSize: 30,
-        fontFamily: FONTS.title
+        fontFamily: FONTS.title,
       },
 });

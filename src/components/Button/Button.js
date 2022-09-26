@@ -1,20 +1,19 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity} from "react-native";
 
 import { COLORS } from "../../assets/const";
-
 
 export const Button = ({ label, onPress, backgroundColor, borderRadius }) => {
 
     return (
-        <View style={styles.buttonContainer}>
-            <TouchableOpacity
-                onPress={() => onPress()}
-                style={{...styles.button, backgroundColor}}
-            >
-                <Text>{label}</Text>
-            </TouchableOpacity>
-        </View>
+
+        <TouchableOpacity
+            onPress={() => onPress()}
+            style={{ ...styles.button, backgroundColor, borderRadius }}
+        >
+            <Text>{label}</Text>
+        </TouchableOpacity>
+
     );
 }
 

@@ -17,6 +17,7 @@ import {
 } from "../../components";
 
 import background from '../../assets/images/background.png';
+import headerImg from "../../assets/images/friends.png";
 
 export function ResponsiveRegister() {
 
@@ -31,7 +32,7 @@ export function ResponsiveRegister() {
                 style={styles.background}>
 
                 <BackButton title="Voltar" />
-                <Header />
+                <Header image={headerImg}/>
                 <View style={styles.formContainer}>
 
                     <Title title="Crie sua conta" />

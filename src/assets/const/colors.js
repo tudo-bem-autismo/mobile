@@ -10,8 +10,8 @@ export const COLORS = {
     pink: '#F2BED4',
     yellow: '#DDD361',
     turquoise: '#C0F8DD',
-    pink:'#DA98B4',
+    pinkBold: '#DA98B4',
+    // pink:'#DA98B4',
     beige:'#FFF8F8',
-    yellow:'#FBF4A3'
-
+    // yellow:'#FBF4A3'
 }

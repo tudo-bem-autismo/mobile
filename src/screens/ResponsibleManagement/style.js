@@ -69,24 +69,8 @@ const style = StyleSheet.create({
         flex: 1,
         alignSelf: 'stretch',
     },
-    profileContainer: {
-        flex: 4,
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        // backgroundColor: COLORS.blue,
-    },
-    iconProfile: {
-        width: 110,
-        height: 110,
-        // backgroundColor: COLORS.black,
-    },
-    nameProfile: {
-        fontSize: 25,
-        fontFamily: FONTS.title,
-        marginTop: 5,
-    },
     formContainer: {
-        flex: 10,
+        flex: 12,
         alignSelf: 'stretch',
         padding: 10,
         // backgroundColor: COLORS.darkBlue,
@@ -100,6 +84,17 @@ const style = StyleSheet.create({
         zIndex: 1,
         // backgroundColor: COLORS.gray,
     },
+    titleText: {
+        fontSize: 20,
+        // backgroundColor: COLORS.blue
+    },
+    titleContainer: {
+        flex: 0.5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 50,
+        // backgroundColor: COLORS.blue
+      },
 
 })
 

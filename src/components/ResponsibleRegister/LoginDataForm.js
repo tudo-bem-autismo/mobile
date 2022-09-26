@@ -1,14 +1,13 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Formik } from "formik";
-import Swiper from 'react-native-swiper';
+import React from "react";
+import { StyleSheet, View } from "react-native";
 import Toast from 'react-native-toast-message';
 
 import { COLORS } from "../../assets/const";
-import { Input, PasswordInput } from "../Input";
-import { Button } from "../Button";
 import { responsibleRegisterService } from "../../services";
 import { responsibleRegisterLoginDataSchema } from "../../utils/validations/responsible";
+import { Button } from "../Button";
+import { Input, PasswordInput } from "../Input";
 
 
 export const LoginDataForm = ({ responsibleData }) => {

@@ -32,6 +32,7 @@ export const Input = ({
                     onBlur={onBlur}
                     value={value}
                 />
+
                 {hasError && (
                     <Text style={styles.errorText}>
                         {errorMessage}
@@ -50,7 +51,6 @@ const styles = StyleSheet.create({
         position: 'relative',
         justifyContent: 'flex-start',
         padding: 10,
-        // backgroundColor: COLORS.black,
     },
     icon: {
         position: 'absolute',
