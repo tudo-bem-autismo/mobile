@@ -3,32 +3,17 @@ import { StyleSheet, Text, TouchableOpacity} from "react-native";
 
 import { COLORS } from "../../assets/const";
 
-
-<<<<<<< HEAD
-export const Button = ({ label, onPress, backgroundColor}) => {
-=======
 export const Button = ({ label, onPress, backgroundColor, borderRadius }) => {
->>>>>>> jennifer.dev
 
-    
     return (
-<<<<<<< HEAD
-        <View style={styles.buttonContainer}>
-            <TouchableOpacity
-                onPress={() => onPress()}
-                style={{...styles.button, backgroundColor}}
-            >
-                <Text>{label}</Text>
-            </TouchableOpacity>
-        </View>
-=======
+
         <TouchableOpacity
             onPress={() => onPress()}
             style={{ ...styles.button, backgroundColor, borderRadius }}
         >
             <Text>{label}</Text>
         </TouchableOpacity>
->>>>>>> jennifer.dev
+
     );
 }
 
@@ -41,7 +26,6 @@ const bottomShadow = {
 }
 
 const styles = StyleSheet.create({
-<<<<<<< HEAD
    buttonContainer: {
         flex: 2,
         alignSelf: 'stretch',
@@ -49,13 +33,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingBottom: 5
     },
-=======
->>>>>>> jennifer.dev
     button: {
-        // width: 138,
-        // height: 48,
-        paddingVertical: 10,
-        paddingHorizontal: 25,
+        width: 138,
+        height: 48,
+        backgroundColor: COLORS.blue,
         borderWidth: 1,
         borderColor: COLORS.black,
         borderRadius: 50,
@@ -65,4 +46,3 @@ const styles = StyleSheet.create({
         ...bottomShadow
     },
 });
-

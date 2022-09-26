@@ -33,7 +33,7 @@ export function ResponsibleManagement({ navigation }) {
 
     useEffect(() => {
         getUser()
-    }, []) 
+    }, [])
 
     const initialValues = responsible
 
@@ -69,7 +69,7 @@ export function ResponsibleManagement({ navigation }) {
     return (
         <View style={style.mainContainer}>
             {isLoading ? (
-                <Loading/>
+                <Loading />
             ) : (
                 <ImageBackground
                     source={backgroundManagement}
@@ -77,7 +77,7 @@ export function ResponsibleManagement({ navigation }) {
                     style={style.background}
                 >
 
-                    <BackButton title="Voltar" navigation={navigation}/>
+                    <BackButton title="Voltar" navigation={navigation} />
 
                     <Formik
                         validationSchema={responsibleUpdateSchema}
@@ -190,9 +190,6 @@ export function ResponsibleManagement({ navigation }) {
 
                 </ImageBackground>
             )}
-
         </View>
-    );
+    )
 }
-
-

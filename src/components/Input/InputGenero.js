@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { FontAwesome } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
@@ -88,6 +89,46 @@ export const InputGenero = ({ setGenderId, hasError }) => {
     </View>
   );
 };
+=======
+import React, { useEffect, useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  TouchableOpacity,
+} from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
+import { FONTS, COLORS } from "../../assets/const";
+
+export const InputGenero = ({
+    value}) => {
+
+    return (
+        <View style={styles.container}>
+    
+              <TouchableOpacity style={styles.button} onPress={()=>{voltarOptionSexo()}}>
+                <FontAwesome name="caret-left" style={styles.icons} />
+              </TouchableOpacity>
+    
+              {/* <Text style={styles.text}>{dados[cont].genero}</Text> */}
+              <Text style={styles.text}
+                        ></Text>
+    
+              <TouchableOpacity style={styles.button} onPress={()=>{avancarOptionSexo()}}>
+                <FontAwesome name="caret-right" style={styles.icons} />
+              </TouchableOpacity>
+            
+          
+        </View>
+      );
+
+
+}
+
+
+
+>>>>>>> 7f4f91b9690f18ce21ee56a537ca52c65fb649c2
 
 const styles = StyleSheet.create({
   container: {
@@ -110,6 +151,7 @@ const styles = StyleSheet.create({
   icons: {
     color: COLORS.black,
     fontSize: 28,
+<<<<<<< HEAD
   },
   input: {
     borderColor: COLORS.black,
@@ -137,3 +179,16 @@ const styles = StyleSheet.create({
     color: COLORS.black,
   },
 });
+=======
+    fontWeight: "bold",
+  },
+  text: {
+    borderColor: COLORS.black,
+    borderWidth: 0.8,
+    width: "70%",
+    height: 30,
+    textAlign: "center",
+    padding: 5,
+  },
+});
+>>>>>>> 7f4f91b9690f18ce21ee56a537ca52c65fb649c2
