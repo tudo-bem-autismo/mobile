@@ -9,7 +9,6 @@ import {
 import { FontAwesome } from "@expo/vector-icons";
 import { FONTS, COLORS } from "../../assets/const";
 import { getAutismLevelsService } from "../../services/autimsLevel";
-import api from '../../services/api';
 
 export const InputNivelAutismo = ({ setAutismLevelId, hasError }) => {
 

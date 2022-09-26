@@ -1,23 +1,16 @@
-import React from "react";
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { DependentListing } from "../screens/DependentListing";
 import HomeScreen from "../screens/Home";
 import { ResponsiveLogin } from "../screens/Login";
-import { ResponsiveRegister } from "../screens/ResponsibleRegister";
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { ResponsibleManagement } from "../screens/ResponsibleManagement";
-import { ResponsiblePassword } from "../screens/ResponsibleManagement/responsiblePassword";
-import { DependentListing } from "../screens/DependentListing";
 import { Menu } from "../screens/Menu";
-import { ScrollView, StyleSheet } from 'react-native';
-import Swiper from 'react-native-swiper'
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Onboarding } from "../screens/Onboarding";
 import { OnboardingGames } from "../screens/OnboardingGames";
 import { OnboardingRoutines } from "../screens/OnboardingRoutines";
+import { ResponsibleManagement } from "../screens/ResponsibleManagement";
+import { ResponsiblePassword } from "../screens/ResponsibleManagement/responsiblePassword";
+import { ResponsiveRegister } from "../screens/ResponsibleRegister";
 
 const Stack = createNativeStackNavigator();
 
