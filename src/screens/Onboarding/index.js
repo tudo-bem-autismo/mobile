@@ -21,7 +21,7 @@ export function Onboarding({navigation}){
                     resizeMode="cover"
                     style={styles.background}
                 >
-                <TouchableOpacity style={styles.buttonJump}>
+                <TouchableOpacity style={styles.buttonJump} onPress={() => navigation.navigate('Login')}>
                     <Text>PULAR</Text>
                 </TouchableOpacity>
 

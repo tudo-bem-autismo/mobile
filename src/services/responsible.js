@@ -14,11 +14,11 @@ export const responsibleRegisterService = async (data) => {
 
         const result = await api.post("/responsavel", formattedData);
 
-        const success = result.status === 201
+        const success = result.status === 200
 
         return {
             success,
-            data: result.data
+            data: result.data,
         }
 
     } catch (error) {

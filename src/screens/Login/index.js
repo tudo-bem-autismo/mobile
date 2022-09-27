@@ -19,7 +19,7 @@ import headerImg from '../../assets/images/aa.png';
 import { COLORS } from "../../assets/const/colors.js";
 
 export function ResponsiveLogin({navigation}) {
-    //console.log(navigation);
+    // console.log(navigation);
 
     return (
         <SafeAreaView style={styles.mainContainer}>

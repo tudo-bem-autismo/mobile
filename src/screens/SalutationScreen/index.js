@@ -5,7 +5,7 @@ import kids from '../../assets/images/kids.gif'
 
 import styles from './style.js';
 
-export function SalutationScreen(){
+export function SalutationScreen({navigation}){
     return(
         <View style = {styles.mainContainer}>
             <View style = {styles.textContainer}>
@@ -19,6 +19,7 @@ export function SalutationScreen(){
             </View>
             <TouchableOpacity
                 style = {styles.buttonLets}
+                onPress={() => navigation.navigate('Home')}
             >
                 <Text>Vamos lá</Text>
             </TouchableOpacity>

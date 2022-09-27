@@ -1,6 +1,6 @@
 import { Formik } from "formik";
-import React from "react";
-import { StyleSheet, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
 import Toast from 'react-native-toast-message';
 
 import { COLORS } from "../../assets/const";
@@ -8,11 +8,12 @@ import { responsibleRegisterService } from "../../services";
 import { responsibleRegisterLoginDataSchema } from "../../utils/validations/responsible";
 import { Button } from "../Button";
 import { Input, PasswordInput } from "../Input";
+import { SalutationScreen } from "../../screens/SalutationScreen";
+import { Loading } from "../../screens/Loading";
 
 
-export const LoginDataForm = ({ responsibleData }) => {
+export const LoginDataForm = ({ responsibleData, navigation }) => {
 
-    // envio dos dados pra api
     const handleForm = async (data) => {
 
         const responsible = {
@@ -22,12 +23,9 @@ export const LoginDataForm = ({ responsibleData }) => {
 
         // Chama a api enviando os dados do formulário, "data" são os "values"
         const result = await responsibleRegisterService(responsible)
-
+        
         if (result.success) {
-            return Toast.show({
-                type: 'success',
-                text1: 'Usuário cadastrado com sucesso',
-            });
+                navigation.navigate('Salutation')     
         }
 
     }
@@ -92,6 +90,7 @@ export const LoginDataForm = ({ responsibleData }) => {
                                 borderRadius={50}
                             />
                         </View>
+
                     </>
                 )}
             </Formik>

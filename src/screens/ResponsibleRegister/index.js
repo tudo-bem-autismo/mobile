@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, SafeAreaView, ImageBackground, KeyboardAvoidingView, Platform } from "react-native";
+import { View, SafeAreaView, ImageBackground, KeyboardAvoidingView, Platform, Text, TouchableOpacity, StyleSheet } from "react-native";
 
 import styles from "./style.js";
 import {
@@ -18,8 +18,10 @@ import {
 
 import background from '../../assets/images/background.png';
 import headerImg from "../../assets/images/friends.png";
+import { FONTS } from "../../assets/const/fonts.js";
+import { COLORS } from "../../assets/const/colors.js";
 
-export function ResponsiveRegister() {
+export function ResponsiveRegister({ navigation }) {
 
     return (
 
@@ -32,22 +34,27 @@ export function ResponsiveRegister() {
                 style={styles.background}>
 
                 <BackButton title="Voltar" />
-                <Header image={headerImg}/>
+                <Header image={headerImg} />
                 <View style={styles.formContainer}>
 
                     <Title title="Crie sua conta" />
 
-                        <View style={styles.registerContainer}>
-                           <FormSwiper/>
-                        </View>
+                    <View style={styles.registerContainer}>
+                        <FormSwiper navigation={navigation}/>
+                    </View>
 
                     <View style={styles.loginContainer}>
                         <Login label="ou entre com" />
                         <Google />
-                        <LoginDescription
-                            question="Você já tem uma conta?"
-                            answer="Entrar"
-                        />
+
+                        <View style={style.loginDescriptionContainer}>
+                            <Text style={style.loginQuestionText}>Você já tem uma conta?</Text>
+
+                            <TouchableOpacity style={style.loginButton} onPress={() => navigation.navigate('Login')}>
+                                <Text style={style.loginButtonText}>Entrar</Text>
+                            </TouchableOpacity>
+                        </View>
+
                     </View>
                 </View>
 
@@ -58,3 +65,25 @@ export function ResponsiveRegister() {
     );
 
 }
+
+const style = StyleSheet.create({
+    loginDescriptionContainer: {
+        flex: 1,
+        alignSelf: 'stretch',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    loginQuestionText: {
+        fontSize: 17,
+        fontFamily: FONTS.text,
+    },
+    loginButton: {
+        marginLeft: 5,
+    },
+    loginButtonText: {
+        fontSize: 17,
+        fontFamily: FONTS.text,
+        color: COLORS.red,
+    },
+});

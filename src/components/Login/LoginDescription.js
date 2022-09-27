@@ -9,9 +9,7 @@ export const LoginDescription = ({ question, answer, navigation }) => {
             <Text style={styles.loginQuestionText}>{question}</Text>
 
             <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Register')}>
-
                 {/* <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Password')}> */}
-
                 <Text style={styles.loginButtonText}>{answer}</Text>
             </TouchableOpacity>
         </View>

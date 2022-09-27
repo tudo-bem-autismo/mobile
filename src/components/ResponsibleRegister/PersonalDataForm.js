@@ -8,7 +8,9 @@ import { Button } from "../Button";
 import { Input, MaskedInput } from "../Input";
 
 
-export const PersonalDataForm = ({ nextFormPage, setResponsibleData }) => {
+export const PersonalDataForm = ({ nextFormPage, setResponsibleData, navigation }) => {
+
+    //console.log(navigation);
 
     const handleForm = async (data) => {
 

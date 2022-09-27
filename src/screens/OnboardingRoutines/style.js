@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
         alignItems:'flex-end',
         marginRight:20,
         top:'3%',
+        zIndex: 2
     },
     featureContainer:{
         flex:2,

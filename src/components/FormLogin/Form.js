@@ -8,20 +8,20 @@ import { Input, PasswordInput } from '../Input';
 import {Button} from '../Button'
 import {responsibleLoginService} from "../../services";
 import { responsibleLoginDataSchema } from '../../utils/validations/responsible';
+import { SalutationScreen } from "../../screens/SalutationScreen";
 
 export const FormLogin = () => {
     
   //ENVIO DOS DADOS PARA A API
-  const handleForm = async (data) => {
+  const handleForm = async (data, {navigation}) => {
 
     // Chama a api enviando os dados do formulário
     const result = await responsibleLoginService(data)
 
     if (result.sucess) {
-        return Toast.show({
-            type: 'success',
-            text1: 'Login realizado com sucesso',
-        });
+        return (
+            navigation.navigate('Salutation')
+        )
     }
 
   }
@@ -77,6 +77,8 @@ export const FormLogin = () => {
                         <Button
                             label="ENTRAR"
                             onPress={handleSubmit}
+                            backgroundColor={COLORS.blue}
+                            borderRadius={50}
                         />
                     </>
                 )}
