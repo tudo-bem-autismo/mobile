@@ -75,12 +75,16 @@ export const ModalDeleteData = ({ label, close, show, del }) => {
                                 label="NÃO"
                                 backgroundColor={COLORS.purple}
                                 borderRadius={15} 
+                                width={100}
+                                height={40}
                                 onPress={close}
                             />
                             <Button
                                 label="SIM"
                                 backgroundColor={COLORS.turquoise}
                                 borderRadius={15}
+                                width={100}
+                                height={40}
                                 onPress={del}
                             />
                         </View>
@@ -92,6 +96,14 @@ export const ModalDeleteData = ({ label, close, show, del }) => {
 
     );
 
+}
+
+const bottomShadow = {
+    shadowOffset: { width: 0, height: 0, },
+    shadowColor: 'black',
+    shadowOpacity: 1,
+    shadowRadius: 5,
+    elevation: 5,
 }
 
 const style = StyleSheet.create({
@@ -127,17 +139,19 @@ const style = StyleSheet.create({
     },
     questionContainer: {
         flex: 1,
+        width: 300,
         alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 50,
+        marginTop: 40,
+        top: 20,
+        left: 35,
         // backgroundColor: COLORS.blue,
     },
     questionText: {
         fontSize: 25,
         fontFamily: FONTS.title,
         textAlign: 'center',
-
     },
     buttonsContainer: {
         flex: 3,
@@ -145,8 +159,28 @@ const style = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'space-evenly',
         flexDirection: 'row',
-        paddingHorizontal: 35,
+        paddingHorizontal: 25,
+        marginBottom: 100,
+        margin: 15,
         // backgroundColor: COLORS.purple,
+    },
+    buttonContainer: {
+        flex: 2,
+        alignSelf: 'stretch',
+        alignItems: 'center',
+        justifyContent: 'center',
+        // paddingBottom: 150,
+        // backgroundColor: COLORS.darkBlue,
+    },
+    button: {
+        width: 100,
+        height: 48,
+        borderWidth: 1,
+        borderColor: COLORS.black,
+        borderRadius: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        ...bottomShadow
     },
 });
 

@@ -68,11 +68,9 @@ export const updateResponsibleService = async (data) => {
             nome: data.name,
             telefone: data.phone ? removePhoneMask(data.phone) : '',
             email: data.email,
-            // // Tirar a obrigatoriedade
-            // senha: '1234'
         }
 
-        const result = await api.put("/responsavel/11", formattedData)
+        const result = await api.put("/responsavel/78", formattedData)
 
         const success = result.status === 200
 

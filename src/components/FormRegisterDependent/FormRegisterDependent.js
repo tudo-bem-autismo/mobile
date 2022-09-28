@@ -161,6 +161,8 @@ export const FormDependentRegister = () => {
                 <Button
                   label="CRIAR"
                   backgroundColor={COLORS.blue}
+                  width={100}
+                  height={50}
                   onPress={handleSubmit}
                 ></Button>
               </View>

@@ -8,7 +8,7 @@ import { Button } from "../Button";
 
 const { height } = Dimensions.get('window')
 
-export const ModalSaveData = ({ label, close, show, password }) => {
+export const ModalSaveData = ({ label, close, show, password, navigation }) => {
 
     const [state, setState] = useState({
         opacity: new Animated.Value(0),
@@ -64,24 +64,51 @@ export const ModalSaveData = ({ label, close, show, password }) => {
                     style={style.modalBackground}
                     resizeMode="cover"
                 >
+                    <View>
+
 
                     <View style={style.questionContainer}>
                         <Text style={style.questionText}>{label}</Text>
                     </View>
 
                     <View style={style.buttonsContainer}>
+
+                        {/* <View style={style.buttonContainer}>
+                            <TouchableOpacity
+                                onPress={close}
+                                style={{ ...style.button, backgroundColor: COLORS.purple }}
+                            >
+                                <Text>NÃO</Text>
+                            </TouchableOpacity>
+                        </View> */}
+
                         <Button
                             label="NÃO"
                             backgroundColor={COLORS.purple}
                             borderRadius={15}
+                            width={100}
+                            height={40}
                             onPress={close}
                         />
+
+                        {/* <View style={style.buttonContainer}>
+                            <TouchableOpacity
+                                onPress={() => navigation.navigate('Menu')}
+                                style={{ ...style.button, backgroundColor: COLORS.turquoise }}
+                            >
+                                <Text>SIM</Text>
+                            </TouchableOpacity>
+                        </View> */}
+
                         <Button
                             label="SIM"
                             backgroundColor={COLORS.turquoise}
                             borderRadius={15}
+                            width={100}
+                            height={40}
                             onPress={password}
                         />
+                    </View>
                     </View>
                 </ImageBackground>
                 {/* </View> */}
@@ -91,6 +118,15 @@ export const ModalSaveData = ({ label, close, show, password }) => {
 
     );
 
+}
+
+
+const bottomShadow = {
+    shadowOffset: { width: 0, height: 0, },
+    shadowColor: 'black',
+    shadowOpacity: 1,
+    shadowRadius: 5,
+    elevation: 5,
 }
 
 const style = StyleSheet.create({
@@ -121,22 +157,23 @@ const style = StyleSheet.create({
         width: '100%',
         height: '100%',
         justifyContent: 'center',
-        alignItems: 'flex-end',
+        alignItems: 'center',
         // backgroundColor: COLORS.gray
     },
     questionContainer: {
         flex: 1,
+        width: 300,
         alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 50,
+        marginTop: 40,
+        top: 20,
         // backgroundColor: COLORS.blue,
     },
     questionText: {
         fontSize: 25,
         fontFamily: FONTS.title,
         textAlign: 'center',
-
     },
     buttonsContainer: {
         flex: 3,
@@ -144,8 +181,28 @@ const style = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'space-evenly',
         flexDirection: 'row',
-        paddingHorizontal: 35,
+        paddingHorizontal: 15,
+        marginBottom: 100,
+        margin: 5,
         // backgroundColor: COLORS.purple,
+    },
+    buttonContainer: {
+        flex: 2,
+        alignSelf: 'stretch',
+        alignItems: 'center',
+        justifyContent: 'center',
+        // paddingBottom: 150,
+        // backgroundColor: COLORS.darkBlue,
+    },
+    button: {
+        width: 100,
+        height: 48,
+        borderWidth: 1,
+        borderColor: COLORS.black,
+        borderRadius: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        ...bottomShadow
     },
 });
 

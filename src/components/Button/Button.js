@@ -3,14 +3,14 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { COLORS } from "../../assets/const";
 
-export const Button = ({ label, onPress, backgroundColor, borderRadius }) => {
+export const Button = ({ label, onPress, backgroundColor, borderRadius, width, height }) => {
 
     return (
 
         <View style={styles.buttonContainer}>
             <TouchableOpacity
                 onPress={() => onPress()}
-                style={{ ...styles.button, backgroundColor, borderRadius }}
+                style={{ ...styles.button, backgroundColor, borderRadius, width, height }}
             >
                 <Text>{label}</Text>
             </TouchableOpacity>

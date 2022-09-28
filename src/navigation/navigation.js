@@ -20,7 +20,7 @@ const Navigation = () => {
         <NavigationContainer>
             <Stack.Navigator>
 
-                <Stack.Screen name="Onboarding" component={Onboarding} options={{ headerShown: false }} />
+                <Stack.Screen name="Onboarding" component={Onboarding} options={{ headerLeft: ()=> null, headerShown: false }} />
                 <Stack.Screen name="OnboardingGames" component={OnboardingGames} options={{ headerShown: false }} />
                 <Stack.Screen name="OnboardingRoutines" component={OnboardingRoutines} options={{ headerShown: false }} />
                 <Stack.Screen name="Login" component={ResponsiveLogin} options={{ headerShown: false }} />
