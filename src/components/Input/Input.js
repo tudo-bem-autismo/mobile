@@ -46,11 +46,12 @@ export const Input = ({
 
 const styles = StyleSheet.create({
     inputContainer: {
-        width: '100%',
+        width: '108%',
         height: 100,
         position: 'relative',
         justifyContent: 'flex-start',
         padding: 10,
+        // backgroundColor: COLORS.blue
     },
     icon: {
         position: 'absolute',

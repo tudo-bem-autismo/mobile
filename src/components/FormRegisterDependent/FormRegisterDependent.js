@@ -18,6 +18,7 @@ import { InputNivelAutismo } from "../Input/InputNivelAutismo";
 import { Button } from "../Button/Button";
 import { kidRegisterService } from "../../services/kid.js";
 import { kidRegisterDataSchema } from "../../utils/validations/dependent";
+import file from "../../assets/images/file.png"
 
 export const FormDependentRegister = () => {
   const now = new Date();
@@ -90,7 +91,7 @@ export const FormDependentRegister = () => {
 
   // Todos os campos irão iniciar com esses valores, ou seja, vazios
   const initialValues = {
-    name: "",
+    name: '',
   };
 
   const pickImage = async () => {
@@ -118,10 +119,11 @@ export const FormDependentRegister = () => {
           <>
             <View style={styles.containerInputs}>
               <TouchableOpacity style={styles.contentImg} onPress={pickImage}>
-                {image && <Image source={{ uri: image }} style={styles.foto} />}
+                {image ?
+                  (<Image source={{ uri: image }} style={styles.foto} />) : (<Image source={file} style={styles.file} />)}
               </TouchableOpacity>
 
-              <Text>FOTO</Text>
+              {/* <Text>FOTO</Text> */}
 
               <View style={styles.input}>
                 <Input
@@ -157,11 +159,15 @@ export const FormDependentRegister = () => {
                 <Button
                   label="CANCELAR"
                   backgroundColor={COLORS.purple}
+                  borderRadius={20}
+                  width={120}
+                  height={50}
                 ></Button>
                 <Button
                   label="CRIAR"
                   backgroundColor={COLORS.blue}
-                  width={100}
+                  borderRadius={20}
+                  width={120}
                   height={50}
                   onPress={handleSubmit}
                 ></Button>
@@ -182,14 +188,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   contentImg: {
-    width: 130,
-    borderRadius: 200,
-    height: 130,
-    borderWidth: 1,
-    borderColor: COLORS.black,
+    width: 170,
+    height: 110,
+    // borderRadius: 200,
+    // borderWidth: 1,
+    // borderColor: COLORS.black,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: COLORS.purple,
+    // backgroundColor: COLORS.purple,
   },
   input: {
     alignItems: "center",
@@ -211,6 +217,10 @@ const styles = StyleSheet.create({
   foto: {
     width: "100%",
     borderRadius: 200,
+    height: "100%",
+  },
+  file: {
+    width: "100%",
     height: "100%",
   },
 });

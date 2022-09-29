@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
         // marginLeft: '-25%',
     },
     inputContainer: {
-        width: '75%',
+        width: '76%',
         height: '100%',
         // backgroundColor: COLORS.darkBlue
     },

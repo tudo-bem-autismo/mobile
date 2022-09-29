@@ -8,7 +8,7 @@ import { Button } from "../Button";
 
 const { height } = Dimensions.get('window')
 
-export const ModalSaveData = ({ label, close, show, password, navigation }) => {
+export const ModalDeleteData = ({ label, close, show, del }) => {
 
     const [state, setState] = useState({
         opacity: new Animated.Value(0),
@@ -20,7 +20,7 @@ export const ModalSaveData = ({ label, close, show, password, navigation }) => {
         Animated.sequence([
             Animated.timing(state.container, { toValue: 0, duration: 100, useNativeDriver: true }),
             Animated.timing(state.opacity, { toValue: 1, duration: 300, useNativeDriver: true }),
-            Animated.spring(state.modal, { toValue: 0, bounciness: 2, useNativeDriver: true })
+            Animated.spring(state.modal, { toValue: 0, bounciness: 5, useNativeDriver: true })
         ]).start()
     }
 
@@ -59,58 +59,35 @@ export const ModalSaveData = ({ label, close, show, password, navigation }) => {
             >
 
                 {/* <View style={style.modal}> */}
-                <ImageBackground
-                    source={modalBackground}
-                    style={style.modalBackground}
-                    resizeMode="cover"
-                >
-                    <View>
+                    <ImageBackground
+                        source={modalBackground}
+                        style={style.modalBackground}
+                        resizeMode="cover"
+                    >
 
+                        <View style={style.questionContainer}>
+                            <Text style={style.questionText}>{label}</Text>
+                        </View>
 
-                    <View style={style.questionContainer}>
-                        <Text style={style.questionText}>{label}</Text>
-                    </View>
-
-                    <View style={style.buttonsContainer}>
-
-                        {/* <View style={style.buttonContainer}>
-                            <TouchableOpacity
+                        <View style={style.buttonsContainer}>
+                            <Button
+                                label="NÃO"
+                                backgroundColor={COLORS.purple}
+                                borderRadius={15} 
+                                width={80}
+                                height={40}
                                 onPress={close}
-                                style={{ ...style.button, backgroundColor: COLORS.purple }}
-                            >
-                                <Text>NÃO</Text>
-                            </TouchableOpacity>
-                        </View> */}
-
-                        <Button
-                            label="NÃO"
-                            backgroundColor={COLORS.purple}
-                            borderRadius={15}
-                            width={100}
-                            height={40}
-                            onPress={close}
-                        />
-
-                        {/* <View style={style.buttonContainer}>
-                            <TouchableOpacity
-                                onPress={() => navigation.navigate('Menu')}
-                                style={{ ...style.button, backgroundColor: COLORS.turquoise }}
-                            >
-                                <Text>SIM</Text>
-                            </TouchableOpacity>
-                        </View> */}
-
-                        <Button
-                            label="SIM"
-                            backgroundColor={COLORS.turquoise}
-                            borderRadius={15}
-                            width={100}
-                            height={40}
-                            onPress={password}
-                        />
-                    </View>
-                    </View>
-                </ImageBackground>
+                            />
+                            <Button
+                                label="SIM"
+                                backgroundColor={COLORS.turquoise}
+                                borderRadius={15}
+                                width={80}
+                                height={40}
+                                onPress={del}
+                            />
+                        </View>
+                    </ImageBackground>
                 {/* </View> */}
 
             </Animated.View>
@@ -119,7 +96,6 @@ export const ModalSaveData = ({ label, close, show, password, navigation }) => {
     );
 
 }
-
 
 const bottomShadow = {
     shadowOffset: { width: 0, height: 0, },
@@ -157,7 +133,7 @@ const style = StyleSheet.create({
         width: '100%',
         height: '100%',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'flex-end',
         // backgroundColor: COLORS.gray
     },
     questionContainer: {
@@ -168,6 +144,7 @@ const style = StyleSheet.create({
         alignItems: 'center',
         marginTop: 40,
         top: 20,
+        left: 35,
         // backgroundColor: COLORS.blue,
     },
     questionText: {
@@ -181,9 +158,9 @@ const style = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'space-evenly',
         flexDirection: 'row',
-        paddingHorizontal: 15,
+        paddingHorizontal: 25,
         marginBottom: 100,
-        margin: 5,
+        margin: 15,
         // backgroundColor: COLORS.purple,
     },
     buttonContainer: {

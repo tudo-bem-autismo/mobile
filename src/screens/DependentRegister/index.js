@@ -28,7 +28,7 @@ export function DependentRegister() {
                 style={styles.background}>
                 
 
-                <View style={aa.cont}>
+                <View style={style.cont}>
                     
                     <FormDependentRegister/>
                     
@@ -43,7 +43,7 @@ export function DependentRegister() {
 
 }
 
-const aa = StyleSheet.create({
+const style = StyleSheet.create({
     cont: {
       marginTop: '60%',
       flex: 1,

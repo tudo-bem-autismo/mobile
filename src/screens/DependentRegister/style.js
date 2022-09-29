@@ -45,7 +45,7 @@ const style = StyleSheet.create({
   },
   container: {
     flex: 6,
-  }
+  },
 });
 
 export default style;

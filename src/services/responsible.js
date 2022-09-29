@@ -36,7 +36,7 @@ export const responsibleRegisterService = async (data) => {
 export const getResponsibleService = async () => {
     try {
 
-        const result = await api.get("/responsavel/12")
+        const result = await api.get("/responsavel/6")
 
         const success = result.status === 200
 
@@ -70,7 +70,7 @@ export const updateResponsibleService = async (data) => {
             email: data.email,
         }
 
-        const result = await api.put("/responsavel/78", formattedData)
+        const result = await api.put("/responsavel/6", formattedData)
 
         const success = result.status === 200
 
@@ -96,7 +96,7 @@ export const updatePasswordResponsibleService = async (data) => {
             senha: data.newPassword,
         }
 
-        const result = await api.put("/responsavel/senha/11", formattedData)
+        const result = await api.put("/responsavel/senha/78", formattedData)
 
         const success = result.status === 200
 
@@ -117,7 +117,7 @@ export const updatePasswordResponsibleService = async (data) => {
 export const deleteResponsibleService = async () => {
     try {
 
-        const result = await api.delete("/responsavel/7")
+        const result = await api.delete("/responsavel/6")
 
         const success = result.status === 200
 
@@ -127,7 +127,8 @@ export const deleteResponsibleService = async () => {
         }
 
     } catch (error) {
-        showErrorToast(error.response.data.message)
+        console.log(error)
+        // showErrorToast(error.response.data.message)
         return {
             success: false,
             data: error.response.data
@@ -138,7 +139,7 @@ export const deleteResponsibleService = async () => {
 export const getResponsibleDependentsService = async () => {
     try {
 
-        const result = await api.get("/responsavel/15")
+        const result = await api.get("/responsavel/78")
 
         const sucess = result.status === 200
 

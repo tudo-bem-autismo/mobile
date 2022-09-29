@@ -103,14 +103,14 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 30,
-    backgroundColor: COLORS.blue,
+    // backgroundColor: COLORS.blue,
     alignItems: "center",
     justifyContent: "center",
     marginHorizontal: 10,
   },
   icons: {
-    color: COLORS.black,
-    fontSize: 28,
+    color: COLORS.blue,
+    fontSize: 35,
 
   },
   input: {

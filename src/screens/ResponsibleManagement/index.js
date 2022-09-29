@@ -8,8 +8,8 @@ import { BackButton, Button, Input, LoginDescription, MaskedInput } from "../../
 import style from "./style.js";
 import { COLORS } from "../../assets/const/colors.js";
 import backgroundManagement from '../../assets/images/backgroundManagement.png';
-import { ModalDeleteData } from "../../components/ResponsibleManagement/ModalDeleteData.js";
-import { ModalSaveData } from "../../components/ResponsibleManagement/ModalSaveData.js";
+import { ModalDeleteData } from "../../components/Modal/ModalDeleteData.js";
+import { ModalSaveData } from "../../components/Modal/ModalSaveData";
 import { Profile } from "../../components/ResponsibleManagement/Profile.js";
 import { deleteResponsibleService, getResponsibleService, updateResponsibleService } from "../../services/responsible.js";
 import { responsibleUpdateSchema } from "../../utils/validations/responsible/index.js";
@@ -147,16 +147,16 @@ export function ResponsibleManagement({ navigation }) {
                                         label="EXCLUIR"
                                         backgroundColor={COLORS.purple}
                                         borderRadius={15}
-                                        width={108}
-                                        height={40}
+                                        width={120}
+                                        height={45}
                                         onPress={() => setShowModal(true)}
                                     />
                                     <Button
                                         label="SALVAR"
                                         backgroundColor={COLORS.turquoise}
                                         borderRadius={15}
-                                        width={108}
-                                        height={40}
+                                        width={120}
+                                        height={45}
                                         onPress={() => setShowModalSaveData(true)}
                                     />
                                 </View>
