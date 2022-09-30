@@ -19,7 +19,7 @@ import { Button } from "../Button/Button";
 import { kidRegisterService } from "../../services/kid.js";
 import { kidRegisterDataSchema } from "../../utils/validations/dependent";
 
-export const FormDependentRegister = () => {
+export const FormRegisterDependent = () => {
   const now = new Date();
 
   const [date, setDate] = useState(now);
@@ -165,6 +165,7 @@ export const FormDependentRegister = () => {
                 ></Button>
               </View>
             </View>
+
           </>
         )}
       </Formik>

@@ -7,6 +7,10 @@ import Toast from 'react-native-toast-message';
 
 
 import Navigation from './src/navigation/navigation';
+import { DependentManagement } from './src/screens/DependentManagement';
+import {DependentRegister} from './src/screens/DependentRegister'
+import { ResponsibleManagement } from './src/screens/ResponsibleManagement';
+
 export default function App() {
 
   const [fontsLoaded] = useFonts({
@@ -24,10 +28,11 @@ export default function App() {
         {/* <ResponsiveRegister /> */}
         {/* <ResponsibleManagement /> */}
         {/* <ResponsiblePassword/> */}
-        <Navigation />
+        <DependentManagement/>
         {/* <Loading/> */}
         {/* <Menu /> */}
         {/* <DependentListing/> */}
+        {/* <DependentRegister/> */}
         <Toast />
         {/* <ResponsiveRegister />
         <Toast /> */}

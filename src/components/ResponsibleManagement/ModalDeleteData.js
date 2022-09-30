@@ -76,12 +76,16 @@ export const ModalDeleteData = ({ label, close, show, del }) => {
                                 backgroundColor={COLORS.purple}
                                 borderRadius={15} 
                                 onPress={close}
+                                height={40}
+                                width={70}
                             />
                             <Button
                                 label="SIM"
                                 backgroundColor={COLORS.turquoise}
                                 borderRadius={15}
                                 onPress={del}
+                                height={40}
+                                width={70}
                             />
                         </View>
                     </ImageBackground>

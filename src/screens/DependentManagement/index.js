@@ -11,11 +11,14 @@ import {
     Form,
 } from "../../components";
 
-import background from '../../assets/images/background.png';
+import backgroundManagement from '../../assets/images/backgroundKidManagement.png';
 import headerImg from '../../assets/images/gg.png'
-import { FormRegisterDependent} from "../../components";
+import { FormManagementDependent } from "../../components/FormManagementDependent/FormManagementDependent.js";
 
-export function DependentRegister() {
+
+export function DependentManagement() {
+
+    
 
     return (
 
@@ -23,14 +26,17 @@ export function DependentRegister() {
 
             <ImageBackground
 
-                source={headerImg}
+                source={backgroundManagement}
                 resizeMode="cover"
                 style={styles.background}>
+
+                
+                <BackButton title="voltar"/>
                 
 
-                <View style={aa.cont}>
+                <View style={stylesCont.cont}>
                     
-                    <FormRegisterDependent/>
+                <FormManagementDependent/>
                     
                     
                 </View>
@@ -43,9 +49,9 @@ export function DependentRegister() {
 
 }
 
-const aa = StyleSheet.create({
+const stylesCont = StyleSheet.create({
     cont: {
-      marginTop: '60%',
+      marginTop: '30%',
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center'

@@ -4,7 +4,7 @@ import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 import { COLORS } from "../../assets/const";
 import { getGendersService } from "../../services/gender";
 
-export const InputGenero = ({ setGenderId, hasError }) => {
+export const InputGenero = ({ setGenderId, hasError, value }) => {
 
   // Lista com todos os gêneros
   const [genders, setGenders] = useState([
@@ -13,6 +13,7 @@ export const InputGenero = ({ setGenderId, hasError }) => {
       gender: 'selecione um gênero',
     }
   ]);
+
 
   // Contador de qual posição está o gênero selecionado
   const [count, setCount] = useState(0);

@@ -144,12 +144,16 @@ export function ResponsibleManagement({ navigation }) {
                                         backgroundColor={COLORS.purple}
                                         borderRadius={15}
                                         onPress={() => setShowModal(true)}
+                                        width={100}
+                                        height={150}
                                     />
                                     <Button
                                         label="SALVAR"
                                         backgroundColor={COLORS.turquoise}
                                         borderRadius={15}
                                         onPress={() => setShowModalSaveData(true)}
+                                        width={100}
+                                        height={150}
                                     />
                                 </View>
 
