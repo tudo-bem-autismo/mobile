@@ -33,7 +33,7 @@ export function ResponsiveRegister({ navigation }) {
                 resizeMode="cover"
                 style={styles.background}>
 
-                <BackButton title="Voltar" />
+                <BackButton title="Voltar" navigation={navigation}/>
                 <Header image={headerImg} />
                 <View style={styles.formContainer}>
 

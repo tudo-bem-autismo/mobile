@@ -1,5 +1,5 @@
 import React from "react";
-import { View, ImageBackground, StyleSheet, Image, Text   } from "react-native";
+import { View, ImageBackground, StyleSheet, Image, Text } from "react-native";
 import styles from "./style.js";
 import {
     BackButton,
@@ -13,9 +13,9 @@ import {
 
 import background from '../../assets/images/background.png';
 import headerImg from '../../assets/images/gg.png'
-import { FormDependentRegister} from "../../components";
+import { FormDependentRegister } from "../../components";
 
-export function DependentRegister() {
+export function DependentRegister({ navigation }) {
 
     return (
 
@@ -26,13 +26,15 @@ export function DependentRegister() {
                 source={headerImg}
                 resizeMode="cover"
                 style={styles.background}>
-                
+
 
                 <View style={style.cont}>
-                    
-                    <FormDependentRegister/>
-                    
-                    
+
+                    <FormDependentRegister
+                        navigation={navigation}
+                    />
+
+
                 </View>
 
             </ImageBackground>
@@ -45,10 +47,10 @@ export function DependentRegister() {
 
 const style = StyleSheet.create({
     cont: {
-      marginTop: '60%',
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center'
-      
+        marginTop: '60%',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+
     },
 })

@@ -81,6 +81,8 @@ export const PersonalDataForm = ({ nextFormPage, setResponsibleData, navigation 
                             <Button
                                 label="PRÓXIMO"
                                 onPress={handleSubmit}
+                                width={120}
+                                height={45}
                                 backgroundColor={COLORS.blue}
                                 borderRadius={50}
                             />

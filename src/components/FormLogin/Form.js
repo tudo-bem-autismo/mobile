@@ -78,7 +78,7 @@ export const FormLogin = ({ navigation }) => {
                             backgroundColor={COLORS.blue}
                             borderRadius={50}
                             width={120}
-                            height={40}
+                            height={45}
                         />
                     </>
                 )}
