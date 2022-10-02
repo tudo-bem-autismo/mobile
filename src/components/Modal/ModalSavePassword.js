@@ -67,13 +67,13 @@ export const ModalSavePasswordData = ({ label, close, show, password, navigation
                     <View>
 
 
-                    <View style={style.questionContainer}>
-                        <Text style={style.questionText}>{label}</Text>
-                    </View>
+                        <View style={style.questionContainer}>
+                            <Text style={style.questionText}>{label}</Text>
+                        </View>
 
-                    <View style={style.buttonsContainer}>
+                        <View style={style.buttonsContainer}>
 
-                        {/* <View style={style.buttonContainer}>
+                            {/* <View style={style.buttonContainer}>
                             <TouchableOpacity
                                 onPress={close}
                                 style={{ ...style.button, backgroundColor: COLORS.purple }}
@@ -82,18 +82,16 @@ export const ModalSavePasswordData = ({ label, close, show, password, navigation
                             </TouchableOpacity>
                         </View> */}
 
-                        <Button
-                            label="NÃO"
-                            backgroundColor={COLORS.purple}
-                            borderRadius={15}
-                            width={80}
-                            height={40}
-                            onPress={close}
-                            height={40}
-                            width={70}
-                        />
+                            <Button
+                                label="NÃO"
+                                backgroundColor={COLORS.purple}
+                                borderRadius={15}
+                                width={80}
+                                height={40}
+                                onPress={close}
+                            />
 
-                        {/* <View style={style.buttonContainer}>
+                            {/* <View style={style.buttonContainer}>
                             <TouchableOpacity
                                 onPress={() => navigation.navigate('Menu')}
                                 style={{ ...style.button, backgroundColor: COLORS.turquoise }}
@@ -102,17 +100,15 @@ export const ModalSavePasswordData = ({ label, close, show, password, navigation
                             </TouchableOpacity>
                         </View> */}
 
-                        <Button
-                            label="SIM"
-                            backgroundColor={COLORS.turquoise}
-                            borderRadius={15}
-                            width={80}
-                            height={40}
-                            onPress={password}
-                            height={40}
-                            width={70}
-                        />
-                    </View>
+                            <Button
+                                label="SIM"
+                                backgroundColor={COLORS.turquoise}
+                                borderRadius={15}
+                                width={80}
+                                height={40}
+                                onPress={password}
+                            />
+                        </View>
                     </View>
                 </ImageBackground>
                 {/* </View> */}

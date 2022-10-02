@@ -10,7 +10,7 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import Toast from "react-native-toast-message";
 import { Formik } from "formik";
-import { isEqual } from "date-fns";
+import { format, isEqual } from "date-fns";
 
 import { COLORS } from "../../assets/const";
 import { Input, DataInput, InputGenero } from "../Input";
@@ -19,58 +19,37 @@ import { Button } from "../Button/Button";
 import { kidRegisterService } from "../../services/kid.js";
 import { getKidService } from "../../services/kid.js";
 import { kidRegisterDataSchema } from "../../utils/validations/dependent";
-import { ModalDeleteData } from "../ResponsibleManagement/ModalDeleteData.js";
-import { ModalSaveData } from "../ResponsibleManagement/ModalSaveData.js";
+import { ModalDeleteData } from "../Modal/ModalDeleteData.js";
+import { ModalSaveData } from "../Modal/ModalSaveData.js";
 import { Loading } from "../../screens/Loading";
 
 export const FormManagementDependent = () => {
   const [showModal, setShowModal] = useState(false);
-
   const [showModalSaveData, setShowModalSaveData] = useState(false);
-
-  const now = new Date();
-
   const [kid, setKid] = useState({});
-
   const [isLoading, setIsLoading] = useState(true);
-
   const [genderId, setGenderId] = useState();
+  const initialValues = kid;
+  const [date, setDate] = useState(new Date());
+  const [dateHasError, setDateHasError] = useState(false);
+  const [genderHasError, setGenderHasError] = useState(false);
+  const [autismLevelId, setAutismLevelId] = useState(0);
+  const [autismLevelHasError, setAutismLevelHasError] = useState(false);
+  const [image, setImage] = useState(null);
 
 
-  const getUser = async () => {
+  const getKid = async () => {
     const result = await getKidService();
     setKid(result.data);
+    setDate(new Date(result.data.date))
     setIsLoading(false);
   };
 
   useEffect(() => {
-    getUser();
+    getKid();
   }, []);
 
-  const initialValues = kid;
-
-  const foto = initialValues.genderId;
-  // console.log(foto)
-
-  const [date, setDate] = useState(now);
-
-  const [dateHasError, setDateHasError] = useState(false);
-
-  const [genderHasError, setGenderHasError] = useState(false);
-
-
-  const [autismLevelId, setAutismLevelId] = useState(0);
-
-  const [autismLevelHasError, setAutismLevelHasError] = useState(false);
-
-  const [image, setImage] = useState(null);
-
   const handleForm = async (data) => {
-    if (isEqual(date, now)) {
-      setDateHasError(true);
-
-      return;
-    }
 
     if (genderId === 0) {
       setGenderHasError(true);
@@ -172,15 +151,18 @@ export const FormManagementDependent = () => {
                   date={date}
                   setDate={setDate}
                   hasError={dateHasError}
+                  value={format(date, "dd/MM/yyyy")}
                 />
 
                 <InputGenero
                   setGenderId={setGenderId}
+                  selectedGenderId={kid.genderId}
                   hasError={genderHasError}
                 />
 
                 <InputNivelAutismo
                   setAutismLevelId={setAutismLevelId}
+                  selectedAutismLevelId={kid.autismLevelId}
                   hasError={autismLevelHasError}
                 />
 

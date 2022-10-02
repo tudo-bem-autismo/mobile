@@ -8,7 +8,7 @@ import Toast from 'react-native-toast-message';
 
 import Navigation from './src/navigation/navigation';
 import { DependentManagement } from './src/screens/DependentManagement';
-import {DependentRegister} from './src/screens/DependentRegister'
+import { DependentRegister } from './src/screens/DependentRegister'
 import { ResponsibleManagement } from './src/screens/ResponsibleManagement';
 
 export default function App() {
@@ -28,15 +28,15 @@ export default function App() {
         {/* <ResponsiveRegister /> */}
         {/* <ResponsibleManagement /> */}
         {/* <ResponsiblePassword/> */}
-        <DependentManagement/>
+        {/* <DependentManagement/> */}
         {/* <Loading/> */}
         {/* <Menu /> */}
         {/* <DependentListing/> */}
         {/* <DependentRegister/> */}
+        {/* <Toast /> */}
+        {/* <ResponsiveRegister />*/}
+        <Navigation />
         <Toast />
-        {/* <ResponsiveRegister />
-        <Toast /> */}
-        {/* <Navigation/> */}
         {/* <KidsManagement/> */}
       </>
     );
