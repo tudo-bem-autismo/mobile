@@ -21,9 +21,10 @@ export function OnboardingGames({navigation}){
                 style = {styles.background}
                 >
 
-            <TouchableOpacity style = {styles.buttonJump}>
+            <TouchableOpacity style = {styles.buttonJump} onPress={() => navigation.navigate('Login')}>
                 <Text>PULAR</Text>
-            </TouchableOpacity>        
+            </TouchableOpacity>   
+
             <View style = {styles.featureContainer}>
                 <Image
                     style = {styles.feature}

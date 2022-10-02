@@ -8,7 +8,9 @@ import { Button } from "../Button";
 import { Input, MaskedInput } from "../Input";
 
 
-export const PersonalDataForm = ({ nextFormPage, setResponsibleData }) => {
+export const PersonalDataForm = ({ nextFormPage, setResponsibleData, navigation }) => {
+
+    //console.log(navigation);
 
     const handleForm = async (data) => {
 
@@ -79,6 +81,8 @@ export const PersonalDataForm = ({ nextFormPage, setResponsibleData }) => {
                             <Button
                                 label="PRÓXIMO"
                                 onPress={handleSubmit}
+                                width={120}
+                                height={45}
                                 backgroundColor={COLORS.blue}
                                 borderRadius={50}
                             />

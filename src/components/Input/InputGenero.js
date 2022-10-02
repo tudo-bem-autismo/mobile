@@ -1,11 +1,10 @@
-<<<<<<< HEAD
 import { FontAwesome } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 import { COLORS } from "../../assets/const";
 import { getGendersService } from "../../services/gender";
 
-export const InputGenero = ({ setGenderId, hasError }) => {
+export const InputGenero = ({ setGenderId, hasError, selectedGenderId }) => {
 
   // Lista com todos os gêneros
   const [genders, setGenders] = useState([
@@ -15,11 +14,26 @@ export const InputGenero = ({ setGenderId, hasError }) => {
     }
   ]);
 
+
   // Contador de qual posição está o gênero selecionado
   const [count, setCount] = useState(0);
 
-  // Gênero selecionado atualmente
   const [currentGender, setCurrentGender] = useState(genders[0]);
+
+  const setSelectedGender = () => {
+
+    const selectedIndex = genders.findIndex(item => item.id === selectedGenderId)
+
+    if (selectedIndex === -1)
+      return
+
+    const selectedGender = genders[selectedIndex]
+
+    setCurrentGender(selectedGender)
+    setCount(selectedIndex)
+  }
+
+  // Gênero selecionado atualmente
 
   const getGenders = async () => {
 
@@ -34,6 +48,10 @@ export const InputGenero = ({ setGenderId, hasError }) => {
   useEffect(() => {
     getGenders()
   }, []);
+
+  useEffect(() => {
+    setSelectedGender()
+  }, [genders])
 
 
   const nextGender = () => {
@@ -89,46 +107,7 @@ export const InputGenero = ({ setGenderId, hasError }) => {
     </View>
   );
 };
-=======
-import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-} from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
-import { FONTS, COLORS } from "../../assets/const";
 
-export const InputGenero = ({
-    value}) => {
-
-    return (
-        <View style={styles.container}>
-    
-              <TouchableOpacity style={styles.button} onPress={()=>{voltarOptionSexo()}}>
-                <FontAwesome name="caret-left" style={styles.icons} />
-              </TouchableOpacity>
-    
-              {/* <Text style={styles.text}>{dados[cont].genero}</Text> */}
-              <Text style={styles.text}
-                        ></Text>
-    
-              <TouchableOpacity style={styles.button} onPress={()=>{avancarOptionSexo()}}>
-                <FontAwesome name="caret-right" style={styles.icons} />
-              </TouchableOpacity>
-            
-          
-        </View>
-      );
-
-
-}
-
-
-
->>>>>>> 7f4f91b9690f18ce21ee56a537ca52c65fb649c2
 
 const styles = StyleSheet.create({
   container: {
@@ -143,15 +122,15 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 30,
-    backgroundColor: COLORS.blue,
+    // backgroundColor: COLORS.blue,
     alignItems: "center",
     justifyContent: "center",
     marginHorizontal: 10,
   },
   icons: {
-    color: COLORS.black,
-    fontSize: 28,
-<<<<<<< HEAD
+    color: COLORS.blue,
+    fontSize: 35,
+
   },
   input: {
     borderColor: COLORS.black,
@@ -179,16 +158,3 @@ const styles = StyleSheet.create({
     color: COLORS.black,
   },
 });
-=======
-    fontWeight: "bold",
-  },
-  text: {
-    borderColor: COLORS.black,
-    borderWidth: 0.8,
-    width: "70%",
-    height: 30,
-    textAlign: "center",
-    padding: 5,
-  },
-});
->>>>>>> 7f4f91b9690f18ce21ee56a537ca52c65fb649c2

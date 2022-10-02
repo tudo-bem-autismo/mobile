@@ -1,18 +1,20 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { COLORS } from "../../assets/const";
 
-export const Button = ({ label, onPress, backgroundColor, borderRadius }) => {
+export const Button = ({ label, onPress, backgroundColor, borderRadius, width, height }) => {
 
     return (
 
-        <TouchableOpacity
-            onPress={() => onPress()}
-            style={{ ...styles.button, backgroundColor, borderRadius }}
-        >
-            <Text>{label}</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonContainer}>
+            <TouchableOpacity
+                onPress={() => onPress()}
+                style={{ ...styles.button, backgroundColor, borderRadius, width, height }}
+            >
+                <Text>{label}</Text>
+            </TouchableOpacity>
+        </View>
 
     );
 }
@@ -26,7 +28,7 @@ const bottomShadow = {
 }
 
 const styles = StyleSheet.create({
-   buttonContainer: {
+    buttonContainer: {
         flex: 2,
         alignSelf: 'stretch',
         alignItems: 'center',

@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         marginTop: StatusBar.currentHeight,
         backgroundColor:COLORS.beige,
+        zIndex: 2,
     },
     textContainer:{
         top:'-1%',

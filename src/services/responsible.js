@@ -14,11 +14,11 @@ export const responsibleRegisterService = async (data) => {
 
         const result = await api.post("/responsavel", formattedData);
 
-        const success = result.status === 201
+        const success = result.status === 200
 
         return {
             success,
-            data: result.data
+            data: result.data,
         }
 
     } catch (error) {
@@ -36,7 +36,7 @@ export const responsibleRegisterService = async (data) => {
 export const getResponsibleService = async () => {
     try {
 
-        const result = await api.get("/responsavel/12")
+        const result = await api.get("/responsavel/78")
 
         const success = result.status === 200
 
@@ -68,11 +68,9 @@ export const updateResponsibleService = async (data) => {
             nome: data.name,
             telefone: data.phone ? removePhoneMask(data.phone) : '',
             email: data.email,
-            // // Tirar a obrigatoriedade
-            // senha: '1234'
         }
 
-        const result = await api.put("/responsavel/11", formattedData)
+        const result = await api.put("/responsavel/78", formattedData)
 
         const success = result.status === 200
 
@@ -98,7 +96,7 @@ export const updatePasswordResponsibleService = async (data) => {
             senha: data.newPassword,
         }
 
-        const result = await api.put("/responsavel/senha/11", formattedData)
+        const result = await api.put("/responsavel/senha/78", formattedData)
 
         const success = result.status === 200
 
@@ -119,7 +117,7 @@ export const updatePasswordResponsibleService = async (data) => {
 export const deleteResponsibleService = async () => {
     try {
 
-        const result = await api.delete("/responsavel/7")
+        const result = await api.delete("/responsavel/15")
 
         const success = result.status === 200
 
@@ -140,7 +138,7 @@ export const deleteResponsibleService = async () => {
 export const getResponsibleDependentsService = async () => {
     try {
 
-        const result = await api.get("/responsavel/15")
+        const result = await api.get("/responsavel/78")
 
         const sucess = result.status === 200
 

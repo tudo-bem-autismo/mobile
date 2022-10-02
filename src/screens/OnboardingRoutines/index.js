@@ -17,7 +17,7 @@ export function OnboardingRoutines({navigation}){
                 resizeMode="cover"
                 style = {styles.background}
             >
-            <TouchableOpacity style = {styles.buttonJump}>
+            <TouchableOpacity style = {styles.buttonJump} onPress={() => navigation.navigate('Login')}>
                 <Text>PULAR</Text>
             </TouchableOpacity> 
             <View style = {styles.featureContainer}>
@@ -48,9 +48,9 @@ export function OnboardingRoutines({navigation}){
                     VOLTAR
                 </Text>
             </TouchableOpacity>
-            <TouchableOpacity style = {styles.buttonContinue}>
+            <TouchableOpacity style = {styles.buttonContinue} onPress={() => navigation.navigate('Login')}>
                 <Text>
-                    CONTINUAR
+                    VAMOS LÁ
                 </Text>
             </TouchableOpacity>
 

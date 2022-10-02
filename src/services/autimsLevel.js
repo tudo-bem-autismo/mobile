@@ -1,4 +1,4 @@
-import { showToast } from "../utils/errors"
+import { showErrorToast } from "../utils/errors"
 import api from './api'
 
 export const getAutismLevelsService = async () => {
@@ -21,7 +21,7 @@ export const getAutismLevelsService = async () => {
         }
 
     } catch (error) {
-        showToast(error.response.data.message)
+        showErrorToast(error.response.data.message)
 
         return {
             sucess: false,

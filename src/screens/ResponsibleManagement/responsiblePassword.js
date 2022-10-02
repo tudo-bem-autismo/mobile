@@ -9,19 +9,17 @@ import style from "./style.js";
 
 import { COLORS } from "../../assets/const/colors.js";
 import backgroundManagement from '../../assets/images/backgroundManagement.png';
-import { ModalSaveData } from "../../components/ResponsibleManagement/ModalSaveData.js";
+import { ModalSavePasswordData } from "../../components/Modal/ModalSavePassword";
 import { updatePasswordResponsibleService } from "../../services/responsible.js";
 import { responsibleUpdatePasswordSchema } from "../../utils/validations/responsible/index.js";
 
 export function ResponsiblePassword({ navigation }) {
 
-    const [showModalSaveData, setShowModalSaveData] = useState(false);
+    const [showModalSavePasswordData, setShowModalSavePasswordData] = useState(false);
 
     const handleForm = async (data) => {
 
-        console.log(data)
-
-        setShowModalSaveData(false)
+        setShowModalSavePasswordData(false)
 
         const result = await updatePasswordResponsibleService(data)
 
@@ -110,24 +108,28 @@ export function ResponsiblePassword({ navigation }) {
                                     label="CANCELAR"
                                     backgroundColor={COLORS.purple}
                                     borderRadius={15}
+                                    width={120}
+                                    height={45}
                                     onPress={() => navigation.goBack()}
                                 />
                                 <Button
                                     label="CONFIRMAR"
                                     backgroundColor={COLORS.turquoise}
                                     borderRadius={15}
-                                    onPress={() => setShowModalSaveData(true)}
+                                    width={120}
+                                    height={45}
+                                    onPress={() => setShowModalSavePasswordData(true)}
                                 />
                             </View>
 
 
                             {
-                                showModalSaveData && (
+                                showModalSavePasswordData && (
                                     <View style={style.modalContainer}>
-                                        <ModalSaveData
+                                        <ModalSavePasswordData
                                             label="Tem certeza que quer redefinir a senha?"
-                                            close={() => setShowModalSaveData(false)}
-                                            show={showModalSaveData}
+                                            close={() => setShowModalSavePasswordData(false)}
+                                            show={showModalSavePasswordData}
                                             password={() => handleSubmit()}
                                         />
                                     </View>

@@ -1,38 +1,38 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Formik} from 'formik';
-import Toast  from 'react-native-toast-message';
+import { Formik } from 'formik';
+import Toast from 'react-native-toast-message';
 
 import { COLORS } from '../../assets/const';
 import { Input, PasswordInput } from '../Input';
-import {Button} from '../Button'
-import {responsibleLoginService} from "../../services";
+import { Button } from '../Button'
+import { responsibleLoginService } from "../../services";
 import { responsibleLoginDataSchema } from '../../utils/validations/responsible';
+import { SalutationScreen } from "../../screens/SalutationScreen";
+import { storeId } from '../../utils/storage';
 
-export const FormLogin = () => {
-    
-  //ENVIO DOS DADOS PARA A API
-  const handleForm = async (data) => {
+export const FormLogin = ({ navigation }) => {
 
-    // Chama a api enviando os dados do formulário
-    const result = await responsibleLoginService(data)
+    //ENVIO DOS DADOS PARA A API
+    const handleForm = async (data) => {
 
-    if (result.sucess) {
-        return Toast.show({
-            type: 'success',
-            text1: 'Login realizado com sucesso',
-        });
+        // Chama a api enviando os dados do formulário
+        const result = await responsibleLoginService(data)
+
+        if (result.sucess) {
+            await storeId(result.data.id)
+            navigation.navigate('Salutation')
+        }
+
     }
 
-  }
-
-  const initialValues = {
-    email: '',
-    password: '',
-}
+    const initialValues = {
+        email: '',
+        password: '',
+    }
 
     return (
-        
+
         <View style={styles.container}>
 
             <Formik
@@ -45,12 +45,12 @@ export const FormLogin = () => {
                 // Evento de quando o formulário é enviado
                 // Ele recebe todos os dados dos inputs na variável "values"
                 onSubmit={values => handleForm(values)}
-            >  
+            >
                 {/* Mais propriedades do Formik para manipular o formulário */}
                 {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
                     <>
                         <View style={styles.inputsContainer}>
-                            <Input 
+                            <Input
                                 title="Email"
                                 iconName="envelope"
                                 placeholder="exemplo@gmail.com"
@@ -60,7 +60,7 @@ export const FormLogin = () => {
                                 value={values.email}
                                 hasError={!!errors.email}
                                 errorMessage={errors.email}
-                                
+
                             />
                             <PasswordInput
                                 title="Senha"
@@ -77,13 +77,17 @@ export const FormLogin = () => {
                         <Button
                             label="ENTRAR"
                             onPress={handleSubmit}
+                            backgroundColor={COLORS.blue}
+                            borderRadius={50}
+                            width={120}
+                            height={45}
                         />
                     </>
                 )}
 
             </Formik>
-            
-            
+
+
         </View>
     );
 }

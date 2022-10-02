@@ -6,11 +6,11 @@ import { format } from "date-fns";
 
 import { COLORS, FONTS } from "../../assets/const";
 
-export function DataInput({ date, setDate, hasError }) {
+export function DataInput({ date, setDate, hasError, value }) {
 
     const [show, setShow] = useState(false);
 
-    const [text, setText] = useState('00/00/0000');
+    const [text, setText] = useState(value);
 
     const handleDate = (event, selectedDate) => {
 
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
         // marginLeft: '-25%',
     },
     inputContainer: {
-        width: '75%',
+        width: '76%',
         height: '100%',
         // backgroundColor: COLORS.darkBlue
     },

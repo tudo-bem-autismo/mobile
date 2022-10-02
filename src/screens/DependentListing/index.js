@@ -56,7 +56,10 @@ export const DependentListing = ({ navigation }) => {
 
                             <View style={style.selectedContainer}>
 
-                                <TouchableOpacity style={style.addButton}>
+                                <TouchableOpacity
+                                    style={style.addButton}
+                                    onPress={() => navigation.navigate('DependentRegister')}
+                                >
                                     <Image
                                         style={style.addIcon}
                                         source={addIcon}

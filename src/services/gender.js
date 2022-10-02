@@ -1,10 +1,11 @@
-import { showToast } from "../utils/errors"
+import { showErrorToast } from "../utils/errors"
 import api from './api'
 
 export const getGendersService = async () => {
     try {
 
         const result = await api.get('/genero')
+
 
         const sucess = result.status === 200
 
@@ -15,13 +16,15 @@ export const getGendersService = async () => {
             }
         })
 
+        // console.log(formattedData)
+
         return {
             sucess,
             data: formattedData
         }
 
     } catch (error) {
-        showToast(error.response.data.message)
+        showErrorToast(error.response.data.message)
 
         return {
             sucess: false,
