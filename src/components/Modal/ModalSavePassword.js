@@ -89,6 +89,8 @@ export const ModalSavePasswordData = ({ label, close, show, password, navigation
                             width={80}
                             height={40}
                             onPress={close}
+                            height={40}
+                            width={70}
                         />
 
                         {/* <View style={style.buttonContainer}>
@@ -107,6 +109,8 @@ export const ModalSavePasswordData = ({ label, close, show, password, navigation
                             width={80}
                             height={40}
                             onPress={password}
+                            height={40}
+                            width={70}
                         />
                     </View>
                     </View>

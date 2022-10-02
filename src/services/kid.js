@@ -37,3 +37,40 @@ export const kidRegisterService = async (data) => {
     };
   }
 };
+
+export const getKidService = async () => {
+  try {
+
+      const result = await api.get("/crianca/2")
+
+      const success = result.status === 200
+
+      // const date = format(result.data.data_nascimento, "dd-MM-yyyy");
+
+      // console.log(date)
+
+      const formattedData = {
+          name: result.data.nome,
+          photo: result.data.foto,
+          date : result.data.data_nascimento,
+          genderId: result.data.id_genero,
+          autismLevelId: result.data.id_nivel_autismo
+          
+      }
+
+      // console.log(formattedData)
+
+      return {
+          success,
+          data: formattedData
+      }
+
+
+  } catch (error) {
+      showErrorToast(error.response.data.message)
+      return {
+          success: false,
+          data: error.response.data
+      }
+  }
+}

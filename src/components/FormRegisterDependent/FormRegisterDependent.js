@@ -176,6 +176,7 @@ export const FormDependentRegister = ({ navigation }) => {
                 />
               </View>
             </View>
+
           </>
         )}
       </Formik>

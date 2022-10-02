@@ -150,6 +150,8 @@ export function ResponsibleManagement({ navigation }) {
                                         width={120}
                                         height={45}
                                         onPress={() => setShowModal(true)}
+                                        width={100}
+                                        height={150}
                                     />
                                     <Button
                                         label="SALVAR"
@@ -158,6 +160,8 @@ export function ResponsibleManagement({ navigation }) {
                                         width={120}
                                         height={45}
                                         onPress={() => setShowModalSaveData(true)}
+                                        width={100}
+                                        height={150}
                                     />
                                 </View>
 
