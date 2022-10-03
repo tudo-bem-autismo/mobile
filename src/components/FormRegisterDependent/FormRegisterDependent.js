@@ -1,25 +1,20 @@
-import React, { useState, useEffect } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Platform,
-  Image,
-} from "react-native";
-import * as ImagePicker from "expo-image-picker";
-import Toast from "react-native-toast-message";
-import { Formik } from "formik";
 import { isEqual } from "date-fns";
+import * as ImagePicker from "expo-image-picker";
+import { Formik } from "formik";
+import { useState } from "react";
+import {
+  Image, StyleSheet,
+  TouchableOpacity, View
+} from "react-native";
+import Toast from "react-native-toast-message";
 
 import { COLORS } from "../../assets/const";
-import { Input, DataInput, InputGenero } from "../Input";
-import { InputNivelAutismo } from "../Input/InputNivelAutismo";
-import { Button } from "../Button/Button";
+import file from "../../assets/icons/file.png";
 import { kidRegisterService } from "../../services/kid.js";
 import { kidRegisterDataSchema } from "../../utils/validations/dependent";
-import file from "../../assets/icons/file.png"
-import { Navigation } from "swiper";
+import { Button } from "../Button/Button";
+import { DataInput, Input, InputGenero } from "../Input";
+import { InputNivelAutismo } from "../Input/InputNivelAutismo";
 
 export const FormDependentRegister = ({ navigation }) => {
   const now = new Date();
@@ -119,12 +114,11 @@ export const FormDependentRegister = ({ navigation }) => {
         {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
           <>
             <View style={styles.containerInputs}>
+
               <TouchableOpacity style={styles.contentImg} onPress={pickImage}>
                 {image ?
                   (<Image source={{ uri: image }} style={styles.foto} />) : (<Image source={file} style={styles.file} />)}
               </TouchableOpacity>
-
-              {/* <Text>FOTO</Text> */}
 
               <View style={styles.input}>
                 <Input
@@ -200,18 +194,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   contentImg: {
-    width: 170,
-    height: 110,
-    // borderRadius: 200,
-    // borderWidth: 1,
-    // borderColor: COLORS.black,
+    width: 100,
+    height: 100,
     justifyContent: "center",
     alignItems: "center",
-    // backgroundColor: COLORS.purple,
   },
   input: {
     alignItems: "center",
-    width: "75%",
+    width: "82%",
     height: "20.6%",
   },
   containerInputs: {
@@ -221,7 +211,6 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   buttons: {
-    // width: "90%",
     flex: 1,
     flexDirection: "row",
     marginBottom: "40%",
@@ -233,8 +222,8 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   file: {
-    width: "80%",
-    height: "50%",
+    width: "100%",
+    height: "100%",
   },
   buttonCancel: {
     flex: 2,
@@ -244,19 +233,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: COLORS.black,
     borderRadius: 20,
-    // width: 120,
-    // height: 45,
     alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',
-    // paddingBottom: 5
   },
   buttonCancelText: {
-
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
-    //marginVertical: 20,
     ...bottomShadow
   },
 });

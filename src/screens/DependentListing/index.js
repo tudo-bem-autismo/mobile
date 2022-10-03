@@ -82,7 +82,9 @@ export const DependentListing = ({ navigation }) => {
 
                             {
                                 option && (
-                                    <Option />
+                                    <Option
+                                        navigation={navigation}
+                                    />
                                 )
 
                             }

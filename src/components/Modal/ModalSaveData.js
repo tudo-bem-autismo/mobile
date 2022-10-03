@@ -8,7 +8,7 @@ import { Button } from "../Button";
 
 const { height } = Dimensions.get('window')
 
-export const ModalSaveData = ({ label, close, show, save, navigation }) => {
+export const ModalSaveData = ({ label, close, show, save }) => {
 
     const [state, setState] = useState({
         opacity: new Animated.Value(0),
@@ -64,7 +64,7 @@ export const ModalSaveData = ({ label, close, show, save, navigation }) => {
                     style={style.modalBackground}
                     resizeMode="cover"
                 >
-                    <View>
+                    {/* <View style={style.modalContainer}> */}
 
 
                     <View style={style.questionContainer}>
@@ -72,15 +72,6 @@ export const ModalSaveData = ({ label, close, show, save, navigation }) => {
                     </View>
 
                     <View style={style.buttonsContainer}>
-
-                        {/* <View style={style.buttonContainer}>
-                            <TouchableOpacity
-                                onPress={close}
-                                style={{ ...style.button, backgroundColor: COLORS.purple }}
-                            >
-                                <Text>NÃO</Text>
-                            </TouchableOpacity>
-                        </View> */}
 
                         <Button
                             label="NÃO"
@@ -91,15 +82,6 @@ export const ModalSaveData = ({ label, close, show, save, navigation }) => {
                             onPress={close}
                         />
 
-                        {/* <View style={style.buttonContainer}>
-                            <TouchableOpacity
-                                onPress={() => navigation.navigate('Menu')}
-                                style={{ ...style.button, backgroundColor: COLORS.turquoise }}
-                            >
-                                <Text>SIM</Text>
-                            </TouchableOpacity>
-                        </View> */}
-
                         <Button
                             label="SIM"
                             backgroundColor={COLORS.turquoise}
@@ -109,7 +91,7 @@ export const ModalSaveData = ({ label, close, show, save, navigation }) => {
                             onPress={save}
                         />
                     </View>
-                    </View>
+                    {/* </View> */}
                 </ImageBackground>
                 {/* </View> */}
 
@@ -148,7 +130,7 @@ const style = StyleSheet.create({
     },
     modal: {
         width: '100%',
-        height: '50%',
+        height: '100%',
         justifyContent: 'flex-end',
         alignItems: 'center',
         // backgroundColor: COLORS.darkBlue,
@@ -166,14 +148,16 @@ const style = StyleSheet.create({
         alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 40,
-        top: 20,
+        // marginTop: 20,
+        top: 50,
+        marginLeft: 30,
         // backgroundColor: COLORS.blue,
     },
     questionText: {
         fontSize: 25,
         fontFamily: FONTS.title,
         textAlign: 'center',
+        padding: 2
     },
     buttonsContainer: {
         flex: 3,
@@ -183,7 +167,7 @@ const style = StyleSheet.create({
         flexDirection: 'row',
         paddingHorizontal: 15,
         marginBottom: 100,
-        margin: 5,
+        margin: 35,
         // backgroundColor: COLORS.purple,
     },
     buttonContainer: {

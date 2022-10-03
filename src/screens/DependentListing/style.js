@@ -3,15 +3,6 @@ import { StatusBar, StyleSheet } from "react-native";
 
 import { COLORS, FONTS } from "../../assets/const";
 
-const bottomShadow = {
-    shadowOffset: { width: 0, height: 0, },
-    shadowColor: 'black',
-    shadowOpacity: 1,
-    shadowRadius: 5,
-    elevation: 5,
-}
-
-
 const style = StyleSheet.create({
     mainContainer: {
         display: 'flex',
@@ -28,10 +19,13 @@ const style = StyleSheet.create({
     },
     selectionChildContainer: {
         flex: 2,
+        marginTop: 150,
         // backgroundColor: COLORS.blue
     },
     container: {
         flex: 2,
+        alignItems: 'center',
+        justifyContent: 'center',
         // backgroundColor: COLORS.darkBlue
     },
     textContainer: {

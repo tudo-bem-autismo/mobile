@@ -11,7 +11,6 @@ const style = StyleSheet.create({
         justifyContent: 'center',
         position: 'relative',
         marginTop: StatusBar.currentHeight,
-        
     },
     modalContainer: {
         position: 'absolute',

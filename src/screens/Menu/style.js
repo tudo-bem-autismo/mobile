@@ -57,8 +57,8 @@ const style = StyleSheet.create({
         // backgroundColor: COLORS.purple,
     },
     button: {
-        width: 170,
-        height: 50,
+        width: 155,
+        height: 45,
         paddingVertical: 10,
         paddingHorizontal: 25,
         borderWidth: 1,

@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         alignItems: 'center',
         justifyContent: 'center',
-        //marginVertical: 20,
         ...bottomShadow
     },
 });

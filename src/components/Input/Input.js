@@ -46,7 +46,7 @@ export const Input = ({
 
 const styles = StyleSheet.create({
     inputContainer: {
-        width: '108%',
+        width: '100%',
         height: 100,
         position: 'relative',
         justifyContent: 'flex-start',
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     icon: {
         position: 'absolute',
         top: 12,
-        right: 40,
+        right: 10,
         fontSize: 22,
         color: COLORS.gray,
         marginRight: 10,

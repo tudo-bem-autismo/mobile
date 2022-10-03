@@ -1,15 +1,11 @@
 import { Formik } from "formik";
-import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Toast from 'react-native-toast-message';
+import { StyleSheet, View } from "react-native";
 
 import { COLORS } from "../../assets/const";
 import { responsibleRegisterService } from "../../services";
 import { responsibleRegisterLoginDataSchema } from "../../utils/validations/responsible";
 import { Button } from "../Button";
 import { Input, PasswordInput } from "../Input";
-import { SalutationScreen } from "../../screens/SalutationScreen";
-import { Loading } from "../../screens/Loading";
 
 
 export const LoginDataForm = ({ responsibleData, navigation }) => {
@@ -87,6 +83,8 @@ export const LoginDataForm = ({ responsibleData, navigation }) => {
                                 label="CADASTRAR"
                                 onPress={handleSubmit}
                                 backgroundColor={COLORS.blue}
+                                width={120}
+                                height={45}
                                 borderRadius={50}
                             />
                         </View>
@@ -129,6 +127,7 @@ const styles = StyleSheet.create({
     },
     inputsContainer: {
         flex: 4,
+        width: '100%',
     },
     formContainer: {
         flex: 2.5,

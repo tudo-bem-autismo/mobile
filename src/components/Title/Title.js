@@ -1,6 +1,4 @@
-import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { COLORS } from "../../assets/const";
 
 import { FONTS } from "../../assets/const/fonts";
 

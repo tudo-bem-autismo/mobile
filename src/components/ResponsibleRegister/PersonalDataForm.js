@@ -10,8 +10,6 @@ import { Input, MaskedInput } from "../Input";
 
 export const PersonalDataForm = ({ nextFormPage, setResponsibleData, navigation }) => {
 
-    //console.log(navigation);
-
     const handleForm = async (data) => {
 
         setResponsibleData(data)
@@ -126,6 +124,7 @@ const styles = StyleSheet.create({
     },
     inputsContainer: {
         flex: 4,
+        width: '100%'
     },
     formContainer: {
         flex: 2.5,

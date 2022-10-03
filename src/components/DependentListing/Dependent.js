@@ -1,8 +1,6 @@
-import React from "react";
-import { TouchableOpacity, StyleSheet, Text, Image } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 
-import julia from "../../assets/images/júlia.png";
-import { COLORS, FONTS } from "../../assets/const";
+import { FONTS } from "../../assets/const";
 
 export const Dependent = ({ name, photo, onPress }) => {
 
@@ -25,7 +23,6 @@ export const Dependent = ({ name, photo, onPress }) => {
 const style = StyleSheet.create({
     option: {
         padding: 10,
-        // backgroundColor: COLORS.blue
     },
     textOption: {
         fontFamily: FONTS.title,

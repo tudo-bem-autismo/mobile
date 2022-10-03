@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
 import { Formik } from 'formik';
-import Toast from 'react-native-toast-message';
+import { StyleSheet, View } from 'react-native';
 
 import { COLORS } from '../../assets/const';
-import { Input, PasswordInput } from '../Input';
-import { Button } from '../Button'
 import { responsibleLoginService } from "../../services";
-import { responsibleLoginDataSchema } from '../../utils/validations/responsible';
-import { SalutationScreen } from "../../screens/SalutationScreen";
 import { storeId } from '../../utils/storage';
+import { responsibleLoginDataSchema } from '../../utils/validations/responsible';
+import { Button } from '../Button';
+import { Input, PasswordInput } from '../Input';
 
 export const FormLogin = ({ navigation }) => {
 
@@ -95,12 +92,6 @@ export const FormLogin = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 3,
-        //padding: 15,
-        //height: 300,
-        //smarginBottom: 25
-    },
-    input: {
-        //marginBottom: 15
     },
     inputsContainer: {
         flex: 8,

@@ -16,8 +16,6 @@ export const PasswordInput = ({
 
     const [hiddenPassword, setHiddenPassword] = useState(true)
 
-
-
     return (
         <View style={styles.inputContainer}>
 

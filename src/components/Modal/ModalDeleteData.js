@@ -77,8 +77,6 @@ export const ModalDeleteData = ({ label, close, show, del }) => {
                                 width={80}
                                 height={40}
                                 onPress={close}
-                                height={40}
-                                width={70}
                             />
                             <Button
                                 label="SIM"
@@ -87,8 +85,6 @@ export const ModalDeleteData = ({ label, close, show, del }) => {
                                 width={80}
                                 height={40}
                                 onPress={del}
-                                height={40}
-                                width={70}
                             />
                         </View>
                     </ImageBackground>

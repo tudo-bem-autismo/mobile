@@ -25,7 +25,9 @@ export const Menu = ({ navigation }) => {
                 style={style.background}
             >
 
-                <Close />
+                <Close
+                    navigation={navigation}
+                />
 
                 <View style={style.navContainer}>
                     <View style={style.infoContainer}>
@@ -64,6 +66,7 @@ export const Menu = ({ navigation }) => {
                                 label="Deseja realmente sair da sua conta?"
                                 close={() => setShow(false)}
                                 show={show}
+                                navigation={navigation}
                             />
                         </View>
 
