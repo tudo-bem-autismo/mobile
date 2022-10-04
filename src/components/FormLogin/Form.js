@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 
 import { COLORS } from '../../assets/const';
 import { responsibleLoginService } from "../../services";
-import { storeId } from '../../utils/storage';
+import { storeData } from '../../utils/storage';
 import { responsibleLoginDataSchema } from '../../utils/validations/responsible';
 import { Button } from '../Button';
 import { Input, PasswordInput } from '../Input';
@@ -17,7 +17,8 @@ export const FormLogin = ({ navigation }) => {
         const result = await responsibleLoginService(data)
 
         if (result.sucess) {
-            await storeId(result.data.id)
+            await storeData(result.data.id, '@id')
+            await storeData(true, '@alreadyLoggedIn')
             navigation.navigate('Salutation')
         }
 

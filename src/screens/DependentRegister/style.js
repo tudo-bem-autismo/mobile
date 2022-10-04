@@ -36,7 +36,6 @@ const style = StyleSheet.create({
     flex: 6,
     alignItems: 'center',
     justifyContent: 'center',
-    // backgroundColor: COLORS.darkBlue,
   },
   loginContainer: {
     flex: 3,

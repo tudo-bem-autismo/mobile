@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Image, ImageBackground, Text, TouchableOpacity, View } from "react-native";
 
-import style from "../DependentListing/style";
-import backgroundMenu from "../../assets/images/backgroundMenu.png";
 import addIcon from "../../assets/images/addIcon.png";
-import maria from "../../assets/images/maria.png";
+import backgroundMenu from "../../assets/images/backgroundMenu.png";
 import { BackButton } from "../../components/Button";
 import { Dependent } from "../../components/DependentListing/Dependent";
 import { Option } from "../../components/DependentListing/Option";
 import { getResponsibleDependentsService } from "../../services";
+import style from "../DependentListing/style";
 import { Loading } from "../Loading";
 
 export const DependentListing = ({ navigation }) => {

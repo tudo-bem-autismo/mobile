@@ -6,7 +6,7 @@ import { Button } from "../Button";
 
 const { height } = Dimensions.get('window')
 
-export const ModalLogOutAccount = ({ label, close, show, navigation }) => {
+export const ModalLogOutAccount = ({ label, close, show, handleLogout }) => {
 
     const [state, setState] = useState({
         opacity: new Animated.Value(0),
@@ -74,10 +74,10 @@ export const ModalLogOutAccount = ({ label, close, show, navigation }) => {
                             label="SIM"
                             backgroundColor={COLORS.white}
                             borderRadius={15}
-                            onPress={() => navigation.navigate('Login')}
+                            onPress={handleLogout}
                             width={55}
                             height={30}
-                        /> 
+                        />
                     </View>
                 </View>
 

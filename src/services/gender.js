@@ -16,8 +16,6 @@ export const getGendersService = async () => {
             }
         })
 
-        // console.log(formattedData)
-
         return {
             sucess,
             data: formattedData

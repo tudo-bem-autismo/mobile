@@ -1,4 +1,3 @@
-import React from "react";
 import { StatusBar, StyleSheet } from "react-native";
 
 import { COLORS, FONTS } from "../../assets/const";
@@ -11,7 +10,6 @@ const style = StyleSheet.create({
         justifyContent: 'center',
         position: 'relative',
         marginTop: StatusBar.currentHeight,
-
     },
     background: {
         flex: 1,
@@ -20,19 +18,16 @@ const style = StyleSheet.create({
     selectionChildContainer: {
         flex: 2,
         marginTop: 150,
-        // backgroundColor: COLORS.blue
     },
     container: {
         flex: 2,
         alignItems: 'center',
         justifyContent: 'center',
-        // backgroundColor: COLORS.darkBlue
     },
     textContainer: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        // backgroundColor: COLORS.light,
     },
     textSelect: {
         fontSize: 20,

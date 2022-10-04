@@ -36,7 +36,7 @@ export const responsibleRegisterService = async (data) => {
 export const getResponsibleService = async () => {
     try {
 
-        const result = await api.get("/responsavel/78")
+        const result = await api.get("/responsavel/23")
 
         const success = result.status === 200
 

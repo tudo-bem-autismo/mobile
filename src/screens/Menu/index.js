@@ -12,10 +12,16 @@ import { ModalLogOutAccount } from "../../components/Menu/ModalLogOutAccount";
 import profileResponsible from "../../assets/images/profileResponsible.png";
 import profileChild from "../../assets/images/profileChild.png";
 import profileCompany from "../../assets/images/profileCompany.png";
+import { clearData } from "../../utils/storage";
 
 export const Menu = ({ navigation }) => {
 
     const [show, setShow] = useState(false);
+
+    const handleLogout = async () => {
+        await clearData('@id')
+        navigation.navigate('Login')
+    }
 
     return (
         <View style={style.mainContainer}>
@@ -66,7 +72,7 @@ export const Menu = ({ navigation }) => {
                                 label="Deseja realmente sair da sua conta?"
                                 close={() => setShow(false)}
                                 show={show}
-                                navigation={navigation}
+                                handleLogout={() => handleLogout()}
                             />
                         </View>
 

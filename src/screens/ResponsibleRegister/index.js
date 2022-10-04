@@ -1,25 +1,16 @@
-import React, { useState } from "react";
-import { View, SafeAreaView, ImageBackground, KeyboardAvoidingView, Platform, Text, TouchableOpacity, StyleSheet } from "react-native";
+import React from "react";
+import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-import styles from "./style.js";
 import {
-    BackButton,
-    Button,
-    Google,
-    Header,
-    Input,
-    Login,
-    LoginDescription,
-    SlideButton,
-    FormSwiper,
-    Title,
-    Form,
+    BackButton, FormSwiper, Google,
+    Header, Login, Title
 } from "../../components";
+import styles from "./style.js";
 
+import { COLORS } from "../../assets/const/colors.js";
+import { FONTS } from "../../assets/const/fonts.js";
 import background from '../../assets/images/background.png';
 import headerImg from "../../assets/images/friends.png";
-import { FONTS } from "../../assets/const/fonts.js";
-import { COLORS } from "../../assets/const/colors.js";
 
 export function ResponsiveRegister({ navigation }) {
 
@@ -33,14 +24,14 @@ export function ResponsiveRegister({ navigation }) {
                 resizeMode="cover"
                 style={styles.background}>
 
-                <BackButton title="Voltar" navigation={navigation}/>
+                <BackButton title="Voltar" navigation={navigation} />
                 <Header image={headerImg} />
                 <View style={styles.formContainer}>
 
                     <Title title="Crie sua conta" />
 
                     <View style={styles.registerContainer}>
-                        <FormSwiper navigation={navigation}/>
+                        <FormSwiper navigation={navigation} />
                     </View>
 
                     <View style={styles.loginContainer}>

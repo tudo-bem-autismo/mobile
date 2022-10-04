@@ -27,7 +27,6 @@ const style = StyleSheet.create({
         width: '100%',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
-        // backgroundColor: COLORS.pink,
     },
     background: {
         flex: 1,
@@ -48,13 +47,11 @@ const style = StyleSheet.create({
         flex: 2,
         alignItems: 'center',
         justifyContent: 'center',
-        // backgroundColor: COLORS.darkBlue,
     },
     buttonContainer: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        // backgroundColor: COLORS.purple,
     },
     button: {
         width: 155,

@@ -8,12 +8,10 @@ const style = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        // backgroundColor: COLORS.blue
     },
     loadingGif: {
         width: '30%',
         height: '20%',
-        // backgroundColor: COLORS.darkBlue,
     },
     text: {
         fontSize: 14,

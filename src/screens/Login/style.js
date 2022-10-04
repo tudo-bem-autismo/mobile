@@ -18,7 +18,6 @@ const style = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'center',
     marginTop: StatusBar.currentHeight,
-    // backgroundColor: COLORS.black,
   },
   background: {
     flex: 1,
@@ -36,16 +35,12 @@ const style = StyleSheet.create({
     flex: 6,
     alignItems: 'center',
     justifyContent: 'center',
-    //backgroundColor: COLORS.darkBlue,
-    //flexDirection: 'column'
   },
   infoContainer: {
     flex: 7,
     alignSelf: 'stretch',
     paddingLeft: 20,
     paddingRight: 20,
-    //backgroundColor: COLORS.red,
-
   },
   loginContainer: {
     flex: 4,

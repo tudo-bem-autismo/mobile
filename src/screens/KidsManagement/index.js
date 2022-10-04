@@ -1,28 +1,22 @@
 import React from 'react';
-import {View, ImageBackground, Image} from 'react-native';
-import { Formik } from 'formik';
-import * as ImagePicker from 'expo-image-picker';
-import Toast from 'react-native-toast-message';
-import{BackButton} from '../../components/Button';
+import { ImageBackground, View } from 'react-native';
 import KidsBackground from '../../assets/images/backgroundKidsManagement.png';
-import styles from './style'
+import { BackButton } from '../../components/Button';
 import { FormRegisterDependent } from '../../components/FormRegisterDependent';
+import styles from './style';
 
-export function KidsManagement(){
-    return(
-        <View style = {styles.mainContainer}>
+export function KidsManagement() {
+    return (
+        <View style={styles.mainContainer}>
             <ImageBackground
-                source = {KidsBackground}
-                style = {styles.background}
-                resizeMode = 'cover'            
+                source={KidsBackground}
+                style={styles.background}
+                resizeMode='cover'
             >
-            <BackButton title="Voltar" />
-            <FormRegisterDependent/>
-           
+                <BackButton title="Voltar" />
+                <FormRegisterDependent />
+
             </ImageBackground>
-
-
-          
 
         </View>
     )
