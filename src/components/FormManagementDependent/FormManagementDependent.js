@@ -19,6 +19,7 @@ import { ModalSaveData } from "../Modal/ModalSaveData.js";
 
 import backgroundManagement from '../../assets/images/backgroundKidManagement.png';
 import { BackButton } from "../Button";
+import { updateKidService } from "../../services";
 
 
 export const FormManagementDependent = ({ navigation }) => {
@@ -31,7 +32,7 @@ export const FormManagementDependent = ({ navigation }) => {
   const [date, setDate] = useState(new Date());
   const [dateHasError, setDateHasError] = useState(false);
   const [genderHasError, setGenderHasError] = useState(false);
-  const [autismLevelId, setAutismLevelId] = useState(0);
+  const [autismLevelId, setAutismLevelId] = useState();
   const [autismLevelHasError, setAutismLevelHasError] = useState(false);
   const [image, setImage] = useState(null);
 
@@ -39,7 +40,10 @@ export const FormManagementDependent = ({ navigation }) => {
   const getKid = async () => {
     const result = await getKidService();
     setKid(result.data);
-    setDate(new Date(result.data.date))
+    setDate(new Date(result.data.date));
+    setGenderId(result.data.genderId);
+    setAutismLevelId(result.data.autismLevelId);
+    setImage(result.data.photo)
     setIsLoading(false);
   };
 
@@ -49,24 +53,23 @@ export const FormManagementDependent = ({ navigation }) => {
 
   const handleForm = async (data) => {
 
+    setShowModalSaveData(false)
+    setDateHasError(false);
+    setGenderHasError(false);
+    setAutismLevelHasError(false);
+
     if (genderId === 0) {
       setGenderHasError(true);
-
       return;
     }
 
     if (autismLevelId === 0) {
       setAutismLevelHasError(true);
-
       return;
     }
 
-    setDateHasError(false);
-    setGenderHasError(false);
-    setAutismLevelHasError(false);
-
     // Criando as configurações da imagem
-    const filename = image.split("/").pop();
+    const filename = (image?.split("/").pop()) || '';
     const match = /\.(\w+)$/.exec(filename);
     const type = match ? `image/${match[1]}` : `image`;
 
@@ -76,6 +79,8 @@ export const FormManagementDependent = ({ navigation }) => {
       uri: image,
     };
 
+    // console.log(filename)
+
     const newData = {
       ...data,
       date,
@@ -84,14 +89,16 @@ export const FormManagementDependent = ({ navigation }) => {
       photo,
     };
 
-    // const result = await kidRegisterService(newData);
+    // console.log(newData)
+    const result = await updateKidService(newData)
 
-    if (result.success) {
-      return Toast.show({
-        type: "success",
-        text1: "Criança cadastrada com sucesso",
-      });
-    }
+      if (result.sucess) {
+        return Toast.show({
+          type: 'sucess',
+          text1: 'Dados atualizados com sucesso'
+        });
+      }
+
   };
 
   const pickImage = async () => {
