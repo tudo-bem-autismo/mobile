@@ -14,6 +14,7 @@ import { ResponsiveRegister } from './src/screens/ResponsibleRegister';
 import { ResponsiblePassword } from './src/screens/ResponsibleManagement/responsiblePassword';
 import { DependentListing } from './src/screens/DependentListing';
 import { Menu } from './src/screens/Menu';
+import { Loading } from './src/screens/Loading';
 
 export default function App() {
 
@@ -41,6 +42,7 @@ export default function App() {
         {/* <Toast /> */}
         {/* <ResponsiveRegister />*/}
         <Navigation />
+        {/* <Loading/> */}
         <Toast />
       </>
     );

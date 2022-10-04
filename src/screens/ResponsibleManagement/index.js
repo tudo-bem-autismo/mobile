@@ -15,6 +15,7 @@ import { deleteResponsibleService, getResponsibleService, updateResponsibleServi
 import { responsibleUpdateSchema } from "../../utils/validations/responsible/index.js";
 import { Loading } from "../Loading";
 import { FONTS } from "../../assets/const";
+import { clearData } from "../../utils/storage";
 
 export function ResponsibleManagement({ navigation }) {
 
@@ -59,10 +60,8 @@ export function ResponsibleManagement({ navigation }) {
         const result = await deleteResponsibleService()
 
         if (result.success) {
-            return Toast.show({
-                type: 'success',
-                text1: 'Conta apagada com sucesso',
-            });
+            await clearData('@id')
+            navigation.navigate('Login')
         }
 
     }

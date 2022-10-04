@@ -13,8 +13,6 @@ export const getData = async (key) => {
 
         const id = await AsyncStorage.getItem(key)
 
-        // console.log(JSON.parse(id))
-
         return JSON.parse(id)
 
     } catch (error) {

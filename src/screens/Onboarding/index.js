@@ -15,8 +15,10 @@ export function Onboarding({ navigation }) {
         const hasId = await getData('@id')
 
         if (hasId) {
-            navigation.navigate('Home')
+           return ( navigation.navigate('Home') )
         }
+
+        verifyAlreadyLoggedIn()
     }
 
     const verifyAlreadyLoggedIn = async () => {
@@ -24,12 +26,11 @@ export function Onboarding({ navigation }) {
 
         if (alreadyLoggedIn) {
             navigation.navigate('Login')
-        }
+        } 
     }
 
     useEffect(() => {
         verifyLoggedUser()
-        verifyAlreadyLoggedIn()
     }, [])
 
     return (
