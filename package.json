@@ -15,6 +15,7 @@
     "@expo/vector-icons": "^13.0.0",
     "@react-native-async-storage/async-storage": "^1.17.10",
     "@react-native-community/datetimepicker": "^6.3.3",
+    "@react-navigation/bottom-tabs": "^6.4.0",
     "@react-navigation/native": "^6.0.13",
     "@react-navigation/native-stack": "^6.9.0",
     "@rpldy/native-uploady": "^1.1.0",

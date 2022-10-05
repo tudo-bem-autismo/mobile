@@ -31,6 +31,7 @@ export const kidRegisterService = async (data) => {
       success,
       data: result.data,
     };
+    
   } catch (error) {
     showErrorToast(error.response.data.message);
 
@@ -44,7 +45,9 @@ export const kidRegisterService = async (data) => {
 export const getKidService = async () => {
   try {
 
-    const result = await api.get("/crianca/44")
+    const id = await getData('@idDependent')
+
+    const result = await api.get(`/crianca/${id}`)
 
     const success = result.status === 200
 
