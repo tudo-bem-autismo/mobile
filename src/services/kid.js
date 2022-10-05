@@ -14,6 +14,7 @@ export const kidRegisterService = async (data) => {
 
     const formData = new FormData();
     formData.append("arquivo", data.photo);
+    console.log(data.photo)
     formData.append("nome", data.name);
     formData.append("data_nascimento", date);
     formData.append("id_genero", data.genderId);
@@ -82,7 +83,7 @@ export const updateKidService = async (data) => {
     //const date = format(data.date, "yyyy-MM-dd");
 
     const formData = new FormData();
-    formData.append("arquivo", "file://" + data.photo);
+    formData.append("foto", data.photo);
     formData.append("nome", data.name);
     formData.append("data_nascimento", data.date);
     formData.append("id_genero", data.genderId);
