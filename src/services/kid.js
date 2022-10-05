@@ -14,7 +14,6 @@ export const kidRegisterService = async (data) => {
 
     const formData = new FormData();
     formData.append("arquivo", data.photo);
-    console.log(data.photo)
     formData.append("nome", data.name);
     formData.append("data_nascimento", date);
     formData.append("id_genero", data.genderId);
@@ -72,6 +71,8 @@ export const getKidService = async () => {
 }
 
 export const updateKidService = async (data) => {
+
+  // console.log(data.date)
   try {
 
     const options = {
@@ -80,19 +81,21 @@ export const updateKidService = async (data) => {
       },
     };
 
-    //const date = format(data.date, "yyyy-MM-dd");
+    const date = format(data.date, "yyyy-MM-dd");
 
     const formData = new FormData();
-    formData.append("foto", data.photo);
+    formData.append("arquivo", data.photo);
     formData.append("nome", data.name);
-    formData.append("data_nascimento", data.date);
+    formData.append("data_nascimento", date);
     formData.append("id_genero", data.genderId);
     formData.append("id_nivel_autismo", data.autismLevelId);
     formData.append("id_responsavel", 7);
 
+    console.log(formData)
+
     const result = await api.put("/crianca/2", formData, options);
 
-    console.log(result)
+    //console.log(result)
 
     const sucess = result.status === 200
 
