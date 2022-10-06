@@ -105,8 +105,7 @@ export const updateKidService = async (data) => {
     }
 
   } catch (error) {
-    console.log(error.response)
-    // showErrorToast(error.response.data.message)
+    showErrorToast(error.response.data.message)
     return {
       success: false,
       data: error.response.data

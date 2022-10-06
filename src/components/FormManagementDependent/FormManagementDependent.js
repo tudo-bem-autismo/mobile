@@ -40,11 +40,11 @@ export const FormManagementDependent = ({ navigation }) => {
   const getKid = async () => {
     const result = await getKidService();
     setKid(result.data);
-    //console.log(kid.photo);
-    setDate(new Date(result.data.date));
+    console.log(result.data.date);
+    //console.log(date + "aaa")
     setGenderId(result.data.genderId);
     setAutismLevelId(result.data.autismLevelId);
-    setImage(kid.photo)
+    setImage(result.data.photo)
     setIsLoading(false);
   };
 
