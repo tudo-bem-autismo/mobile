@@ -1,5 +1,6 @@
 import { format } from "date-fns";
-import { showToast } from "../utils/errors";
+import { showErrorToast } from "../utils/errors";
+import { getData } from "../utils/storage";
 import api from "./api";
 
 export const kidRegisterService = async (data) => {
@@ -10,6 +11,8 @@ export const kidRegisterService = async (data) => {
       },
     };
 
+    const id = await getData('@id')
+
     const date = format(data.date, "yyyy-MM-dd");
 
     const formData = new FormData();
@@ -18,7 +21,7 @@ export const kidRegisterService = async (data) => {
     formData.append("data_nascimento", date);
     formData.append("id_genero", data.genderId);
     formData.append("id_nivel_autismo", data.autismLevelId);
-    formData.append("id_responsavel", 6);
+    formData.append("id_responsavel", id);
 
     const result = await api.post("/crianca", formData, options);
 
@@ -28,8 +31,9 @@ export const kidRegisterService = async (data) => {
       success,
       data: result.data,
     };
+    
   } catch (error) {
-    showToast(error.response.data.message);
+    showErrorToast(error.response.data.message);
 
     return {
       success: false,
@@ -37,3 +41,36 @@ export const kidRegisterService = async (data) => {
     };
   }
 };
+
+export const getKidService = async () => {
+  try {
+
+    const id = await getData('@idDependent')
+
+    const result = await api.get(`/crianca/${id}`)
+
+    const success = result.status === 200
+
+    const formattedData = {
+      name: result.data.nome,
+      photo: result.data.foto,
+      date: result.data.data_nascimento,
+      genderId: result.data.id_genero,
+      autismLevelId: result.data.id_nivel_autismo
+
+    }
+
+    return {
+      success,
+      data: formattedData
+    }
+
+
+  } catch (error) {
+    showErrorToast(error.response.data.message)
+    return {
+      success: false,
+      data: error.response.data
+    }
+  }
+}

@@ -7,8 +7,7 @@ import { LoginDataForm } from "./LoginDataForm";
 import { PersonalDataForm } from "./PersonalDataForm";
 
 
-export const FormSwiper = () => {
-
+export const FormSwiper = ({navigation}) => {
     const [formPage, setFormPage] = useState(0)
 
     const [responsibleData, setResponsibleData] = useState({})
@@ -35,10 +34,12 @@ export const FormSwiper = () => {
                     nextFormPage={nextFormPage}
                     setResponsibleData={setResponsibleData}
                     changeFormPage={changeFormPage}
+                    navigation={navigation}
                 />
                 <LoginDataForm 
                     responsibleData={responsibleData}
                     changeFormPage={changeFormPage}
+                    navigation={navigation}
                 />
             </Swiper>
 

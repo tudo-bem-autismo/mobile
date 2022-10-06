@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ImageBackground, Text, View } from "react-native";
+import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Toast from 'react-native-toast-message';
 import { Formik } from "formik";
 
@@ -8,12 +8,14 @@ import { BackButton, Button, Input, LoginDescription, MaskedInput } from "../../
 import style from "./style.js";
 import { COLORS } from "../../assets/const/colors.js";
 import backgroundManagement from '../../assets/images/backgroundManagement.png';
-import { ModalDeleteData } from "../../components/ResponsibleManagement/ModalDeleteData.js";
-import { ModalSaveData } from "../../components/ResponsibleManagement/ModalSaveData.js";
+import { ModalDeleteData } from "../../components/Modal/ModalDeleteData.js";
+import { ModalSaveData } from "../../components/Modal/ModalSaveData";
 import { Profile } from "../../components/ResponsibleManagement/Profile.js";
 import { deleteResponsibleService, getResponsibleService, updateResponsibleService } from "../../services/responsible.js";
 import { responsibleUpdateSchema } from "../../utils/validations/responsible/index.js";
 import { Loading } from "../Loading";
+import { FONTS } from "../../assets/const";
+import { clearData } from "../../utils/storage";
 
 export function ResponsibleManagement({ navigation }) {
 
@@ -58,10 +60,8 @@ export function ResponsibleManagement({ navigation }) {
         const result = await deleteResponsibleService()
 
         if (result.success) {
-            return Toast.show({
-                type: 'success',
-                text1: 'Conta apagada com sucesso',
-            });
+            await clearData('@id')
+            navigation.navigate('Login')
         }
 
     }
@@ -131,11 +131,14 @@ export function ResponsibleManagement({ navigation }) {
                                         errorMessage={errors.email}
                                     />
 
-                                    <LoginDescription
-                                        question="Deseja redefinir a sua senha?"
-                                        answer="Redefinir"
-                                        navigation={navigation}
-                                    />
+                                    <View style={styles.loginDescriptionContainer}>
+                                        <Text style={styles.loginQuestionText}>Deseja redefinir sua senha?</Text>
+
+                                        <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Password')}>
+                                            <Text style={styles.loginButtonText}>Redefinir</Text>
+                                        </TouchableOpacity>
+                                    </View>
+
                                 </View>
 
                                 <View style={style.buttonContainer}>
@@ -143,12 +146,16 @@ export function ResponsibleManagement({ navigation }) {
                                         label="EXCLUIR"
                                         backgroundColor={COLORS.purple}
                                         borderRadius={15}
+                                        width={120}
+                                        height={45}
                                         onPress={() => setShowModal(true)}
                                     />
                                     <Button
                                         label="SALVAR"
                                         backgroundColor={COLORS.turquoise}
                                         borderRadius={15}
+                                        width={120}
+                                        height={45}
                                         onPress={() => setShowModalSaveData(true)}
                                     />
                                 </View>
@@ -179,6 +186,7 @@ export function ResponsibleManagement({ navigation }) {
                                                 close={() => setShowModalSaveData(false)}
                                                 show={showModalSaveData}
                                                 save={() => handleSubmit()}
+                                                navigation={navigation}
                                             />
                                         </View>
 
@@ -193,3 +201,25 @@ export function ResponsibleManagement({ navigation }) {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    loginDescriptionContainer: {
+        flex: 1,
+        alignSelf: 'stretch',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    loginQuestionText: {
+        fontSize: 17,
+        fontFamily: FONTS.text,
+    },
+    loginButton: {
+        marginLeft: 5,
+    },
+    loginButtonText: {
+        fontSize: 17,
+        fontFamily: FONTS.text,
+        color: COLORS.red,
+    },
+});

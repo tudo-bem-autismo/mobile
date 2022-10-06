@@ -4,12 +4,11 @@ import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensio
 import modalBackground from '../../assets/images/modalBackground.png';
 import { FONTS, COLORS } from "../../assets/const";
 import { Button } from "../Button";
-import { responsibleManagementService } from "../../services";
 
 
 const { height } = Dimensions.get('window')
 
-export const ModalDeleteData = ({ label, close, show, del }) => {
+export const ModalSaveData = ({ label, close, show, save }) => {
 
     const [state, setState] = useState({
         opacity: new Animated.Value(0),
@@ -21,7 +20,7 @@ export const ModalDeleteData = ({ label, close, show, del }) => {
         Animated.sequence([
             Animated.timing(state.container, { toValue: 0, duration: 100, useNativeDriver: true }),
             Animated.timing(state.opacity, { toValue: 1, duration: 300, useNativeDriver: true }),
-            Animated.spring(state.modal, { toValue: 0, bounciness: 5, useNativeDriver: true })
+            Animated.spring(state.modal, { toValue: 0, bounciness: 2, useNativeDriver: true })
         ]).start()
     }
 
@@ -60,31 +59,40 @@ export const ModalDeleteData = ({ label, close, show, del }) => {
             >
 
                 {/* <View style={style.modal}> */}
-                    <ImageBackground
-                        source={modalBackground}
-                        style={style.modalBackground}
-                        resizeMode="cover"
-                    >
+                <ImageBackground
+                    source={modalBackground}
+                    style={style.modalBackground}
+                    resizeMode="cover"
+                >
+                    {/* <View style={style.modalContainer}> */}
 
-                        <View style={style.questionContainer}>
-                            <Text style={style.questionText}>{label}</Text>
-                        </View>
 
-                        <View style={style.buttonsContainer}>
-                            <Button
-                                label="NÃO"
-                                backgroundColor={COLORS.purple}
-                                borderRadius={15} 
-                                onPress={close}
-                            />
-                            <Button
-                                label="SIM"
-                                backgroundColor={COLORS.turquoise}
-                                borderRadius={15}
-                                onPress={del}
-                            />
-                        </View>
-                    </ImageBackground>
+                    <View style={style.questionContainer}>
+                        <Text style={style.questionText}>{label}</Text>
+                    </View>
+
+                    <View style={style.buttonsContainer}>
+
+                        <Button
+                            label="NÃO"
+                            backgroundColor={COLORS.purple}
+                            borderRadius={15}
+                            width={80}
+                            height={40}
+                            onPress={close}
+                        />
+
+                        <Button
+                            label="SIM"
+                            backgroundColor={COLORS.turquoise}
+                            borderRadius={15}
+                            width={80}
+                            height={40}
+                            onPress={save}
+                        />
+                    </View>
+                    {/* </View> */}
+                </ImageBackground>
                 {/* </View> */}
 
             </Animated.View>
@@ -92,6 +100,15 @@ export const ModalDeleteData = ({ label, close, show, del }) => {
 
     );
 
+}
+
+
+const bottomShadow = {
+    shadowOffset: { width: 0, height: 0, },
+    shadowColor: 'black',
+    shadowOpacity: 1,
+    shadowRadius: 5,
+    elevation: 5,
 }
 
 const style = StyleSheet.create({
@@ -113,7 +130,7 @@ const style = StyleSheet.create({
     },
     modal: {
         width: '100%',
-        height: '50%',
+        height: '100%',
         justifyContent: 'flex-end',
         alignItems: 'center',
         // backgroundColor: COLORS.darkBlue,
@@ -122,22 +139,25 @@ const style = StyleSheet.create({
         width: '100%',
         height: '100%',
         justifyContent: 'center',
-        alignItems: 'flex-end',
+        alignItems: 'center',
         // backgroundColor: COLORS.gray
     },
     questionContainer: {
         flex: 1,
+        width: 300,
         alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 50,
+        // marginTop: 20,
+        top: 50,
+        marginLeft: 30,
         // backgroundColor: COLORS.blue,
     },
     questionText: {
         fontSize: 25,
         fontFamily: FONTS.title,
         textAlign: 'center',
-
+        padding: 2
     },
     buttonsContainer: {
         flex: 3,
@@ -145,8 +165,28 @@ const style = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'space-evenly',
         flexDirection: 'row',
-        paddingHorizontal: 35,
+        paddingHorizontal: 15,
+        marginBottom: 100,
+        margin: 35,
         // backgroundColor: COLORS.purple,
+    },
+    buttonContainer: {
+        flex: 2,
+        alignSelf: 'stretch',
+        alignItems: 'center',
+        justifyContent: 'center',
+        // paddingBottom: 150,
+        // backgroundColor: COLORS.darkBlue,
+    },
+    button: {
+        width: 100,
+        height: 48,
+        borderWidth: 1,
+        borderColor: COLORS.black,
+        borderRadius: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        ...bottomShadow
     },
 });
 

@@ -1,16 +1,6 @@
-import React from "react";
 import { StatusBar, StyleSheet } from "react-native";
 
 import { COLORS, FONTS } from "../../assets/const";
-
-const bottomShadow = {
-    shadowOffset: { width: 0, height: 0, },
-    shadowColor: 'black',
-    shadowOpacity: 1,
-    shadowRadius: 5,
-    elevation: 5,
-}
-
 
 const style = StyleSheet.create({
     mainContainer: {
@@ -20,7 +10,6 @@ const style = StyleSheet.create({
         justifyContent: 'center',
         position: 'relative',
         marginTop: StatusBar.currentHeight,
-
     },
     background: {
         flex: 1,
@@ -28,17 +17,17 @@ const style = StyleSheet.create({
     },
     selectionChildContainer: {
         flex: 2,
-        // backgroundColor: COLORS.blue
+        marginTop: 150,
     },
     container: {
         flex: 2,
-        // backgroundColor: COLORS.darkBlue
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     textContainer: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        // backgroundColor: COLORS.light,
     },
     textSelect: {
         fontSize: 20,

@@ -1,6 +1,6 @@
 export * from './login';
 export * from './responsible';
 export * from './gender';
-export * from './autismLevel';
+export * from './autimsLevel';
 export * from './kid';
 

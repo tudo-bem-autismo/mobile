@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-} from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
-import { FONTS, COLORS } from "../../assets/const";
+import { useEffect, useState } from "react";
+import {
+  StyleSheet, TextInput, TouchableOpacity, View
+} from "react-native";
+import { COLORS } from "../../assets/const";
 import { getAutismLevelsService } from "../../services/autimsLevel";
-import api from '../../services/api';
 
-export const InputNivelAutismo = ({ setAutismLevelId, hasError }) => {
+export const InputNivelAutismo = ({ setAutismLevelId, hasError, selectedAutismLevelId }) => {
 
   // Lista com todos os gêneros
   const [autismLevels, setAutismLevels] = useState([
@@ -24,8 +19,23 @@ export const InputNivelAutismo = ({ setAutismLevelId, hasError }) => {
   // Contador de qual posição está o gênero selecionado
   const [count, setCount] = useState(0);
 
-  // Gênero selecionado atualmente
   const [currentAutismLevel, setCurrentAutismLevel] = useState(autismLevels[0]);
+
+  const setSelectedAutismLevel = () => {
+
+    const selectedIndex = autismLevels.findIndex(item => item.id === selectedAutismLevelId)
+
+    if (selectedIndex === -1)
+      return
+
+    const selectedAutismLevel = autismLevels[selectedIndex]
+
+    setCurrentAutismLevel(selectedAutismLevel)
+    setCount(selectedIndex)
+
+  }
+
+  // Gênero selecionado atualmente
 
   const getAutismLevels = async () => {
 
@@ -40,6 +50,10 @@ export const InputNivelAutismo = ({ setAutismLevelId, hasError }) => {
   useEffect(() => {
     getAutismLevels()
   }, []);
+
+  useEffect(() => {
+    setSelectedAutismLevel()
+  }, [autismLevels])
 
 
   const nextAutismLevel = () => {
@@ -104,7 +118,6 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     height: "15%",
-    //backgroundColor: COLORS.white,
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
@@ -114,14 +127,13 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 30,
-    backgroundColor: COLORS.blue,
     alignItems: "center",
     justifyContent: "center",
     marginHorizontal: 10,
   },
   icons: {
-    color: COLORS.black,
-    fontSize: 28,
+    color: COLORS.blue,
+    fontSize: 35,
     fontWeight: "bold",
   },
   input: {

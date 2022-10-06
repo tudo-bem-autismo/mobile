@@ -1,27 +1,49 @@
-import React, { useState } from "react";
-import {Image, ImageBackground, Text, View, TouchableOpacity, SafeAreaView, ScrollView} from "react-native";
+import React, { useEffect } from "react";
+import { Image, ImageBackground, Text, TouchableOpacity, View } from "react-native";
 
 import styles from "./style.js";
 
 import backgroundOnboarding from '../../assets/images/backgroundOnboarding.png';
-import paperAirplane from '../../assets/images/paperAirplane.png';
 import family from '../../assets/images/family.gif';
+import paperAirplane from '../../assets/images/paperAirplane.png';
 import sequenceOne from '../../assets/images/sequenceOne.png';
-import { COLORS } from "../../assets/const/colors.js";
+import { getData } from "../../utils/storage/index.js";
 
-export function Onboarding({navigation}){
+export function Onboarding({ navigation }) {
 
-    return(
+    const verifyLoggedUser = async () => {
+        const hasId = await getData('@id')
 
-        
-            <View style= {styles.mainContainer}>
+        if (hasId) {
+           return ( navigation.navigate('Games') )
+        }
 
-                <ImageBackground
-                    source={backgroundOnboarding}
-                    resizeMode="cover"
-                    style={styles.background}
-                >
-                <TouchableOpacity style={styles.buttonJump}>
+        verifyAlreadyLoggedIn()
+    }
+
+    const verifyAlreadyLoggedIn = async () => {
+        const alreadyLoggedIn = await getData('@alreadyLoggedIn')
+
+        if (alreadyLoggedIn) {
+            navigation.navigate('Login')
+        } 
+    }
+
+    useEffect(() => {
+        verifyLoggedUser()
+    }, [])
+
+    return (
+
+
+        <View style={styles.mainContainer}>
+
+            <ImageBackground
+                source={backgroundOnboarding}
+                resizeMode="cover"
+                style={styles.background}
+            >
+                <TouchableOpacity style={styles.buttonJump} onPress={() => navigation.navigate('Login')}>
                     <Text>PULAR</Text>
                 </TouchableOpacity>
 
@@ -33,31 +55,31 @@ export function Onboarding({navigation}){
                 </View>
                 <View style={styles.familyContainer}>
                     <Image
-                        style = {styles.family}
+                        style={styles.family}
                         source={family}
                     />
-                    <Text style ={styles.textContainer}>
+                    <Text style={styles.textContainer}>
                         Tudo Bem Autismo é um aplicativo {'\n'}
                         cuja intenção é auxiliar a criança nas  {'\n'}
                         atividades do dia a dia de forma  {'\n'}
-                        divertida. 
+                        divertida.
                     </Text>
 
                     <Image
-                    style={styles.sequenceContainer}
-                    source={sequenceOne}
+                        style={styles.sequenceContainer}
+                        source={sequenceOne}
                     />
                 </View>
-                <TouchableOpacity 
+                <TouchableOpacity
                     style={styles.buttonContinue}
-                    onPress= {()=>navigation.navigate('OnboardingGames')}>
+                    onPress={() => navigation.navigate('OnboardingGames')}>
                     <Text>CONTINUAR</Text>
 
                 </TouchableOpacity>
-                </ImageBackground>
+            </ImageBackground>
 
-            </View>
-      
+        </View>
+
     );
 
 }

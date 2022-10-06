@@ -23,7 +23,7 @@ export const Input = ({
             <View>
                 <FontAwesome
                     name={hasError ? "times-circle" : iconName}
-                    style={hasError ? styles.errorIcon : styles.icon}
+                    style={hasError ? styles.errorIcon : {...styles.icon }}
                 />
                 <TextInput
                     style={hasError ? styles.errorInput : { ...styles.input, borderColor }}
@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         justifyContent: 'flex-start',
         padding: 10,
+        // backgroundColor: COLORS.blue
     },
     icon: {
         position: 'absolute',

@@ -1,7 +1,5 @@
 import { Formik } from "formik";
-import React from "react";
 import { StyleSheet, View } from "react-native";
-import Toast from 'react-native-toast-message';
 
 import { COLORS } from "../../assets/const";
 import { responsibleRegisterService } from "../../services";
@@ -10,9 +8,8 @@ import { Button } from "../Button";
 import { Input, PasswordInput } from "../Input";
 
 
-export const LoginDataForm = ({ responsibleData }) => {
+export const LoginDataForm = ({ responsibleData, navigation }) => {
 
-    // envio dos dados pra api
     const handleForm = async (data) => {
 
         const responsible = {
@@ -22,12 +19,9 @@ export const LoginDataForm = ({ responsibleData }) => {
 
         // Chama a api enviando os dados do formulário, "data" são os "values"
         const result = await responsibleRegisterService(responsible)
-
+        
         if (result.success) {
-            return Toast.show({
-                type: 'success',
-                text1: 'Usuário cadastrado com sucesso',
-            });
+                navigation.navigate('Salutation')     
         }
 
     }
@@ -89,9 +83,12 @@ export const LoginDataForm = ({ responsibleData }) => {
                                 label="CADASTRAR"
                                 onPress={handleSubmit}
                                 backgroundColor={COLORS.blue}
+                                width={120}
+                                height={45}
                                 borderRadius={50}
                             />
                         </View>
+
                     </>
                 )}
             </Formik>
@@ -130,6 +127,7 @@ const styles = StyleSheet.create({
     },
     inputsContainer: {
         flex: 4,
+        width: '100%',
     },
     formContainer: {
         flex: 2.5,
