@@ -7,6 +7,7 @@ import Toast from 'react-native-toast-message';
 
 import Navigation from './src/navigation/navigation';
 import { HomeResponsible } from './src/screens/HomeResponsible';
+import { SalutationScreen } from './src/screens/SalutationScreen';
 
 export default function App() {
 
@@ -22,7 +23,7 @@ export default function App() {
   } else {
     return (
       <>
-        <HomeResponsible />
+        <Navigation />
         {/* <Navigation /> */}
         <Toast />
       </>

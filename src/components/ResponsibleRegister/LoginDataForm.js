@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 
 import { COLORS } from "../../assets/const";
 import { responsibleRegisterService } from "../../services";
+import { storeData } from "../../utils/storage";
 import { responsibleRegisterLoginDataSchema } from "../../utils/validations/responsible";
 import { Button } from "../Button";
 import { Input, PasswordInput } from "../Input";
@@ -21,7 +22,8 @@ export const LoginDataForm = ({ responsibleData, navigation }) => {
         const result = await responsibleRegisterService(responsible)
         
         if (result.success) {
-                navigation.navigate('Salutation')     
+            await storeData(result.data.id, '@id')
+            navigation.navigate('Salutation')     
         }
 
     }
