@@ -41,7 +41,7 @@ export const kidRegisterService = async (data) => {
 export const getKidService = async () => {
   try {
 
-    const result = await api.get("/crianca/2")
+    const result = await api.get("/crianca/1")
 
     const success = result.status === 200
 
@@ -82,6 +82,7 @@ export const updateKidService = async (data) => {
     };
 
     const date = format(data.date, "yyyy-MM-dd");
+    console.log(new Date('12/06/2022'))
 
     const formData = new FormData();
     formData.append("arquivo", data.photo);
@@ -93,14 +94,14 @@ export const updateKidService = async (data) => {
 
     console.log(formData)
 
-    const result = await api.put("/crianca/2", formData, options);
+    const result = await api.put("/crianca/1", formData, options);
 
     //console.log(result)
 
-    const sucess = result.status === 200
+    const success = result.status === 200
 
     return {
-      sucess,
+      success,
       data: result.data
     }
 
@@ -113,4 +114,25 @@ export const updateKidService = async (data) => {
   }
 
   
+}
+
+export const deleteKidService = async () => {
+  try {
+
+      const result = await api.delete("/crianca/2")
+
+      const success = result.status === 200
+
+      return {
+          success,
+          data: result.data
+      }
+
+  } catch (error) {
+      showErrorToast(error.response.data.message)
+      return {
+          success: false,
+          data: error.response.data
+      }
+  }
 }
