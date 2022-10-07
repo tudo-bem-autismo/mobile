@@ -28,6 +28,7 @@ export const TabsResponsible = ({ navigation }) => {
                 component={RoutineResponsible}
                 navigation={navigation}
                 options={{
+                    headerShown: false,
                     tabBarIcon: ({ focused }) =>
 
                     (
@@ -53,6 +54,7 @@ export const TabsResponsible = ({ navigation }) => {
                 name="Games"
                 component={Games}
                 options={{
+                    headerShown: false,
                     tabBarIcon: ({ focused }) =>
 
                     (
@@ -66,7 +68,7 @@ export const TabsResponsible = ({ navigation }) => {
                                 />
                             </View>
 
-                            <Text style={styles.screenName}>GAMES</Text>
+                            <Text style={styles.screenName}>JOGOS</Text>
                         </View>
 
                     )
@@ -77,6 +79,7 @@ export const TabsResponsible = ({ navigation }) => {
                 name="Reports"
                 component={Reports}
                 options={{
+                    headerShown: false,
                     tabBarIcon: ({ focused }) =>
 
                     (
