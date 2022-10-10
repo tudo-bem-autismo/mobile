@@ -1,6 +1,6 @@
 
 import { MaterialIcons } from '@expo/vector-icons';
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './style';
@@ -8,10 +8,13 @@ import { MainHeader } from '../../components/Header/MainHeader';
 import feelings from '../../assets/images/feelings.gif';
 import clothes from '../../assets/images/clothes.gif';
 import brushingTeeth from '../../assets/images/brushingTeeth.gif';
-import friends from '../../assets/images/friends.png';
 import { COLORS } from '../../assets/const';
+import { Game } from '../../components/Games/Game';
+import { ModalApplyChildGame } from '../../components/Modal/ModalApplyChildGame';
 
 export const Games = ({ navigation }) => {
+
+    const [modal, setModal] = useState(false);
 
     return (
 
@@ -30,48 +33,30 @@ export const Games = ({ navigation }) => {
 
                     <View style={styles.listGamesContainer}>
 
-                        <View style={styles.game}>
-                            <TouchableOpacity style={styles.buttonGame}>
-                                <Text style={styles.textGame}>Sentimentos</Text>
-                                <View style={styles.imageGameContainer}>
-                                    <Image
-                                        source={feelings}
-                                        resizeMode='cover'
-                                        style={styles.imageGame} />
-                                </View>
-                            </TouchableOpacity>
-                        </View>
+                        <Game
+                            titleGame="sentimentos"
+                            gifGame={feelings}
+                            onPress={() => setModal(true)}
+                        />
+                        <Game
+                            titleGame="Escolher roupas"
+                            gifGame={clothes}
+                        />
+                        <Game
+                            titleGame="Escovar os dentes"
+                            gifGame={brushingTeeth}
+                        />
+                        <Game
+                            titleGame="sentimentos"
+                            gifGame={feelings}
+                        />
 
-                        <View style={styles.game}>
-                            <TouchableOpacity style={styles.buttonGame}>
-                                <Text style={styles.textGame}>Escolher roupas</Text>
-                                <View style={styles.imageGameContainer}>
-                                    <Image
-                                        source={clothes}
-                                        resizeMode='cover'
-                                        style={styles.imageGame} />
-                                </View>
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={styles.game}>
-                            <TouchableOpacity style={styles.buttonGame}>
-                                <Text style={styles.textGame}>Escovar os dentes</Text>
-                                <View style={styles.imageGameContainer}>
-                                    <Image
-                                        source={brushingTeeth}
-                                        resizeMode='cover'
-                                        style={styles.imageGame} />
-                                </View>
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={styles.game}>
-                            <TouchableOpacity style={styles.buttonGame}>
-                                <Text style={styles.textGame}>Sentimentos</Text>
-                                <Image source={feelings} style={styles.imageGame} />
-                            </TouchableOpacity>
-                        </View>
+                        {modal && (
+                            <ModalApplyChildGame
+                                close={() => setModal(false)}
+                                show={modal}
+                            />
+                        )}
 
                     </View>
                 </ScrollView>
