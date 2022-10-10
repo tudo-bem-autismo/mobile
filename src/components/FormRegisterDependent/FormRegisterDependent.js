@@ -19,7 +19,7 @@ import { DataInput, Input, InputGenero, MaskedInput } from "../Input";
 import { InputNivelAutismo } from "../Input/InputNivelAutismo";
 
 export const FormDependentRegister = ({ navigation }) => {
-  const now = new Date();
+  //const now = new Date();
 
   // const [date, setDate] = useState(now);
 

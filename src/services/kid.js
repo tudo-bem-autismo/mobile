@@ -12,12 +12,14 @@ export const kidRegisterService = async (data) => {
 
     const date = format(data.date, "yyyy-MM-dd");
 
+    const dataFinal = new Date(date)
+
     console.log(date)
 
     const formData = new FormData();
     formData.append("arquivo", data.photo);
     formData.append("nome", data.name);
-    formData.append("data_nascimento", date);
+    formData.append("data_nascimento", dataFinal);
     formData.append("id_genero", data.genderId);
     formData.append("id_nivel_autismo", data.autismLevelId);
     formData.append("id_responsavel", 78);
