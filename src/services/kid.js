@@ -12,6 +12,8 @@ export const kidRegisterService = async (data) => {
 
     const date = format(data.date, "yyyy-MM-dd");
 
+    console.log(date)
+
     const formData = new FormData();
     formData.append("arquivo", data.photo);
     formData.append("nome", data.name);
