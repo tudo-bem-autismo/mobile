@@ -25,13 +25,13 @@ const styles = StyleSheet.create({
 
     buttonContainer: {
         flex:1,
-        padding: 8,
+        padding: 10,
     },
     alertButton: {
         display: 'flex',
         flexDirection: 'row',
         flex:1,
-        marginLeft:"70%",
+        marginLeft:"85%",
    
     },
 

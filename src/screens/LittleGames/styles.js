@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         position: 'relative',
         marginTop: StatusBar.currentHeight,
-        backgroundColor:COLORS.beige,
+        backgroundColor:COLORS.yellowContainer,
         zIndex: 2,
     },
     backButton:{

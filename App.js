@@ -9,6 +9,7 @@ import Navigation from './src/navigation/navigation';
 import { HomeResponsible } from './src/screens/HomeResponsible';
 import { SalutationScreen } from './src/screens/SalutationScreen';
 import { LittleGames} from './src/screens/LittleGames';
+import { Onboarding } from './src/screens/Onboarding';
 
 export default function App() {
 
@@ -24,8 +25,8 @@ export default function App() {
   } else {
     return (
       <>
-        <LittleGames/>
-        {/* <Navigation /> */}
+       
+         <LitlleGames/>
         {/* <Toast /> */}
       </>
     );
