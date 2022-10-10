@@ -33,11 +33,11 @@ export default function App() {
         {/* <ResponsiveRegister /> */}
         {/* <ResponsibleManagement /> */}
         {/* <ResponsiblePassword/> */}
-        {/* <DependentManagement/> */}
+        <DependentManagement/>
         {/* <Loading/> */}
         {/* <Menu /> */}
         {/* <DependentListing/> */}
-        <DependentRegister/> 
+        {/* <DependentRegister/>  */}
         {/* <Toast />
         {/* <ResponsiveRegister />*/}
         {/* <Navigation /> */}

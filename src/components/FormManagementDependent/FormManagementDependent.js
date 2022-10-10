@@ -29,8 +29,8 @@ export const FormManagementDependent = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [genderId, setGenderId] = useState();
   const initialValues = kid;
-  const [date, setDate] = useState(new Date());
-  const [dateHasError, setDateHasError] = useState(false);
+  //const [date, setDate] = useState(new Date());
+  //const [dateHasError, setDateHasError] = useState(false);
   const [genderHasError, setGenderHasError] = useState(false);
   const [autismLevelId, setAutismLevelId] = useState();
   const [autismLevelHasError, setAutismLevelHasError] = useState(false);
@@ -40,11 +40,11 @@ export const FormManagementDependent = ({ navigation }) => {
   const getKid = async () => {
     const result = await getKidService();
     setKid(result.data);
-    console.log(result.data.date);
-    const data = result.data.date;
-    console.log(data)
-    const dataF = data.split("T")[0];
-    setDate(new Date(result.data.date))
+    //console.log(result.data.date);
+    //const data = result.data.date;
+    //console.log(data)
+    //const dataF = data.split("T")[0];
+    //setDate(new Date(result.data.date))
     setGenderId(result.data.genderId);
     setAutismLevelId(result.data.autismLevelId);
     setImage(result.data.photo)
@@ -58,7 +58,7 @@ export const FormManagementDependent = ({ navigation }) => {
   const handleForm = async (data) => {
 
   
-    setDateHasError(false);
+    //setDateHasError(false);
     setGenderHasError(false);
     setAutismLevelHasError(false);
 
@@ -85,7 +85,6 @@ export const FormManagementDependent = ({ navigation }) => {
 
     const newData = {
       ...data,
-      date,
       genderId,
       autismLevelId,
       photo,
@@ -94,6 +93,7 @@ export const FormManagementDependent = ({ navigation }) => {
     setShowModalSaveData(false)
     //console.log(kid.photo)
     const result = await updateKidService(newData) 
+    //console.log(newData)
 
       if (result.success) {
         return Toast.show({
@@ -180,30 +180,32 @@ export const FormManagementDependent = ({ navigation }) => {
                     ></Input>
                   </View>
 
-                  {/* <View style={styles.input}>
+                  <View style={styles.input}>
                     <MaskedInput
-                      title="Telefone"
-                      iconName="phone"
-                      placeholder="(99) 99999-9999"
-                      borderColor={COLORS.purple}
-                      onChangeText={handleChange('phone')}
-                      onBlur={handleBlur('phone')}
-                      value={values.phone}
-                      hasError={!!errors.phone}
-                      errorMessage={errors.phone}
-                      type={'data'}
-                      options={{
-                        maskType: "[00]{-}[00]-{0099}",
-                      }}
-                      />
-                  </View> */}
+                    title="Data de Nascimento"
+                    iconName="calendar"
+                    placeholder="00/00/0000"
+                    borderColor={COLORS.blue}
+                    onChangeText={handleChange('date')}
+                    onBlur={handleBlur('date')}
+                    value={values.date}
+                    hasError={!!errors.date}
+                    errorMessage={errors.date}
+                    type={'datetime'}
+                    options={{
+                      format: 'DD/MM/YYYY'
+                    }}
+                    />
+                      
+                    
+                  </View>
 
-                  <DataInput
+                  {/* <DataInput
                     date={date}
                     setDate={setDate}
                     hasError={dateHasError}
                     value={format(date, "dd/MM/yyyy")}
-                  />
+                  /> */}
 
                   <InputGenero
                     setGenderId={setGenderId}

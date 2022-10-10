@@ -10,11 +10,20 @@ export const kidRegisterService = async (data) => {
       },
     };
 
-    const date = format(data.date, "yyyy-MM-dd");
+    const date = data.date;
 
-    const dataFinal = new Date(date)
+   
 
-    console.log(date)
+    //console.log(date)
+
+    const dataD = date.split('/')[0]
+    const dataM = date.split('/')[1]
+    const dataY = date.split('/')[2]
+
+
+    const dataFinal = dataY + "-" + dataM + "-" + dataD
+
+    //console.log = dataFinal
 
     const formData = new FormData();
     formData.append("arquivo", data.photo);
@@ -22,7 +31,7 @@ export const kidRegisterService = async (data) => {
     formData.append("data_nascimento", dataFinal);
     formData.append("id_genero", data.genderId);
     formData.append("id_nivel_autismo", data.autismLevelId);
-    formData.append("id_responsavel", 78);
+    formData.append("id_responsavel", 7);
 
     const result = await api.post("/crianca", formData, options);
 
@@ -45,14 +54,25 @@ export const kidRegisterService = async (data) => {
 export const getKidService = async () => {
   try {
 
-    const result = await api.get("/crianca/1")
+    const result = await api.get("/crianca/5")
 
     const success = result.status === 200
 
+    const dataNaoFormatada = result.data.data_nascimento.split('T')[0]
+
+    const dataY = dataNaoFormatada.split('-')[0]
+    const dataM = dataNaoFormatada.split('-')[1]
+    const dataD = dataNaoFormatada.split('-')[2]
+
+    const dataFinal = dataD + "/" + dataM + "/" + dataY
+
+    console.log(dataFinal)
+    
     const formattedData = {
+
       name: result.data.nome,
       photo: result.data.foto,
-      date: result.data.data_nascimento,
+      date: dataFinal,
       genderId: result.data.id_genero,
       autismLevelId: result.data.id_nivel_autismo,
       
@@ -76,7 +96,7 @@ export const getKidService = async () => {
 
 export const updateKidService = async (data) => {
 
-  // console.log(data.date)
+
   try {
 
     const options = {
@@ -85,20 +105,25 @@ export const updateKidService = async (data) => {
       },
     };
 
-    const date = format(data.date, "yyyy-MM-dd");
-    console.log(new Date('12/06/2022'))
+    const dateD = data.date.split('/')[0]
+    const dateM = data.date.split('/')[1]
+    const dateY = data.date.split('/')[2]
+
+    const dataFinal = dateY + '-' + dateM + '-' + dateD
+    //const dateY = date.split('/')[0]
+    //console.log(dateY)
 
     const formData = new FormData();
     formData.append("arquivo", data.photo);
     formData.append("nome", data.name);
-    formData.append("data_nascimento", date);
+    formData.append("data_nascimento", dataFinal);
     formData.append("id_genero", data.genderId);
     formData.append("id_nivel_autismo", data.autismLevelId);
     formData.append("id_responsavel", 7);
 
     console.log(formData)
 
-    const result = await api.put("/crianca/1", formData, options);
+    const result = await api.put("/crianca/5", formData, options);
 
     //console.log(result)
 
