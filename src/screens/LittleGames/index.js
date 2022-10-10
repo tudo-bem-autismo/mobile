@@ -5,6 +5,7 @@ import {View, Text} from 'react-native';
 import styles from './styles.js';
 import { ButtonAlert, ButtonGames} from '../../components';
 import {ImageGames} from '../../components/ImageGames';
+import {TextGames, TextImage} from '../../components/TextGames';
 
 export function LittleGames(){
     
@@ -12,6 +13,12 @@ export function LittleGames(){
 
         <View style = {styles.mainContainer}>
             <ButtonAlert/>
+            <ImageGames
+            />
+            <TextGames
+            label = "O que ela está sentindo?"
+            />
+
             <ButtonGames  
             label ="FELICIDADE"
             tittle= "RAIVA"

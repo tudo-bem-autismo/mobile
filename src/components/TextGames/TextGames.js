@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet } from 'react-native';
 
-import {COLORS, FONT} from '../../assets/const';
+import {COLORS} from '../../assets/const';
+import {FONTS} from '../../assets/const/fonts';
 
 export const TextGames = ({label}) => {
     return(
@@ -12,23 +13,18 @@ export const TextGames = ({label}) => {
     );
 }
 
-const textShadow = {
-    shadowOffset: { width: 0, height: 0, },
-    shadowColor: 'black',
-    shadowOpacity: 1,
-    shadowRadius: 5,
-    elevation: 5,
-}
-
 const styles = StyleSheet.create({
     textContainer:{
         flex:1,
         padding:8,
+        fontFamily:FONTS.title,
+        marginBottom:'30%',
     },
     text:{
-        fontSize:15,
-        ...textShadow
-    
-
+        fontSize:48,
+        color:COLORS.white,
+        textAlign:'center',
+        justifyContent:'center',
+        fontWeight:'bold',
     }
 })

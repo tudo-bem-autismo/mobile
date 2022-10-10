@@ -1,18 +1,31 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
 import {COLORS, FONT} from '../../assets/const';
+import kidLove from '../../assets/images/love.png';
+import sad from '../../assets/images/sad.png';
 
-export const ButtonGames = ({borderRadius, widht, height}) =>{
+export const ButtonImage = ({source, borderRadius, widht, height}) =>{
     return(
-        <View>
-              <View style = {styles.buttonContainer}>
+        <View style = {styles.container}>
+              <View style = {styles.imageContainer}>
                 <TouchableOpacity 
-                style = {{...styles.borderRadius, widht, height}}
+                style = {{...styles.buttonImage, borderRadius, widht, height}}
                 >
-
-                
-
+                <Image
+                    style = {styles.image}
+                    source={kidLove}
+                />
+                </TouchableOpacity>
+            </View>
+            <View style = {styles.containerImage}>
+                <TouchableOpacity 
+                style = {{...styles.buttonImage, borderRadius, widht, height}}
+                >
+                 <Image
+                    style = {styles.image}
+                    source={sad}
+                />
                 </TouchableOpacity>
             </View>
         </View>
@@ -30,22 +43,24 @@ const styles = StyleSheet.create({
 
     container:{
         flex: 1,
-        alignItems: 'center',
-        justifyContent:'center',
         flexDirection: 'row',
-        width: 300,
-        height: 100,
+        width: 150,
+        height: 149,
+        alignItems:'center',
+        marginRight:'45%',
+        marginBottom:'20%'
     },
-    buttonContainer:{
+    imageContainer:{
         display:'flex',
-        alignItems: 'center',
-        marginRight:'10%',
+        alignItems:'center',
+    
     },
-    containerButton:{
+    containerImage:{
         display:'flex',
-        alignItems: 'center',
+        alignItems:'center',
+        marginLeft:'20%',
     },
-    buttonGames:{
+    buttonImage:{
         width:150,
         height:149,
         backgroundColor:COLORS.yellow,
@@ -53,6 +68,11 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent:'center',
         ...imageShadow
+    },
+    image:{
+        width:150,
+        height:149,
+        borderRadius:80
     }
 
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
-import {COLORS, FONT} from '../../assets/const';
+import {COLORS, FONTS} from '../../assets/const';
 
 export const ButtonGames = ({label, tittle, backgroundColor, borderRadius, widht, height}) => {
     return(
@@ -12,7 +12,7 @@ export const ButtonGames = ({label, tittle, backgroundColor, borderRadius, widht
                 style = {{...styles.buttonGames, backgroundColor, borderRadius, widht, height}}
                 >
 
-                <Text>{label}</Text>
+                <Text style = {styles.text}>{label}</Text>
 
                 </TouchableOpacity>
             </View>
@@ -21,7 +21,7 @@ export const ButtonGames = ({label, tittle, backgroundColor, borderRadius, widht
                 style = {{...styles.buttonGames, backgroundColor, borderRadius, widht, height}}
                 >
 
-                <Text>{tittle}</Text>
+                <Text style = {styles.text}>{tittle}</Text>
 
                 </TouchableOpacity>
             </View>
@@ -57,15 +57,24 @@ const styles = StyleSheet.create({
     containerButton:{
         display:'flex',
         alignItems: 'center',
+        color:COLORS.pink
     },
     buttonGames:{
         width:150,
         height:60,
         backgroundColor:COLORS.yellow,
+        fontFamily:FONTS.title,
         borderRadius:50,
         alignItems:'center',
         justifyContent:'center',
+        marginBottom:'170%',
         ...bottomShadow
+    }, 
+    text:{
+       color:COLORS.white,
+       fontFamily:FONTS.title,
+       fontWeight:'bold',
+       fontSize:20,
     }
 
 
