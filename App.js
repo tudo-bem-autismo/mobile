@@ -6,6 +6,7 @@ import { Text } from 'react-native';
 import Toast from 'react-native-toast-message';
 
 import Navigation from './src/navigation/navigation';
+import { DependentRegister } from './src/screens/DependentRegister';
 import { HomeResponsible } from './src/screens/HomeResponsible';
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
     return (
       <>
         <HomeResponsible />
+        {/* <DependentRegister/> */}
         {/* <Navigation /> */}
         <Toast />
       </>

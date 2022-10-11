@@ -16,7 +16,7 @@ export const getGamesService = async () => {
             }
         })
 
-        // console.log(formattedData)
+        console.log(formattedData)
 
         return {
             success,
@@ -24,7 +24,6 @@ export const getGamesService = async () => {
         }
 
     } catch (error) {
-        // console.log(error)
         showErrorToast(error.response.data.message)
         return {
             success: false,

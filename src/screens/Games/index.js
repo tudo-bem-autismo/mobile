@@ -51,39 +51,16 @@ export const Games = ({ navigation }) => {
 
                             <View style={styles.listGamesContainer}>
 
-                                <Game
-                                    titleGame="sentimentos"
-                                    gifGame={feelings}
-                                    onPress={() => setModal(true)}
-                                />
-                                {/* {/* 
-                                <Game
-                                    titleGame="sentimentos"
-                                    gifGame={feelings}
-                                    onPress={() => setModal(true)}
-                                />
-
-                                <Game
-                                    titleGame="sentimentos"
-                                    gifGame={feelings}
-                                    onPress={() => setModal(true)}
-                                /> */}
-
-                                <Game
-                                    titleGame="sentimentos"
-                                    gifGame={feelings}
-                                    onPress={() => setModal(true)}
-                                />
-
-                                {/* {
+                                {
                                     games?.map(item => (
                                         <Game
                                             titleGame={item.name}
-                                            gifGame={item.icon}
+                                            gifGame={{ uri : item.icon}}
                                             key={item.id}
+                                            onPress={() => setModal(true)}
                                         />
                                     ))
-                                } */}
+                                }
 
 
                             </View>
