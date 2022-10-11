@@ -117,7 +117,7 @@ export const updatePasswordResponsibleService = async (data) => {
         return {
             success: false,
             data: error.response.data
-        } 
+        }
     }
 }
 
@@ -149,9 +149,9 @@ export const getResponsibleDependentsService = async () => {
 
         const id = await getData('@id')
 
-        const result = await api.get(`/responsavel/27`)
+        const result = await api.get(`/responsavel/6`)
 
-        const sucess = result.status === 200
+        const success = result.status === 200
 
         const formattedData = result.data.tbl_crianca.map(item => {
             return {
@@ -162,7 +162,7 @@ export const getResponsibleDependentsService = async () => {
         })
 
         return {
-            sucess,
+            success,
             data: formattedData
         }
 

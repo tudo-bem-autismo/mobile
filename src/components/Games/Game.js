@@ -1,26 +1,30 @@
 import React, { useState } from 'react';
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Button, Image, Pressable, ScrollView, StyleSheet, Text, Touchable, TouchableHighlight, TouchableHighlightComponent, TouchableNativeFeedback, TouchableOpacity, View } from 'react-native';
+import { TouchableRipple } from 'react-native-paper';
 import { COLORS, FONTS } from '../../assets/const';
 
 export const Game = ({ titleGame, gifGame, onPress }) => {
- 
-    return(
+
+    return (
         <View style={styles.game}>
 
-        <TouchableOpacity style={styles.buttonGame} onPress={() => onPress()}>
+            <TouchableOpacity style={styles.buttonGame} onPress={() => onPress()}>
 
-            <Text style={styles.textGame}>{titleGame}</Text>
+                <>
+                    <Text style={styles.textGame}>{titleGame}</Text>
 
-            <View style={styles.imageGameContainer}>
-                <Image
-                    source={gifGame}
-                    resizeMode='cover'
-                    style={styles.imageGame} />
-            </View>
+                    <View style={styles.imageGameContainer}>
+                        <Image
+                            source={gifGame}
+                            resizeMode='cover'
+                            style={styles.imageGame} />
+                    </View>
 
-        </TouchableOpacity>
+                </>
 
-    </View>
+            </TouchableOpacity>
+
+        </View >
     )
 
 }
@@ -35,8 +39,8 @@ const bottomShadow = {
 
 const styles = StyleSheet.create({
     game: {
-        width: '65%',
-        height: '25%',
+        width: 250,
+        height: 190,
         margin: 10,
         ...bottomShadow,
         borderRadius: 40,
@@ -55,10 +59,11 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.title,
         color: COLORS.black,
         textShadowColor: COLORS.black,
-        textShadowOffset:{width: 0, height: 0},
+        textShadowOffset: { width: 0, height: 0 },
         textShadowRadius: 1,
         zIndex: 2,
-        margin: 20,
+        marginTop: 10,
+        marginLeft: 20,
 
     },
     imageGameContainer: {

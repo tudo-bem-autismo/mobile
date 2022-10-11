@@ -4,12 +4,14 @@ import { BlurView } from 'expo-blur';
 
 import modalBackground from '../../assets/images/modalBackground.png';
 import { FONTS, COLORS } from "../../assets/const";
-import { Button } from "../Button";
+import { BackButton, Button } from "../Button";
 import { Game } from "../Games/Game";
 import feelings from '../../assets/images/feelings.gif';
 import { Loading } from "../../screens/Loading";
 import { getResponsibleDependentsService } from "../../services";
 import { Dependent } from "../DependentListing";
+import { MaterialIcons } from "@expo/vector-icons";
+import { PlayButton } from "../Button/PlayButton";
 
 
 const { height } = Dimensions.get('window')
@@ -91,6 +93,17 @@ export const ModalApplyChildGame = ({ label, close, show, del }) => {
                         >
                             <View style={style.applyGameModalContainer}>
 
+                                <View style={style.closeModalIconContainer}>
+
+                                    <MaterialIcons
+                                        name="close"
+                                        size={30}
+                                        style={style.closeModalIcon}
+                                        onPress={close}
+                                    />
+
+                                </View>
+
                                 <View style={style.gameContainer}>
 
                                     <Game
@@ -98,41 +111,44 @@ export const ModalApplyChildGame = ({ label, close, show, del }) => {
                                         gifGame={feelings}
                                     />
 
-                                    <Button
-                                        label="JOGAR"
-                                        backgroundColor={COLORS.white}
-                                        borderRadius={25}
-                                        width={100}
-                                        height={45}
-                                    />
+
+                                    <PlayButton />
 
                                 </View>
 
-                                <Text>Qual filho(a) poderá jogar?</Text>
                                 <View style={style.dependentsContainer}>
 
+                                    <Text style={style.text}>Qual filho(a) poderá jogar?</Text>
 
-                                    {
-                                        dependents.map(item => (
-                                            <Dependent
-                                                name={item.name}
-                                                photo={item.photo}
-                                                key={item.id}
-                                                onPress={() => setOption(true)}
-                                            />
-                                        ))
-                                    }
+                                    <View style={style.dependentsList}>
+
+
+                                        {
+                                            dependents.map(item => (
+                                                <Dependent
+                                                    name={item.name}
+                                                    photo={item.photo}
+                                                    key={item.id}
+                                                    onPress={() => setOption(true)}
+                                                />
+                                            ))
+                                        }
+
+                                    </View>
 
                                 </View>
 
+                                <View style={style.buttonContainer}>
+
                                     <Button
-                                        label="NÃO"
+                                        label="APLICAR"
                                         backgroundColor={COLORS.white}
                                         borderRadius={25}
                                         width={100}
                                         height={45}
-                                        onPress={close}
                                     />
+
+                                </View>
 
                             </View>
 
@@ -160,27 +176,27 @@ const style = StyleSheet.create({
         width: '100%',
         height: '100%',
         position: 'absolute',
-        // top: -60,
+        top: 0,
+        left: 0,
         alignItems: 'center',
         justifyContent: 'center',
+        // backgroundColor: COLORS.red
     },
     container: {
         width: '100%',
         height: '100%',
-        position: 'absolute',
-        top: -60,
         alignItems: 'center',
         justifyContent: 'center',
+        // backgroundColor: COLORS.blue
+
     },
     modalContainer: {
-        position: 'absolute',
-        // top: 5,
         height: '100%',
         width: '100%',
         // backgroundColor: COLORS.blue
     },
     blurContainer: {
-        position: "absolute",
+        position: 'absolute',
         top: 0,
         left: 0,
         bottom: 0,
@@ -188,12 +204,12 @@ const style = StyleSheet.create({
         width: '100%',
         height: '100%',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
     },
     applyGameModalContainer: {
         width: '80%',
-        height: '60%',
-        top: -110,
+        height: '70%',
+        top: 70,
         backgroundColor: COLORS.white,
         borderColor: COLORS.purple,
         borderWidth: 1,
@@ -202,14 +218,50 @@ const style = StyleSheet.create({
         shadowRadius: 1,
         elevation: 10,
         borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     dependentsContainer: {
-        flex: 2,
-        flexDirection: 'row',
-        backgroundColor: COLORS.pink
+        flex: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'stretch',
+        // backgroundColor: COLORS.pink
+    },
+    dependentsList: {
+        flexDirection: 'row'
     },
     gameContainer: {
-        flex: 2,
-        backgroundColor: COLORS.red
+        flex: 5,
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        alignSelf: 'stretch',
+        position: 'relative',
+        // backgroundColor: COLORS.red
+    },
+    closeModalIconContainer: {
+        flex: 1,
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        alignSelf: 'stretch',
+        paddingRight: 10,
+        // backgroundColor: COLORS.darkBlue
+    },
+    closeModalIcon: {
+        // flex: .5,
+        // margin: 5,
+        // backgroundColor: COLORS.blue
+    },
+    buttonContainer: {
+        flex: 1.5,
+        // marginBottom: 5,
+        // backgroundColor: COLORS.darkBlue
+    },
+    text: {
+        textAlign: 'center',
+        fontSize: 20,
+        margin: 10,
+        // backgroundColor: COLORS.darkBlue
+
     }
 });

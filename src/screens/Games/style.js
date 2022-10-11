@@ -6,6 +6,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignSelf: 'stretch',
+        alignItems: 'center',
+        justifyContent: 'center',
         marginTop: StatusBar.currentHeight,
     },
     gamesContainer: {
@@ -19,13 +21,13 @@ const styles = StyleSheet.create({
     },
     listGames: {
         width: '100%',
+
     },
     listGamesContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 50,
     },
-    
+
 
 });
 
