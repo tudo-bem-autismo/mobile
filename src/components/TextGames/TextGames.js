@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
     textContainer:{
         flex:1,
         padding:8,
-        fontFamily:FONTS.title,
         marginBottom:'30%',
     },
     text:{
@@ -25,6 +24,12 @@ const styles = StyleSheet.create({
         color:COLORS.white,
         textAlign:'center',
         justifyContent:'center',
+        textShadowColor:COLORS.grey,
+        textShadowOffset:{widht:-1, height:1},
+        textShadowRadius:1,
+        elevation:10,
+        fontFamily:FONTS.title,
         fontWeight:'bold',
+
     }
 })

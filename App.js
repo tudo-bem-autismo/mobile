@@ -18,7 +18,6 @@ export default function App() {
     Poppins_400Regular,
     Outfit_400Regular,
     Mandali_400Regular
-
   });
 
   if (!fontsLoaded) {

@@ -16,6 +16,7 @@ export function LittleGamesTwo(){
                 borderRadius={80}
                 widht={150}
                 height={149}
+                
             />
             <TextGames
             label="Quem está triste?"
