@@ -1,12 +1,28 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 
 import {COLORS, FONT} from '../../assets/const';
 import kidLove from '../../assets/images/love.png';
 import sad from '../../assets/images/sad.png';
 
+import { getStepGames } from '../../services';
+
 export const ButtonImage = ({source, borderRadius, widht, height}) =>{
+    
+    const [image1, setImage] = useState(null);
+    const [image2, setImage2] = useState(null);
+
+    const getImages = async () =>{
+        const result = await getStepGames()
+        setImage(result.dataTwo.imagem)
+        setImage2(result.dataTwo.imagemDois)
+    }
+    useEffect(() =>{
+        getImages()
+    }, [])
+    
     return(
+
         <View style = {styles.container}>
               <View style = {styles.imageContainer}>
                 <TouchableOpacity 
@@ -14,7 +30,7 @@ export const ButtonImage = ({source, borderRadius, widht, height}) =>{
                 >
                 <Image
                     style = {styles.image}
-                    source={kidLove}
+                    source={{uri: image1}}
                 />
                 </TouchableOpacity>
             </View>
@@ -24,7 +40,7 @@ export const ButtonImage = ({source, borderRadius, widht, height}) =>{
                 >
                  <Image
                     style = {styles.image}
-                    source={sad}
+                    source={{uri: image2}}
                 />
                 </TouchableOpacity>
             </View>

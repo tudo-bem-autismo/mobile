@@ -19,7 +19,6 @@ export function LittleGamesTwo(){
                 
             />
             <TextGames
-            label="Quem está triste?"
             />
 
         </View>

@@ -1,13 +1,27 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet } from 'react-native';
 
 import {COLORS} from '../../assets/const';
 import {FONTS} from '../../assets/const/fonts';
 
-export const TextGames = ({label}) => {
+import { getStepGames } from '../../services';
+
+export const TextGames = () => {
+
+    const [dialogo, setDialogo] = useState('');
+
+    const getDialogo = async () =>{
+        const result = await getStepGames()
+        //console.log(result.data.dialogo)
+        setDialogo(result.data.dialogo)
+    }
+    useEffect(() =>{
+        getDialogo()
+    }, [])
+
     return(
         <View style = {styles.textContainer}>
-            <Text style = {styles.text}>{label}</Text>
+            <Text style = {styles.text}>{dialogo}</Text>
 
         </View>
     );

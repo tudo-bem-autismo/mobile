@@ -1,27 +1,44 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 import {COLORS, FONTS} from '../../assets/const';
 
-export const ButtonGames = ({label, tittle, backgroundColor, borderRadius, widht, height}) => {
+import { getStepGames } from '../../services';
+
+export const ButtonGames = ({backgroundColor, borderRadius, widht, height}) => {
+
+    const [passo1, setPasso1] = useState('');
+    const [passo2, setPasso2] = useState('');
+    const [cor, setCor] = useState('');
+
+    const getPassos = async () =>{
+        const result = await getStepGames()
+        setPasso1(result.data.passo1)
+        setPasso2(result.data.passo2)
+        setCor(result.data.corBotao)
+    }
+    useEffect(() =>{
+        getPassos()
+    }, [])
+
     return(
 
         <View style = {styles.container}>
             <View style = {styles.buttonContainer}>
                 <TouchableOpacity 
-                style = {{...styles.buttonGames, backgroundColor, borderRadius, widht, height}}
+                style = {{...styles.buttonGames, backgroundColor: cor, borderRadius, widht, height}}
                 >
 
-                <Text style = {styles.text}>{label}</Text>
+                <Text style = {styles.text}>{passo1}</Text>
 
                 </TouchableOpacity>
             </View>
             <View style = {styles.containerButton}>
                 <TouchableOpacity 
-                style = {{...styles.buttonGames, backgroundColor, borderRadius, widht, height}}
+                style = {{...styles.buttonGames, backgroundColor: cor, borderRadius, widht, height}}
                 >
 
-                <Text style = {styles.text}>{tittle}</Text>
+                <Text style = {styles.text}>{passo2}</Text>
 
                 </TouchableOpacity>
             </View>
@@ -62,7 +79,7 @@ const styles = StyleSheet.create({
     buttonGames:{
         width:150,
         height:60,
-        backgroundColor:COLORS.yellow,
+        //backgroundColor:COLORS.yellow,
         fontFamily:FONTS.title,
         borderRadius:50,
         alignItems:'center',

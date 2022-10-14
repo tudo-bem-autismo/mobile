@@ -11,6 +11,7 @@ export const ImageGames = () =>{
 
     const getImage = async () =>{
         const result = await getStepGames()
+        //console.log(result.data.image)
         setImage(result.data.image)
     }
     useEffect(() =>{
@@ -20,7 +21,7 @@ export const ImageGames = () =>{
     return(
         <View style = {styles.imageContainer}>
             <Image style = {styles.image}
-            source ={image}
+            source ={{uri: image}}
             reziseMode='stretch'
             />
         </View>

@@ -13,15 +13,10 @@ export function LittleGames(){
 
         <View style = {styles.mainContainer}>
             <ButtonAlert/>
-            <ImageGames
-            />
-            <TextGames
-            label = "O que ela está sentindo?"
-            />
+            <ImageGames/>
+            <TextGames/>
 
             <ButtonGames  
-            label ="FELICIDADE"
-            tittle= "RAIVA"
             backgroundColor={COLORS.orange}
             borderRadius={30}
             width={150}
