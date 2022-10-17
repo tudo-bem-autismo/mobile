@@ -5,6 +5,7 @@ import {COLORS, FONTS} from '../../assets/const';
 import feelingAnger from '../../assets/images/feelings.png';
 import {getStepGames} from '../../services/stepGames';
 
+
 export const ImageGames = () =>{
 
     const [image, setImage] = useState(null);
@@ -27,6 +28,8 @@ export const ImageGames = () =>{
         </View>
 
     );
+
+  
 }
 
 const styles = StyleSheet.create({

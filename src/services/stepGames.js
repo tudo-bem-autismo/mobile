@@ -20,12 +20,12 @@ export const getStepGames = async () => {
        }
 
        const formattedDataTwo = {
-        dialogo: result.data[0].tbl_situacao_escolha[0],
+        dialogo: result.data[0].tbl_situacao_escolha[0].tbl_passo[0].dialogo,
         imagem: result.data[0].tbl_situacao_escolha[0].tbl_passo[0].imagem,
         imagemDois: result.data[0].tbl_situacao_escolha[0].tbl_passo[1].imagem
-   }
+        }
 
-        //console.log(result.data[0].tbl_situacao_escolha[0].tbl_passo[0])
+        //console.log(result.data[0].tbl_situacao_escolha[0].dialogo)
         return{
                 success,
                 data:formattedData,

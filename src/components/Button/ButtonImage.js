@@ -58,13 +58,13 @@ const imageShadow = {
 const styles = StyleSheet.create({
 
     container:{
-        flex: 1,
+        flex:1,
         flexDirection: 'row',
         width: 150,
         height: 149,
         alignItems:'center',
         marginRight:'45%',
-        marginBottom:'20%'
+        marginBottom:'1%'
     },
     imageContainer:{
         display:'flex',
@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
         borderRadius:50,
         alignItems:'center',
         justifyContent:'center',
+        marginBottom:'100%',
         ...imageShadow
     },
     image:{
