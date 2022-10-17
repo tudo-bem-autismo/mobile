@@ -13,6 +13,7 @@ import Toast from "react-native-toast-message";
 import { COLORS } from "../../assets/const";
 import file from "../../assets/icons/file.png";
 import { kidRegisterService } from "../../services/kid.js";
+import { getData, storeData } from "../../utils/storage";
 import { kidRegisterDataSchema } from "../../utils/validations/dependent";
 import { Button } from "../Button/Button";
 import { DataInput, Input, InputGenero, MaskedInput } from "../Input";
@@ -58,16 +59,21 @@ export const FormDependentRegister = ({ navigation }) => {
     setGenderHasError(false);
     setAutismLevelHasError(false);
 
-    // Criando as configurações da imagem
-    const filename = image.split("/").pop();
-    const match = /\.(\w+)$/.exec(filename);
-    const type = match ? `image/${match[1]}` : `image`;
+    let photo = false
 
-    const photo = {
-      name: filename,
-      type,
-      uri: image,
-    };
+    if(image){
+      
+      // Criando as configurações da imagem
+      const filename = image.split("/").pop();
+      const match = /\.(\w+)$/.exec(filename);
+      const type = match ? `image/${match[1]}` : `image`;
+
+      photo = {
+        name: filename,
+        type,
+        uri: image,
+      };
+    }
 
     const newData = {
       ...data,
@@ -80,6 +86,7 @@ export const FormDependentRegister = ({ navigation }) => {
     const result = await kidRegisterService(newData);
 
     if (result.success) {
+      await storeData(result.data.id, '@idDependent')
       return Toast.show({
         type: "success",
         text1: "Criança cadastrada com sucesso",

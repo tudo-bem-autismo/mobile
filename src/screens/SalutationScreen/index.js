@@ -19,7 +19,7 @@ export function SalutationScreen({navigation}){
             </View>
             <TouchableOpacity
                 style = {styles.buttonLets}
-                onPress={() => navigation.navigate('Home')}
+                onPress={() => navigation.navigate('HomeResponsible')}
             >
                 <Text>Vamos lá</Text>
             </TouchableOpacity>

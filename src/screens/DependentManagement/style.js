@@ -15,11 +15,8 @@ const style = StyleSheet.create({
   mainContainer: {
     display: 'flex',
     flex: 1,
-    alignItems: 'flex-start',
     justifyContent: 'center',
     marginTop: StatusBar.currentHeight,
-    backgroundColor: COLORS.blue,
-
   },
 });
 

@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import { showErrorToast } from "../utils/errors";
+import { getData } from "../utils/storage";
 import api from "./api";
 
 export const kidRegisterService = async (data) => {
@@ -10,12 +11,6 @@ export const kidRegisterService = async (data) => {
       },
     };
 
-    const date = data.date;
-
-   
-
-    //console.log(date)
-
     const dataD = date.split('/')[0]
     const dataM = date.split('/')[1]
     const dataY = date.split('/')[2]
@@ -23,7 +18,7 @@ export const kidRegisterService = async (data) => {
 
     const dataFinal = dataY + "-" + dataM + "-" + dataD
 
-    //console.log = dataFinal
+    const id = await getData('@id')
 
     const formData = new FormData();
     formData.append("arquivo", data.photo);
@@ -31,7 +26,7 @@ export const kidRegisterService = async (data) => {
     formData.append("data_nascimento", dataFinal);
     formData.append("id_genero", data.genderId);
     formData.append("id_nivel_autismo", data.autismLevelId);
-    formData.append("id_responsavel", 7);
+    formData.append("id_responsavel", id);
 
     const result = await api.post("/crianca", formData, options);
 
@@ -41,6 +36,7 @@ export const kidRegisterService = async (data) => {
       success,
       data: result.data,
     };
+    
   } catch (error) {
     showErrorToast(error.response.data.message);
 
@@ -54,7 +50,9 @@ export const kidRegisterService = async (data) => {
 export const getKidService = async () => {
   try {
 
-    const result = await api.get("/crianca/5")
+    const id = await getData('@idDependent')
+
+    const result = await api.get(`/crianca/${id}`)
 
     const success = result.status === 200
 

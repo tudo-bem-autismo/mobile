@@ -5,12 +5,13 @@ import { COLORS, FONTS } from "../../assets/const";
 
 const style = StyleSheet.create({
     loadingContainer: {
-        flex: 1,
+        flex: 2,
         alignItems: 'center',
         justifyContent: 'center',
+        alignSelf: 'stretch'
     },
     loadingGif: {
-        width: '30%',
+        width: '60%',
         height: '20%',
     },
     text: {
