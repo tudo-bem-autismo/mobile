@@ -6,7 +6,7 @@ import feelingAnger from '../../assets/images/feelings.png';
 import {getStepGames} from '../../services/stepGames';
 
 
-export const ImageGames = () =>{
+export const ImageGames = ({srcImage}) =>{
 
     const [image, setImage] = useState(null);
 
@@ -22,7 +22,7 @@ export const ImageGames = () =>{
     return(
         <View style = {styles.imageContainer}>
             <Image style = {styles.image}
-            source ={{uri: image}}
+            source ={{uri: srcImage}}
             reziseMode='stretch'
             />
         </View>
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flex:1,
         borderRadius:100,
+        
         
         
     },
