@@ -15,7 +15,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'stretch',
-        backgroundColor: COLORS.white
+        backgroundColor: COLORS.white,
+        
     },
     textSelectGame: {
     },
@@ -27,6 +28,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    picker: {
+        backgroundColor: COLORS.white,
+        width: 130,
+        height: 100
+    }
 
 
 });

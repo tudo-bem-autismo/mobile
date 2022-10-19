@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text, Picker } from "react-native";
+import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text} from "react-native";
 import { BlurView } from 'expo-blur';
 import { FONTS, COLORS } from "../../assets/const";
 import { BackButton, Button } from "../Button";
-import RNPickerSelect from 'react-native-picker-select';
-
+import {Picker} from '@react-native-picker/picker';
 import { MaterialIcons } from "@expo/vector-icons";
 import styles from "../../screens/Reports/style";
+import { getKidService, getResponsibleDependentsService } from "../../services";
 
 
 
@@ -43,6 +43,22 @@ export const ModalReports = ({ label, close, show, del }) => {
             closeModal()
         }
     }, [show])
+
+   
+
+    const [selectedLanguage, setSelectedLanguage] = useState();
+
+    const [kidName, setKidName] = useState();
+    
+    const getKid = async () => {
+
+        const result = await getResponsibleDependentsService();
+        setKidName(result.data)
+    }
+
+    useEffect(() => {
+        getKid();
+      }, []);
 
     return (
         <View style={style.mainContainer}>
@@ -86,14 +102,18 @@ export const ModalReports = ({ label, close, show, del }) => {
 
                                     <Text style={style.text}>Selecione a criança:</Text>
                                     <View style={styles.containerList}>
-                                        <RNPickerSelect
-                                            onValueChange={(value) => console.log(value)}
-                                            items={[
-                                                { label: 'Football', value: 'football' },
-                                                { label: 'Baseball', value: 'baseball' },
-                                                { label: 'Hockey', value: 'hockey' },
-                                            ]}
-                                        />
+                                    <Picker
+                                        style={style.picker}
+                                        selectedValue={selectedLanguage}
+                                        onValueChange={(itemValue) =>
+                                            setSelectedLanguage(itemValue)
+                                        }>
+                                        {
+                                            kidName.map(
+                                                <Picker.Item label={kidName.name} value={kidName.name} />
+                                            )
+                                        }
+                                    </Picker>
                                     </View>
                                    
                                     <Text style={style.text}>Selecione a dinâmica:</Text>
@@ -227,4 +247,8 @@ const style = StyleSheet.create({
         alignItems      : "center",
         justifyContent  : "center",
     },
+    picker: {
+        width: 150,
+        backgroundColor: COLORS.red
+    }
 });
