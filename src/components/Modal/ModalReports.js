@@ -6,13 +6,17 @@ import { BackButton, Button } from "../Button";
 import {Picker} from '@react-native-picker/picker';
 import { MaterialIcons } from "@expo/vector-icons";
 import styles from "../../screens/Reports/style";
-import { getKidService, getResponsibleDependentsService } from "../../services";
+import {getResponsibleDependentsService } from "../../services";
+import { getGamesService } from '../../services/game';
+import { Loading } from "../../screens/Loading";
 
 
 
 const { height } = Dimensions.get('window')
 
 export const ModalReports = ({ label, close, show, del }) => {
+
+    const [isLoading, setIsLoading] = useState(true);
 
     const [state, setState] = useState({
         opacity: new Animated.Value(0),
@@ -36,32 +40,52 @@ export const ModalReports = ({ label, close, show, del }) => {
         ]).start()
     }
 
+    const [selectedKid, setSelectedKid] = useState();
+
+    const [selectedGame, setSelectedGame] = useState();
+
+    const [selectedPeriod, setSelectedPeriod] = useState();
+
+    const [kidName, setKidName] = useState([]);
+    
+    const getKid = async () => {
+        const result = await getResponsibleDependentsService();
+        setKidName(result.data)
+    }
+
+    const [games, setGames] = useState([]);
+
+    const getGames = async () => {
+        const result = await getGamesService()
+        setGames(result.data)
+    }
+    
     useEffect(() => {
         if (show) {
-            openModal()
+            getGames();
+            getKid();
+            openModal();
+            setIsLoading(false);
         } else {
             closeModal()
         }
     }, [show])
 
+const gerarRelatorio = () => {
+    console.log(selectedGame + '-' + selectedKid + '-' + selectedPeriod);
+}
+
    
 
-    const [selectedLanguage, setSelectedLanguage] = useState();
-
-    const [kidName, setKidName] = useState();
     
-    const getKid = async () => {
-
-        const result = await getResponsibleDependentsService();
-        setKidName(result.data)
-    }
-
-    useEffect(() => {
-        getKid();
-      }, []);
+      
 
     return (
         <View style={style.mainContainer}>
+            {
+                isLoading ? (
+                    <Loading/>
+                ) : ( 
                 <Animated.View
                     style={[style.container, {
                         opacity: state.opacity,
@@ -102,23 +126,61 @@ export const ModalReports = ({ label, close, show, del }) => {
 
                                     <Text style={style.text}>Selecione a criança:</Text>
                                     <View style={styles.containerList}>
-                                    <Picker
-                                        style={style.picker}
-                                        selectedValue={selectedLanguage}
-                                        onValueChange={(itemValue) =>
-                                            setSelectedLanguage(itemValue)
-                                        }>
-                                        {
-                                            kidName.map(
-                                                <Picker.Item label={kidName.name} value={kidName.name} />
-                                            )
-                                        }
-                                    </Picker>
+                                        <Picker
+                                            style={style.picker}
+                                            selectedValue={selectedKid}
+                                            onValueChange={(itemValue) =>
+                                                setSelectedKid(itemValue)
+                                            }>
+                                            {
+                                                kidName.map(
+                                                    kid => (
+                                                        <Picker.Item label={kid.name} value={kid.name} />
+                                                    )     
+                                                )
+                                            }
+                                        </Picker>
                                     </View>
                                    
                                     <Text style={style.text}>Selecione a dinâmica:</Text>
 
+                                    <View style={styles.containerList}>
+                                        <Picker
+                                            style={style.picker}
+                                            selectedValue={selectedGame}
+                                            onValueChange={(itemValue) =>
+                                                setSelectedGame(itemValue)
+                                            }>
+                                            {
+                                                games.map(
+                                                    game => (
+                                                        <Picker.Item label={game.name} value={game.name} />
+                                                    )     
+                                                )
+                                            }
+                                        </Picker>
+                                    </View>
+                                   
+
                                     <Text style={style.text}>Selecione o periódo:</Text>
+
+                                    <View style={styles.containerList}>
+                                        <Picker
+                                            style={style.picker}
+                                            selectedValue={selectedPeriod}
+                                            onValueChange={(itemValue) =>
+                                                setSelectedPeriod(itemValue)
+                                            }>
+                                            
+                                            <Picker.Item label='Hoje' value='0'/>
+                                            <Picker.Item label='7 - Dias' value='7'/>
+                                            <Picker.Item label='31 - Dias' value='31'/>
+                                            <Picker.Item label='365 - Dias' value='365' />
+                                               
+                                        </Picker>
+                                    </View>
+                                   
+
 
                                 </View>
 
@@ -130,6 +192,7 @@ export const ModalReports = ({ label, close, show, del }) => {
                                         borderRadius={25}
                                         width={100}
                                         height={45}
+                                        onPress={() => gerarRelatorio()}
                                     />
 
                                 </View>
@@ -141,6 +204,8 @@ export const ModalReports = ({ label, close, show, del }) => {
 
                     </Animated.View>
                 </Animated.View >
+                    )
+                }
         </View>
     );
 
@@ -248,7 +313,7 @@ const style = StyleSheet.create({
         justifyContent  : "center",
     },
     picker: {
-        width: 150,
+        width: 180,
         backgroundColor: COLORS.red
     }
 });
