@@ -28,7 +28,7 @@ export default function App() {
   } else {
     return (
       <>
-         <ScreenGames/>
+         <HomeResponsible/>
         {/* <Toast /> */}
       </>
     );

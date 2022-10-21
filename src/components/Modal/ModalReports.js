@@ -9,6 +9,7 @@ import styles from "../../screens/Reports/style";
 import {getResponsibleDependentsService } from "../../services";
 import { getGamesService } from '../../services/game';
 import { Loading } from "../../screens/Loading";
+import { getReports } from "../../services";
 
 
 
@@ -62,7 +63,7 @@ export const ModalReports = ({ label, close, show, del }) => {
         const result = await getGamesService()
         setGames(result.data)
     }
-    
+
     useEffect(() => {
         if (show) {
             getGames();
@@ -74,8 +75,16 @@ export const ModalReports = ({ label, close, show, del }) => {
         }
     }, [show])
 
-const gerarRelatorio = () => {
-    console.log(selectedGame + '-' + selectedKid + '-' + selectedPeriod);
+const gerarRelatorio = async () => {
+
+    const kid = selectedKid
+    const game = selectedGame
+    const periodo = selectedPeriod
+
+    const result = await getReports(selectedKid, selectedGame, selectedPeriod)
+    console.log(result.data[0]);
+    const [erros, setErros] = useState({})
+    //setErros = result.map()
 }
 
    
@@ -138,7 +147,7 @@ const gerarRelatorio = () => {
                                             {
                                                 kidName.map(
                                                     kid => (
-                                                        <Picker.Item label={kid.name} value={kid.name} key={kid.id} />
+                                                        <Picker.Item label={kid.name} value={kid.id} key={kid.id} />
                                                     )     
                                                 )
                                             }
@@ -157,7 +166,7 @@ const gerarRelatorio = () => {
                                             {
                                                 games.map(
                                                     game => (
-                                                        <Picker.Item label={game.name} value={game.name} key={game.id} />
+                                                        <Picker.Item label={game.name} value={game.id} key={game.id} />
                                                     )     
                                                 )
                                             }
@@ -172,7 +181,7 @@ const gerarRelatorio = () => {
                                             style={style.picker}
                                             selectedValue={selectedPeriod}
                                             onValueChange={(itemValue) =>
-                                                setSelectedPeriod(itemValue)
+                                            setSelectedPeriod(itemValue)
                                             }>
                                             
                                             <Picker.Item label='Hoje' value='0'/>

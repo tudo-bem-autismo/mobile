@@ -22,14 +22,12 @@ export const Reports = () => {
         series: [
           {
             data: [820, 932, 901, 934, 1290, 1330, 1320],
-            type: "line"
+            type: "bar"
           },
-          {
-            data1: [520, 532, 601, 634, 790, 1030, 1220],
-            type: "line"
-          }
         ]
       };
+
+      
 
     return (
 
