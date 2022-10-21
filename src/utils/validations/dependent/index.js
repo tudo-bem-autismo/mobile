@@ -6,9 +6,9 @@ export const kidRegisterDataSchema = yup.object().shape({
         .min(4, 'No mínimo 4 caracteres')
         .max(20, 'No máximo 20 caracteres')
         .required('Insira seu nome'),
-    // data: yup
-    //     .date()
-    //     .typeError('Insira uma data')
-    //     // .min(yup.ref('showMode'), 'Selecione uma data')
-    //     .required('Insira uma data valída')
+    date: yup
+        .string()
+        .min(10, 'Insira uma data válida')
+        .max(11, 'Insira um número válido')
+       
 })

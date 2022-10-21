@@ -9,16 +9,17 @@ import Toast from "react-native-toast-message";
 
 import { COLORS } from "../../assets/const";
 import { Loading } from "../../screens/Loading";
-import { getKidService } from "../../services/kid.js";
+import { deleteKidService, getKidService } from "../../services/kid.js";
 import { kidRegisterDataSchema } from "../../utils/validations/dependent";
 import { Button } from "../Button/Button";
-import { DataInput, Input, InputGenero } from "../Input";
+import { DataInput, Input, InputGenero, MaskedInput } from "../Input";
 import { InputNivelAutismo } from "../Input/InputNivelAutismo";
 import { ModalDeleteData } from "../Modal/ModalDeleteData.js";
 import { ModalSaveData } from "../Modal/ModalSaveData.js";
 
 import backgroundManagement from '../../assets/images/backgroundKidManagement.png';
 import { BackButton } from "../Button";
+import { updateKidService } from "../../services";
 
 
 export const FormManagementDependent = ({ navigation }) => {
@@ -28,10 +29,10 @@ export const FormManagementDependent = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [genderId, setGenderId] = useState();
   const initialValues = kid;
-  const [date, setDate] = useState(new Date());
-  const [dateHasError, setDateHasError] = useState(false);
+  //const [date, setDate] = useState(new Date());
+  //const [dateHasError, setDateHasError] = useState(false);
   const [genderHasError, setGenderHasError] = useState(false);
-  const [autismLevelId, setAutismLevelId] = useState(0);
+  const [autismLevelId, setAutismLevelId] = useState();
   const [autismLevelHasError, setAutismLevelHasError] = useState(false);
   const [image, setImage] = useState(null);
 
@@ -39,7 +40,14 @@ export const FormManagementDependent = ({ navigation }) => {
   const getKid = async () => {
     const result = await getKidService();
     setKid(result.data);
-    setDate(new Date(result.data.date))
+    //console.log(result.data.date);
+    //const data = result.data.date;
+    //console.log(data)
+    //const dataF = data.split("T")[0];
+    //setDate(new Date(result.data.date))
+    setGenderId(result.data.genderId);
+    setAutismLevelId(result.data.autismLevelId);
+    setImage(result.data.photo)
     setIsLoading(false);
   };
 
@@ -49,24 +57,23 @@ export const FormManagementDependent = ({ navigation }) => {
 
   const handleForm = async (data) => {
 
+  
+    //setDateHasError(false);
+    setGenderHasError(false);
+    setAutismLevelHasError(false);
+
     if (genderId === 0) {
       setGenderHasError(true);
-
       return;
     }
 
     if (autismLevelId === 0) {
       setAutismLevelHasError(true);
-
       return;
     }
 
-    setDateHasError(false);
-    setGenderHasError(false);
-    setAutismLevelHasError(false);
-
     // Criando as configurações da imagem
-    const filename = image.split("/").pop();
+    const filename = (image?.split("/").pop()) || '';
     const match = /\.(\w+)$/.exec(filename);
     const type = match ? `image/${match[1]}` : `image`;
 
@@ -78,21 +85,40 @@ export const FormManagementDependent = ({ navigation }) => {
 
     const newData = {
       ...data,
-      date,
       genderId,
       autismLevelId,
       photo,
     };
 
-    // const result = await kidRegisterService(newData);
+    setShowModalSaveData(false)
+    //console.log(kid.photo)
+    const result = await updateKidService(newData) 
+    //console.log(newData)
+
+      if (result.success) {
+        return Toast.show({
+          type: 'success',
+          text1: 'Dados atualizados com sucesso'
+        });
+        //console.log('DEU CERTO')
+      }
+
+  };
+
+  const deleteKid = async () => {
+
+    setShowModal(false)
+
+    const result = await deleteKidService()
 
     if (result.success) {
-      return Toast.show({
-        type: "success",
-        text1: "Criança cadastrada com sucesso",
-      });
+        return Toast.show({
+            type: 'success',
+            text1: 'Criança deletada com sucesso',
+        });
     }
-  };
+
+}
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -154,12 +180,32 @@ export const FormManagementDependent = ({ navigation }) => {
                     ></Input>
                   </View>
 
-                  <DataInput
+                  <View style={styles.input}>
+                    <MaskedInput
+                    title="Data de Nascimento"
+                    iconName="calendar"
+                    placeholder="00/00/0000"
+                    borderColor={COLORS.blue}
+                    onChangeText={handleChange('date')}
+                    onBlur={handleBlur('date')}
+                    value={values.date}
+                    hasError={!!errors.date}
+                    errorMessage={errors.date}
+                    type={'datetime'}
+                    options={{
+                      format: 'DD/MM/YYYY'
+                    }}
+                    />
+                      
+                    
+                  </View>
+
+                  {/* <DataInput
                     date={date}
                     setDate={setDate}
                     hasError={dateHasError}
                     value={format(date, "dd/MM/yyyy")}
-                  />
+                  /> */}
 
                   <InputGenero
                     setGenderId={setGenderId}
@@ -200,7 +246,8 @@ export const FormManagementDependent = ({ navigation }) => {
                       label="Tem certeza que quer excluir o perfil?"
                       close={() => setShowModal(false)}
                       show={showModal}
-                      del={() => deleteResponsible()}
+                      del={() => deleteKid()}
+                      //navigation={navigation}
                     />
                   </View>
                 )}

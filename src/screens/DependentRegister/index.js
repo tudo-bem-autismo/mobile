@@ -9,6 +9,7 @@ import {
     LoginDescription,
     Title,
     Form,
+    DataInput
 } from "../../components";
 
 import background from '../../assets/images/background.png';
