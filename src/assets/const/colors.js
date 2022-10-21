@@ -11,5 +11,9 @@ export const COLORS = {
     turquoise: '#C0F8DD',
     pinkBold: '#DA98B4',
     beige:'#FFF8F8',
-    yellow:'#FBF4A3'
+    yellow:'#FBF4A3',
+    orange:'#EE9A39',
+    yellowContainer:'#FBF4A3',
+    purpleContainer:'#CCB7EF',
+    grey:'#949494'
 }

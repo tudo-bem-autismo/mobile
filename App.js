@@ -8,6 +8,12 @@ import Toast from 'react-native-toast-message';
 import Navigation from './src/navigation/navigation';
 import { DependentRegister } from './src/screens/DependentRegister';
 import { HomeResponsible } from './src/screens/HomeResponsible';
+import { SalutationScreen } from './src/screens/SalutationScreen';
+import { LittleGames} from './src/screens/LittleGames';
+import { LittleGamesTwo } from './src/screens/LittleGamesTwo';
+import { Onboarding } from './src/screens/Onboarding';
+import { ScreenGames } from './src/screens/ScreenGames';
+import { ScreenGamesTwo } from './src/screens/ScreenGamesTwo';
 
 export default function App() {
 
@@ -15,7 +21,6 @@ export default function App() {
     Poppins_400Regular,
     Outfit_400Regular,
     Mandali_400Regular
-
   });
 
   if (!fontsLoaded) {
@@ -23,10 +28,8 @@ export default function App() {
   } else {
     return (
       <>
-        <HomeResponsible />
-        {/* <DependentRegister/> */}
-        {/* <Navigation /> */}
-        <Toast />
+         <ScreenGames/>
+        {/* <Toast /> */}
       </>
     );
   }

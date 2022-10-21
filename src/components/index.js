@@ -11,3 +11,5 @@ export * from "./Modal";
 export * from "./ResponsibleManagement";
 export * from "./ResponsibleRegister";
 export * from "./Title";
+export * from "./ComponentGames";
+export * from "./ComponentGamesTwo";
