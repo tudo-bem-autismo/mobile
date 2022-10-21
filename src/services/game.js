@@ -16,7 +16,7 @@ export const getGamesService = async () => {
             }
         })
 
-        console.log(formattedData)
+        // console.log(formattedData)
 
         return {
             success,

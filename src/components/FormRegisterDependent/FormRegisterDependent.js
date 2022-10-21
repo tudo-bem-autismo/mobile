@@ -4,9 +4,11 @@ import { Formik } from "formik";
 import { useState } from "react";
 import {
   Image, StyleSheet,
-  TouchableOpacity, View
+  TouchableOpacity, View, Text
 } from "react-native";
 import Toast from "react-native-toast-message";
+
+
 
 import { COLORS } from "../../assets/const";
 import file from "../../assets/icons/file.png";
@@ -14,15 +16,15 @@ import { kidRegisterService } from "../../services/kid.js";
 import { getData, storeData } from "../../utils/storage";
 import { kidRegisterDataSchema } from "../../utils/validations/dependent";
 import { Button } from "../Button/Button";
-import { DataInput, Input, InputGenero } from "../Input";
+import { DataInput, Input, InputGenero, MaskedInput } from "../Input";
 import { InputNivelAutismo } from "../Input/InputNivelAutismo";
 
 export const FormDependentRegister = ({ navigation }) => {
-  const now = new Date();
+  //const now = new Date();
 
-  const [date, setDate] = useState(now);
+  // const [date, setDate] = useState(now);
 
-  const [dateHasError, setDateHasError] = useState(false);
+  // const [dateHasError, setDateHasError] = useState(false);
 
   const [genderHasError, setGenderHasError] = useState(false);
 
@@ -35,11 +37,11 @@ export const FormDependentRegister = ({ navigation }) => {
   const [image, setImage] = useState(null);
 
   const handleForm = async (data) => {
-    if (isEqual(date, now)) {
-      setDateHasError(true);
+    // if (isEqual(date, now)) {
+    //   setDateHasError(true);
 
-      return;
-    }
+    //   return;
+    // }
 
     if (genderId === 0) {
       setGenderHasError(true);
@@ -53,7 +55,7 @@ export const FormDependentRegister = ({ navigation }) => {
       return;
     }
 
-    setDateHasError(false);
+    // setDateHasError(false);
     setGenderHasError(false);
     setAutismLevelHasError(false);
 
@@ -75,7 +77,7 @@ export const FormDependentRegister = ({ navigation }) => {
 
     const newData = {
       ...data,
-      date,
+      //date,
       genderId,
       autismLevelId,
       photo,
@@ -95,7 +97,9 @@ export const FormDependentRegister = ({ navigation }) => {
   // Todos os campos irão iniciar com esses valores, ou seja, vazios
   const initialValues = {
     name: '',
+    date: ''
   };
+
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -140,12 +144,30 @@ export const FormDependentRegister = ({ navigation }) => {
                   errorMessage={errors.name}
                 ></Input>
               </View>
+  
+              <View style={styles.input}>
+                <MaskedInput
+                  title="Data de Nascimento"
+                  iconName="calendar"
+                  placeholder="00/00/0000"
+                  borderColor={COLORS.blue}
+                  onChangeText={handleChange('date')}
+                  onBlur={handleBlur('date')}
+                  value={values.date}
+                  hasError={!!errors.date}
+                  errorMessage={errors.date}
+                  type={'datetime'}
+                  options={{
+                    format: 'DD/MM/YYYY'
+                  }}
+                  />
+              </View>
 
-              <DataInput
+              {/* <DataInput
                 date={date}
                 setDate={setDate}
                 hasError={dateHasError}
-              />
+              /> */}
 
               <InputGenero
                 setGenderId={setGenderId}
@@ -210,6 +232,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "82%",
     height: "20.6%",
+    marginBottom: "7%"
   },
   containerInputs: {
     flex: 5,
@@ -250,4 +273,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     ...bottomShadow
   },
+  maskedInput: {
+    maskedInput: {
+      borderWidth: 2,
+      borderRadius: 6,
+      width: '80%',
+      padding: 12,
+      color: COLORS.black,
+      fontSize: 20
+    }
+  }
 });
