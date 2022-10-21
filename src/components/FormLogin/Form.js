@@ -1,36 +1,36 @@
-import React, { useState } from 'react';
+import { Formik } from 'formik';
 import { StyleSheet, View } from 'react-native';
-import { Formik} from 'formik';
-import Toast  from 'react-native-toast-message';
 
 import { COLORS } from '../../assets/const';
-import { Input, PasswordInput } from '../Input';
-import {Button} from '../Button'
-import {responsibleLoginService} from "../../services";
+import { responsibleLoginService } from "../../services";
+import { storeData } from '../../utils/storage';
 import { responsibleLoginDataSchema } from '../../utils/validations/responsible';
-import { SalutationScreen } from "../../screens/SalutationScreen";
+import { Button } from '../Button';
+import { Input, PasswordInput } from '../Input';
 
 export const FormLogin = ({ navigation }) => {
-    
-  //ENVIO DOS DADOS PARA A API
-  const handleForm = async (data) => {
 
-    // Chama a api enviando os dados do formulário
-    const result = await responsibleLoginService(data)
+    //ENVIO DOS DADOS PARA A API
+    const handleForm = async (data) => {
 
-    if (result.sucess) {
+        // Chama a api enviando os dados do formulário
+        const result = await responsibleLoginService(data)
+
+        if (result.sucess) {
+            await storeData(result.data.id, '@id')
+            await storeData(true, '@alreadyLoggedIn')
             navigation.navigate('Salutation')
+        }
+
     }
 
-  }
-
-  const initialValues = {
-    email: '',
-    password: '',
-}
+    const initialValues = {
+        email: '',
+        password: '',
+    }
 
     return (
-        
+
         <View style={styles.container}>
 
             <Formik
@@ -43,12 +43,12 @@ export const FormLogin = ({ navigation }) => {
                 // Evento de quando o formulário é enviado
                 // Ele recebe todos os dados dos inputs na variável "values"
                 onSubmit={values => handleForm(values)}
-            >  
+            >
                 {/* Mais propriedades do Formik para manipular o formulário */}
                 {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
                     <>
                         <View style={styles.inputsContainer}>
-                            <Input 
+                            <Input
                                 title="Email"
                                 iconName="envelope"
                                 placeholder="exemplo@gmail.com"
@@ -58,7 +58,7 @@ export const FormLogin = ({ navigation }) => {
                                 value={values.email}
                                 hasError={!!errors.email}
                                 errorMessage={errors.email}
-                                
+
                             />
                             <PasswordInput
                                 title="Senha"
@@ -84,8 +84,8 @@ export const FormLogin = ({ navigation }) => {
                 )}
 
             </Formik>
-            
-            
+
+
         </View>
     );
 }
@@ -93,12 +93,6 @@ export const FormLogin = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 3,
-        //padding: 15,
-        //height: 300,
-        //smarginBottom: 25
-    },
-    input: {
-        //marginBottom: 15
     },
     inputsContainer: {
         flex: 8,

@@ -1,5 +1,6 @@
 import { showErrorToast } from "../utils/errors";
 import { removePhoneMask } from "../utils/masks";
+import { getData } from "../utils/storage";
 import api from "./api";
 
 export const responsibleRegisterService = async (data) => {
@@ -36,7 +37,9 @@ export const responsibleRegisterService = async (data) => {
 export const getResponsibleService = async () => {
     try {
 
-        const result = await api.get("/responsavel/78")
+        const id = await getData('@id')
+
+        const result = await api.get(`/responsavel/${id}`)
 
         const success = result.status === 200
 
@@ -70,7 +73,9 @@ export const updateResponsibleService = async (data) => {
             email: data.email,
         }
 
-        const result = await api.put("/responsavel/78", formattedData)
+        const id = await getData('@id')
+
+        const result = await api.put(`/responsavel/${id}`, formattedData)
 
         const success = result.status === 200
 
@@ -96,7 +101,9 @@ export const updatePasswordResponsibleService = async (data) => {
             senha: data.newPassword,
         }
 
-        const result = await api.put("/responsavel/senha/78", formattedData)
+        const id = await getData('@id')
+
+        const result = await api.put(`/responsavel/senha/${id}`, formattedData)
 
         const success = result.status === 200
 
@@ -117,7 +124,9 @@ export const updatePasswordResponsibleService = async (data) => {
 export const deleteResponsibleService = async () => {
     try {
 
-        const result = await api.delete("/responsavel/15")
+        const id = await getData('@id')
+
+        const result = await api.delete(`/responsavel/${id}`)
 
         const success = result.status === 200
 
@@ -138,9 +147,11 @@ export const deleteResponsibleService = async () => {
 export const getResponsibleDependentsService = async () => {
     try {
 
-        const result = await api.get("/responsavel/78")
+        const id = await getData('@id')
 
-        const sucess = result.status === 200
+        const result = await api.get(`/responsavel/6`)
+
+        const success = result.status === 200
 
         const formattedData = result.data.tbl_crianca.map(item => {
             return {
@@ -151,7 +162,7 @@ export const getResponsibleDependentsService = async () => {
         })
 
         return {
-            sucess,
+            success,
             data: formattedData
         }
 

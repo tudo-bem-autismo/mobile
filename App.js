@@ -5,8 +5,10 @@ import { Poppins_400Regular, useFonts } from '@expo-google-fonts/poppins';
 import { Text } from 'react-native';
 import Toast from 'react-native-toast-message';
 
-
 import Navigation from './src/navigation/navigation';
+import { DependentRegister } from './src/screens/DependentRegister';
+import { HomeResponsible } from './src/screens/HomeResponsible';
+
 export default function App() {
 
   const [fontsLoaded] = useFonts({
@@ -21,18 +23,10 @@ export default function App() {
   } else {
     return (
       <>
-        {/* <ResponsiveRegister /> */}
-        {/* <ResponsibleManagement /> */}
-        {/* <ResponsiblePassword/> */}
-        <Navigation />
-        {/* <Loading/> */}
-        {/* <Menu /> */}
-        {/* <DependentListing/> */}
+        <HomeResponsible />
+        {/* <DependentRegister/> */}
+        {/* <Navigation /> */}
         <Toast />
-        {/* <ResponsiveRegister />
-        <Toast /> */}
-        {/* <Navigation/> */}
-        {/* <KidsManagement/> */}
       </>
     );
   }

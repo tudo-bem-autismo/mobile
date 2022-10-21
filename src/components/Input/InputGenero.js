@@ -4,7 +4,7 @@ import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 import { COLORS } from "../../assets/const";
 import { getGendersService } from "../../services/gender";
 
-export const InputGenero = ({ setGenderId, hasError }) => {
+export const InputGenero = ({ setGenderId, hasError, selectedGenderId }) => {
 
   // Lista com todos os gêneros
   const [genders, setGenders] = useState([
@@ -14,11 +14,26 @@ export const InputGenero = ({ setGenderId, hasError }) => {
     }
   ]);
 
+
   // Contador de qual posição está o gênero selecionado
   const [count, setCount] = useState(0);
 
-  // Gênero selecionado atualmente
   const [currentGender, setCurrentGender] = useState(genders[0]);
+
+  const setSelectedGender = () => {
+
+    const selectedIndex = genders.findIndex(item => item.id === selectedGenderId)
+
+    if (selectedIndex === -1)
+      return
+
+    const selectedGender = genders[selectedIndex]
+
+    setCurrentGender(selectedGender)
+    setCount(selectedIndex)
+  }
+
+  // Gênero selecionado atualmente
 
   const getGenders = async () => {
 
@@ -33,6 +48,10 @@ export const InputGenero = ({ setGenderId, hasError }) => {
   useEffect(() => {
     getGenders()
   }, []);
+
+  useEffect(() => {
+    setSelectedGender()
+  }, [genders])
 
 
   const nextGender = () => {
@@ -103,7 +122,6 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 30,
-    // backgroundColor: COLORS.blue,
     alignItems: "center",
     justifyContent: "center",
     marginHorizontal: 10,

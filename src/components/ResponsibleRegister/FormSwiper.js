@@ -8,7 +8,6 @@ import { PersonalDataForm } from "./PersonalDataForm";
 
 
 export const FormSwiper = ({navigation}) => {
-    //console.log(navigation);
     const [formPage, setFormPage] = useState(0)
 
     const [responsibleData, setResponsibleData] = useState({})

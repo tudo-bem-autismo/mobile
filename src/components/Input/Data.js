@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { Text, StyleSheet, View, Button, Platform, TouchableOpacity, TextInput } from "react-native";
-import DateTimePicker from "@react-native-community/datetimepicker";
 import { FontAwesome } from "@expo/vector-icons";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import { format } from "date-fns";
+import { useState } from "react";
+import { Platform, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { COLORS, FONTS } from "../../assets/const";
 
-export function DataInput({ date, setDate, hasError }) {
+export function DataInput({ date, setDate, hasError, value }) {
 
     const [show, setShow] = useState(false);
 
-    const [text, setText] = useState('00/00/0000');
+    const [text, setText] = useState(value);
 
     const handleDate = (event, selectedDate) => {
 
@@ -40,7 +40,7 @@ export function DataInput({ date, setDate, hasError }) {
                     style={hasError ? styles.errorCalendarContainer : styles.calendarContainer}
                 >
 
-                    <Text style={styles.text} values={text}>{text}</Text>
+                    <Text style={styles.text} values={text}>{text ? text : "00/00/0000"}</Text>
 
                     <TouchableOpacity
                         onPress={() => setShow(true)}
@@ -62,6 +62,7 @@ export function DataInput({ date, setDate, hasError }) {
                         mode='date'
                         display='default'
                         maximumDate={new Date()}
+                        //timeZoneOffsetInMinutes={-7}
                         onChange={handleDate} />
                 )}
             </View>
@@ -77,12 +78,10 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 120,
         alignItems: 'center',
-        // backgroundColor: COLORS.blue
     },
     text: {
         fontWeight: '400',
         fontSize: 16,
-        // backgroundColor: COLORS.darkBlue
     },
     calendarContainer: {
         flexDirection: 'row',
@@ -95,7 +94,6 @@ const styles = StyleSheet.create({
         borderColor: COLORS.blue,
         padding: 10,
         fontSize: 17,
-        // backgroundColor: COLORS.pink
     },
     errorCalendarContainer: {
         flexDirection: 'row',
@@ -108,7 +106,6 @@ const styles = StyleSheet.create({
         borderColor: COLORS.red,
         padding: 10,
         fontSize: 17,
-        // backgroundColor: COLORS.pink
     },
     button: {
         position: 'absolute',
@@ -123,12 +120,10 @@ const styles = StyleSheet.create({
     labelCalendar: {
         fontSize: 20,
         fontFamily: FONTS.mandali,
-        // marginLeft: '-25%',
     },
     inputContainer: {
         width: '76%',
         height: '100%',
-        // backgroundColor: COLORS.darkBlue
     },
     errorMessage: {
         color: COLORS.red,

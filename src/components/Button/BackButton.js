@@ -27,8 +27,6 @@ export const BackButton = ({ title, navigation }) => {
 
 const styles = StyleSheet.create({
     backContainer: {
-        flex: 1,
-        flexDirection: 'row',
         padding: 8,
     },
     backButton: {
