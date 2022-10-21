@@ -1,4 +1,4 @@
-export * from "./Close";
+export * from "./close";
 export * from "./ModalLogOutAccount";
 export * from "./SessionChild";
 export * from "./SessionCompany";
