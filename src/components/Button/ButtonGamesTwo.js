@@ -5,7 +5,7 @@ import {COLORS, FONTS} from '../../assets/const';
 
 import { getStepGames } from '../../services';
 
-export const ButtonGamesTwo = ({backgroundColor, borderRadius, widht, height}) => {
+export const ButtonGamesTwo = ({backgroundColor, borderRadius, widht, height, labelButton, color}) => {
 
     const [passo2, setPasso2] = useState('');
     const [cor, setCor] = useState('');
@@ -23,10 +23,10 @@ export const ButtonGamesTwo = ({backgroundColor, borderRadius, widht, height}) =
         <View style = {styles.container}>
             <View style = {styles.containerButton}>
                 <TouchableOpacity 
-                style = {{...styles.buttonGames, backgroundColor: cor, borderRadius, widht, height}}
+                style = {{...styles.buttonGames, backgroundColor: color, borderRadius, widht, height}}
                 >
 
-                <Text style = {styles.text}>{passo2}</Text>
+                <Text style = {styles.text}>{labelButton}</Text>
 
                 </TouchableOpacity>
             </View>
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
         borderRadius:50,
         alignItems:'center',
         justifyContent:'center',
-        marginBottom:'170%',
+        marginBottom:'450%',
         marginLeft:'90%',
         ...bottomShadow
     }, 

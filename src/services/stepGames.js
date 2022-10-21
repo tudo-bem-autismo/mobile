@@ -10,7 +10,7 @@ export const getStepGames = async () => {
         const result = await api.get(`/miniJogo/1`)
         const data = result.data[0].tbl_situacao_escolha
         
-        console.log(data[3].tbl_passo)
+        console.log(data[1].tbl_passo)
         console.log('-------------------    ------')
 
         const success = result.status === 200
