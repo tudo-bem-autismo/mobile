@@ -12,5 +12,6 @@ export * from './OnboardingRoutines';
 export * from './ResponsibleManagement';
 export * from './ResponsibleRegister';
 export * from './SalutationScreen';
+export * from './LittleGames';
 
 

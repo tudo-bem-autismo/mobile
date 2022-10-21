@@ -3,4 +3,5 @@ export * from './responsible';
 export * from './gender';
 export * from './autimsLevel';
 export * from './kid';
+export * from './stepGames';
 
