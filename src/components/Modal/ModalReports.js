@@ -12,9 +12,12 @@ import { Loading } from "../../screens/Loading";
 
 
 
+
 const { height } = Dimensions.get('window')
 
 export const ModalReports = ({ label, close, show, del }) => {
+
+    
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -135,7 +138,7 @@ const gerarRelatorio = () => {
                                             {
                                                 kidName.map(
                                                     kid => (
-                                                        <Picker.Item label={kid.name} value={kid.name} />
+                                                        <Picker.Item label={kid.name} value={kid.name} key={kid.id} />
                                                     )     
                                                 )
                                             }
@@ -154,7 +157,7 @@ const gerarRelatorio = () => {
                                             {
                                                 games.map(
                                                     game => (
-                                                        <Picker.Item label={game.name} value={game.name} />
+                                                        <Picker.Item label={game.name} value={game.name} key={game.id} />
                                                     )     
                                                 )
                                             }
@@ -188,7 +191,7 @@ const gerarRelatorio = () => {
 
                                     <Button
                                         label="GERAR"
-                                        backgroundColor={COLORS.white}
+                                        backgroundColor={COLORS.pink}
                                         borderRadius={25}
                                         width={100}
                                         height={45}
@@ -314,6 +317,6 @@ const style = StyleSheet.create({
     },
     picker: {
         width: 180,
-        backgroundColor: COLORS.red
+        //backgroundColor: COLORS.red
     }
 });
