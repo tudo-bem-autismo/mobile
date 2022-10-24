@@ -14,11 +14,13 @@ import { getReports } from "../../services";
 
 
 
+
 const { height } = Dimensions.get('window')
 
-export const ModalReports = ({ label, close, show, del }) => {
+export const ModalReports = ({ label, close, show, del, onClick, errors}) => {
 
-    
+   
+   
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -75,16 +77,30 @@ export const ModalReports = ({ label, close, show, del }) => {
         }
     }, [show])
 
+    const [error, setError] = useState([{
+        erro: 1
+    }])
+
+
 const gerarRelatorio = async () => {
-
-    const kid = selectedKid
-    const game = selectedGame
-    const periodo = selectedPeriod
-
     const result = await getReports(selectedKid, selectedGame, selectedPeriod)
-    console.log(result.data[0]);
-    const [erros, setErros] = useState({})
-    //setErros = result.map()
+    const erros = await result.data;
+    // console.log(result.data)
+    //console.log(erros.length)
+     
+        
+        for (var cont = 0; cont < erros.length; cont++) {
+
+             setError([erros[cont].erros])
+
+            
+               
+        }
+
+        console.log(error)
+
+       
+
 }
 
    
@@ -172,7 +188,6 @@ const gerarRelatorio = async () => {
                                             }
                                         </Picker>
                                     </View>
-                                   
 
                                     <Text style={style.text}>Selecione o periódo:</Text>
 
@@ -198,14 +213,17 @@ const gerarRelatorio = async () => {
 
                                 <View style={style.buttonContainer}>
 
+                                    
+
                                     <Button
                                         label="GERAR"
                                         backgroundColor={COLORS.pink}
                                         borderRadius={25}
                                         width={100}
                                         height={45}
-                                        onPress={() => gerarRelatorio()}
+                                        onPress={() => {gerarRelatorio(), onClick()}}
                                     />
+                                    
 
                                 </View>
 
