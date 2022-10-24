@@ -44,7 +44,7 @@ export const Games = ({ navigation }) => {
                     <View style={styles.gamesContainer}>
 
                         <Text style={styles.textSelectGame}>
-                            selecione os jogos que estarão disponíveis para seu filho(a)
+                            selecione os jogos que estarão indisponíveis para seu filho(a)
                         </Text>
 
                         <ScrollView style={styles.listGames}>

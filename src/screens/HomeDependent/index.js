@@ -3,15 +3,14 @@ import {Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './style.js';
 
-import { TabsResponsible } from '../../navigation/tabsResponsible.js';
-
 import { NavigationContainer } from '@react-navigation/native';
+import { TabsDependent } from '../../navigation/tabsDependent.js';
 
-export const HomeResponsible = ({ navigation }) => {
+export const HomeDependent = ({ navigation }) => {
 
     return (
         <NavigationContainer>
-            <TabsResponsible />
+            <TabsDependent />
         </NavigationContainer>
     );
 }

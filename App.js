@@ -14,6 +14,9 @@ import { LittleGamesTwo } from './src/screens/LittleGamesTwo';
 import { Onboarding } from './src/screens/Onboarding';
 import { ScreenGames } from './src/screens/ScreenGames';
 import { ScreenGamesTwo } from './src/screens/ScreenGamesTwo';
+import { Reports } from './src/screens/Reports';
+import { Loading } from './src/screens/Loading';
+import { HomeDependent } from './src/screens/HomeDependent';
 
 export default function App() {
 
@@ -28,7 +31,7 @@ export default function App() {
   } else {
     return (
       <>
-         <ScreenGames/>
+         <HomeDependent/>
         {/* <Toast /> */}
       </>
     );

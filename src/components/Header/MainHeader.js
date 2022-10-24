@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: 10,
+        alignSelf: 'stretch',
         backgroundColor: COLORS.white
     },
     buttonMenu: {

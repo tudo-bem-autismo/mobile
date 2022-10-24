@@ -118,7 +118,7 @@ export const ModalApplyChildGame = ({ label, close, show, del }) => {
 
                                 <View style={style.dependentsContainer}>
 
-                                    <Text style={style.text}>Qual filho(a) poderá jogar?</Text>
+                                    <Text style={style.text}>Qual filho(a) não poderá jogar?</Text>
 
                                     <View style={style.dependentsList}>
 
