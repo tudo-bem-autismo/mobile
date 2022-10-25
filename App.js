@@ -17,6 +17,7 @@ import { ScreenGamesTwo } from './src/screens/ScreenGamesTwo';
 import { Reports } from './src/screens/Reports';
 import { Loading } from './src/screens/Loading';
 import { HomeDependent } from './src/screens/HomeDependent';
+import { DependentProfile } from './src/screens/DependentProfile';
 
 export default function App() {
 
@@ -31,7 +32,7 @@ export default function App() {
   } else {
     return (
       <>
-         <HomeDependent/>
+         <DependentProfile/>
         {/* <Toast /> */}
       </>
     );

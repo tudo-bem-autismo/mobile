@@ -11,6 +11,8 @@ export const kidRegisterService = async (data) => {
       },
     };
 
+    const date = data.date;
+
     const dataD = date.split('/')[0]
     const dataM = date.split('/')[1]
     const dataY = date.split('/')[2]
@@ -26,7 +28,7 @@ export const kidRegisterService = async (data) => {
     formData.append("data_nascimento", dataFinal);
     formData.append("id_genero", data.genderId);
     formData.append("id_nivel_autismo", data.autismLevelId);
-    formData.append("id_responsavel", id);
+    formData.append("id_responsavel", 12);
 
     const result = await api.post("/crianca", formData, options);
 
@@ -53,7 +55,7 @@ export const getKidService = async () => {
 
     const id = await getData('@idDependent')
 
-    const result = await api.get(`/crianca/${id}`)
+    const result = await api.get(`/crianca/4`)
 
     const success = result.status === 200
 
@@ -64,8 +66,6 @@ export const getKidService = async () => {
     const dataD = dataNaoFormatada.split('-')[2]
 
     const dataFinal = dataD + "/" + dataM + "/" + dataY
-
-    console.log(dataFinal)
     
     const formattedData = {
 
@@ -77,6 +77,8 @@ export const getKidService = async () => {
       
 
     }
+
+    console.log(formattedData)
 
     return {
       success,

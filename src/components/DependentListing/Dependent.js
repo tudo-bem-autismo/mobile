@@ -1,6 +1,9 @@
 import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 
-import { FONTS } from "../../assets/const";
+import { COLORS, FONTS } from "../../assets/const";
+
+// import myProfile from '../../assets/images/myProfile.png';
+
 
 export const Dependent = ({ name, photo, onPress }) => {
 
@@ -12,7 +15,8 @@ export const Dependent = ({ name, photo, onPress }) => {
         >
             <Image
                 style={style.photo}
-                source={{ uri: photo }} />
+                source={photo} 
+            />
             <Text style={style.textOption}>{name}</Text>
         </TouchableOpacity>
 
@@ -34,6 +38,7 @@ const style = StyleSheet.create({
         width: 90,
         height: 90,
         borderRadius: 50,
+        // backgroundColor: COLORS.red
     }
 });
 
