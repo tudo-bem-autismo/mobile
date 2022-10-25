@@ -13,7 +13,7 @@ export const ComponentGamesTwo = ({firstStepImage, secondStepImage, firstStepTex
                 borderRadius={80}
                 widht={150}
                 height={149}
-                srcImage={firstStepImage}         
+                srcImage={firstStepImage}       
             />
             <ButtonImageTwo
                 borderRadius={80}

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, onclick} from 'react-native';
 
 import {COLORS, FONTS} from '../../assets/const';
 
@@ -21,12 +21,14 @@ export const ButtonGames = ({backgroundColor, borderRadius, widht, height, label
         getPassos()
     }, [])
 
+
     return(
+        
 
         <View style = {styles.container}>
             <View style = {styles.buttonContainer}>
                 <TouchableOpacity 
-                style = {{...styles.buttonGames, backgroundColor: color, borderRadius, widht, height}}
+                style = {{...styles.buttonGames, backgroundColor: color , borderRadius, widht, height}}
                 >
 
                 <Text style = {styles.text}>{labelButton}</Text>

@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     textContainer:{
         flex:1,
         padding:8,
-        marginBottom:'50%',
+        marginBottom:'44%',
     },
     text:{
         fontSize:50,
@@ -44,6 +44,5 @@ const styles = StyleSheet.create({
         elevation:10,
         fontFamily:FONTS.title,
         fontWeight:'bold',
-
     }
 })

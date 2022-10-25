@@ -5,19 +5,21 @@ import {ComponentGames} from '../../components/ComponentGames';
 import { ButtonAlert, ButtonGames, ButtonImage, ComponentGamesTwo } from '../../components';
 import { getStepGames } from '../../services';
 import { Loading } from '../Loading';
-
-//import styles from './style.js';
+import { setLocale } from 'yup';
+import { get } from 'react-native/Libraries/Utilities/PixelRatio';
+import axios from 'axios';
 
 export function ScreenGames(){
 
     const [game, setGame] = useState([])
-    const [currentStep, setCurrenteStep] = useState([3])
+    const [currentStep, setCurrenteStep] = useState([1])
     const [isLoading, setIsLoading] = useState(true)
+    const [games, setGames] = useState([]);
 
     const getSteps = async () =>{
         const result = await getStepGames()
         setGame(result.data)
-        console.log(game[1].imagem_exemplo)
+        console.log(game[currentStep].imagem_exemplo)
 
     }
     useEffect(() =>{
@@ -25,6 +27,18 @@ export function ScreenGames(){
         setIsLoading(false)
     }, [])
 
+    function getGames(){
+        setIsLoading(true)
+        setTimeout(()=>{
+            setGames(Games)
+            setIsLoading(false)
+        }
+        )
+    }
+//    const getGames = async ()=> {
+//         setIsLoading(false)
+//         const result = (await axios.get()) 
+//     }
 
     return(
         <>
@@ -32,10 +46,11 @@ export function ScreenGames(){
             <Loading />
             ) : (
                 
-               <View style={{...styles.mainContainer, backgroundColor: game[currentStep].cor_fundo}}>
-                {/* <View style={styles.mainContainer}>  */}
+            <View style={{...styles.mainContainer, backgroundColor: game[currentStep].cor_fundo}}>
+                    {/* <View style={styles.mainContainer}>     */}
           
                     <ButtonAlert/>
+                   
                         {
                             game[currentStep].imagem_exemplo == null ? (
                                     
@@ -46,11 +61,12 @@ export function ScreenGames(){
                                         
                                 <ComponentGames
                                 firstStepImageGames={game[currentStep].imagem_exemplo}
+                                secondStepText={game[currentStep].dialogo}
                                 firstStepButton={game[currentStep].tbl_passo[0].texto}
                                 firstStepButtonTwo={game[currentStep].tbl_passo[1].texto}
                                 firstStepColor={game[currentStep].tbl_passo[0].cor}/>)
-                        }  
-                      
+                        }    
+          
                 </View>  
             )}
         </>

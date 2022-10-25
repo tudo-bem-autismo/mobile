@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         display:'flex',
         alignItems:'center',
         marginLeft:'170%',
-        marginBottom:'400%'
+        marginBottom:'425%'
     },
     buttonImage:{
         width:150,

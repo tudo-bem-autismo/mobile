@@ -6,7 +6,7 @@ import {FONTS} from '../../assets/const/fonts';
 
 import { getStepGames } from '../../services';
 
-export const TextGames = () => {
+export const TextGames = ({labelSecondText}) => {
 
     const [dialogo, setDialogo] = useState('');
 
@@ -21,7 +21,7 @@ export const TextGames = () => {
 
     return(
         <View style = {styles.textContainer}>
-            <Text style = {styles.text}>{dialogo}</Text>
+            <Text style = {styles.text}>{labelSecondText}</Text>
 
         </View>
     );
@@ -31,10 +31,12 @@ const styles = StyleSheet.create({
     textContainer:{
         flex:1,
         padding:8,
-        marginBottom:'30%',
+        marginBottom:'60%',
+        // backgroundColor:COLORS.black,
+        zIndex:2,
     },
     text:{
-        fontSize:48,
+        fontSize:45,
         color:COLORS.white,
         textAlign:'center',
         justifyContent:'center',

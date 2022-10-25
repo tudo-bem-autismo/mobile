@@ -1,27 +1,32 @@
 import React from 'react';
-import { View, StyleSheet, StatusBar } from 'react-native';
+import { View, StyleSheet, StatusBar, Text } from 'react-native';
 import { COLORS } from '../../assets/const/colors';
 import { ImageGames } from '../../components/ImageGames';
 import { TextGames } from '../../components/TextGames';
 import { ButtonGames } from '../../components/Button/ButtonGames';
 import { ButtonGamesTwo } from '../Button/ButtonGamesTwo';
 
-export const ComponentGames = ({ firstStepImageGames, firstStepButton, firstStepButtonTwo, fisrtStepColor }) => {
+export const ComponentGames = ({ firstStepImageGames, secondStepText, firstStepButton, firstStepButtonTwo, firstStepColor }) => {
   return (
+
+
 
     <View style={styles.mainContainer}>
       <ImageGames
         srcImageGames={firstStepImageGames}
       />
-      <TextGames />
+      <View style={styles.textContainer}>
+        <TextGames
+          labelSecondText={secondStepText} />
+      </View>
       <ButtonGames
         backgroundColor={COLORS.orange}
         borderRadius={30}
         width={150}
         height={60}
         labelButton={firstStepButton}
-        color={fisrtStepColor}
-
+        color={firstStepColor}
+        
       />
       <ButtonGamesTwo
         backgroundColor={COLORS.orange}
@@ -29,8 +34,10 @@ export const ComponentGames = ({ firstStepImageGames, firstStepButton, firstStep
         width={150}
         height={60}
         labelButton={firstStepButtonTwo}
+        color={firstStepColor}
       />
 
+     
     </View>
 
   );
@@ -47,5 +54,9 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight,
     // backgroundColor:COLORS.yellowContainer,
   },
+  textContainer: {
+    position: 'absolute',
+    marginBottom:'70%',
+  }
 
 });
