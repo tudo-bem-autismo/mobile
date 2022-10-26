@@ -14,7 +14,7 @@ import { ModalApplyChildGame } from '../../components/Modal/ModalApplyChildGame'
 import { getGamesService } from '../../services/game';
 import { Loading } from '../Loading';
 
-export const Games = ({ navigation }) => {
+export const GamesDependent = ({ navigation }) => {
 
     const [modal, setModal] = useState(false);
 
@@ -40,14 +40,14 @@ export const Games = ({ navigation }) => {
             ) : (
                 <>
                     <MainHeader
-                        screenName="GERENCIAMENTO DOS JOGOS"
+                        screenName="JOGOS"
                         navigation={navigation}
                     />
 
                     <View style={styles.gamesContainer}>
 
                         <Text style={styles.textSelectGame}>
-                            selecione os jogos que estarão indisponíveis para seu filho(a)
+                            Bora jogaaaaar!
                         </Text>
 
                         <ScrollView style={styles.listGames}>

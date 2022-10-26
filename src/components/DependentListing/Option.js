@@ -14,7 +14,7 @@ export const Option = ({ onPress, navigation }) => {
 
             <TouchableOpacity
                 style={style.button}
-                onPress={() => navigation.navigate('Home')}
+                onPress={() => navigation.navigate('TabsDependent')}
             >
                 <Text style={style.textButton}>ENTRAR</Text>
             </TouchableOpacity>

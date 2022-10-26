@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { RoutineResponsible } from '../screens/RoutineResponsible';
 import { DependentProfile } from '../screens/DependentProfile';
-import { Games } from '../screens/Games';
+import { GamesDependent } from '../screens/GamesDependent';
 import { COLORS } from '../assets/const';
 import { Image, StyleSheet, Text, View } from 'react-native';
 
@@ -52,7 +52,7 @@ export const TabsDependent = ({ navigation }) => {
             />
             <Tab.Screen
                 name="Games"
-                component={Games}
+                component={GamesDependent}
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ focused }) =>

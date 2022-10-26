@@ -18,6 +18,7 @@ import { Reports } from './src/screens/Reports';
 import { Loading } from './src/screens/Loading';
 import { HomeDependent } from './src/screens/HomeDependent';
 import { DependentProfile } from './src/screens/DependentProfile';
+import { ResponsiveLogin } from './src/screens/Login';
 
 export default function App() {
 
@@ -32,7 +33,7 @@ export default function App() {
   } else {
     return (
       <>
-         <DependentProfile/>
+         <Navigation/>
         {/* <Toast /> */}
       </>
     );

@@ -15,6 +15,7 @@ import medalBronze from '../../assets/icons/medalBronze.png';
 import { COLORS } from '../../assets/const/colors.js';
 import { getKidService } from '../../services/kid.js';
 import { Loading } from '../Loading/index.js';
+import { getMedalsDependent } from '../../services/medal.js';
 
 export const DependentProfile = ({ navigation }) => {
 
@@ -22,14 +23,22 @@ export const DependentProfile = ({ navigation }) => {
 
     const [dependent, setDependent] = useState([]);
 
+    const [medals, setMedals] = useState([]);
+
     const getDependent = async () => {
         const result = await getKidService()
         setDependent(result.data)
 
     }
 
+    const getMedalDependent = async () => {
+        const result = await getMedalsDependent()
+        setMedals(result.data)
+    }
+
     useEffect(() => {
         getDependent()
+        getMedalDependent()
         setIsLoading(false)
 
     }, [])
@@ -56,14 +65,12 @@ export const DependentProfile = ({ navigation }) => {
 
                                 <Dependent
                                     name={dependent.name}
-                                    photo={{ uri : dependent.photo}}
+                                    photo={{ uri: dependent.photo }}
                                 />
 
                             </View>
 
                         </ImageBackground>
-
-                        {/* <ScrollView style={styles.profileContainer}> */}
 
                         <View style={styles.cardsContainer}>
 
@@ -74,58 +81,31 @@ export const DependentProfile = ({ navigation }) => {
 
                                 <View style={styles.medalsContainer}>
 
-                                    <View style={styles.medalContainer}>
+                                    {
+                                        medals.map(item => (
 
-                                        <Image
-                                            style={styles.imageMedal}
-                                            source={medalGold}
-                                        />
+                                            <View
+                                                style={styles.medalContainer}
+                                                key={item.id}
+                                            >
 
-                                        <Text style={styles.textMedal}>10</Text>
+                                                <Image
+                                                    style={styles.imageMedal}
+                                                    source={{ uri: item.medal }}
+                                                />
 
-                                    </View>
+                                                <Text style={styles.textMedal}>{item.amount}</Text>
 
-                                    <View style={styles.medalContainer}>
+                                            </View>
 
-                                        <Image
-                                            style={styles.imageMedal}
-                                            source={medalSilver}
-                                        />
-
-                                        <Text style={styles.textMedal}>10</Text>
-
-                                    </View>
-
-                                    <View style={styles.medalContainer}>
-
-                                        <Image
-                                            style={styles.imageMedal}
-                                            source={medalBronze}
-                                        />
-
-                                        <Text style={styles.textMedal}>10</Text>
-
-                                    </View>
-
-                                </View>
-
-                            </View>
-
-
-
-                            <View style={{ ...styles.cardContainer, backgroundColor: COLORS.yellowLight, borderColor: COLORS.yellowBold }}>
-
-                                <Text style={styles.textMedals}>SUGESTÕES</Text>
-
-                                <View style={styles.medalContainer}>
+                                        ))
+                                    }
 
                                 </View>
 
                             </View>
 
                         </View>
-
-                        {/* </ScrollView> */}
 
                     </View>
 

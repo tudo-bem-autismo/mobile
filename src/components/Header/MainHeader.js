@@ -5,12 +5,15 @@ import { COLORS } from '../../assets/const';
 
 import attackButton from '../../assets/icons/botao-crise.png';
 
-export const MainHeader = ({ screenName }) => {
+export const MainHeader = ({ screenName, navigation }) => {
 
     return (
         <View style={styles.headerContainer}>
 
-            <TouchableOpacity style={styles.buttonMenu}>
+            <TouchableOpacity 
+            style={styles.buttonMenu}
+            onPress={() => navigation.navigate('Menu')}
+            >
                 <MaterialIcons
                     name="notes"
                     size={40}

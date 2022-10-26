@@ -10,7 +10,7 @@ export const Close = ({navigation}) => {
         <View style={style.closeContainer}>
             <TouchableOpacity
                 style={style.closeButton}
-                onPress={() => navigation.navigate('Home')}
+                onPress={() => navigation.navigate('TabsResponsible')}
             >
                 <MaterialIcons
                     name="close"

@@ -28,16 +28,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         // backgroundColor: COLORS.darkBlue,
     },
-    // profileContainer: {
-    //     minHeight: 400,
-    //     alignSelf: 'stretch',
-    //     backgroundColor: COLORS.red
-    // },  
     cardsContainer: {
         flex: 6,
         alignSelf: 'stretch',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         // backgroundColor: COLORS.blue
     },
     cardContainer: {
