@@ -10,6 +10,8 @@ export const getReports = async (id_crianca, id_mini_jogo, periodo) => {
 
         const success = result.status === 200
 
+        // console.log(result.data)
+
         const formattedData = result.data.map (item => {
             return {
                 id: item.id,

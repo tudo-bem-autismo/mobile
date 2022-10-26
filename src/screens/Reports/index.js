@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import styles from './style';
 import { MainHeader } from '../../components/Header/MainHeader';
 import { Button } from '../../components';
@@ -16,17 +16,23 @@ export const Reports = () => {
 
     const [renderRelatory, setRenderRealatory] = useState(false)
 
+    const [errorsKid, setErrorsKid] = useState([]);
+
+    const [dateErrorsKid, setDateErrorsKid] = useState([]);
+
+    // console.log(errorsKid)
+
     const options = {
       xAxis: {
         type: "category",
-        data: ["20/10", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+        data: [...dateErrorsKid]
       },
       yAxis: {
         type: "value"
       },
       series: [
         {
-          data: [820, 932, 901, 934, 1290, 1330, 1320],
+          data: [...errorsKid],
           type: "line"
         },
       ]
@@ -49,12 +55,13 @@ export const Reports = () => {
               renderRelatory ? 
                 <View style={{flex: 1, width: '100%'}}>
                   <View style={{alignItems: "center", marginBottom: 0}}>
-                    <Text>Erros</Text>
+                    <Text>{errorsKid}</Text>
                   </View>
                   <ECharts
                       option={options}
                       backgroundColor={COLORS.white}/>
                 </View> 
+                
               : null
             }
 
@@ -72,6 +79,8 @@ export const Reports = () => {
                     close={() => setModal(false)}
                     show={modal}
                     onClick={()=> setRenderRealatory(true)}
+                    setErrorsKid={setErrorsKid}
+                    setDateErrorsKid={setDateErrorsKid}
                     />
             )}
 
@@ -80,3 +89,4 @@ export const Reports = () => {
      
     );
 }
+
