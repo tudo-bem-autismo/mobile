@@ -1,5 +1,4 @@
 import api from './api';
-import { getData } from '../utils/storage';
 import { showErrorToast } from "../utils/errors";
 
 export const getStepGames = async () => {

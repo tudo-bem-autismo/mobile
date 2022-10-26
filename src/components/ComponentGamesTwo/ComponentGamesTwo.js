@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, StatusBar} from 'react-native';
 import {COLORS} from '../../assets/const/colors';
 import { ButtonImage } from '../../components/Button/ButtonImage';
@@ -13,7 +13,7 @@ export const ComponentGamesTwo = ({firstStepImage, secondStepImage, firstStepTex
                 borderRadius={80}
                 widht={150}
                 height={149}
-                srcImage={firstStepImage}       
+                srcImage={firstStepImage}      
             />
             <ButtonImageTwo
                 borderRadius={80}

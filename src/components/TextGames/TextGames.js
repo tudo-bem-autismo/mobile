@@ -8,16 +8,16 @@ import { getStepGames } from '../../services';
 
 export const TextGames = ({labelSecondText}) => {
 
-    const [dialogo, setDialogo] = useState('');
+    // const [dialogo, setDialogo] = useState('');
 
-    const getDialogo = async () =>{
-        const result = await getStepGames()
-        //console.log(result.data.dialogo)
-        setDialogo(result.data.dialogo)
-    }
-    useEffect(() =>{
-        getDialogo()
-    }, [])
+    // const getDialogo = async () =>{
+    //     const result = await getStepGames()
+    //     //console.log(result.data.dialogo)
+    //     setDialogo(result.data.dialogo)
+    // }
+    // useEffect(() =>{
+    //     getDialogo()
+    // }, [])
 
     return(
         <View style = {styles.textContainer}>

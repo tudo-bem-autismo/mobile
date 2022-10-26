@@ -6,7 +6,7 @@ import { TextGames } from '../../components/TextGames';
 import { ButtonGames } from '../../components/Button/ButtonGames';
 import { ButtonGamesTwo } from '../Button/ButtonGamesTwo';
 
-export const ComponentGames = ({ firstStepImageGames, secondStepText, firstStepButton, firstStepButtonTwo, firstStepColor }) => {
+export const ComponentGames = ({ firstStepImageGames, secondStepText, firstStepButton, firstStepButtonTwo, firstStepColor, onPress =()=>{} }) => {
   return (
 
 

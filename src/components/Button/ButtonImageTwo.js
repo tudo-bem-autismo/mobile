@@ -7,15 +7,15 @@ import { getStepGames } from '../../services';
 
 export const ButtonImageTwo = ({source, borderRadius, widht, height, srcImage}) =>{
 
-    const [image2, setImage2] = useState(null);
+    // const [image2, setImage2] = useState(null);
 
-    const getImages = async () =>{
-        const result = await getStepGames()
-        setImage2(result.dataTwo.imagemDois)
-    }
-    useEffect(() =>{
-        getImages()
-    }, [])
+    // const getImages = async () =>{
+    //     const result = await getStepGames()
+    //     //setImage2(result.dataTwo.imagemDois)
+    // }
+    // useEffect(() =>{
+    //     getImages()
+    // }, [])
 
     return(
         <View style = {styles.container}>

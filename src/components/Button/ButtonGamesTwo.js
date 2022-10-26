@@ -7,17 +7,17 @@ import { getStepGames } from '../../services';
 
 export const ButtonGamesTwo = ({backgroundColor, borderRadius, widht, height, labelButton, color}) => {
 
-    const [passo2, setPasso2] = useState('');
-    const [cor, setCor] = useState('');
+    // const [passo2, setPasso2] = useState('');
+    // const [cor, setCor] = useState('');
 
-    const getPassos = async () =>{
-        const result = await getStepGames()
-        setPasso2(result.data.passo2)
-        setCor(result.data.corBotao)
-    }
-    useEffect(() =>{
-        getPassos()
-    }, [])
+    // const getPassos = async () =>{
+    //     const result = await getStepGames()
+    //     setPasso2(result.data.passo2)
+    //     setCor(result.data.corBotao)
+    // }
+    // useEffect(() =>{
+    //     getPassos()
+    // }, [])
 
     return(
         <View style = {styles.container}>

@@ -8,16 +8,16 @@ import {getStepGames} from '../../services/stepGames';
 
 export const ImageGames = ({srcImageGames}) =>{
 
-    const [image, setImage] = useState(null);
+    // const [image, setImage] = useState(null);
 
-    const getImage = async () =>{
-        const result = await getStepGames()
-        //console.log(result.data.image)
-        setImage(result.data.image)
-    }
-    useEffect(() =>{
-        getImage()
-    }, [])
+    // const getImage = async () =>{
+    //     const result = await getStepGames()
+    //     //console.log(result.data.image)
+    //     setImage(result.data.image)
+    // }
+    // useEffect(() =>{
+    //     getImage()
+    // }, [])
 
     return(
         <View style = {styles.imageContainer}>
