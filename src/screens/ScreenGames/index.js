@@ -5,6 +5,7 @@ import { ButtonAlert, ButtonGames, ButtonImage, ComponentGamesTwo } from '../../
 import { getStepGames } from '../../services';
 import { Loading } from '../Loading';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
+import { COLORS } from '../../assets/const';
 
 export function ScreenGames() {
 
@@ -42,6 +43,8 @@ export function ScreenGames() {
     const stepTest = 0
     const [step, setStep] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const [hits, setHits] = useState(0)
+    const [mistakes, setMistakes] = useState(0)
     const [currentGame, setCurrentGame] = useState({
         "id": 0,
         "ordem": 0,
@@ -85,15 +88,7 @@ export function ScreenGames() {
 
     }
     useEffect(() => {
-        // const result = getSteps()
-        // getStepGames()
-        // setGame(getSteps())
-        // getSteps().then(
-        //     (data) => {
-        //         setGame(data)
-        //     }
-        // )
-    
+
 
         setIsLoading(false)
 
@@ -110,18 +105,22 @@ export function ScreenGames() {
 
     }, [])
 
-    // function getGames(){
-    //     setIsLoading(true)
-    //     setTimeout(()=>{
-    //         setGames(Games)
-    //         setIsLoading(false)
-    //     }
-    //     )
-    // }
-    //    const getGames = async ()=> {
-    //         setIsLoading(false)
-    //         const result = (await axios.get()) 
-    //     }
+    const correctStep = () => {
+        console.log('vfgdsfb')
+        setHits(hits + 1)
+        setCurrenteStep(currentStep + 1)
+        setCurrentGame(game[currentStep + 1])
+        console.log(hits)
+
+    }
+    const incorrectStep = () =>{
+        setMistakes(mistakes+1)
+        console.log(mistakes)
+    }
+
+    
+
+    
 
     return (
         <>
@@ -141,70 +140,36 @@ export function ScreenGames() {
                                 firstStepImage={currentGame.tbl_passo[0].imagem}
                                 secondStepImage={currentGame.tbl_passo[1].imagem}
                                 firstStepText={currentGame.dialogo}
-                                 />) : (
+                                correctStepFunction={()=>correctStep()}
+                                incorrectStepFunction={()=> incorrectStep()}
+                                firstStepCorrect = {currentGame.tbl_passo[0].passo_correto}
+                                
+                            />) : (
 
                             <ComponentGames
                                 firstStepImageGames={currentGame.imagem_exemplo}
                                 secondStepText={currentGame.dialogo}
                                 firstStepButton={currentGame.tbl_passo[0].texto}
                                 firstStepButtonTwo={currentGame.tbl_passo[1].texto}
-                                firstStepColor={currentGame.tbl_passo[0].cor} 
-                            
-                                
-                                />)
+                                firstStepColor={currentGame.tbl_passo[0].cor}
+                                correctStepFunction={() => correctStep()}
+                                incorrectStepFunction={()=> incorrectStep()}
+                                firstStepCorrect = {currentGame.tbl_passo[0].passo_correto}
+
+
+
+                            />)
                     }
-
-                    <Pressable onPress={() => nextGame()}><Text>Next</Text></Pressable>
-
                 </View>
             )}
         </>
 
-        // <>
-        //     {game ? (
-        //         <View style={{ ...styles.mainContainer, backgroundColor: game[currentStep].cor_fundo }}>
-        //             {/* <View style={styles.mainContainer}> */}
-
-        //             <ButtonAlert />
-
-        //             {
-        //                 game[currentStep].imagem_exemplo == null ? (
-
-        //                     <ComponentGamesTwo
-        //                         firstStepImage={game[currentStep].tbl_passo[0].imagem}
-        //                         secondStepImage={game[currentStep].tbl_passo[1].imagem}
-        //                         firstStepText={game[currentStep].dialogo} />) : (
-
-        //                     <ComponentGames
-        //                         firstStepImageGames={game[currentStep].imagem_exemplo}
-        //                         secondStepText={game[currentStep].dialogo}
-        //                         firstStepButton={game[currentStep].tbl_passo[0].texto}
-        //                         firstStepButtonTwo={game[currentStep].tbl_passo[1].texto}
-        //                         firstStepColor={game[currentStep].tbl_passo[0].cor} />)
-        //             }
-
-        //         </View>
-        //     ) : (
-
-        //         <Loading />
-        //     )}
-        // </>
-
-        // <ComponentGames/>
+       
     );
 
 
 }
-//if(situation.passo[0].imagem == null){
-// return(
-//     <View style = {styles.mainContainer}>
-//         <ComponentGames/>
 
-
-//     </View>
-// );
-
-//}
 
 
 

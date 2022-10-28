@@ -5,7 +5,8 @@ import { ButtonImage } from '../../components/Button/ButtonImage';
 import { ButtonImageTwo } from '../Button/ButtonImageTwo';
 import { TextGamesTwo } from '../../components/TextGamesTwo';
 
-export const ComponentGamesTwo = ({firstStepImage, secondStepImage, firstStepText}) =>{
+export const ComponentGamesTwo = ({firstStepImage, secondStepImage, firstStepText, correctStepFunction = () =>{}, incorrectStepFunction = ()=>{}}, firstStepCorrect ) =>{
+
 
     return(
         <View style = {styles.mainContainer}>
@@ -13,13 +14,17 @@ export const ComponentGamesTwo = ({firstStepImage, secondStepImage, firstStepTex
                 borderRadius={80}
                 widht={150}
                 height={149}
-                srcImage={firstStepImage}      
+                srcImage={firstStepImage}   
+                // onPress={() => { correctStepFunction() }}
+                onPress={()=>firstStepCorrect ? correctStepFunction() : incorrectStepFunction()}
             />
             <ButtonImageTwo
                 borderRadius={80}
                 widht={150}
                 height={149}  
-                srcImage={secondStepImage}          
+                srcImage={secondStepImage}  
+                //onPress={()=>{incorrectStepFunction()}}    
+                onPress={()=>firstStepCorrect ? incorrectStepFunction() : correctStepFunction()}    
             />
             <TextGamesTwo
                 labelText={firstStepText}

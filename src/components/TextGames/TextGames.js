@@ -12,7 +12,7 @@ export const TextGames = ({labelSecondText}) => {
 
     // const getDialogo = async () =>{
     //     const result = await getStepGames()
-    //     //console.log(result.data.dialogo)
+        // console.log(labelSecondText)
     //     setDialogo(result.data.dialogo)
     // }
     // useEffect(() =>{

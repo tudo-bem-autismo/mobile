@@ -5,7 +5,7 @@ import {COLORS, FONT} from '../../assets/const';
 
 import { getStepGames } from '../../services';
 
-export const ButtonImageTwo = ({source, borderRadius, widht, height, srcImage}) =>{
+export const ButtonImageTwo = ({source, borderRadius, widht, height, srcImage, onPress= ()=>{}}) =>{
 
     // const [image2, setImage2] = useState(null);
 
@@ -22,6 +22,7 @@ export const ButtonImageTwo = ({source, borderRadius, widht, height, srcImage}) 
              <View style = {styles.containerImage}>
                 <TouchableOpacity 
                 style = {{...styles.buttonImage, borderRadius, widht, height}}
+                onPress={onPress}
                 >
                  <Image
                     style = {styles.image}

@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, onclick} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, onclick } from 'react-native';
 
-import {COLORS, FONTS} from '../../assets/const';
+import { COLORS, FONTS } from '../../assets/const';
 
 import { getStepGames } from '../../services';
 
-export const ButtonGames = ({backgroundColor, borderRadius, widht, height, labelButton, color}) => {
+export const ButtonGames = ({ backgroundColor, borderRadius, widht, height, labelButton, color, onPress = () => { } }) => {
 
     // const [passo1, setPasso1] = useState('');
     // const [passo2, setPasso2] = useState('');
@@ -22,20 +22,20 @@ export const ButtonGames = ({backgroundColor, borderRadius, widht, height, label
     // }, [])
 
 
-    return(
-        
+    return (
 
-        <View style = {styles.container}>
-            <View style = {styles.buttonContainer}>
-                <TouchableOpacity 
-                style = {{...styles.buttonGames, backgroundColor: color , borderRadius, widht, height}}
-                >
 
-                <Text style = {styles.text}>{labelButton}</Text>
+        <View style={styles.container}>
+            <TouchableOpacity
+                style={{ ...styles.buttonGames, backgroundColor: color, borderRadius, widht, height }}
+                onPress={onPress}
+            >
 
-                </TouchableOpacity>
-            </View>
-            
+
+                <Text style={styles.text}>{labelButton}</Text>
+
+            </TouchableOpacity>
+
 
         </View>
     );
@@ -51,35 +51,39 @@ const bottomShadow = {
 
 const styles = StyleSheet.create({
 
-    container:{
-        flex: 1,
+    container: {
+        // flex: 1,
         alignItems: 'center',
-        justifyContent:'center',
+        justifyContent: 'center',
         flexDirection: 'row',
+        top: 25,
+        left: 0,
         width: 200,
-        height: 100,
+        height: 50,
+        // zIndex: 10,
+        backgroundColor: COLORS.red,
     },
-    buttonContainer:{
-        display:'flex',
+    buttonGames: {
+        width: 150,
+        height: 60,
+        fontFamily: FONTS.title,
+        borderRadius: 50,
         alignItems: 'center',
-
-    },
-    buttonGames:{
-        width:150,
-        height:60,
-        fontFamily:FONTS.title,
-        borderRadius:50,
-        alignItems:'center',
-        justifyContent:'center',
-        marginBottom:'450%',
-        marginRight:'90%',
+        justifyContent: 'center',
+        marginBottom: '450%',
+        marginRight: '90%',
+        // position: 'relative',
+        // top: 100,
+        // right: 400,
+        zIndex: 2,
         ...bottomShadow
-    }, 
-    text:{
-       color:COLORS.white,
-       fontFamily:FONTS.title,
-       fontWeight:'bold',
-       fontSize:20,
+    },
+    text: {
+        color: COLORS.white,
+        fontFamily: FONTS.title,
+        fontWeight: 'bold',
+        fontSize: 20,
+        zIndex: 10,
     }
 
 
