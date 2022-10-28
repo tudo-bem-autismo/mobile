@@ -24,7 +24,7 @@ import { format } from "date-fns";
 
 const { height } = Dimensions.get("window");
 
-export const ModalReports = ({ label, close, show, del, onClick, setErrorsKid, setDateErrorsKid}) => {
+export const ModalReports = ({ label, close, show, del, onClick, setErrorsKid, setDateErrorsKid,  setAcertosKid}) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [state, setState] = useState({
@@ -114,6 +114,10 @@ export const ModalReports = ({ label, close, show, del, onClick, setErrorsKid, s
 
   setDateErrorsKid(dateReports);
 
+  const [acerto, setAcerto] = useState([]);
+
+  setAcertosKid(acerto);
+
 
 //   const [result, setResult] = useState()
   const [data, setData] = useState()
@@ -199,6 +203,7 @@ export const ModalReports = ({ label, close, show, del, onClick, setErrorsKid, s
   useEffect(()=>{
 
     if(data) {
+
       const err = data.map(
         (item) => {
           return item.erros
@@ -218,6 +223,13 @@ export const ModalReports = ({ label, close, show, del, onClick, setErrorsKid, s
       )
 
       setDateReports(d)
+
+      const acertos = data.map(
+        (item) => {
+          return item.acertos
+        }
+      )
+      setAcerto(acertos)
        
      
 

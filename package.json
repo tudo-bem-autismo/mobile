@@ -40,6 +40,7 @@
     "react-native-echarts-wrapper": "^2.0.0",
     "react-native-masked-text": "^1.13.0",
     "react-native-paper": "^4.12.4",
+    "react-native-svg": "^13.4.0",
     "react-native-svg-charts": "^5.4.0",
     "react-native-swiper": "^1.6.0",
     "react-native-swiper-flatlist": "^3.0.17",
@@ -48,6 +49,7 @@
     "react-native-vector-icons": "^9.2.0",
     "swiper": "^8.4.2",
     "toast": "^0.5.4",
+    "victory-native": "^36.6.8",
     "yup": "^0.32.11"
   },
   "devDependencies": {
