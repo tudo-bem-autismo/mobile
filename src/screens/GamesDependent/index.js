@@ -4,15 +4,12 @@ import React, { useEffect, useState } from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './style';
-import { MainHeader } from '../../components/Header/MainHeader';
-import feelings from '../../assets/images/feelings.gif';
-import clothes from '../../assets/images/clothes.gif';
-import brushingTeeth from '../../assets/images/brushingTeeth.gif';
 import { COLORS } from '../../assets/const';
 import { Game } from '../../components/Games/Game';
 import { ModalApplyChildGame } from '../../components/Modal/ModalApplyChildGame';
 import { getGamesService } from '../../services/game';
 import { Loading } from '../Loading';
+import { MainHeaderDependent } from '../../components/Header/MainHeaderDependent';
 
 export const GamesDependent = ({ navigation }) => {
 
@@ -39,7 +36,7 @@ export const GamesDependent = ({ navigation }) => {
                 <Loading />
             ) : (
                 <>
-                    <MainHeader
+                    <MainHeaderDependent
                         screenName="JOGOS"
                         navigation={navigation}
                     />

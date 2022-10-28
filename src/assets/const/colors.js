@@ -19,5 +19,6 @@ export const COLORS = {
     orange:'#EE9A39',
     yellowContainer:'#FBF4A3',
     purpleContainer:'#CCB7EF',
-    grey:'#949494'
+    grey:'#949494',
+    green: '#C0F8DD',
 }
