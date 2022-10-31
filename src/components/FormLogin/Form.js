@@ -18,6 +18,8 @@ export const FormLogin = ({ navigation }) => {
 
         if (result.sucess) {
             await storeData(result.data.id, '@id')
+            await storeData(result.data.email, '@email')
+            await storeData(result.data.name, '@name')
             await storeData(true, '@alreadyLoggedIn')
             navigation.navigate('Salutation')
         }

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
 
 
 import style from "./style";
 import backgroundMenu from "../../assets/images/backgroundMenu.png";
+import Toast from 'react-native-toast-message';
 import { Close } from "../../components/Menu/close.js";
 import { SessionResponsible } from "../../components/Menu/SessionResponsible";
 import { SessionChild } from "../../components/Menu/SessionChild";
@@ -12,17 +13,48 @@ import { ModalLogOutAccount } from "../../components/Menu/ModalLogOutAccount";
 import profileResponsible from "../../assets/images/profileResponsible.png";
 import profileChild from "../../assets/images/profileChild.png";
 import profileCompany from "../../assets/images/profileCompany.png";
-import { clearData } from "../../utils/storage";
+import { clearData, getData } from "../../utils/storage";
 import backgroundMenuDependent from "../../assets/images/backgroundMenuDependent.png";
 import { PasswordInput } from "../../components";
+import { COLORS } from "../../assets/const";
+import { Formik } from "formik";
+import { responsiblePasswordLogoutAccountDependentSchema } from "../../utils/validations/responsible";
+import { getPasswordResponsibleLogoutAccountService, getResponsibleService, responsibleLoginService } from "../../services";
 
 export const MenuDependent = ({ navigation }) => {
 
-    const [show, setShow] = useState(false);
+    const [responsible, setResponsible] = useState('');
 
-    const handleLogout = async () => {
-        await clearData('@id')
-        navigation.navigate('Login')
+    const getNameResponsible = async () => {
+
+        const name = await getData('@name')
+
+        setResponsible(name)
+    }
+
+
+    const handleForm = async (data) => {
+
+        const email = await getData('@email')
+
+        const dataAccountResponsible = {
+            email: email,
+            password: data.passwordResponsible
+        }
+        
+        const result = await responsibleLoginService(dataAccountResponsible)
+
+        if (result.sucess) {
+            return ( navigation.navigate('DependentListing') )
+        }
+    }
+
+    useEffect(() => {
+        getNameResponsible()
+    }, [])
+
+    const initialValues = {
+        passwordResponsible: '',
     }
 
     return (
@@ -40,24 +72,48 @@ export const MenuDependent = ({ navigation }) => {
 
                 <View style={style.container}>
 
-                    <Text style={style.textProfileResponsible}>Voltar ao perfil do responsável: Jennifer</Text>
+                    <Formik
+                        // Informa como deve ser o formato dos dados
+                        validationSchema={responsiblePasswordLogoutAccountDependentSchema}
+                        // Informa com quais dados o formulário irá iniciar
+                        initialValues={initialValues}
+                        // Evento de quando o formulário é enviado
+                        // Ele recebe todos os dados dos inputs na variável "values"
+                        onSubmit={values => handleForm(values)}
+                    >
+                        {/* Mais propriedades do Formik para manipular o formulário */}
+                        {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+                            <>
 
-                    <View style={style.modalContainer}>
+                                <Text style={style.textProfileResponsible}>Voltar ao perfil do responsável: {responsible}</Text>
 
-                        <Text style={style.textQuestion}>Insira a senha do responsável para trocar de conta</Text>
+                                <View style={style.modalContainer}>
 
-                        <PasswordInput/>
+                                    <Text style={style.textQuestion}>Insira a senha do responsável para trocar de conta</Text>
 
-                        <View style={style.buttonContainer}>
-                            <TouchableOpacity
-                                style={style.button}
-                                onPress={() => setShow(true)}
-                            >
-                                <Text style={style.textButton}>TROCAR DE CONTA</Text>
-                            </TouchableOpacity>
-                        </View>
+                                    <PasswordInput
+                                        borderColor={COLORS.greenBold}
+                                        onChangeText={handleChange('passwordResponsible')}
+                                        onBlur={handleBlur('passwordResponsible')}
+                                        value={values.passwordResponsible}
+                                        hasError={!!errors.passwordResponsible}
+                                        errorMessage={errors.passwordResponsible}
+                                    />
 
-                    </View>
+                                    <View style={style.buttonContainer}>
+                                        <TouchableOpacity
+                                            style={style.button}
+                                            onPress={handleSubmit}
+                                        >
+                                            <Text style={style.textButton}>TROCAR DE CONTA</Text>
+                                        </TouchableOpacity>
+                                    </View>
+
+                                </View>
+
+                            </>
+                        )}
+                    </Formik>
 
                 </View>
 

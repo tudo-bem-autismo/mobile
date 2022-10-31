@@ -37,16 +37,16 @@ const styles = StyleSheet.create({
     },
     cardContainer: {
         width: '85%',
-        height: '50%',
+        height: 220,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: COLORS.pinkLight,
+        backgroundColor: COLORS.green,
         borderWidth: 2,
-        borderColor: COLORS.pinkBold,
+        borderColor: COLORS.greenBold,
         borderRadius: 20,
         marginBottom: 20,
     },
-    textMedals: {
+    titleCard: {
         flex: 1,
         alignSelf: 'stretch',
         textAlignVertical: 'center',
@@ -79,6 +79,35 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 30,
         fontFamily: FONTS.title
+    },
+    aboutDependentContainer: {
+        flex: 4,
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'stretch',
+        // backgroundColor: COLORS.white
+    },
+    aboutContainer: {
+        padding: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        // backgroundColor: COLORS.red,
+    },
+    titleAbout: {
+        fontSize: 20,
+        fontFamily: FONTS.title
+    },
+    infoAbout: {
+        fontSize: 20,
+        fontFamily: FONTS.title
+    },
+    scrollContainer: {
+        width: '100%',
+        // alignSelf: 'stretch',
+        paddingLeft: 45,
+        // alignItems: 'center',
+        // justifyContent: 'center',
+        // backgroundColor: COLORS.red
     }
 
 });

@@ -9,11 +9,13 @@ export const responsibleLoginService = async (data) => {
             senha: data.password
         }
 
-
+console.log(formattedData)
         const result = await api.post("/responsavel/login", formattedData);
 
         const formattedResultData = {
-            id: result.data.responsavel.id
+            id: result.data.responsavel.id,
+            email: result.data.responsavel.email,
+            name: result.data.responsavel.nome
         }
 
         const sucess = result.status === 202
@@ -30,5 +32,38 @@ export const responsibleLoginService = async (data) => {
         }
     }
 
+}
+
+export const getPasswordResponsibleLogoutAccountService = async (data) => {
+
+    try {
+
+        const formattedData = {
+            email: data.email,
+            senha: data.password
+        }
+
+        console.log(formattedData)
+
+
+        const result = await api.post("/responsavel/login", formattedData);
+
+        const formattedResultData = {
+            id: result.data.responsavel.id
+        }
+
+        const success = result.status === 202
+
+        return {
+            success,
+            data: formattedResultData
+        }
+    } catch (error) {
+        showErrorToast(error.response.data.message)
+        return {
+            sucess: false,
+            data: error.response.data
+        }
+    }
 
 }

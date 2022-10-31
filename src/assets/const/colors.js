@@ -21,4 +21,5 @@ export const COLORS = {
     purpleContainer:'#CCB7EF',
     grey:'#949494',
     green: '#C0F8DD',
+    greenBold: '#00FF84',
 }

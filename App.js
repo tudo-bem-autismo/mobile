@@ -34,7 +34,7 @@ export default function App() {
     return (
       <>
          <Navigation/>
-        {/* <Toast /> */}
+        <Toast />
       </>
     );
   }
