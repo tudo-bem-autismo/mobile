@@ -5,6 +5,7 @@ import {
   View,
   StyleSheet,
   processColor,
+  SafeAreaView,
 } from "react-native";
 import styles from "./style";
 import { MainHeader } from "../../components/Header/MainHeader";
@@ -30,20 +31,25 @@ export const Reports = () => {
       xAxis: {
         type: "category",
         data: values.dates,
+        show: false
       },
       yAxis: {
         type: "value",
       },
+      tooltip:{
+        trigger: 'axis'
+      },   
       series: [
         {
           data: values.errors,
           color: COLORS.missRed,
-          type: "bar",
+          type: "line",
         },
         {
           data: values.hits,
           color: COLORS.hitGreen,
-          type: "bar",
+          type: "line",
+
         },
       ],
     }
@@ -52,6 +58,24 @@ export const Reports = () => {
     setRenderRelatory(true)
   }
 
+  const additionalCode = `
+    chart.on('click', function(param) {
+      var obj = {
+      type: 'event_clicked',
+      data: param.data
+      };
+
+      sendData(JSON.stringify(obj));
+  });
+  `;
+
+  const onData = (param) => {
+    const obj = JSON.parse(param);
+
+    if (obj.type === "event_clicked") {
+      console.log(obj);
+    }
+  };
   // useEffect(() => {
   // setOptions({
   //   xAxis: {
@@ -94,11 +118,27 @@ export const Reports = () => {
 
       <View style={styles.reportsContainer}>
         {chartIsLoading ? (<Loading />) : renderRelatory && (
-          <View style={{ flex: 1, width: "100%" }}>
-            <View style={{ alignItems: "center", marginBottom: 0 }}>
+          <View style={{width: "100%", flex: 1}}>
+            <SafeAreaView style={{height: '180%'}}>
+            <ECharts
+              option={options} 
+              backgroundColor={COLORS.white}
+              additionalCode={additionalCode}
+              onData={onData}  />
+            </SafeAreaView>
+          <View style={{justifyContent: 'center', alignItems:'center', flexDirection: 'row', }}>
+            <View style={{justifyContent: 'center', alignItems:'center', flexDirection: 'row', marginRight: 25}}>
+              <Text style={{marginRight: 5, fontSize: 15, fontWeight: 'bold'}}>Acertos:</Text>
+              <View style={{width: 20, height: 20, backgroundColor: COLORS.hitGreen, borderRadius: 10}}/>
             </View>
-            <ECharts option={options} backgroundColor={COLORS.white} />
+            <View style={{justifyContent: 'center', alignItems:'center', flexDirection: 'row'}}>
+              <Text style={{marginRight: 5, fontSize: 15, fontWeight: 'bold'}}>Erros:</Text>
+              <View style={{width: 20, height: 20, backgroundColor: COLORS.missRed, borderRadius: 10}}/>
+            </View>
           </View>
+          </View>
+          
+      
         )}
 
         <Button

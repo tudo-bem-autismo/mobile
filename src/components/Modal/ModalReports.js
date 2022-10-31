@@ -186,10 +186,12 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
     setChartIsLoading(true)
 
     // variaveis utilizadas para filtros, são passadas "?period=" chamadas como query params
-    api.get(`/crianca/perfil/relatorio/${selectedKid}/${selectedGame}?period=${selectedPeriod}`).then(
+    api.get(`/crianca/perfil/relatorio/${selectedKid}/${selectedGame}/${selectedPeriod}`).then(
 
       (result) => {
         setData(result.data)
+
+        //console.log(result.data)
 
         const relatoryDays = result.data.map(item => format(new Date(item.data), "dd/MM/yyyy"))
 
