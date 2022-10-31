@@ -24,7 +24,7 @@ import { format } from "date-fns";
 
 const { height } = Dimensions.get("window");
 
-export const ModalReports = ({ label, close, show, del, onClick, setErrorsKid, setDateErrorsKid,  setAcertosKid}) => {
+export const ModalReports = ({ label, close, show, del, updateChart, setChartIsLoading }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [state, setState] = useState({
@@ -98,7 +98,7 @@ export const ModalReports = ({ label, close, show, del, onClick, setErrorsKid, s
       gerarRelatorio();
       getGames();
       getKid();
-    //   gerarRelatorio();
+      //   gerarRelatorio();
       openModal();
       setIsLoading(false);
     } else {
@@ -108,36 +108,36 @@ export const ModalReports = ({ label, close, show, del, onClick, setErrorsKid, s
 
   const [error, setError] = useState([]);
 
-  setErrorsKid(error);
+  // setErrorsKid(error);
 
   const [dateReports, setDateReports] = useState([]);
 
-  setDateErrorsKid(dateReports);
+  // setDateErrorsKid(dateReports);
 
   const [acerto, setAcerto] = useState([]);
 
-  setAcertosKid(acerto);
+  // setAcertosKid(acerto);
 
 
-//   const [result, setResult] = useState()
+  //   const [result, setResult] = useState()
   const [data, setData] = useState()
 
-  
+
 
   const gerarRelatorio = async () => {
     // setError([null])
     //console.log(selectedKid, selectedGame, selectedPeriod)
-//     const result = await getReports(selectedKid, selectedGame, selectedPeriod)
-//     const data = await result.data;
-//     const erros = data.map((err) => {
+    //     const result = await getReports(selectedKid, selectedGame, selectedPeriod)
+    //     const data = await result.data;
+    //     const erros = data.map((err) => {
 
-//         return err.erros
-//   })
+    //         return err.erros
+    //   })
 
-//     // setError(null);
-//     setError(erros)
+    //     // setError(null);
+    //     setError(erros)
 
-//     console.log(error);
+    //     console.log(error);
     // getReports(selectedKid, selectedGame, selectedPeriod).then(
 
     //     (result) => {
@@ -161,7 +161,7 @@ export const ModalReports = ({ label, close, show, del, onClick, setErrorsKid, s
     //     const result = api.get(`/crianca/perfil/relatorio/${selectedKid}/${selectedGame}/${selectedPeriod}}`)
     //     console.log(result)
     //     // setData(await result.data)
-        
+
     // }catch(e){
     //     console.log(e)
     // }
@@ -179,30 +179,49 @@ export const ModalReports = ({ label, close, show, del, onClick, setErrorsKid, s
 
     //         console.log(e)
     //     }
-    // )
+    // ) 
 
     // console.log(data)
 
-    api.get(`/crianca/perfil/relatorio/${selectedKid}/${selectedGame}/${selectedPeriod}`).then(
+    setChartIsLoading(true)
 
-        (result) => {
-            setData(result.data)
-            //console.log(data)
-        }
+    // variaveis utilizadas para filtros, são passadas "?period=" chamadas como query params
+    api.get(`/crianca/perfil/relatorio/${selectedKid}/${selectedGame}?period=${selectedPeriod}`).then(
+
+      (result) => {
+        setData(result.data)
+
+        const relatoryDays = result.data.map(item => format(new Date(item.data), "dd/MM/yyyy"))
+
+        const relatoryErrors = result.data.map(item => item.erros)
+
+        const relatoryHits = result.data.map(item => item.acertos)
+
+        updateChart({
+          dates: relatoryDays,
+          errors: relatoryErrors,
+          hits: relatoryHits
+        })
+
+        setChartIsLoading(false)
+      }
+
+
     ).catch(
 
-        (e)=> {
-            console.log(e)
-        }
+      (e) => {
+        console.log(e)
+        setChartIsLoading(false)
+      }
     )
 
   };
 
- 
 
-  useEffect(()=>{
 
-    if(data) {
+  useEffect(() => {
+
+    if (data) {
 
       const err = data.map(
         (item) => {
@@ -210,7 +229,7 @@ export const ModalReports = ({ label, close, show, del, onClick, setErrorsKid, s
         }
       )
       setError(err)
-      
+
       const d = data.map(
         (item) => {
           const dataBD = item.data.split('T')[0]
@@ -230,21 +249,21 @@ export const ModalReports = ({ label, close, show, del, onClick, setErrorsKid, s
         }
       )
       setAcerto(acertos)
-       
-     
 
-     
+
+
+
     } else {
       console.log('ERRO')
     }
- 
-  },[data])
 
-  
+  }, [data])
+
+
 
 
   return (
-    
+
     <View style={style.mainContainer}>
       {isLoading ? (
         <Loading />
@@ -340,7 +359,7 @@ export const ModalReports = ({ label, close, show, del, onClick, setErrorsKid, s
                     width={100}
                     height={45}
                     onPress={() => {
-                      gerarRelatorio(), onClick();
+                      gerarRelatorio();
                     }}
                   />
                 </View>

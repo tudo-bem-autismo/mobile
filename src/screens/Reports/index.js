@@ -13,45 +13,70 @@ import { COLORS } from "../../assets/const";
 import { ModalReports } from "../../components";
 import { ECharts } from "react-native-echarts-wrapper";
 import { LineChart } from "react-native-charts-wrapper";
+import { Loading } from "../Loading";
 
 export const Reports = () => {
   const [modal, setModal] = useState(false);
 
-  const [errorsKid, setErrorsKid] = useState([]);
-
-  const [acertosKid, setAcertosKid] = useState([]);
-
-  const [dateErrorsKid, setDateErrorsKid] = useState([]);
-
-  const [renderRelatory, setRenderRealatory] = useState(options);
+  const [renderRelatory, setRenderRelatory] = useState(false);
 
   const [options, setOptions] = useState({});
 
-  useEffect(() => {
-    const option = {
+  const [chartIsLoading, setChartIsLoading] = useState(false);
+
+  const updateChart = (values) => {
+
+    const chartOptions = {
       xAxis: {
         type: "category",
-        data: [...dateErrorsKid],
+        data: values.dates,
       },
       yAxis: {
         type: "value",
       },
       series: [
         {
-          data: [...errorsKid],
+          data: values.errors,
           color: COLORS.missRed,
-          type: "line",
+          type: "bar",
         },
         {
-          data: [...acertosKid],
+          data: values.hits,
           color: COLORS.hitGreen,
-          type: "line",
+          type: "bar",
         },
       ],
-    };
+    }
 
-    setOptions(option);
-  });
+    setOptions(chartOptions)
+    setRenderRelatory(true)
+  }
+
+  // useEffect(() => {
+  // setOptions({
+  //   xAxis: {
+  //     type: "category",
+  //     data: [...dateErrorsKid],
+  //   },
+  //   yAxis: {
+  //     type: "value",
+  //   },
+  //   series: [
+  //     {
+  //       data: [...errorsKid],
+  //       color: COLORS.missRed,
+  //       type: "line",
+  //     },
+  //     {
+  //       data: [...acertosKid],
+  //       color: COLORS.hitGreen,
+  //       type: "line",
+  //     },
+  //   ],
+  // });
+
+  //   setOptions(option);
+  // });
   // console.log(options.series[0].data);
 
   // options.series[0].data
@@ -68,14 +93,13 @@ export const Reports = () => {
       <MainHeader screenName={"RELATÓRIOS DOS JOGOS"} />
 
       <View style={styles.reportsContainer}>
-        {renderRelatory ? (
+        {chartIsLoading ? (<Loading />) : renderRelatory && (
           <View style={{ flex: 1, width: "100%" }}>
             <View style={{ alignItems: "center", marginBottom: 0 }}>
-              <Text>{acertosKid}</Text>
             </View>
             <ECharts option={options} backgroundColor={COLORS.white} />
           </View>
-        ) : null}
+        )}
 
         <Button
           label={"GERAR RELATÓRIO"}
@@ -91,10 +115,8 @@ export const Reports = () => {
         <ModalReports
           close={() => setModal(false)}
           show={modal}
-          onClick={() => setRenderRealatory(true)}
-          setErrorsKid={setErrorsKid}
-          setDateErrorsKid={setDateErrorsKid}
-          setAcertosKid={setAcertosKid}
+          updateChart={updateChart}
+          setChartIsLoading={setChartIsLoading}
         />
       )}
     </View>
