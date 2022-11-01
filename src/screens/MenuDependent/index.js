@@ -42,8 +42,6 @@ export const MenuDependent = ({ navigation }) => {
             password: data.passwordResponsible
         }
 
-        console.log(responsible)
-
         const result = await responsibleLoginService(dataAccountResponsible)
 
         if (result.sucess) {
@@ -69,7 +67,7 @@ export const MenuDependent = ({ navigation }) => {
             >
 
                 <Close
-                    onPress={() => navigation.navigate('TabsDependent')}
+                    onPress={() => navigation.goBack()}
                 />
 
                 <View style={style.container}>

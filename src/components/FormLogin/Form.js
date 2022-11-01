@@ -10,10 +10,8 @@ import { Input, PasswordInput } from '../Input';
 
 export const FormLogin = ({ navigation }) => {
 
-    //ENVIO DOS DADOS PARA A API
     const handleForm = async (data) => {
 
-        // Chama a api enviando os dados do formulário
         const result = await responsibleLoginService(data)
 
         if (result.sucess) {

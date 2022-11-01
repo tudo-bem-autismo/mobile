@@ -127,7 +127,7 @@ export const ModalApplyChildGame = ({ label, close, show, del }) => {
                                             dependents.map(item => (
                                                 <Dependent
                                                     name={item.name}
-                                                    photo={item.photo}
+                                                    photo={{ uri : item.photo}}
                                                     key={item.id}
                                                     onPress={() => setOption(true)}
                                                 />

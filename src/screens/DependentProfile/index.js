@@ -8,16 +8,13 @@ import { MainHeader } from '../../components/Header/MainHeader.js';
 import { Dependent, SessionResponsible } from '../../components/index.js';
 
 import clouds from '../../assets/images/clouds.png';
-import myProfile from '../../assets/images/myProfile.png';
-import medalGold from '../../assets/icons/medalGold.png';
-import medalSilver from '../../assets/icons/medalSilver.png';
-import medalBronze from '../../assets/icons/medalBronze.png';
 import profileResponsible from "../../assets/images/profileResponsible.png";
 import { COLORS } from '../../assets/const/colors.js';
 import { getKidService } from '../../services/kid.js';
 import { Loading } from '../Loading/index.js';
 import { getMedalsDependent } from '../../services/medal.js';
 import { MainHeaderDependent } from '../../components/Header/MainHeaderDependent.js';
+import { getData } from '../../utils/storage/index.js';
 
 export const DependentProfile = ({ navigation }) => {
 
@@ -28,7 +25,11 @@ export const DependentProfile = ({ navigation }) => {
     const [medals, setMedals] = useState([]);
 
     const getDependent = async () => {
-        const result = await getKidService()
+
+        const idDependent = await getData('@idDependent')
+
+        const result = await getKidService(idDependent)
+
         setDependent(result.data)
 
     }
@@ -36,23 +37,6 @@ export const DependentProfile = ({ navigation }) => {
     const getMedalDependent = async () => {
         const result = await getMedalsDependent()
         setMedals(result.data)
-    }
-
-    const getGenderDependent = () => {
-
-        switch (dependent.genderId) {
-            case 1:
-                return "FEMININO";
-                break;
-            case 2:
-                return "MASCULINO";
-                break;
-            case 3:
-                return "OUTROS";
-                break;
-            default:
-                return "Não encontrado";
-        }
     }
 
     useEffect(() => {
@@ -116,7 +100,7 @@ export const DependentProfile = ({ navigation }) => {
 
                                         <View style={styles.aboutContainer}>
                                             <Text style={styles.titleAbout}>Gênero:</Text>
-                                            <Text style={styles.infoAbout}>{getGenderDependent()}</Text>
+                                            <Text style={styles.infoAbout}>{dependent.gender}</Text>
                                         </View>
 
                                     </View>

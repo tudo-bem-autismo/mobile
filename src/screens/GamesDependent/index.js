@@ -43,10 +43,6 @@ export const GamesDependent = ({ navigation }) => {
 
                     <View style={styles.gamesContainer}>
 
-                        <Text style={styles.textSelectGame}>
-                            Bora jogaaaaar!
-                        </Text>
-
                         <ScrollView style={styles.listGames}>
 
                             <View style={styles.listGamesContainer}>

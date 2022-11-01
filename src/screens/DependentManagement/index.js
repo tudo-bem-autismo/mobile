@@ -5,7 +5,9 @@ import styles from "./style.js";
 import { FormManagementDependent } from "../../components/FormManagementDependent/FormManagementDependent.js";
 
 
-export function DependentManagement({ navigation }) {
+export function DependentManagement({ route, navigation }) {
+
+    let {idDependent} = route.params;
 
     return (
 
@@ -13,6 +15,7 @@ export function DependentManagement({ navigation }) {
 
             <FormManagementDependent
                 navigation={navigation}
+                idDependent={idDependent}
             />
 
         </View >

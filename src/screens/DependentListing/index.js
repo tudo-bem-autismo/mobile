@@ -18,6 +18,8 @@ export const DependentListing = ({ navigation }) => {
 
     const [dependents, setDependents] = useState([]);
 
+    const [idDependents, setIDDependents] = useState(0);
+
     const getDependents = async () => {
         const result = await getResponsibleDependentsService()
         setDependents(result.data)
@@ -27,7 +29,6 @@ export const DependentListing = ({ navigation }) => {
     useEffect(() => {
         getDependents()
         setIsLoading(false)
-
     }, [])
 
     return (
@@ -72,7 +73,12 @@ export const DependentListing = ({ navigation }) => {
                                             name={item.name}
                                             photo={{ uri: item.photo }}
                                             key={item.id}
-                                            onPress={() => setOption(true)}
+                                            onPress={()=> {
+                                                
+                                                setOption(true)
+                                                setIDDependents(item.id)
+                                               
+                                            }}
                                         />
                                     ))
                                 }
@@ -80,11 +86,14 @@ export const DependentListing = ({ navigation }) => {
                             </View>
 
                             {
+                                
                                 option && (
                                     <Option
                                         navigation={navigation}
+                                        idDependent={idDependents}
                                     />
                                 )
+
 
                             }
 

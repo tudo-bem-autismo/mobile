@@ -50,12 +50,10 @@ export const kidRegisterService = async (data) => {
 };
 
 
-export const getKidService = async () => {
+export const getKidService = async (idDependent) => {
   try {
 
-    const id = await getData('@idDependent')
-
-    const result = await api.get(`/crianca/4`)
+    const result = await api.get(`/crianca/${idDependent}`)
 
     const success = result.status === 200
 
@@ -73,6 +71,7 @@ export const getKidService = async () => {
       photo: result.data.foto,
       date: dataFinal,
       genderId: result.data.id_genero,
+      gender: result.data.tbl_genero.genero,
       autismLevelId: result.data.id_nivel_autismo,
 
 

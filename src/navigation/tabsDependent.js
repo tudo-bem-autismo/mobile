@@ -9,10 +9,15 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import routine from '../assets/icons/routine.png';
 import games from '../assets/icons/games.png';
 import reports from '../assets/icons/reports.png'
+import { storeData } from '../utils/storage';
 
-export const TabsDependent = ({ navigation }) => {
+export const TabsDependent = ({ route, navigation }) => {
 
     const Tab = createBottomTabNavigator()
+
+    let { idDependent } = route.params;
+
+    const id = storeData(idDependent, '@idDependent')
 
     return (
 
