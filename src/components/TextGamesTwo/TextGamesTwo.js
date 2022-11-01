@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         marginBottom:'44%',
     },
     text:{
-        fontSize:50,
+        fontSize:40,
         color:COLORS.white,
         textAlign:'center',
         justifyContent:'center',

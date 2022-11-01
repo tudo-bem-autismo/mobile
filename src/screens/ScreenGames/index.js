@@ -84,20 +84,12 @@ export function ScreenGames() {
                 setCurrentGame(result.data[0])
             }
         )
-        // setStep(result.data)
-
     }
     useEffect(() => {
-
-
         setIsLoading(false)
 
     }, [game])
 
-    const nextGame = () => {
-        setCurrenteStep(currentStep + 1)
-        setCurrentGame(game[currentStep + 1])
-    }
 
     useEffect(() => {
         getSteps()
@@ -111,16 +103,12 @@ export function ScreenGames() {
         setCurrenteStep(currentStep + 1)
         setCurrentGame(game[currentStep + 1])
         console.log(hits)
-
     }
-    const incorrectStep = () =>{
+
+    const incorrectStep = () => {
         setMistakes(mistakes+1)
         console.log(mistakes)
     }
-
-    
-
-    
 
     return (
         <>
@@ -155,24 +143,13 @@ export function ScreenGames() {
                                 correctStepFunction={() => correctStep()}
                                 incorrectStepFunction={()=> incorrectStep()}
                                 firstStepCorrect = {currentGame.tbl_passo[0].passo_correto}
-
-
-
-                            />)
+                             />)
                     }
                 </View>
             )}
         </>
-
-       
     );
-
-
 }
-
-
-
-
 const styles = StyleSheet.create({
     mainContainer: {
         display: 'flex',

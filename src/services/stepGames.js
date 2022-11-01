@@ -6,7 +6,7 @@ export const getStepGames = async () => {
     try{
         //const id = await getData('@id')
 
-        const result = await api.get(`/miniJogo/2`)
+        const result = await api.get(`/miniJogo/1`)
         const data = result.data[0].tbl_situacao_escolha
         
         // console.log(data[1].tbl_passo)
