@@ -77,13 +77,39 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
 
   const [selectedGame, setSelectedGame] = useState();
 
-  const [selectedPeriod, setSelectedPeriod] = useState();
+  const [selectedPeriod, setSelectedPeriod] = useState(1);
 
-  const [kidName, setKidName] = useState([]);
+  const periods = [
+      {
+        "id": 1,
+        "value": 1,
+        "name": "Hoje"
+      },
+      {
+        "id": 2,
+        "value": 7,
+        "name": "7 - Dias "
+      },
+      {
+        "id": 3,
+        "value": 31,
+        "name": "31 - Dias"
+      },
+      {
+        "id": 4,
+        "value": 365,
+        "name": "365 - Dias"
+      },
+
+  ]
+
+  const [kidName, setKidName] = useState([
+  ]);
 
   const getKid = async () => {
     const result = await getResponsibleDependentsService();
     setKidName(result.data);
+   
   };
 
   const [games, setGames] = useState([]);
@@ -91,11 +117,11 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
   const getGames = async () => {
     const result = await getGamesService();
     setGames(result.data);
-  };
-
+  };        
+        
   useEffect(() => {
     if (show) {
-      gerarRelatorio();
+      //gerarRelatorio();
       getGames();
       getKid();
       //   gerarRelatorio();
@@ -125,79 +151,24 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
 
 
   const gerarRelatorio = async () => {
-    // setError([null])
-    //console.log(selectedKid, selectedGame, selectedPeriod)
-    //     const result = await getReports(selectedKid, selectedGame, selectedPeriod)
-    //     const data = await result.data;
-    //     const erros = data.map((err) => {
-
-    //         return err.erros
-    //   })
-
-    //     // setError(null);
-    //     setError(erros)
-
-    //     console.log(error);
-    // getReports(selectedKid, selectedGame, selectedPeriod).then(
-
-    //     (result) => {
-    //         const data = result.data
-    //         const erros = data.map((err) => {
-    //             return err.erros
-    //       })
-
-    //       setError(data)
-    //       console.log(error)
-    //     }
-    // ).catch(
-    //     (e) => {
-
-    //         console.log(e)
-    //     }
-    // )
-
-    // try{
-
-    //     const result = api.get(`/crianca/perfil/relatorio/${selectedKid}/${selectedGame}/${selectedPeriod}}`)
-    //     console.log(result)
-    //     // setData(await result.data)
-
-    // }catch(e){
-    //     console.log(e)
-    // }
-    // api.get(`/crianca/perfil/relatorio/${selectedKid}/${selectedGame}/${selectedPeriod}}`).then(
-
-    //     (result) => {
-
-    //         setData(result.data)
-
-
-    //     }
-    // ).catch(
-
-    //     (e)=> {
-
-    //         console.log(e)
-    //     }
-    // ) 
-
-    // console.log(data)
-
+    
     setChartIsLoading(true)
 
+    
     // variaveis utilizadas para filtros, são passadas "?period=" chamadas como query params
     api.get(`/crianca/perfil/relatorio/${selectedKid}/${selectedGame}/${selectedPeriod}`).then(
-
+      
       (result) => {
         setData(result.data)
-
-        //console.log(result.data)
-
+        
+        
         const relatoryDays = result.data.map(item => format(new Date(item.data), "dd/MM/yyyy"))
-
+        
         const relatoryErrors = result.data.map(item => item.erros)
-
+        
         const relatoryHits = result.data.map(item => item.acertos)
+
+        // console.log(result.data)
 
         updateChart({
           dates: relatoryDays,
@@ -206,8 +177,8 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
         })
 
         setChartIsLoading(false)
+       
       }
-
 
     ).catch(
 
@@ -237,9 +208,6 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
           const dataBD = item.data.split('T')[0]
           const dataArray = dataBD.split('-')
           return `${dataArray[2]}/${dataArray[1]}/${dataArray[0]}`
-          // const
-          // console.log(item.data.split('T')[0])
-          //return format((new Date(item.data.split('T')[0])), 'dd/mm/yyyy') 
         }
       )
 
@@ -256,7 +224,7 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
 
 
     } else {
-      console.log('ERRO')
+      // console.log('')
     }
 
   }, [data])
@@ -344,16 +312,23 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
                         setSelectedPeriod(itemValue)
                       }
                     >
-                      <Picker.Item label="Hoje" value="0" />
+                      {
+                        periods.map((period) => (
+                          <Picker.Item
+                            label={period.name}
+                            value={period.value}
+                            key={period.id}/>
+                        ))
+                      }
+                      {/* <Picker.Item label="Hoje" value="0" />
                       <Picker.Item label="7 - Dias" value="7" />
                       <Picker.Item label="31 - Dias" value="31" />
-                      <Picker.Item label="365 - Dias" value="365" />
+                      <Picker.Item label="365 - Dias" value="365" /> */}
                     </Picker>
                   </View>
                 </View>
 
                 <View style={style.buttonContainer}>
-                  <Text>AAAAA: {dateReports} </Text>
                   <Button
                     label="GERAR"
                     backgroundColor={COLORS.pink}
@@ -361,9 +336,10 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
                     width={100}
                     height={45}
                     onPress={() => {
-                      gerarRelatorio();
+                      gerarRelatorio()
                     }}
                   />
+                 
                 </View>
               </View>
             </BlurView>

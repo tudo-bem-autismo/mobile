@@ -35,21 +35,68 @@ export const Reports = () => {
       },
       yAxis: {
         type: "value",
+        axisLabel: {
+          show: true,
+          color: COLORS.black,
+          fontSize: 14,
+          fontWeight: 'bold'
+        },
+        minorSplitLine: {
+          color: COLORS.black
+        }
       },
+      grid: {
+        show: true,
+        backgroundColor: COLORS.white,
+        color: COLORS.black
+      },
+      legend: {
+        data: ['Erros', 'Acertos'],
+        itemHeight: 15,
+        padding: [25, 25, 25, 25],
+        icon: 'circle',
+        textStyle: {
+          fontWeight: "bold",
+          color: COLORS.black,
+          fontSize: 16
+        },
+      },
+      
       tooltip:{
         trigger: 'axis'
       },   
       series: [
-        {
+        { 
+          name: 'Erros',
           data: values.errors,
-          color: COLORS.missRed,
           type: "line",
+          symbol: 'circle',
+          symbolSize: 10,
+          lineStyle: {
+            color: COLORS.missRed,
+            width: 5,  
+          },
+          itemStyle: {
+            borderWidth: 1,
+            borderColor: COLORS.black,
+            color: COLORS.missRed
+          }
         },
         {
+          name: 'Acertos',
           data: values.hits,
-          color: COLORS.hitGreen,
           type: "line",
-
+          symbol: 'circle',
+          symbolSize: 10,
+          lineStyle: {
+            color: COLORS.hitGreen,
+            width: 5,  
+          },
+          itemStyle: {
+            borderWidth: 1,
+            borderColor: COLORS.black,
+            color: COLORS.hitGreen
+          }
         },
       ],
     }
@@ -76,41 +123,6 @@ export const Reports = () => {
       console.log(obj);
     }
   };
-  // useEffect(() => {
-  // setOptions({
-  //   xAxis: {
-  //     type: "category",
-  //     data: [...dateErrorsKid],
-  //   },
-  //   yAxis: {
-  //     type: "value",
-  //   },
-  //   series: [
-  //     {
-  //       data: [...errorsKid],
-  //       color: COLORS.missRed,
-  //       type: "line",
-  //     },
-  //     {
-  //       data: [...acertosKid],
-  //       color: COLORS.hitGreen,
-  //       type: "line",
-  //     },
-  //   ],
-  // });
-
-  //   setOptions(option);
-  // });
-  // console.log(options.series[0].data);
-
-  // options.series[0].data
-
-  // const handleOptions = (key, value) => {
-  //   setOptions({
-  //     ...options,
-  //     [key]: value
-  // })
-  // }
 
   return (
     <View style={styles.container}>
@@ -118,24 +130,15 @@ export const Reports = () => {
 
       <View style={styles.reportsContainer}>
         {chartIsLoading ? (<Loading />) : renderRelatory && (
-          <View style={{width: "100%", flex: 1}}>
-            <SafeAreaView style={{height: '180%'}}>
+          <View style={{width: "90%", flex: 1, marginBottom: '20%'}}>
+            <SafeAreaView style={{height: '220%', borderWidth: 1}}>
             <ECharts
               option={options} 
               backgroundColor={COLORS.white}
-              additionalCode={additionalCode}
-              onData={onData}  />
+              //additionalCode={additionalCode}
+              //onData={onData}  
+              />
             </SafeAreaView>
-          <View style={{justifyContent: 'center', alignItems:'center', flexDirection: 'row', }}>
-            <View style={{justifyContent: 'center', alignItems:'center', flexDirection: 'row', marginRight: 25}}>
-              <Text style={{marginRight: 5, fontSize: 15, fontWeight: 'bold'}}>Acertos:</Text>
-              <View style={{width: 20, height: 20, backgroundColor: COLORS.hitGreen, borderRadius: 10}}/>
-            </View>
-            <View style={{justifyContent: 'center', alignItems:'center', flexDirection: 'row'}}>
-              <Text style={{marginRight: 5, fontSize: 15, fontWeight: 'bold'}}>Erros:</Text>
-              <View style={{width: 20, height: 20, backgroundColor: COLORS.missRed, borderRadius: 10}}/>
-            </View>
-          </View>
           </View>
           
       
@@ -146,7 +149,7 @@ export const Reports = () => {
           onPress={() => setModal(true)}
           backgroundColor={COLORS.pink}
           borderRadius={150}
-          width={300}
+          width={230}
           height={50}
         />
       </View>
