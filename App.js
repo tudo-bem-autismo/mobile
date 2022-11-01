@@ -9,7 +9,7 @@ import Navigation from './src/navigation/navigation';
 import { DependentRegister } from './src/screens/DependentRegister';
 import { HomeResponsible } from './src/screens/HomeResponsible';
 import { SalutationScreen } from './src/screens/SalutationScreen';
-import { LittleGames} from './src/screens/LittleGames';
+import { LittleGames } from './src/screens/LittleGames';
 import { LittleGamesTwo } from './src/screens/LittleGamesTwo';
 import { Onboarding } from './src/screens/Onboarding';
 import { ScreenGames } from './src/screens/ScreenGames';
@@ -33,7 +33,7 @@ export default function App() {
   } else {
     return (
       <>
-         <Navigation/>
+        <Navigation />
         <Toast />
       </>
     );

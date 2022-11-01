@@ -17,6 +17,7 @@ import { COLORS } from '../../assets/const/colors.js';
 import { getKidService } from '../../services/kid.js';
 import { Loading } from '../Loading/index.js';
 import { getMedalsDependent } from '../../services/medal.js';
+import { MainHeaderDependent } from '../../components/Header/MainHeaderDependent.js';
 
 export const DependentProfile = ({ navigation }) => {
 
@@ -37,6 +38,23 @@ export const DependentProfile = ({ navigation }) => {
         setMedals(result.data)
     }
 
+    const getGenderDependent = () => {
+
+        switch (dependent.genderId) {
+            case 1:
+                return "FEMININO";
+                break;
+            case 2:
+                return "MASCULINO";
+                break;
+            case 3:
+                return "OUTROS";
+                break;
+            default:
+                return "Não encontrado";
+        }
+    }
+
     useEffect(() => {
         getDependent()
         getMedalDependent()
@@ -53,7 +71,7 @@ export const DependentProfile = ({ navigation }) => {
 
                 <View style={styles.mainContainer}>
 
-                    <MainHeader screenName="MEU PERFIL" />
+                    <MainHeaderDependent screenName="MEU PERFIL" />
 
                     <View style={styles.container}>
 
@@ -65,7 +83,6 @@ export const DependentProfile = ({ navigation }) => {
                             <View style={styles.dependentContainer}>
 
                                 <Dependent
-                                    name={dependent.name}
                                     photo={{ uri: dependent.photo }}
                                 />
 
@@ -75,7 +92,36 @@ export const DependentProfile = ({ navigation }) => {
 
 
                         <View style={styles.cardsContainer}>
-                            <ScrollView style={styles.scrollContainer}>
+
+                            <ScrollView
+                                persistentScrollbar={true}
+                                style={styles.scrollContainer}
+                            >
+
+                                <View style={{ ...styles.cardContainer, backgroundColor: COLORS.yellowLight, borderColor: COLORS.yellowBold }}>
+
+                                    <Text style={styles.titleCard}>SOBRE MIM</Text>
+
+                                    <View style={styles.aboutDependentContainer}>
+
+                                        <View style={styles.aboutContainer}>
+                                            <Text style={styles.titleAbout}>Nome:</Text>
+                                            <Text style={styles.infoAbout}>{dependent.name}</Text>
+                                        </View>
+
+                                        <View style={styles.aboutContainer}>
+                                            <Text style={styles.titleAbout}>Data de nascimento:</Text>
+                                            <Text style={styles.infoAbout}>{dependent.date}</Text>
+                                        </View>
+
+                                        <View style={styles.aboutContainer}>
+                                            <Text style={styles.titleAbout}>Gênero:</Text>
+                                            <Text style={styles.infoAbout}>{getGenderDependent()}</Text>
+                                        </View>
+
+                                    </View>
+
+                                </View>
 
                                 <View style={styles.cardContainer}>
 
@@ -109,56 +155,27 @@ export const DependentProfile = ({ navigation }) => {
 
                                 </View>
 
-                                <View style={{ ...styles.cardContainer, backgroundColor: COLORS.yellowLight, borderColor: COLORS.yellowBold }}>
 
-                                    <Text style={styles.titleCard}>SOBRE MIM</Text>
-
-                                    <View style={styles.aboutDependentContainer}>
-
-                                        <View style={styles.aboutContainer}>
-                                            <Text style={styles.titleAbout}>Nome:</Text>
-                                            <Text tyle={styles.infoAbout}>JENNNIFER</Text>
-                                        </View>
-
-                                        <View style={styles.aboutContainer}>
-                                            <Text tyle={styles.titleAbout}>Data de nascimento:</Text>
-                                            <Text tyle={styles.infoAbout}>04/07/2003</Text>
-                                        </View>
-
-                                        <View style={styles.aboutContainer}>
-                                            <Text tyle={styles.titleAbout}>Genero:</Text>
-                                            <Text tyle={styles.infoAbout}>FEMININO</Text>
-                                        </View>
-
-                                    </View>
-
-
-
-                                </View>
 
                                 <View style={{ ...styles.cardContainer, backgroundColor: COLORS.pink, borderColor: COLORS.pinkBold, height: 80, }}>
 
-                                    <View style={styles.aboutDependentContainer}>
+                                    <TouchableOpacity
+                                        onPress={() => navigation.navigate('MenuDependent')}
+                                        style={styles.button}
+                                    >
+                                        <Image source={profileResponsible} />
+                                        <Text style={styles.titleButton}>PERFIL RESPONSAVEL</Text>
 
-                                        <TouchableOpacity
-                                        >
-
-                                            <SessionResponsible
-                                                image={profileResponsible}
-                                                label="Perfil responsável"
-                                                
-                                            />
-
-                                        </TouchableOpacity>
-
-                                    </View>
-
+                                    </TouchableOpacity>
 
 
                                 </View>
 
+                                <View style={styles.card} />
+
 
                             </ScrollView>
+
                         </View>
 
                     </View>

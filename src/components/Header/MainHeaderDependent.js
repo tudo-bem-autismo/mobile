@@ -10,7 +10,7 @@ export const MainHeaderDependent = ({ screenName, navigation }) => {
     return (
         <View style={styles.headerContainer}>
 
-            <TouchableOpacity 
+            {/* <TouchableOpacity 
             style={styles.buttonMenu}
             onPress={() => navigation.navigate('MenuDependent')}
             >
@@ -19,7 +19,7 @@ export const MainHeaderDependent = ({ screenName, navigation }) => {
                     size={40}
                     color="black"
                 />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
             <View style={styles.screenNameContainer}>
                 <Text style={styles.screenName}>{screenName}</Text>
@@ -53,15 +53,16 @@ const styles = StyleSheet.create({
     buttonAlert: {
         width: '10%',
         height: '100%',
-        margin: 10,
+        marginRight: 20,
         alignItems: 'center',
         justifyContent: 'center',
 
     },
     screenNameContainer: {
         width: '70%',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'center',
+        marginLeft: 30,
     },
     screenName: {
         fontSize: 20,

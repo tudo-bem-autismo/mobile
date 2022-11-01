@@ -41,11 +41,13 @@ export const MenuDependent = ({ navigation }) => {
             email: email,
             password: data.passwordResponsible
         }
-        
+
+        console.log(responsible)
+
         const result = await responsibleLoginService(dataAccountResponsible)
 
         if (result.sucess) {
-            return ( navigation.navigate('DependentListing') )
+            return (navigation.navigate('DependentListing'))
         }
     }
 
@@ -67,7 +69,7 @@ export const MenuDependent = ({ navigation }) => {
             >
 
                 <Close
-                    navigation={navigation}
+                    onPress={() => navigation.navigate('TabsDependent')}
                 />
 
                 <View style={style.container}>

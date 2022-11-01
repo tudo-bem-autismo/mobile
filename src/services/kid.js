@@ -28,7 +28,7 @@ export const kidRegisterService = async (data) => {
     formData.append("data_nascimento", dataFinal);
     formData.append("id_genero", data.genderId);
     formData.append("id_nivel_autismo", data.autismLevelId);
-    formData.append("id_responsavel", 12);
+    formData.append("id_responsavel", 27);
 
     const result = await api.post("/crianca", formData, options);
 
@@ -38,7 +38,7 @@ export const kidRegisterService = async (data) => {
       success,
       data: result.data,
     };
-    
+
   } catch (error) {
     showErrorToast(error.response.data.message);
 
@@ -66,7 +66,7 @@ export const getKidService = async () => {
     const dataD = dataNaoFormatada.split('-')[2]
 
     const dataFinal = dataD + "/" + dataM + "/" + dataY
-    
+
     const formattedData = {
 
       name: result.data.nome,
@@ -74,7 +74,7 @@ export const getKidService = async () => {
       date: dataFinal,
       genderId: result.data.id_genero,
       autismLevelId: result.data.id_nivel_autismo,
-      
+
 
     }
 
@@ -143,26 +143,26 @@ export const updateKidService = async (data) => {
     }
   }
 
-  
+
 }
 
 export const deleteKidService = async () => {
   try {
 
-      const result = await api.delete("/crianca/2")
+    const result = await api.delete("/crianca/2")
 
-      const success = result.status === 200
+    const success = result.status === 200
 
-      return {
-          success,
-          data: result.data
-      }
+    return {
+      success,
+      data: result.data
+    }
 
   } catch (error) {
-      showErrorToast(error.response.data.message)
-      return {
-          success: false,
-          data: error.response.data
-      }
+    showErrorToast(error.response.data.message)
+    return {
+      success: false,
+      data: error.response.data
+    }
   }
 }

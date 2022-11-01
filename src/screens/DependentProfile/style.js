@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     },
     cardContainer: {
         width: '85%',
-        height: 220,
+        height: 250,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: COLORS.green,
@@ -94,20 +94,31 @@ const styles = StyleSheet.create({
         // backgroundColor: COLORS.red,
     },
     titleAbout: {
-        fontSize: 20,
-        fontFamily: FONTS.title
+        fontSize: 22,
+        fontFamily: FONTS.title,
     },
     infoAbout: {
         fontSize: 20,
+        textTransform: 'capitalize',
         fontFamily: FONTS.title
+    },
+    button: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+    },
+    titleButton: {
+        fontSize: 20,
+        fontFamily: FONTS.title,
+        marginLeft: 10,
     },
     scrollContainer: {
         width: '100%',
-        // alignSelf: 'stretch',
         paddingLeft: 45,
-        // alignItems: 'center',
-        // justifyContent: 'center',
-        // backgroundColor: COLORS.red
+    },
+    card: {
+        width: '85%',
+        height: 120,
     }
 
 });
