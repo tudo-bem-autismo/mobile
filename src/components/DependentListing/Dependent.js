@@ -1,11 +1,8 @@
-import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { COLORS, FONTS } from "../../assets/const";
 
-// import myProfile from '../../assets/images/myProfile.png';
-
-
-export const Dependent = ({ name, photo, onPress }) => {
+export const Dependent = ({ name, photo, onPress, selected }) => {
 
     return (
 
@@ -13,11 +10,16 @@ export const Dependent = ({ name, photo, onPress }) => {
             style={style.option}
             onPress={() => onPress()}
         >
-            <Image
-                style={style.photo}
-                source={photo} 
-            />
+            <ImageBackground
+                style={style.dependent}
+                imageStyle={style.dependent}
+                source={photo}
+            >
+                <View style={selected ? style.selectedDependent : style.dependent}></View>
+            </ImageBackground>
+
             <Text style={style.textOption}>{name}</Text>
+
         </TouchableOpacity>
 
     );
@@ -38,7 +40,18 @@ const style = StyleSheet.create({
         width: 90,
         height: 90,
         borderRadius: 50,
-        // backgroundColor: COLORS.red
+    },
+    selectedDependent: {
+        width: 90,
+        height: 90,
+        borderRadius: 60,
+        backgroundColor: '#00000077',
+        zIndex: 10,
+    },
+    dependent: {
+        width: 90,
+        height: 90,
+        borderRadius: 50,
     }
 });
 

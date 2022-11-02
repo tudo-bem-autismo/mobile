@@ -22,9 +22,12 @@ export const ModalApplyChildGame = ({ label, close, show, del }) => {
 
     const [dependents, setDependents] = useState([]);
 
+    const [idDependents, setIdDependents] = useState(0);
+
     const getDependents = async () => {
         const result = await getResponsibleDependentsService()
         setDependents(result.data)
+        console.log(result.data)
 
     }
 
@@ -127,12 +130,20 @@ export const ModalApplyChildGame = ({ label, close, show, del }) => {
                                             dependents.map(item => (
                                                 <Dependent
                                                     name={item.name}
-                                                    photo={{ uri : item.photo}}
+                                                    photo={{ uri: item.photo }}
                                                     key={item.id}
-                                                    onPress={() => setOption(true)}
+                                                    selected={idDependents === item.id}
+                                                    onPress={() => {
+
+                                                        // setOption(true)
+                                                        setIdDependents(item.id)
+
+                                                    }}
                                                 />
                                             ))
                                         }
+
+                                        {/* {console.log(idDependents)} */}
 
                                     </View>
 
