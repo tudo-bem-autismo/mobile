@@ -4,7 +4,7 @@ import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
 
 import style from "./style";
 import backgroundMenu from "../../assets/images/backgroundMenu.png";
-import { Close } from "../../components/Menu/close.js";
+import { Close } from "../../components/Menu/Close.js";
 import { SessionResponsible } from "../../components/Menu/SessionResponsible";
 import { SessionChild } from "../../components/Menu/SessionChild";
 import { SessionCompany } from "../../components/Menu/SessionCompany";
@@ -20,6 +20,8 @@ export const Menu = ({ navigation }) => {
 
     const handleLogout = async () => {
         await clearData('@id')
+        await clearData('@email')
+        await clearData('@name')
         navigation.navigate('Login')
     }
 
@@ -32,7 +34,7 @@ export const Menu = ({ navigation }) => {
             >
 
                 <Close
-                    navigation={navigation}
+                    onPress={() => navigation.navigate('TabsResponsible')}
                 />
 
                 <View style={style.navContainer}>

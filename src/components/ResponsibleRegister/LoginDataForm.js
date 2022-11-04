@@ -20,10 +20,12 @@ export const LoginDataForm = ({ responsibleData, navigation }) => {
 
         // Chama a api enviando os dados do formulário, "data" são os "values"
         const result = await responsibleRegisterService(responsible)
-        
+
         if (result.success) {
             await storeData(result.data.id, '@id')
-            navigation.navigate('Salutation')     
+            await storeData(data.email, '@email')
+            await storeData(responsibleData.name, '@name')
+            navigation.navigate('Salutation')
         }
 
     }

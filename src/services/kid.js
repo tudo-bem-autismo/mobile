@@ -11,6 +11,8 @@ export const kidRegisterService = async (data) => {
       },
     };
 
+    const date = data.date;
+
     const dataD = date.split('/')[0]
     const dataM = date.split('/')[1]
     const dataY = date.split('/')[2]
@@ -26,7 +28,7 @@ export const kidRegisterService = async (data) => {
     formData.append("data_nascimento", dataFinal);
     formData.append("id_genero", data.genderId);
     formData.append("id_nivel_autismo", data.autismLevelId);
-    formData.append("id_responsavel", id);
+    formData.append("id_responsavel", 27);
 
     const result = await api.post("/crianca", formData, options);
 
@@ -36,7 +38,7 @@ export const kidRegisterService = async (data) => {
       success,
       data: result.data,
     };
-    
+
   } catch (error) {
     showErrorToast(error.response.data.message);
 
@@ -48,12 +50,10 @@ export const kidRegisterService = async (data) => {
 };
 
 
-export const getKidService = async () => {
+export const getKidService = async (idDependent) => {
   try {
 
-    const id = await getData('@idDependent')
-
-    const result = await api.get(`/crianca/${id}`)
+    const result = await api.get(`/crianca/${idDependent}`)
 
     const success = result.status === 200
 
@@ -65,18 +65,19 @@ export const getKidService = async () => {
 
     const dataFinal = dataD + "/" + dataM + "/" + dataY
 
-    console.log(dataFinal)
-    
     const formattedData = {
 
       name: result.data.nome,
       photo: result.data.foto,
       date: dataFinal,
       genderId: result.data.id_genero,
+      gender: result.data.tbl_genero.genero,
       autismLevelId: result.data.id_nivel_autismo,
-      
+
 
     }
+
+    // console.log(formattedData)
 
     return {
       success,
@@ -141,26 +142,26 @@ export const updateKidService = async (data) => {
     }
   }
 
-  
+
 }
 
 export const deleteKidService = async () => {
   try {
 
-      const result = await api.delete("/crianca/2")
+    const result = await api.delete("/crianca/2")
 
-      const success = result.status === 200
+    const success = result.status === 200
 
-      return {
-          success,
-          data: result.data
-      }
+    return {
+      success,
+      data: result.data
+    }
 
   } catch (error) {
-      showErrorToast(error.response.data.message)
-      return {
-          success: false,
-          data: error.response.data
-      }
+    showErrorToast(error.response.data.message)
+    return {
+      success: false,
+      data: error.response.data
+    }
   }
 }

@@ -61,3 +61,10 @@ export const responsibleUpdatePasswordSchema = yup.object().shape({
     .required('Confime sua nova senha')
     .oneOf([yup.ref('newPassword'), null],'Senhas não conferem')
 })
+
+
+export const responsiblePasswordLogoutAccountDependentSchema = yup.object().shape({
+    passwordResponsible: yup
+    .string()
+    .required('Insira a senha do Responsável (login)'),
+})

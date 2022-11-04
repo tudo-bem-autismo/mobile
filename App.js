@@ -19,6 +19,12 @@ import { COLORS, FONTS } from './src/assets/const';
 import { Games } from './src/screens/Games';
 import { CongratulationsScreen } from './src/screens/CongratulationsScreen';
 import { MedalScreen } from './src/screens/MedalScreen';
+import { ScreenGamesTwo } from './src/screens/ScreenGamesTwo';
+import { Reports } from './src/screens/Reports';
+import { Loading } from './src/screens/Loading';
+import { HomeDependent } from './src/screens/HomeDependent';
+import { DependentProfile } from './src/screens/DependentProfile';
+import { ResponsiveLogin } from './src/screens/Login';
 
 export default function App() {
 
@@ -34,10 +40,8 @@ export default function App() {
     return (
 
       <>
-      {/* <CongratulationsScreen/> */}
-      {/* <MedalScreen/> */}
-      <ScreenGames /> 
-      {/* // <Toast /> */}
+        <Navigation />
+        <Toast />
       </>
     );
   }

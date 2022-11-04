@@ -4,6 +4,7 @@ import { Image, Text, View } from "react-native";
 import style from "./style";
 
 import loading from "../../assets/images/loading.gif"
+import chicken from "../../assets/images/chicken.gif"
 
 export const Loading = () => {
 
@@ -13,7 +14,7 @@ export const Loading = () => {
                 source={loading}
                 style={style.loadingGif}
             />
-            <Text style={style.text}>CARREGANDO</Text>
+            <Text style={style.text}>CARREGANDO...</Text>
         </View>
     );
 }
