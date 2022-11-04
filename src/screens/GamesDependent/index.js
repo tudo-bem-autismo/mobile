@@ -13,8 +13,6 @@ import { MainHeaderDependent } from '../../components/Header/MainHeaderDependent
 
 export const GamesDependent = ({ navigation }) => {
 
-    const [modal, setModal] = useState(false);
-
     const [isLoading, setIsLoading] = useState(true);
 
     const [games, setGames] = useState([]);
@@ -53,7 +51,7 @@ export const GamesDependent = ({ navigation }) => {
                                             titleGame={item.name}
                                             gifGame={{ uri: item.icon }}
                                             key={item.id}
-                                            onPress={() => setModal(true)}
+                                            onPress={() => openGameModal(item.id)}
                                         />
                                     ))
                                 }
@@ -63,12 +61,12 @@ export const GamesDependent = ({ navigation }) => {
                         </ScrollView>
                     </View>
 
-                    {modal && (
+                    {/* {showModal && (
                         <ModalApplyChildGame
-                            close={() => setModal(false)}
-                            show={modal}
+                            close={() => setShowModal(false)}
+                            show={showModal}
                         />
-                    )}
+                    )} */}
                 </>
             )}
         </View>

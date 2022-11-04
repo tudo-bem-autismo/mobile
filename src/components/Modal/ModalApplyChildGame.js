@@ -1,38 +1,98 @@
-import React, { useEffect, useState } from "react";
-import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text } from "react-native";
 import { BlurView } from 'expo-blur';
+import React, { useEffect, useState } from "react";
+import { Animated, Dimensions, StyleSheet, Text, View } from "react-native";
 
-import modalBackground from '../../assets/images/modalBackground.png';
-import { FONTS, COLORS } from "../../assets/const";
-import { BackButton, Button } from "../Button";
-import { Game } from "../Games/Game";
-import feelings from '../../assets/images/feelings.gif';
+import { MaterialIcons } from "@expo/vector-icons";
+import Toast from "react-native-toast-message";
+import { COLORS } from "../../assets/const";
 import { Loading } from "../../screens/Loading";
 import { getResponsibleDependentsService } from "../../services";
-import { Dependent } from "../DependentListing";
-import { MaterialIcons } from "@expo/vector-icons";
+import { getGameByIdService, getGamesService } from "../../services/game";
+import { createDependentRestrictionsService, deleteDependentRestrictionsService } from "../../services/restriction";
+import { Button } from "../Button";
 import { PlayButton } from "../Button/PlayButton";
-
+import { Dependent } from "../DependentListing";
+import { Game } from "../Games/Game";
 
 const { height } = Dimensions.get('window')
 
-export const ModalApplyChildGame = ({ label, close, show, del }) => {
+export const ModalApplyChildGame = ({ close, show, selectedGameId }) => {
 
     const [isLoading, setIsLoading] = useState(true);
 
     const [dependents, setDependents] = useState([]);
 
-    const [idDependents, setIdDependents] = useState(0);
+    // restrições que o usuário já possui
+    const [restrictions, setRestrictions] = useState([]);
+
+    // restrições atualizadas
+    const [newRestrictions, setNewRestrictions] = useState([]);
+
+    const [game, setGame] = useState({});
+
+    // useEffect(() => {
+    //     console.log(newRestrictions)
+    // }, [newRestrictions])
+
+    const getGame = async () => {
+        const result = await getGameByIdService(selectedGameId)
+        setGame(result.data)
+    }
 
     const getDependents = async () => {
         const result = await getResponsibleDependentsService()
         setDependents(result.data)
-        console.log(result.data)
+    }
 
+    const getRestrictions = async () => {
+        const result = await getGamesService()
+        const selectedGame = result.data.find(item => item.id === selectedGameId)
+        setRestrictions(selectedGame.restrictions)
+        setNewRestrictions(selectedGame.restrictions)
+    }
+
+    const manageDependentRestriction = async (idDependent) => {
+
+        const restrictionExist = newRestrictions?.find(restriction => restriction.idDependent === idDependent)
+
+        if (restrictionExist) {
+            const filteredRestriction = newRestrictions.filter(item => item.idDependent !== idDependent)
+            return setNewRestrictions(filteredRestriction)
+        }
+
+        const restriction = {
+            idGame: selectedGameId,
+            idDependent
+        }
+
+        const managedRestrictions = [
+            ...newRestrictions,
+            restriction
+        ]
+
+        setNewRestrictions(managedRestrictions)
+
+    }
+
+    const updateDependentRestrictions = async () => {
+        await deleteDependentRestrictionsService(restrictions)
+        await createDependentRestrictionsService(newRestrictions)
+
+        await getRestrictions()
+
+        close()
+
+        return Toast.show({
+            type: 'success',
+            text1: 'Sucesso!',
+            text2: 'Restrições atualizadas com sucesso.'
+        })
     }
 
     useEffect(() => {
         getDependents()
+        getRestrictions()
+        getGame()
         setIsLoading(false)
 
     }, [])
@@ -110,8 +170,8 @@ export const ModalApplyChildGame = ({ label, close, show, del }) => {
                                 <View style={style.gameContainer}>
 
                                     <Game
-                                        titleGame="sentimentos"
-                                        gifGame={feelings}
+                                        titleGame={game.name}
+                                        gifGame={{ uri: game.icon }}
                                     />
 
 
@@ -132,18 +192,11 @@ export const ModalApplyChildGame = ({ label, close, show, del }) => {
                                                     name={item.name}
                                                     photo={{ uri: item.photo }}
                                                     key={item.id}
-                                                    selected={idDependents === item.id}
-                                                    onPress={() => {
-
-                                                        // setOption(true)
-                                                        setIdDependents(item.id)
-
-                                                    }}
+                                                    selected={newRestrictions?.find(restriction => restriction.idDependent === item.id)}
+                                                    onPress={() => manageDependentRestriction(item.id)}
                                                 />
                                             ))
                                         }
-
-                                        {/* {console.log(idDependents)} */}
 
                                     </View>
 
@@ -157,6 +210,7 @@ export const ModalApplyChildGame = ({ label, close, show, del }) => {
                                         borderRadius={25}
                                         width={100}
                                         height={45}
+                                        onPress={() => updateDependentRestrictions()}
                                     />
 
                                 </View>
