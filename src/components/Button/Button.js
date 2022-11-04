@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingBottom: 5
+        paddingBottom: 5,
+        
     },
     button: {
         width: 138,
