@@ -1,26 +1,28 @@
 
-import { MaterialIcons } from '@expo/vector-icons';
 import React, { useEffect, useState } from 'react';
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 
-import styles from './style';
-import { MainHeader } from '../../components/Header/MainHeader';
-import feelings from '../../assets/images/feelings.gif';
-import clothes from '../../assets/images/clothes.gif';
-import brushingTeeth from '../../assets/images/brushingTeeth.gif';
-import { COLORS } from '../../assets/const';
 import { Game } from '../../components/Games/Game';
+import { MainHeader } from '../../components/Header/MainHeader';
 import { ModalApplyChildGame } from '../../components/Modal/ModalApplyChildGame';
 import { getGamesService } from '../../services/game';
 import { Loading } from '../Loading';
+import styles from './style';
 
 export const Games = ({ navigation }) => {
 
-    const [modal, setModal] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
     const [isLoading, setIsLoading] = useState(true);
 
     const [games, setGames] = useState([]);
+
+    const [selectedGameId, setSelectedGameId] = useState(null);
+
+    const openGameModal = (gameId) => {
+        setSelectedGameId(gameId)
+        setShowModal(true)
+    }
 
     const getGames = async () => {
         const result = await getGamesService()
@@ -39,12 +41,15 @@ export const Games = ({ navigation }) => {
                 <Loading />
             ) : (
                 <>
-                    <MainHeader screenName="GERENCIAMENTO DOS JOGOS" />
+                    <MainHeader
+                        screenName="GERENCIAMENTO DOS JOGOS"
+                        navigation={navigation}
+                    />
 
                     <View style={styles.gamesContainer}>
 
                         <Text style={styles.textSelectGame}>
-                            selecione os jogos que estarão disponíveis para seu filho(a)
+                            selecione os jogos que estarão indisponíveis para seu filho(a)
                         </Text>
 
                         <ScrollView style={styles.listGames}>
@@ -57,7 +62,7 @@ export const Games = ({ navigation }) => {
                                             titleGame={item.name}
                                             gifGame={{ uri: item.icon }}
                                             key={item.id}
-                                            onPress={() => setModal(true)}
+                                            onPress={() => openGameModal(item.id)}
                                         />
                                     ))
                                 }
@@ -67,10 +72,12 @@ export const Games = ({ navigation }) => {
                         </ScrollView>
                     </View>
 
-                    {modal && (
+                    {showModal && (
                         <ModalApplyChildGame
-                            close={() => setModal(false)}
-                            show={modal}
+                            close={() => setShowModal(false)}
+                            show={showModal}
+                            selectedGameId={selectedGameId}
+                            games={games}
                         />
                     )}
                 </>

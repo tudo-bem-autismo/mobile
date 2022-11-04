@@ -1,35 +1,34 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-import {COLORS, FONTS} from '../../assets/const';
+import { COLORS, FONTS } from '../../assets/const';
 
 import { getStepGames } from '../../services';
 
-export const ButtonGamesTwo = ({backgroundColor, borderRadius, widht, height}) => {
+export const ButtonGamesTwo = ({ backgroundColor, borderRadius, widht, height, labelButton, color , onPress = ()=>{}}) => {
 
-    const [passo2, setPasso2] = useState('');
-    const [cor, setCor] = useState('');
+    // const [passo2, setPasso2] = useState('');
+    // const [cor, setCor] = useState('');
 
-    const getPassos = async () =>{
-        const result = await getStepGames()
-        setPasso2(result.data.passo2)
-        setCor(result.data.corBotao)
-    }
-    useEffect(() =>{
-        getPassos()
-    }, [])
+    // const getPassos = async () =>{
+    //     const result = await getStepGames()
+    //     setPasso2(result.data.passo2)
+    //     setCor(result.data.corBotao)
+    // }
+    // useEffect(() =>{
+    //     getPassos()
+    // }, [])
 
-    return(
-        <View style = {styles.container}>
-            <View style = {styles.containerButton}>
-                <TouchableOpacity 
-                style = {{...styles.buttonGames, backgroundColor: cor, borderRadius, widht, height}}
-                >
+    return (
+        <View style={styles.container}>
+            <TouchableOpacity
+                style={{ ...styles.buttonGames, backgroundColor: color, borderRadius, widht, height }}
+                onPress={onPress}
+            >
 
-                <Text style = {styles.text}>{passo2}</Text>
+                <Text style={styles.text}>{labelButton}</Text>
 
-                </TouchableOpacity>
-            </View>
+            </TouchableOpacity>
 
         </View>
     );
@@ -44,36 +43,35 @@ const bottomShadow = {
 
 const styles = StyleSheet.create({
 
-    container:{
-        flex: 1,
+    container: {
+        // flex: 1,
         alignItems: 'center',
-        justifyContent:'center',
+        justifyContent: 'center',
         flexDirection: 'row',
+        top: 55,
+        right: 200,
         width: 200,
-        height: 100,
+        height: 50,
+        // zIndex: 10,
+        backgroundColor: COLORS.red,
     },
-    containerButton:{
-        display:'flex',
-        alignItems: 'center',
-        color:COLORS.pink
-    },
-    buttonGames:{
-        width:150,
-        height:60,
+    buttonGames: {
+        width: 150,
+        height: 60,
         //backgroundColor:COLORS.yellow,
-        fontFamily:FONTS.title,
-        borderRadius:50,
-        alignItems:'center',
-        justifyContent:'center',
-        marginBottom:'170%',
-        marginLeft:'90%',
+        fontFamily: FONTS.title,
+        borderRadius: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: '450%',
+        marginLeft: '90%',
         ...bottomShadow
-    }, 
-    text:{
-       color:COLORS.white,
-       fontFamily:FONTS.title,
-       fontWeight:'bold',
-       fontSize:20,
+    },
+    text: {
+        color: COLORS.white,
+        fontFamily: FONTS.title,
+        fontWeight: 'bold',
+        fontSize: 20,
     }
 
 

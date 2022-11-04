@@ -3,14 +3,14 @@ import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { COLORS } from "../../assets/const";
 
-export const Close = ({navigation}) => {
+export const Close = ({ onPress }) => {
 
     return (
 
         <View style={style.closeContainer}>
             <TouchableOpacity
                 style={style.closeButton}
-                onPress={() => navigation.navigate('Home')}
+                onPress={onPress}
             >
                 <MaterialIcons
                     name="close"

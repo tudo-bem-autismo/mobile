@@ -4,7 +4,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { COLORS, FONTS } from "../../assets/const";
 
 
-export const Option = ({ onPress, navigation }) => {
+export const Option = ({ onPress, navigation, idDependent}) => {
 
     return (
         <View
@@ -14,13 +14,13 @@ export const Option = ({ onPress, navigation }) => {
 
             <TouchableOpacity
                 style={style.button}
-                onPress={() => navigation.navigate('Home')}
+                onPress={() => navigation.navigate('TabsDependent', {idDependent})}
             >
                 <Text style={style.textButton}>ENTRAR</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-                onPress={() => navigation.navigate('DependentManagement')}
+                onPress={() => navigation.navigate('DependentManagement', {idDependent})}
             >
                 <Text style={style.text}>EDITAR</Text>
             </TouchableOpacity>

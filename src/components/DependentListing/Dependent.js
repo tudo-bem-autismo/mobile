@@ -1,8 +1,8 @@
-import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-import { FONTS } from "../../assets/const";
+import { COLORS, FONTS } from "../../assets/const";
 
-export const Dependent = ({ name, photo, onPress }) => {
+export const Dependent = ({ name, photo, onPress, selected }) => {
 
     return (
 
@@ -10,10 +10,16 @@ export const Dependent = ({ name, photo, onPress }) => {
             style={style.option}
             onPress={() => onPress()}
         >
-            <Image
-                style={style.photo}
-                source={{ uri: photo }} />
+            <ImageBackground
+                style={style.dependent}
+                imageStyle={style.dependent}
+                source={photo}
+            >
+                <View style={selected ? style.selectedDependent : style.dependent}></View>
+            </ImageBackground>
+
             <Text style={style.textOption}>{name}</Text>
+
         </TouchableOpacity>
 
     );
@@ -31,6 +37,18 @@ const style = StyleSheet.create({
         marginTop: 5,
     },
     photo: {
+        width: 90,
+        height: 90,
+        borderRadius: 50,
+    },
+    selectedDependent: {
+        width: 90,
+        height: 90,
+        borderRadius: 60,
+        backgroundColor: '#00000077',
+        zIndex: 10,
+    },
+    dependent: {
         width: 90,
         height: 90,
         borderRadius: 50,
