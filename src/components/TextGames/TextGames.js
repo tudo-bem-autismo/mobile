@@ -6,22 +6,22 @@ import {FONTS} from '../../assets/const/fonts';
 
 import { getStepGames } from '../../services';
 
-export const TextGames = () => {
+export const TextGames = ({labelSecondText}) => {
 
-    const [dialogo, setDialogo] = useState('');
+    // const [dialogo, setDialogo] = useState('');
 
-    const getDialogo = async () =>{
-        const result = await getStepGames()
-        //console.log(result.data.dialogo)
-        setDialogo(result.data.dialogo)
-    }
-    useEffect(() =>{
-        getDialogo()
-    }, [])
+    // const getDialogo = async () =>{
+    //     const result = await getStepGames()
+        // console.log(labelSecondText)
+    //     setDialogo(result.data.dialogo)
+    // }
+    // useEffect(() =>{
+    //     getDialogo()
+    // }, [])
 
     return(
         <View style = {styles.textContainer}>
-            <Text style = {styles.text}>{dialogo}</Text>
+            <Text style = {styles.text}>{labelSecondText}</Text>
 
         </View>
     );
@@ -31,10 +31,12 @@ const styles = StyleSheet.create({
     textContainer:{
         flex:1,
         padding:8,
-        marginBottom:'30%',
+        marginBottom:'60%',
+        // backgroundColor:COLORS.black,
+        zIndex:2,
     },
     text:{
-        fontSize:48,
+        fontSize:40,
         color:COLORS.white,
         textAlign:'center',
         justifyContent:'center',

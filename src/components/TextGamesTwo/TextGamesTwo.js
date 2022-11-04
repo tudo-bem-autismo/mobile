@@ -8,16 +8,16 @@ import { getStepGames } from '../../services';
 
 export const TextGamesTwo = ({labelText}) => {
 
-    const [dialogo, setDialogo] = useState('');
+    // const [dialogo, setDialogo] = useState('');
 
-    const getDialogo = async () =>{
-        const result = await getStepGames()
-        //console.log(result.data.dialogo)
-        setDialogo(result.dataTwo.dialogo)
-    }
-    useEffect(() =>{
-        getDialogo()
-    }, [])
+    // const getDialogo = async () =>{
+    //     const result = await getStepGames()
+    //     //console.log(result.data.dialogo)
+    //     setDialogo(result.dataTwo.dialogo)
+    // }
+    // useEffect(() =>{
+    //     getDialogo()
+    // }, [])
 
     return(
         <View style = {styles.textContainer}>
@@ -31,10 +31,10 @@ const styles = StyleSheet.create({
     textContainer:{
         flex:1,
         padding:8,
-        marginBottom:'50%',
+        marginBottom:'44%',
     },
     text:{
-        fontSize:50,
+        fontSize:40,
         color:COLORS.white,
         textAlign:'center',
         justifyContent:'center',
@@ -44,6 +44,5 @@ const styles = StyleSheet.create({
         elevation:10,
         fontFamily:FONTS.title,
         fontWeight:'bold',
-
     }
 })

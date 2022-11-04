@@ -5,17 +5,17 @@ import {COLORS, FONT} from '../../assets/const';
 
 import { getStepGames } from '../../services';
 
-export const ButtonImage = ({source, borderRadius, widht, height, srcImage}) =>{
+export const ButtonImage = ({source, borderRadius, widht, height, srcImage, onPress = () => { }}) =>{
     
-    const [image1, setImage] = useState(null);
+    // const [image1, setImage] = useState(null);
 
-    const getImages = async () =>{
-        const result = await getStepGames()
-        setImage(result.dataTwo.imagem)
-    }
-    useEffect(() =>{
-        getImages()
-    }, [])
+    // const getImages = async () =>{
+    //     const result = await getStepGames()
+    //     setImage(result.dataTwo.imagem)
+    // }
+    // useEffect(() =>{
+    //     getImages()
+    // }, [])
     
     return(
 
@@ -23,6 +23,7 @@ export const ButtonImage = ({source, borderRadius, widht, height, srcImage}) =>{
               <View style = {styles.imageContainer}>
                 <TouchableOpacity 
                 style = {{...styles.buttonImage, borderRadius, widht, height}}
+                onPress={onPress}
                 >
                 <Image
                     style = {styles.image}
