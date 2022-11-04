@@ -15,7 +15,7 @@ export function Onboarding({ navigation }) {
         const hasId = await getData('@id')
 
         if (hasId) {
-           return ( navigation.navigate('Games') )
+           return ( navigation.navigate('TabsResponsible') )
         }
 
         verifyAlreadyLoggedIn()

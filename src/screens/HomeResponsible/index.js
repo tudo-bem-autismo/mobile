@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, TouchableOpacity, View } from 'react-native';
 
-// import styles from './style.js';
+import styles from './style.js';
 
 import { TabsResponsible } from '../../navigation/tabsResponsible.js';
 

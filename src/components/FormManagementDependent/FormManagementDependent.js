@@ -22,7 +22,8 @@ import { BackButton } from "../Button";
 import { updateKidService } from "../../services";
 
 
-export const FormManagementDependent = ({ navigation }) => {
+export const FormManagementDependent = ({ navigation, idDependent }) => {
+
   const [showModal, setShowModal] = useState(false);
   const [showModalSaveData, setShowModalSaveData] = useState(false);
   const [kid, setKid] = useState({});
@@ -38,7 +39,7 @@ export const FormManagementDependent = ({ navigation }) => {
 
 
   const getKid = async () => {
-    const result = await getKidService();
+    const result = await getKidService(idDependent);
     setKid(result.data);
     //console.log(result.data.date);
     //const data = result.data.date;

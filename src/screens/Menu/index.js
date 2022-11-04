@@ -20,6 +20,8 @@ export const Menu = ({ navigation }) => {
 
     const handleLogout = async () => {
         await clearData('@id')
+        await clearData('@email')
+        await clearData('@name')
         navigation.navigate('Login')
     }
 
@@ -32,7 +34,7 @@ export const Menu = ({ navigation }) => {
             >
 
                 <Close
-                    navigation={navigation}
+                    onPress={() => navigation.navigate('TabsResponsible')}
                 />
 
                 <View style={style.navContainer}>

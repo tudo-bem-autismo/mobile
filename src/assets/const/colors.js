@@ -8,15 +8,20 @@ export const COLORS = {
     red: '#F00',
     purple: '#CCB7EF',
     pink: '#F2BED4',
+    pinkLight: '#FEE1ED',
+    pinkBold: '#FF0071',
     turquoise: '#C0F8DD',
     pinkBold: '#DA98B4',
     beige:'#FFF8F8',
     yellow:'#FBF4A3',
+    yellowLight: '#FFFBD2',
+    yellowBold: '#FFEB00', 
     orange:'#EE9A39',
     yellowContainer:'#FBF4A3',
     purpleContainer:'#CCB7EF',
     grey:'#949494',
+    green: '#C0F8DD',
+    greenBold: '#00FF84',
     hitGreen: '#C0F8DD',
-    missRed: '#DF4C4C'
-
+    missRed: '#DF4C4C',
 }
