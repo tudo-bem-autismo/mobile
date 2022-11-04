@@ -22,4 +22,6 @@ export const COLORS = {
     grey:'#949494',
     green: '#C0F8DD',
     greenBold: '#00FF84',
+    hitGreen: '#C0F8DD',
+    missRed: '#DF4C4C',
 }
