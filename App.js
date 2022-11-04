@@ -34,9 +34,10 @@ export default function App() {
     return (
 
       <>
-        {/* <MedalScreen/> */}
-        <ScreenGames /> 
-        {/* // <Toast /> */}
+      {/* <CongratulationsScreen/> */}
+      {/* <MedalScreen/> */}
+      <ScreenGames /> 
+      {/* // <Toast /> */}
       </>
     );
   }
