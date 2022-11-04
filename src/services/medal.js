@@ -6,9 +6,9 @@ import api from "./api";
 export const getMedalsDependent = async () => {
   try {
 
-    const id = await getData('@idDependent')
+    const idDependent = await getData('@idDependent')
 
-    const result = await api.get(`/crianca/perfil/relatorio/premiacao/1`)
+    const result = await api.get(`/premiacao/${idDependent}`)
 
     const success = result.status === 200
     
@@ -24,7 +24,7 @@ export const getMedalsDependent = async () => {
     return {
       success,
       data: formattedData
-    }
+    }   
 
 
   } catch (error) {
