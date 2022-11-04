@@ -148,6 +148,8 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
   //   const [result, setResult] = useState()
   const [data, setData] = useState()
 
+  const [msgRelatorio, setMsgRelatorio] = useState('')
+
 
 
   const gerarRelatorio = async () => {
@@ -159,6 +161,7 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
     api.get(`/crianca/perfil/relatorio/${selectedKid}/${selectedGame}/${selectedPeriod}`).then(
       
       (result) => {
+
         setData(result.data)
         
         
@@ -168,15 +171,26 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
         
         const relatoryHits = result.data.map(item => item.acertos)
 
+
+        //console.log(relatoryDays)
+        if (relatoryDays == '') {
+          setMsgRelatorio('Não há relatório com estes dados')
+          setChartIsLoading(false)
+        } else {
+          updateChart({
+            dates: relatoryDays,
+            errors: relatoryErrors,
+            hits: relatoryHits
+          })
+  
+          close()
+          setChartIsLoading(false)
+        }
+
         // console.log(result.data)
 
-        updateChart({
-          dates: relatoryDays,
-          errors: relatoryErrors,
-          hits: relatoryHits
-        })
-
-        setChartIsLoading(false)
+        
+        //setMsgRelatorio('Relátorio gerado com sucesso')
        
       }
 
@@ -329,6 +343,8 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
                 </View>
 
                 <View style={style.buttonContainer}>
+                  <Text>{msgRelatorio}</Text>
+                  
                   <Button
                     label="GERAR"
                     backgroundColor={COLORS.pink}
