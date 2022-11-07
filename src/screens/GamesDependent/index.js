@@ -51,7 +51,7 @@ export const GamesDependent = ({ navigation }) => {
                                             titleGame={item.name}
                                             gifGame={{ uri: item.icon }}
                                             key={item.id}
-                                            onPress={() => openGameModal(item.id)}
+                                            onPress={() => navigation.navigate('ScreenGames')}
                                         />
                                     ))
                                 }

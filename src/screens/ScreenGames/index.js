@@ -116,7 +116,7 @@ export function ScreenGames() {
                 {isLoading ? (
                     <Loading />
                 ) : (
-
+                    
                     <View style={{ ...styles.mainContainer, backgroundColor: currentGame.cor_fundo }}>
                         {/* <View style={styles.mainContainer}> */}
 
