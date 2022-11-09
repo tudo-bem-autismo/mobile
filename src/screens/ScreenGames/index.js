@@ -6,6 +6,8 @@ import { getStepGames } from '../../services';
 import { Loading } from '../Loading';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import { COLORS } from '../../assets/const';
+import { CongratulationsScreen } from '../CongratulationsScreen';
+import { MedalScreen } from '../MedalScreen';
 
 export function ScreenGames() {
 
@@ -117,37 +119,40 @@ export function ScreenGames() {
                     <Loading />
                 ) : (
                     
-                    <View style={{ ...styles.mainContainer, backgroundColor: currentGame.cor_fundo }}>
-                        {/* <View style={styles.mainContainer}> */}
+                    currentStep.toString() < game.length ? (
+                        
+                        <View style={{ ...styles.mainContainer, backgroundColor: currentGame.cor_fundo }}>
+                            {/* <View style={styles.mainContainer}> */}
 
-                        <ButtonAlert />
+                            <ButtonAlert />
 
-                            {
-                                currentGame.imagem_exemplo == null ? (
+                                {
+                                    currentGame.imagem_exemplo == null ? (
 
-                                    <ComponentGamesTwo
-                                        firstStepImage={currentGame.tbl_passo[0].imagem}
-                                        secondStepImage={currentGame.tbl_passo[1].imagem}
-                                        firstStepText={currentGame.dialogo}
-                                        correctStepFunction={()=>correctStep()}
-                                        incorrectStepFunction={()=> incorrectStep()}
-                                        firstStepCorrect = {currentGame.tbl_passo[0].passo_correto}
-                                        
-                                    />) : (
+                                        <ComponentGamesTwo
+                                            firstStepImage={currentGame.tbl_passo[0].imagem}
+                                            secondStepImage={currentGame.tbl_passo[1].imagem}
+                                            firstStepText={currentGame.dialogo}
+                                            correctStepFunction={()=>correctStep()}
+                                            incorrectStepFunction={()=> incorrectStep()}
+                                            firstStepCorrect = {currentGame.tbl_passo[0].passo_correto}
+                                            
+                                        />) : (
 
-                                    <ComponentGames
-                                        firstStepImageGames={currentGame.imagem_exemplo}
-                                        secondStepText={currentGame.dialogo}
-                                        firstStepButton={currentGame.tbl_passo[0].texto}
-                                        firstStepButtonTwo={currentGame.tbl_passo[1].texto}
-                                        firstStepColor={currentGame.tbl_passo[0].cor}
-                                        correctStepFunction={() => correctStep()}
-                                        incorrectStepFunction={()=> incorrectStep()}
-                                        firstStepCorrect = {currentGame.tbl_passo[0].passo_correto}
-                                    />)
-                            }
-                       
-                    </View>
+                                        <ComponentGames
+                                            firstStepImageGames={currentGame.imagem_exemplo}
+                                            secondStepText={currentGame.dialogo}
+                                            firstStepButton={currentGame.tbl_passo[0].texto}
+                                            firstStepButtonTwo={currentGame.tbl_passo[1].texto}
+                                            firstStepColor={currentGame.tbl_passo[0].cor}
+                                            correctStepFunction={() => correctStep()}
+                                            incorrectStepFunction={()=> incorrectStep()}
+                                            firstStepCorrect = {currentGame.tbl_passo[0].passo_correto}
+                                        />)
+                                }
+                        
+                        </View>
+                    ):(<MedalScreen/>)
                 )}
             
         </>

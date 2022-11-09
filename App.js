@@ -24,6 +24,8 @@ import { Loading } from './src/screens/Loading';
 import { HomeDependent } from './src/screens/HomeDependent';
 import { DependentProfile } from './src/screens/DependentProfile';
 import { ResponsiveLogin } from './src/screens/Login';
+import { MenuDependent } from './src/screens/MenuDependent';
+import { GamesDependent } from './src/screens/GamesDependent';
 
 export default function App() {
 
@@ -41,6 +43,7 @@ export default function App() {
       <>
         <Navigation/>
         {/* <ScreenGames /> */}
+        {/* <GamesDependent/> */}
         <Toast />
       </>
     );

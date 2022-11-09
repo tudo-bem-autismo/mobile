@@ -10,12 +10,14 @@ import { ModalApplyChildGame } from '../../components/Modal/ModalApplyChildGame'
 import { getGamesService } from '../../services/game';
 import { Loading } from '../Loading';
 import { MainHeaderDependent } from '../../components/Header/MainHeaderDependent';
+import { getStepGames } from '../../services';
 
 export const GamesDependent = ({ navigation }) => {
 
     const [isLoading, setIsLoading] = useState(true);
-
     const [games, setGames] = useState([]);
+    
+
 
     const getGames = async () => {
         const result = await getGamesService()
@@ -26,6 +28,11 @@ export const GamesDependent = ({ navigation }) => {
         getGames()
         setIsLoading(false)
     }, [])
+
+const getId = (id) => {
+    const result = getStepGames(id)
+    return result
+}
 
     return (
 
@@ -51,7 +58,7 @@ export const GamesDependent = ({ navigation }) => {
                                             titleGame={item.name}
                                             gifGame={{ uri: item.icon }}
                                             key={item.id}
-                                            onPress={() => navigation.navigate('ScreenGames')}
+                                            onPress={() => navigation.navigate('ScreenGames', getId(item.id))}
                                         />
                                     ))
                                 }
