@@ -17,6 +17,15 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         backgroundColor: COLORS.white
     },
+    modalContainer: {
+        position: 'absolute',
+        justifyContent: 'flex-end',
+        width: '100%',
+        height: '100%',
+        top: 0,
+        left: 0,
+        zIndex: 5,
+    },
     textSelectGame: {
     },
     listGames: {

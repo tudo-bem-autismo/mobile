@@ -149,7 +149,7 @@ export const getResponsibleDependentsService = async () => {
 
         const id = await getData('@id')
 
-        const result = await api.get(`/responsavel/28`)
+        const result = await api.get(`/responsavel/39`)
 
         const success = result.status === 200
 

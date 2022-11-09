@@ -16,14 +16,14 @@ export const Input = ({
     errorMessage }) => {
 
     return (
-        <View style={styles.inputContainer}>
+        <View style={styles.container}>
 
             <Text style={styles.inputText}>{title}</Text>
 
-            <View>
+            <View style={styles.inputContainer}>
                 <FontAwesome
                     name={hasError ? "times-circle" : iconName}
-                    style={hasError ? styles.errorIcon : {...styles.icon }}
+                    style={hasError ? styles.errorIcon : { ...styles.icon }}
                 />
                 <TextInput
                     style={hasError ? styles.errorInput : { ...styles.input, borderColor }}
@@ -45,7 +45,7 @@ export const Input = ({
 }
 
 const styles = StyleSheet.create({
-    inputContainer: {
+    container: {
         width: '100%',
         height: 100,
         position: 'relative',
@@ -95,6 +95,10 @@ const styles = StyleSheet.create({
     errorText: {
         color: COLORS.red,
         marginLeft: 10
+    },
+    inputContainer: {
+        backgroundColor: COLORS.white,
+        borderRadius: 10,
     }
 });
 

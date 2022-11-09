@@ -1,14 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text } from "react-native";
+import DatePicker from 'react-native-modern-datepicker';
 
 import modalBackground from '../../assets/images/modalBackground.png';
 import { FONTS, COLORS } from "../../assets/const";
 import { Button } from "../Button";
+import { Formik } from "formik";
+import { Input, MaskedInput } from "../Input";
+import { Picker } from "@react-native-picker/picker";
+import { getResponsibleDependentsService } from "../../services";
+import { Dependent } from "../DependentListing/Dependent";
 
 
 const { height } = Dimensions.get('window')
 
-export const ModalCreateSchedule = ({ label, close, show, del }) => {
+export const ModalCreateSchedule = ({ close, show }) => {
+
+    const [time, setTime] = useState('');
+
+    const [date, setDate] = useState('');
+
+    const [selectedKid, setSelectedKid] = useState();
+
+    const [kidName, setKidName] = useState([]);
+
+    const [dependents, setDependents] = useState([]);
+
+    const getKid = async () => {
+        const result = await getResponsibleDependentsService();
+        setKidName(result.data);
+
+    };
+
+    const getDependents = async () => {
+        const result = await getResponsibleDependentsService()
+        setDependents(result.data)
+
+    }
+
+    useEffect(() => {
+        getKid();
+        getDependents()
+    }, []);
+
 
     const [state, setState] = useState({
         opacity: new Animated.Value(0),
@@ -58,37 +92,130 @@ export const ModalCreateSchedule = ({ label, close, show, del }) => {
                 }]}
             >
 
-                {/* <View style={style.modal}> */}
-                    <ImageBackground
-                        source={modalBackground}
-                        style={style.modalBackground}
-                        resizeMode="cover"
+                <View style={style.scheduleContainer}>
+
+
+                    <Formik
+                        // validationSchema={responsibleUpdateSchema}
+                        // initialValues={initialValues}
+                        onSubmit={values => handleForm(values)}
                     >
+                        {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+                            <>
 
-                        <View style={style.questionContainer}>
-                            <Text style={style.questionText}>{label}</Text>
-                        </View>
+                                <View style={style.formContainer}>
 
-                        <View style={style.buttonsContainer}>
-                            <Button
-                                label="NÃO"
-                                backgroundColor={COLORS.purple}
-                                borderRadius={15} 
-                                width={80}
-                                height={40}
-                                onPress={close}
-                            />
-                            <Button
-                                label="SIM"
-                                backgroundColor={COLORS.turquoise}
-                                borderRadius={15}
-                                width={80}
-                                height={40}
-                                onPress={del}
-                            />
-                        </View>
-                    </ImageBackground>
-                {/* </View> */}
+                                    <Input
+                                        title="TITULO"
+                                        iconName="user-circle-o"
+                                        placeholder="Descreva a tarefa a ser criada"
+                                        borderColor={COLORS.blue}
+                                        backgroundColor={COLORS.white}
+                                    />
+
+                                    <View style={style.dateTimeContainer}>
+
+                                        <Text style={style.text}>DIA E HORA</Text>
+
+                                        <View style={style.timeContainer}>
+
+                                            <Picker
+                                                style={style.picker}
+                                                selectedValue={selectedKid}
+                                                onValueChange={(itemValue) => setSelectedKid(itemValue)}
+                                            >
+                                                {kidName.map((kid) => (
+                                                    <Picker.Item
+                                                        label={kid.name}
+                                                        value={kid.id}
+                                                        key={kid.id}
+                                                        style={style.item}
+
+                                                    />
+                                                ))}
+                                            </Picker>
+
+                                            <View style={style.periodDate}>
+
+                                                <Picker
+                                                    style={style.picker}
+                                                    selectedValue={selectedKid}
+                                                    dropdownIconColor={COLORS.blue}
+                                                    dropdownIconRippleColor={COLORS.purple}
+
+                                                    onValueChange={(itemValue) => setSelectedKid(itemValue)}
+                                                >
+                                                    <Picker.Item
+                                                        label="Repetir"
+                                                        value="Repetir"
+                                                        style={style.item}
+                                                    />
+                                                    <Picker.Item
+                                                        label="Todos os dias"
+                                                        value="Todos os dias"
+                                                        style={style.item}
+                                                    />
+                                                    <Picker.Item
+                                                        label="Seg a sex"
+                                                        value="Seg a sex"
+                                                        style={style.item}
+
+                                                    />
+                                                </Picker>
+
+                                            </View>
+
+                                        </View>
+
+                                        <Input
+                                            placeholder="  SEG  TER  QUAR  QUI  SEX  SAB  DOM"
+                                            borderColor={COLORS.blue}
+                                            backgroundColor={COLORS.white}
+                                        />
+
+                                        <Input
+                                            placeholder="Icone da tarefa"
+                                            borderColor={COLORS.blue}
+                                            backgroundColor={COLORS.white}
+                                        />
+
+
+
+                                        {/* <View >
+                                            <DatePicker
+                                                mode="time"
+                                                minuteInterval={3}
+                                                onTimeChange={selectedTime => setTime(selectedTime)}
+
+                                            />
+                                        </View> */}
+
+                                    </View>
+
+                                    <Text style={style.text}>SELECIONE A CRIANÇA</Text>
+
+                                    <View style={style.dependentsContainer}>
+
+                                        {
+                                            dependents.map(item => (
+                                                <Dependent
+                                                    name={item.name}
+                                                    photo={{ uri: item.photo }}
+                                                    key={item.id}
+                                                    onPress={() => {
+                                                    }}
+                                                />
+                                            ))
+                                        }
+
+                                    </View>
+
+                                </View>
+                            </>
+                        )}
+                    </Formik>
+
+                </View>
 
             </Animated.View>
         </Animated.View >
@@ -109,77 +236,73 @@ const style = StyleSheet.create({
     container: {
         width: '100%',
         height: '100%',
-        backgroundColor: 'rgba(0, 0, 0, 0.2)',
-        position: 'absolute'
+        position: 'absolute',
     },
     modalContainer: {
-        bottom: 0,
-        position: 'absolute',
-        height: '50%',
-        width: '100%',
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-        paddingLeft: 25,
-        paddingRight: 25
-    },
-    modal: {
-        width: '100%',
-        height: '50%',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        // backgroundColor: COLORS.darkBlue,
-    },
-    modalBackground: {
         width: '100%',
         height: '100%',
-        justifyContent: 'center',
-        alignItems: 'flex-end',
-        // backgroundColor: COLORS.gray
+        justifyContent: 'flex-end',
+        alignItems: 'center',
     },
-    questionContainer: {
+    scheduleContainer: {
+        // bottom: 0,
+        // position: 'absolute',
+        height: '100%',
+        width: '100%',
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        borderWidth: 2,
+        borderColor: COLORS.purple,
+        backgroundColor: COLORS.purpleLight
+    },
+    formContainer: {
         flex: 1,
-        width: 300,
-        alignSelf: 'stretch',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 40,
-        top: 20,
-        left: 35,
-        // backgroundColor: COLORS.blue,
-    },
-    questionText: {
-        fontSize: 25,
-        fontFamily: FONTS.title,
-        textAlign: 'center',
-    },
-    buttonsContainer: {
-        flex: 3,
-        alignSelf: 'stretch',
-        alignItems: 'flex-start',
-        justifyContent: 'space-evenly',
-        flexDirection: 'row',
-        paddingHorizontal: 25,
-        marginBottom: 100,
         margin: 15,
-        // backgroundColor: COLORS.purple,
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        // backgroundColor: COLORS.white
     },
-    buttonContainer: {
-        flex: 2,
+    text: {
+        fontSize: 20,
+        fontFamily: FONTS.mandali,
+        marginLeft: 20,
+    },
+    dateTimeContainer: {
         alignSelf: 'stretch',
-        alignItems: 'center',
         justifyContent: 'center',
-        // paddingBottom: 150,
-        // backgroundColor: COLORS.darkBlue,
+        // alignItems: 'center',
+        margin: 10,
+        // backgroundColor: COLORS.red
     },
-    button: {
-        width: 100,
-        height: 48,
+    timeContainer: {
+        flexDirection: 'row'
+    },
+    item: {
+        fontSize: 20,
+        fontFamily: FONTS.mandali,
+    },
+    picker: {
+        width: 180,
+        height: 10,
+    },
+    periodDate: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
         borderWidth: 1,
-        borderColor: COLORS.black,
-        borderRadius: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-        ...bottomShadow
+        borderColor: COLORS.blue,
+        backgroundColor: COLORS.white
     },
+    dependentsContainer: {
+        flexDirection: 'row',
+        marginLeft: 20,
+    }
+    // hour: {
+    //     width: 180,
+    //     height: 100,
+    //     backgroundColor: COLORS.red,
+
+    // }
+
 });
 
