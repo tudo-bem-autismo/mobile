@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { RoutineResponsible } from '../screens/RoutineResponsible';
+import { ScheduleResponsible } from '../screens/ScheduleResponsible';
 import { DependentProfile } from '../screens/DependentProfile';
 import { GamesDependent } from '../screens/GamesDependent';
 import { COLORS } from '../assets/const';
@@ -30,7 +30,7 @@ export const TabsDependent = ({ route, navigation }) => {
         >
             <Tab.Screen
                 name="RoutineDependent"
-                component={RoutineResponsible}
+                component={ScheduleResponsible}
                 navigation={navigation}
                 options={{
                     headerShown: false,

@@ -15,7 +15,7 @@ import { ResponsiveRegister } from "../screens/ResponsibleRegister";
 import { DependentRegister } from '../screens/DependentRegister';
 import { DependentManagement } from '../screens/DependentManagement';
 import { SalutationScreen } from '../screens/SalutationScreen';
-import { RoutineResponsible } from '../screens/RoutineResponsible';
+import { ScheduleResponsible } from '../screens/ScheduleResponsible';
 import { ScreenGames } from '../screens/ScreenGames';
 import { CongratulationsScreen } from '../screens/CongratulationsScreen';
 import { TabsDependent } from './tabsDependent';
@@ -41,7 +41,7 @@ const Navigation = () => {
                 <Stack.Screen name="Salutation" component={SalutationScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="Menu" component={Menu} options={{ headerShown: false }} />
                 <Stack.Screen name="HomeResponsible" component={HomeResponsible} options={{ headerShown: false }} />
-                <Stack.Screen name="RoutineResponsible" component={RoutineResponsible} options={{ headerShown: false }} />
+                <Stack.Screen name="RoutineResponsible" component={ScheduleResponsible} options={{ headerShown: false }} />
                 <Stack.Screen name="Management" component={ResponsibleManagement} options={{ headerShown: false }} />
                 <Stack.Screen name="Password" component={ResponsiblePassword} options={{ headerShown: false }} />
                 <Stack.Screen name="DependentListing" component={DependentListing} options={{ headerShown: false }} />
