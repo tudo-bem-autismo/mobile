@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text } from "react-native";
-import DatePicker from 'react-native-modern-datepicker';
+import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text, DatePickerIOSBase, Image } from "react-native";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 import modalBackground from '../../assets/images/modalBackground.png';
+import clock from '../../assets/icons/clock.png';
 import { FONTS, COLORS } from "../../assets/const";
 import { Button } from "../Button";
 import { Formik } from "formik";
@@ -16,9 +17,26 @@ const { height } = Dimensions.get('window')
 
 export const ModalCreateSchedule = ({ close, show }) => {
 
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
+
+    const handleConfirm = (date) => {
+        console.warn("A date has been picked: ", date);
+        hideDatePicker();
+    };
+
     const [time, setTime] = useState('');
 
     const [date, setDate] = useState('');
+
+    const [open, setOpen] = useState(false)
 
     const [selectedKid, setSelectedKid] = useState();
 
@@ -107,7 +125,7 @@ export const ModalCreateSchedule = ({ close, show }) => {
 
                                     <Input
                                         title="TITULO"
-                                        iconName="user-circle-o"
+                                        iconName="calendar-o"
                                         placeholder="Descreva a tarefa a ser criada"
                                         borderColor={COLORS.blue}
                                         backgroundColor={COLORS.white}
@@ -117,23 +135,31 @@ export const ModalCreateSchedule = ({ close, show }) => {
 
                                         <Text style={style.text}>DIA E HORA</Text>
 
-                                        <View style={style.timeContainer}>
+                                        <View style={style.selectContainer}>
 
-                                            <Picker
-                                                style={style.picker}
-                                                selectedValue={selectedKid}
-                                                onValueChange={(itemValue) => setSelectedKid(itemValue)}
+                                            <TouchableOpacity
+                                                style={style.timeContainer}
+                                                onPress={showDatePicker}
                                             >
-                                                {kidName.map((kid) => (
-                                                    <Picker.Item
-                                                        label={kid.name}
-                                                        value={kid.id}
-                                                        key={kid.id}
-                                                        style={style.item}
 
+                                                <View style={style.clockContainer}>
+                                                    <Text style={style.textClock}>12:00</Text>
+                                                    <Image
+                                                        source={clock}
+                                                        style={style.iconClock}
                                                     />
-                                                ))}
-                                            </Picker>
+                                                </View>
+
+                                                <DateTimePickerModal
+                                                    isVisible={isDatePickerVisible}
+                                                    mode="time"
+                                                    onConfirm={handleConfirm}
+                                                    onCancel={hideDatePicker}
+                                                    style={{ backgroundColor: COLORS.yellow, width: 200, }}
+                                                />
+
+                                            </TouchableOpacity>
+
 
                                             <View style={style.periodDate}>
 
@@ -164,9 +190,11 @@ export const ModalCreateSchedule = ({ close, show }) => {
                                                 </Picker>
 
                                             </View>
-
                                         </View>
 
+                                    </View>
+
+                                    <View style={style.daysContainer}>
                                         <Input
                                             placeholder="  SEG  TER  QUAR  QUI  SEX  SAB  DOM"
                                             borderColor={COLORS.blue}
@@ -177,11 +205,12 @@ export const ModalCreateSchedule = ({ close, show }) => {
                                             placeholder="Icone da tarefa"
                                             borderColor={COLORS.blue}
                                             backgroundColor={COLORS.white}
+
                                         />
+                                    </View>
 
 
-
-                                        {/* <View >
+                                    {/* <View >
                                             <DatePicker
                                                 mode="time"
                                                 minuteInterval={3}
@@ -190,7 +219,6 @@ export const ModalCreateSchedule = ({ close, show }) => {
                                             />
                                         </View> */}
 
-                                    </View>
 
                                     <Text style={style.text}>SELECIONE A CRIANÇA</Text>
 
@@ -211,6 +239,11 @@ export const ModalCreateSchedule = ({ close, show }) => {
                                     </View>
 
                                 </View>
+
+                                <TouchableOpacity style={style.buttonContainer}>
+                                    <Text style={style.textButton}>CRIAR</Text>
+                                </TouchableOpacity>
+
                             </>
                         )}
                     </Formik>
@@ -247,7 +280,7 @@ const style = StyleSheet.create({
     scheduleContainer: {
         // bottom: 0,
         // position: 'absolute',
-        height: '100%',
+        height: '98%',
         width: '100%',
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
@@ -265,7 +298,7 @@ const style = StyleSheet.create({
     text: {
         fontSize: 20,
         fontFamily: FONTS.mandali,
-        marginLeft: 20,
+        marginLeft: 10,
     },
     dateTimeContainer: {
         alignSelf: 'stretch',
@@ -275,15 +308,46 @@ const style = StyleSheet.create({
         // backgroundColor: COLORS.red
     },
     timeContainer: {
-        flexDirection: 'row'
+        width: 160,
+        height: 50,
+        borderWidth: 1,
+        borderColor: COLORS.blue,
+        backgroundColor: COLORS.white,
+        borderRadius: 10,
+    },
+    clockContainer: {
+        position: 'absolute',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        top: 1,
+        width: 150,
+        height: 50,
+        padding: 10
+        // backgroundColor: COLORS.red
+    },
+    textClock: {
+        fontSize: 20,
+        color: COLORS.gray
+    },
+    iconClock: {
+        width: 30,
+        height: 30,
+    },
+    selectContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     item: {
         fontSize: 20,
         fontFamily: FONTS.mandali,
+        color: COLORS.gray
+
     },
     picker: {
-        width: 180,
+        width: 170,
         height: 10,
+
     },
     periodDate: {
         justifyContent: 'center',
@@ -291,12 +355,37 @@ const style = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
         borderColor: COLORS.blue,
-        backgroundColor: COLORS.white
+        backgroundColor: COLORS.white,
+
+    },
+    daysContainer: {
+        height: 200,
+        // backgroundColor: COLORS.red
     },
     dependentsContainer: {
         flexDirection: 'row',
         marginLeft: 20,
-    }
+        // backgroundColor: COLORS.red
+    },
+    buttonContainer: {
+        position: 'absolute',
+        top: 525,
+        left: 280,
+        width: 95,
+        height: 95,
+        borderRadius: 50,
+        borderWidth: 1,
+        borderColor: COLORS.gray,
+        alignItems: 'center',
+        alignContent: 'center',
+        backgroundColor: COLORS.white,
+        ...bottomShadow
+
+    },
+    textButton: {
+        fontSize: 20,
+        marginTop: 35,
+    },
     // hour: {
     //     width: 180,
     //     height: 100,
