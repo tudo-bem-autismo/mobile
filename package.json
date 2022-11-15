@@ -35,6 +35,7 @@
     "react-native": "0.69.6",
     "react-native-app-intro-slider": "^4.0.4",
     "react-native-blur": "^3.2.2",
+    "react-native-bouncy-checkbox": "^3.0.6",
     "react-native-charts-wrapper": "^0.5.11",
     "react-native-date-picker": "^4.2.6",
     "react-native-document-picker": "^8.1.1",

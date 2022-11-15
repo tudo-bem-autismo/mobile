@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text, DatePickerIOSBase, Image } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 import modalBackground from '../../assets/images/modalBackground.png';
 import clock from '../../assets/icons/clock.png';
@@ -11,6 +12,7 @@ import { Input, MaskedInput } from "../Input";
 import { Picker } from "@react-native-picker/picker";
 import { getResponsibleDependentsService } from "../../services";
 import { Dependent } from "../DependentListing/Dependent";
+import { format } from "date-fns";
 
 
 const { height } = Dimensions.get('window')
@@ -18,6 +20,64 @@ const { height } = Dimensions.get('window')
 export const ModalCreateSchedule = ({ close, show }) => {
 
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+    const [selectedKid, setSelectedKid] = useState();
+
+    const [kidName, setKidName] = useState([]);
+
+    const [dependents, setDependents] = useState([]);
+
+    const [alarmDate, setAlarmDate] = useState(new Date());
+
+    const [alarmHour, setAlarmHour] = useState('12:00');
+
+    const [selectedDays, setSelectedDays] = useState([]);
+
+    const DAYS_OFF_WEEK = [
+        'DOM',
+        'SEG',
+        'TER',
+        'QUA',
+        'QUI',
+        'SEX',
+        'SAB',
+    ]
+
+    const WORKING_DAYS = [
+        'SEG',
+        'TER',
+        'QUA',
+        'QUI',
+        'SEX'
+    ]
+
+    const WEEKEND_DAYS = [
+        'SAB',
+        'DOM'
+    ]
+
+    const manageDays = (day) => {
+
+        const dayAlreadySelected = selectedDays.includes(day);
+
+        if (dayAlreadySelected) {
+            const newSelectedDays = selectedDays.filter(item => item !== day);
+
+            return setSelectedDays(newSelectedDays);
+        }
+
+        setSelectedDays([
+            ...selectedDays,
+            day
+        ])
+
+    }
+
+    const handleSelectDays = (days) => {
+
+        setSelectedDays(days)
+
+    }
 
     const showDatePicker = () => {
         setDatePickerVisibility(true);
@@ -27,22 +87,15 @@ export const ModalCreateSchedule = ({ close, show }) => {
         setDatePickerVisibility(false);
     };
 
-    const handleConfirm = (date) => {
-        console.warn("A date has been picked: ", date);
+    const handleHour = (date) => {
+
+        const hour = format(date, 'HH:mm')
+
+        setAlarmHour(hour)
+
         hideDatePicker();
     };
 
-    const [time, setTime] = useState('');
-
-    const [date, setDate] = useState('');
-
-    const [open, setOpen] = useState(false)
-
-    const [selectedKid, setSelectedKid] = useState();
-
-    const [kidName, setKidName] = useState([]);
-
-    const [dependents, setDependents] = useState([]);
 
     const getKid = async () => {
         const result = await getResponsibleDependentsService();
@@ -60,7 +113,6 @@ export const ModalCreateSchedule = ({ close, show }) => {
         getKid();
         getDependents()
     }, []);
-
 
     const [state, setState] = useState({
         opacity: new Animated.Value(0),
@@ -143,7 +195,7 @@ export const ModalCreateSchedule = ({ close, show }) => {
                                             >
 
                                                 <View style={style.clockContainer}>
-                                                    <Text style={style.textClock}>12:00</Text>
+                                                    <Text style={style.textClock}>{alarmHour}</Text>
                                                     <Image
                                                         source={clock}
                                                         style={style.iconClock}
@@ -153,8 +205,10 @@ export const ModalCreateSchedule = ({ close, show }) => {
                                                 <DateTimePickerModal
                                                     isVisible={isDatePickerVisible}
                                                     mode="time"
-                                                    onConfirm={handleConfirm}
+                                                    onConfirm={handleHour}
                                                     onCancel={hideDatePicker}
+                                                    date={alarmDate}
+                                                    is24Hour={true}
                                                     style={{ backgroundColor: COLORS.yellow, width: 200, }}
                                                 />
 
@@ -168,25 +222,30 @@ export const ModalCreateSchedule = ({ close, show }) => {
                                                     selectedValue={selectedKid}
                                                     dropdownIconColor={COLORS.blue}
                                                     dropdownIconRippleColor={COLORS.purple}
-
-                                                    onValueChange={(itemValue) => setSelectedKid(itemValue)}
+                                                    onValueChange={(itemValue) => handleSelectDays(itemValue)}
                                                 >
+
                                                     <Picker.Item
-                                                        label="Repetir"
-                                                        value="Repetir"
+                                                        label="Selecionar dias"
+                                                        value={[]}
                                                         style={style.item}
                                                     />
                                                     <Picker.Item
                                                         label="Todos os dias"
-                                                        value="Todos os dias"
+                                                        value={DAYS_OFF_WEEK}
                                                         style={style.item}
                                                     />
                                                     <Picker.Item
                                                         label="Seg a sex"
-                                                        value="Seg a sex"
+                                                        value={WORKING_DAYS}
                                                         style={style.item}
-
                                                     />
+                                                    <Picker.Item
+                                                        label="Final de semana"
+                                                        value={WEEKEND_DAYS}
+                                                        style={style.item}
+                                                    />
+
                                                 </Picker>
 
                                             </View>
@@ -195,20 +254,31 @@ export const ModalCreateSchedule = ({ close, show }) => {
                                     </View>
 
                                     <View style={style.daysContainer}>
-                                        <Input
-                                            placeholder="  SEG  TER  QUAR  QUI  SEX  SAB  DOM"
-                                            borderColor={COLORS.blue}
-                                            backgroundColor={COLORS.white}
-                                        />
 
-                                        <Input
-                                            placeholder="Icone da tarefa"
-                                            borderColor={COLORS.blue}
-                                            backgroundColor={COLORS.white}
+                                        {
+                                            DAYS_OFF_WEEK.map(item => (
 
-                                        />
+                                                <TouchableOpacity
+                                                    style={selectedDays.includes(item) ? style.selectedDayButton : style.dayButton}
+                                                    onPress={() => manageDays(item)}
+                                                    key={item}
+                                                >
+                                                    <Text style={style.dayText}>{item}</Text>
+                                                </TouchableOpacity>
+
+                                            ))
+                                        }
+
+
+
                                     </View>
 
+                                    <Input
+                                        placeholder="Icone da tarefa"
+                                        borderColor={COLORS.blue}
+                                        backgroundColor={COLORS.white}
+
+                                    />
 
                                     {/* <View >
                                             <DatePicker
@@ -292,7 +362,8 @@ const style = StyleSheet.create({
         flex: 1,
         margin: 15,
         // justifyContent: 'center',
-        // alignItems: 'center',
+        alignItems: 'center',
+
         // backgroundColor: COLORS.white
     },
     text: {
@@ -359,8 +430,15 @@ const style = StyleSheet.create({
 
     },
     daysContainer: {
-        height: 200,
-        // backgroundColor: COLORS.red
+        width: '95%',
+        height: 50,
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: COLORS.blue,
+        backgroundColor: COLORS.white,
+        fontSize: 17,
+        flexDirection: 'row',
+        padding: 5
     },
     dependentsContainer: {
         flexDirection: 'row',
@@ -386,12 +464,24 @@ const style = StyleSheet.create({
         fontSize: 20,
         marginTop: 35,
     },
-    // hour: {
-    //     width: 180,
-    //     height: 100,
-    //     backgroundColor: COLORS.red,
-
-    // }
-
+    dayButton: {
+        flex: 1,
+        alignSelf: 'stretch',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    dayText: {
+        fontFamily: FONTS.mandali,
+        fontSize: 15
+    },
+    selectedDayButton: {
+        flex: 1,
+        alignSelf: 'stretch',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: COLORS.blue,
+        borderRadius: 50
+    }
 });
 
