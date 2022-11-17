@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.white
     },
     textSelectGame: {
+        marginBottom: 50
     },
     listGames: {
         width: '100%',

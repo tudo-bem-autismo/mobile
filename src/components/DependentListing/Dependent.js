@@ -29,6 +29,7 @@ export const Dependent = ({ name, photo, onPress, selected }) => {
 const style = StyleSheet.create({
     option: {
         padding: 10,
+        alignItems: 'center'
     },
     textOption: {
         fontFamily: FONTS.title,
