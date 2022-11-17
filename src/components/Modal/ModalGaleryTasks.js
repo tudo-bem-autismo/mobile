@@ -260,7 +260,7 @@ const style = StyleSheet.create({
     },
     galeryContainer: {
         width: '100%',
-        height: '80%',
+        height: '86%',
         top: 18,
         backgroundColor: COLORS.white,
         borderColor: COLORS.purple,

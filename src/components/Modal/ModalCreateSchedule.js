@@ -203,6 +203,11 @@ export const ModalCreateSchedule = ({ close, show }) => {
                                         placeholder="Descreva a tarefa a ser criada"
                                         borderColor={COLORS.blue}
                                         backgroundColor={COLORS.white}
+                                        // onChangeText={handleChange('title')}
+                                        // onBlur={handleBlur('title')}
+                                        // value={values.title}
+                                        // hasError={!!errors.title}
+                                        // errorMessage={errors.title}
                                     />
 
                                     <View style={style.dateTimeContainer}>
@@ -380,7 +385,7 @@ const style = StyleSheet.create({
     scheduleContainer: {
         // bottom: 0,
         // position: 'absolute',
-        height: '98%',
+        height: '100%',
         width: '100%',
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
@@ -393,7 +398,6 @@ const style = StyleSheet.create({
         margin: 15,
         // justifyContent: 'center',
         alignItems: 'center',
-
         // backgroundColor: COLORS.white
     },
     headerContainer: {
@@ -497,10 +501,10 @@ const style = StyleSheet.create({
     },
     buttonContainer: {
         position: 'absolute',
-        top: 500,
+        top: 450,
         left: 280,
-        width: 95,
-        height: 95,
+        width: 75,
+        height: 75,
         borderRadius: 50,
         borderWidth: 1,
         borderColor: COLORS.gray,
@@ -512,12 +516,12 @@ const style = StyleSheet.create({
     },
     invisibleButtonContainer: {
         position: 'absolute',
-        top: 600,
+        top: 700,
         left: 280,
     },
     textButton: {
-        fontSize: 20,
-        marginTop: 32,
+        fontSize: 15,
+        marginTop: 25,
     },
     dayButton: {
         flex: 1,
@@ -561,7 +565,7 @@ const style = StyleSheet.create({
     selectDependentsContainer: {
         // backgroundColor q: COLORS.red,
         alignSelf: 'stretch',
-        marginTop: 30
+        marginTop: 10
 
     },
     closeModalIcon: {
