@@ -8,6 +8,7 @@ export const COLORS = {
     red: '#F00',
     purple: '#CCB7EF',
     purpleLight: '#EEE4FF',
+    purpleBold: '#442479',
     pink: '#F2BED4',
     pinkLight: '#FEE1ED',
     pinkBold: '#FF0071',

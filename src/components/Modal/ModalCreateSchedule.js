@@ -2,17 +2,20 @@ import React, { useEffect, useState } from "react";
 import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text, DatePickerIOSBase, Image } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
+import { format } from "date-fns";
 
 import modalBackground from '../../assets/images/modalBackground.png';
 import clock from '../../assets/icons/clock.png';
+import next from '../../assets/icons/next.png';
 import { FONTS, COLORS } from "../../assets/const";
-import { Button } from "../Button";
+import { BackButton, Button } from "../Button";
 import { Formik } from "formik";
 import { Input, MaskedInput } from "../Input";
 import { Picker } from "@react-native-picker/picker";
 import { getResponsibleDependentsService } from "../../services";
 import { Dependent } from "../DependentListing/Dependent";
-import { format } from "date-fns";
+import { MaterialIcons } from "@expo/vector-icons";
+import { ModalGaleryTasks } from "./ModalGaleryTasks";
 
 
 const { height } = Dimensions.get('window')
@@ -20,6 +23,8 @@ const { height } = Dimensions.get('window')
 export const ModalCreateSchedule = ({ close, show }) => {
 
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+    const [modalGaleryTasks, setModalGaleryTasks] = useState(false)
 
     const [selectedKid, setSelectedKid] = useState();
 
@@ -32,6 +37,10 @@ export const ModalCreateSchedule = ({ close, show }) => {
     const [alarmHour, setAlarmHour] = useState('12:00');
 
     const [selectedDays, setSelectedDays] = useState([]);
+
+    const [restrictions, setRestrictions] = useState([]);
+
+    const [newRestrictions, setNewRestrictions] = useState([]);
 
     const DAYS_OFF_WEEK = [
         'DOM',
@@ -175,6 +184,19 @@ export const ModalCreateSchedule = ({ close, show }) => {
 
                                 <View style={style.formContainer}>
 
+                                    <View style={style.headerContainer}>
+
+                                        <Text style={style.textTitle}>CRIAR TAREFA</Text>
+
+                                        <MaterialIcons
+                                            name="close"
+                                            size={35}
+                                            style={style.closeModalIcon}
+                                            onPress={close}
+                                        />
+
+                                    </View>
+
                                     <Input
                                         title="TITULO"
                                         iconName="calendar-o"
@@ -185,7 +207,7 @@ export const ModalCreateSchedule = ({ close, show }) => {
 
                                     <View style={style.dateTimeContainer}>
 
-                                        <Text style={style.text}>DIA E HORA</Text>
+                                        <Text style={style.textDateTime}>DIA E HORA</Text>
 
                                         <View style={style.selectContainer}>
 
@@ -269,48 +291,56 @@ export const ModalCreateSchedule = ({ close, show }) => {
                                             ))
                                         }
 
-
-
                                     </View>
 
-                                    <Input
-                                        placeholder="Icone da tarefa"
-                                        borderColor={COLORS.blue}
-                                        backgroundColor={COLORS.white}
+                                    <TouchableOpacity
+                                        style={style.modalGaleryButton}
+                                        onPress={() => setModalGaleryTasks(true)}
+                                    >
+                                        <Text style={style.textModalGalery}>Icone da tarefa</Text>
+                                        <Image source={next} />
+                                    </TouchableOpacity>
 
-                                    />
+                                    {
+                                        modalGaleryTasks && (
+                                            <View style={style.modalContainer}>
+                                                <ModalGaleryTasks
+                                                    show={modalGaleryTasks}
+                                                    close={() => setModalGaleryTasks(false)}
 
-                                    {/* <View >
-                                            <DatePicker
-                                                mode="time"
-                                                minuteInterval={3}
-                                                onTimeChange={selectedTime => setTime(selectedTime)}
-
-                                            />
-                                        </View> */}
-
-
-                                    <Text style={style.text}>SELECIONE A CRIANÇA</Text>
-
-                                    <View style={style.dependentsContainer}>
-
-                                        {
-                                            dependents.map(item => (
-                                                <Dependent
-                                                    name={item.name}
-                                                    photo={{ uri: item.photo }}
-                                                    key={item.id}
-                                                    onPress={() => {
-                                                    }}
                                                 />
-                                            ))
-                                        }
+                                            </View>
+                                        )
+                                    }
+
+                                    <View style={style.selectDependentsContainer}>
+
+                                        <Text style={style.text}>SELECIONE A CRIANÇA</Text>
+
+                                        <View style={style.dependentsContainer}>
+
+                                            {
+                                                dependents.map(item => (
+                                                    <Dependent
+                                                        name={item.name}
+                                                        photo={{ uri: item.photo }}
+                                                        key={item.id}
+                                                        onPress={() => {
+                                                        }}
+                                                    />
+                                                ))
+                                            }
+
+                                        </View>
 
                                     </View>
 
                                 </View>
 
-                                <TouchableOpacity style={style.buttonContainer}>
+                                <TouchableOpacity
+                                    style={modalGaleryTasks ? style.invisibleButtonContainer : style.buttonContainer}
+
+                                >
                                     <Text style={style.textButton}>CRIAR</Text>
                                 </TouchableOpacity>
 
@@ -366,10 +396,30 @@ const style = StyleSheet.create({
 
         // backgroundColor: COLORS.white
     },
+    headerContainer: {
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        alignSelf: 'stretch',
+        flexDirection: 'row',
+        paddingLeft: 15,
+        paddingRight: 20,
+        // backgroundColor: COLORS.darkBlue
+    },
+    textTitle: {
+        fontSize: 25,
+        fontFamily: FONTS.mandali,
+        color: COLORS.purpleBold
+    },
     text: {
         fontSize: 20,
         fontFamily: FONTS.mandali,
+        marginLeft: 20,
+    },
+    textDateTime: {
+        fontSize: 20,
+        fontFamily: FONTS.mandali,
         marginLeft: 10,
+
     },
     dateTimeContainer: {
         alignSelf: 'stretch',
@@ -447,7 +497,7 @@ const style = StyleSheet.create({
     },
     buttonContainer: {
         position: 'absolute',
-        top: 525,
+        top: 500,
         left: 280,
         width: 95,
         height: 95,
@@ -460,9 +510,14 @@ const style = StyleSheet.create({
         ...bottomShadow
 
     },
+    invisibleButtonContainer: {
+        position: 'absolute',
+        top: 600,
+        left: 280,
+    },
     textButton: {
         fontSize: 20,
-        marginTop: 35,
+        marginTop: 32,
     },
     dayButton: {
         flex: 1,
@@ -482,6 +537,35 @@ const style = StyleSheet.create({
         borderWidth: 1,
         borderColor: COLORS.blue,
         borderRadius: 50
+    },
+    modalGaleryButton: {
+        width: '95%',
+        height: 50,
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: COLORS.blue,
+        backgroundColor: COLORS.white,
+        fontSize: 17,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingLeft: 10,
+        paddingRight: 10,
+        marginTop: 30
+    },
+    textModalGalery: {
+        fontFamily: FONTS.mandali,
+        fontSize: 20,
+        color: COLORS.gray
+    },
+    selectDependentsContainer: {
+        // backgroundColor q: COLORS.red,
+        alignSelf: 'stretch',
+        marginTop: 30
+
+    },
+    closeModalIcon: {
+        // paddingLeft: 300,
     }
 });
 
