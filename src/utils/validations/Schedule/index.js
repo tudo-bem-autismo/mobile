@@ -6,9 +6,9 @@ import { yupToFormErrors } from 'formik';
 export const scheduleCreateTaskDataSchema = yup.object().shape({
     title: yup
         .string()
-        .min(4, 'No mínimo 4 caracteres')
-        .max(20, 'No máximo 20 caracteres')
-        .required('Insira seu nome'),
+        .min(1, 'No mínimo 1 caracteres')
+        .max(200, 'No máximo 200 caracteres')
+        .required('Insira o titulo da tarefa'),
 })
 
 

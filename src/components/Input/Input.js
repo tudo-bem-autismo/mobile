@@ -33,12 +33,13 @@ export const Input = ({
                     value={value}
                 />
 
-                {hasError && (
-                    <Text style={styles.errorText}>
-                        {errorMessage}
-                    </Text>
-                )}
             </View>
+            
+            {hasError && (
+                <Text style={styles.errorText}>
+                    {errorMessage}
+                </Text>
+            )}
 
         </View>
     );

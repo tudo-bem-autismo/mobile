@@ -6,7 +6,6 @@ import { format } from "date-fns";
 
 import modalBackground from '../../assets/images/modalBackground.png';
 import clock from '../../assets/icons/clock.png';
-import next from '../../assets/icons/next.png';
 import { FONTS, COLORS } from "../../assets/const";
 import { BackButton, Button } from "../Button";
 import { Formik } from "formik";
@@ -16,6 +15,8 @@ import { getResponsibleDependentsService } from "../../services";
 import { Dependent } from "../DependentListing/Dependent";
 import { MaterialIcons } from "@expo/vector-icons";
 import { ModalGaleryTasks } from "./ModalGaleryTasks";
+import { scheduleCreateTaskDataSchema } from "../../utils/validations/Schedule";
+import { InputGaleryTasks } from "../Input/InputGaleryTasks";
 
 
 const { height } = Dimensions.get('window')
@@ -26,10 +27,6 @@ export const ModalCreateSchedule = ({ close, show }) => {
 
     const [modalGaleryTasks, setModalGaleryTasks] = useState(false)
 
-    const [selectedKid, setSelectedKid] = useState();
-
-    const [kidName, setKidName] = useState([]);
-
     const [dependents, setDependents] = useState([]);
 
     const [alarmDate, setAlarmDate] = useState(new Date());
@@ -38,9 +35,13 @@ export const ModalCreateSchedule = ({ close, show }) => {
 
     const [selectedDays, setSelectedDays] = useState([]);
 
-    const [restrictions, setRestrictions] = useState([]);
+    const [galeryHasError, setGaleryHasError] = useState(false);
 
-    const [newRestrictions, setNewRestrictions] = useState([]);
+    const [daysOfWeekHasError, setDaysOfWeekHasError] = useState(false);
+
+    const [selectDependentHasError, setSelectDependentHasError] = useState(false);
+
+    const [selectedDependents, setSelectedDependents] = useState([]);
 
     const DAYS_OFF_WEEK = [
         'DOM',
@@ -80,6 +81,27 @@ export const ModalCreateSchedule = ({ close, show }) => {
             day
         ])
 
+        // console.log(selectedDays);
+
+    }
+
+    const manageDependents = (dependent) => {
+
+        const dependentAlreadySelected = selectedDependents.includes(dependent);
+
+        if (dependentAlreadySelected) {
+            const newSelectedDependents = selectedDependents.filter(item => item !== dependent)
+
+            return setSelectedDependents(newSelectedDependents)
+        }
+
+        setSelectedDependents([
+            ...selectedDependents,
+            dependent
+        ])
+
+        // console.log(selectedDependents);
+
     }
 
     const handleSelectDays = (days) => {
@@ -105,13 +127,6 @@ export const ModalCreateSchedule = ({ close, show }) => {
         hideDatePicker();
     };
 
-
-    const getKid = async () => {
-        const result = await getResponsibleDependentsService();
-        setKidName(result.data);
-
-    };
-
     const getDependents = async () => {
         const result = await getResponsibleDependentsService()
         setDependents(result.data)
@@ -119,7 +134,6 @@ export const ModalCreateSchedule = ({ close, show }) => {
     }
 
     useEffect(() => {
-        getKid();
         getDependents()
     }, []);
 
@@ -153,6 +167,26 @@ export const ModalCreateSchedule = ({ close, show }) => {
         }
     }, [show])
 
+    const initialValues = {
+        title: '',
+    }
+
+    const handleForm = async (data) => {
+
+        const newData = {
+            ...data,
+            alarmHour,
+            selectedDays,
+            selectedDependents
+        };
+
+        setGaleryHasError(true)
+        setDaysOfWeekHasError(true)
+        setSelectDependentHasError(true)
+        console.log(newData)
+
+    }
+
     return (
 
         <Animated.View
@@ -175,8 +209,8 @@ export const ModalCreateSchedule = ({ close, show }) => {
 
 
                     <Formik
-                        // validationSchema={responsibleUpdateSchema}
-                        // initialValues={initialValues}
+                        validationSchema={scheduleCreateTaskDataSchema}
+                        initialValues={initialValues}
                         onSubmit={values => handleForm(values)}
                     >
                         {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
@@ -186,12 +220,12 @@ export const ModalCreateSchedule = ({ close, show }) => {
 
                                     <View style={style.headerContainer}>
 
-                                        <Text style={style.textTitle}>CRIAR TAREFA</Text>
+                                        {/* <Text style={style.textTitle}>CRIAR TAREFA</Text> */}
 
                                         <MaterialIcons
                                             name="close"
                                             size={35}
-                                            style={style.closeModalIcon}
+                                            style={modalGaleryTasks ? style.invisibleCloseModalIcon : style.closeModalIcon}
                                             onPress={close}
                                         />
 
@@ -203,11 +237,11 @@ export const ModalCreateSchedule = ({ close, show }) => {
                                         placeholder="Descreva a tarefa a ser criada"
                                         borderColor={COLORS.blue}
                                         backgroundColor={COLORS.white}
-                                        // onChangeText={handleChange('title')}
-                                        // onBlur={handleBlur('title')}
-                                        // value={values.title}
-                                        // hasError={!!errors.title}
-                                        // errorMessage={errors.title}
+                                        onChangeText={handleChange('title')}
+                                        onBlur={handleBlur('title')}
+                                        value={values.title}
+                                        hasError={!!errors.title}
+                                        errorMessage={errors.title}
                                     />
 
                                     <View style={style.dateTimeContainer}>
@@ -246,7 +280,6 @@ export const ModalCreateSchedule = ({ close, show }) => {
 
                                                 <Picker
                                                     style={style.picker}
-                                                    selectedValue={selectedKid}
                                                     dropdownIconColor={COLORS.blue}
                                                     dropdownIconRippleColor={COLORS.purple}
                                                     onValueChange={(itemValue) => handleSelectDays(itemValue)}
@@ -280,7 +313,7 @@ export const ModalCreateSchedule = ({ close, show }) => {
 
                                     </View>
 
-                                    <View style={style.daysContainer}>
+                                    <View style={daysOfWeekHasError ? style.hasErrorDayButton : style.daysContainer}>
 
                                         {
                                             DAYS_OFF_WEEK.map(item => (
@@ -298,13 +331,10 @@ export const ModalCreateSchedule = ({ close, show }) => {
 
                                     </View>
 
-                                    <TouchableOpacity
-                                        style={style.modalGaleryButton}
+                                    <InputGaleryTasks
                                         onPress={() => setModalGaleryTasks(true)}
-                                    >
-                                        <Text style={style.textModalGalery}>Icone da tarefa</Text>
-                                        <Image source={next} />
-                                    </TouchableOpacity>
+                                        hasError={galeryHasError}
+                                    />
 
                                     {
                                         modalGaleryTasks && (
@@ -326,13 +356,20 @@ export const ModalCreateSchedule = ({ close, show }) => {
 
                                             {
                                                 dependents.map(item => (
-                                                    <Dependent
-                                                        name={item.name}
-                                                        photo={{ uri: item.photo }}
-                                                        key={item.id}
-                                                        onPress={() => {
-                                                        }}
-                                                    />
+
+                                                    <View 
+                                                    style={selectDependentHasError ? style.hasErrorDependentButton : style.dependentButton}
+                                                    key={item.id}
+                                                    >
+
+                                                        <Dependent
+                                                            name={item.name}
+                                                            photo={{ uri: item.photo }}
+                                                            selected={selectedDependents.includes(item.id)}
+                                                            onPress={() => manageDependents(item.id)}
+                                                        />
+
+                                                    </View>
                                                 ))
                                             }
 
@@ -344,7 +381,7 @@ export const ModalCreateSchedule = ({ close, show }) => {
 
                                 <TouchableOpacity
                                     style={modalGaleryTasks ? style.invisibleButtonContainer : style.buttonContainer}
-
+                                    onPress={handleSubmit}
                                 >
                                     <Text style={style.textButton}>CRIAR</Text>
                                 </TouchableOpacity>
@@ -375,12 +412,15 @@ const style = StyleSheet.create({
         width: '100%',
         height: '100%',
         position: 'absolute',
+        // backgroundColor: COLORS.red
     },
     modalContainer: {
         width: '100%',
         height: '100%',
         justifyContent: 'flex-end',
         alignItems: 'center',
+        // bottom: 10,
+        // backgroundColor: COLORS.beige
     },
     scheduleContainer: {
         // bottom: 0,
@@ -401,12 +441,15 @@ const style = StyleSheet.create({
         // backgroundColor: COLORS.white
     },
     headerContainer: {
+        position: 'absolute',
+        left: 285,
         alignItems: 'center',
         justifyContent: 'space-between',
         alignSelf: 'stretch',
         flexDirection: 'row',
         paddingLeft: 15,
-        paddingRight: 20,
+        zIndex: 2,
+        // paddingRight: 20,
         // backgroundColor: COLORS.darkBlue
     },
     textTitle: {
@@ -496,8 +539,21 @@ const style = StyleSheet.create({
     },
     dependentsContainer: {
         flexDirection: 'row',
-        marginLeft: 20,
+        marginLeft: 10,
         // backgroundColor: COLORS.red
+    },
+    dependentButton: {
+
+    },
+    hasErrorDependentButton: {
+        borderWidth: 1,
+        borderRadius: 10,
+        marginRight: 10,
+        borderColor: COLORS.red
+    },
+    selectedDependentButton: {
+        borderRadius: 10,
+        backgroundColor: COLORS.purple
     },
     buttonContainer: {
         position: 'absolute',
@@ -542,31 +598,27 @@ const style = StyleSheet.create({
         borderColor: COLORS.blue,
         borderRadius: 50
     },
-    modalGaleryButton: {
+    hasErrorDayButton: {
         width: '95%',
         height: 50,
         borderWidth: 1,
         borderRadius: 10,
-        borderColor: COLORS.blue,
+        borderColor: COLORS.red,
         backgroundColor: COLORS.white,
         fontSize: 17,
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingLeft: 10,
-        paddingRight: 10,
-        marginTop: 30
-    },
-    textModalGalery: {
-        fontFamily: FONTS.mandali,
-        fontSize: 20,
-        color: COLORS.gray
+        padding: 5
     },
     selectDependentsContainer: {
         // backgroundColor q: COLORS.red,
         alignSelf: 'stretch',
         marginTop: 10
 
+    },
+    invisibleCloseModalIcon: {
+        position: 'absolute',
+        top: 700,
+        left: 280,
     },
     closeModalIcon: {
         // paddingLeft: 300,

@@ -229,7 +229,7 @@ const style = StyleSheet.create({
         width: '100%',
         height: '100%',
         position: 'absolute',
-        bottom: 400,
+        bottom: 340,
         alignItems: 'center',
         justifyContent: 'center',
         // backgroundColor: COLORS.red
@@ -260,7 +260,7 @@ const style = StyleSheet.create({
     },
     galeryContainer: {
         width: '100%',
-        height: '86%',
+        height: '82%',
         top: 18,
         backgroundColor: COLORS.white,
         borderColor: COLORS.purple,
@@ -274,7 +274,7 @@ const style = StyleSheet.create({
         justifyContent: 'center',
     },
     headerContainer: {
-        flex: 1,
+        flex: .5,
         alignItems: 'center',
         justifyContent: 'space-around',
         alignSelf: 'stretch',
@@ -290,7 +290,7 @@ const style = StyleSheet.create({
         flexDirection: 'row'
     },
     selectTasksContainer: {
-        // flex: 10,
+        flex: 3,
         // marginBottom: 10,
         // backgroundColor: COLORS.red
     }
