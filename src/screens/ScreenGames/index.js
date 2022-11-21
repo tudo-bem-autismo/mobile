@@ -2,14 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, StatusBar } from 'react-native';
 import { ComponentGames } from '../../components/ComponentGames';
 import { ButtonAlert, ButtonGames, ButtonImage, ComponentGamesTwo } from '../../components';
-import { getStepGames } from '../../services';
+import { getStepGames } from '../../services/game';
 import { Loading } from '../Loading';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import { COLORS } from '../../assets/const';
 import { CongratulationsScreen } from '../CongratulationsScreen';
 import { MedalScreen } from '../MedalScreen';
 
-export function ScreenGames() {
+export function ScreenGames({route ,navigation}) {
+
+    let {idGames} = route.params;
+
+    // console.log(idGames);
+
+    // const {dados} = route.params;
 
     const [game, setGame] = useState([{
         "id": 0,
@@ -78,6 +84,12 @@ export function ScreenGames() {
 
     });
 
+    const getGames = async () =>{
+        const result = await getStepGames(idGames)
+        setGame(result.data)
+
+    }
+
     const getSteps = () => {
         getStepGames().then(
             (result) => {
@@ -89,8 +101,11 @@ export function ScreenGames() {
     }
     useEffect(() => {
         setIsLoading(false)
+        getGames()
+        // console.log(game)
 
-    }, [game])
+        // console.log(idGames)
+    }, [game[0].ordem])
 
 
     useEffect(() => {
@@ -100,16 +115,15 @@ export function ScreenGames() {
     }, [])
 
     const correctStep = () => {
-        console.log('vfgdsfb')
         setHits(hits + 1)
         setCurrenteStep(currentStep + 1)
         setCurrentGame(game[currentStep + 1])
-        console.log(hits)
+        // console.log(hits)
     }
 
     const incorrectStep = () => {
         setMistakes(mistakes+1)
-        console.log(mistakes)
+        // console.log(mistakes)
     }
 
     return (

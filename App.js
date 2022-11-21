@@ -26,6 +26,7 @@ import { DependentProfile } from './src/screens/DependentProfile';
 import { ResponsiveLogin } from './src/screens/Login';
 import { MenuDependent } from './src/screens/MenuDependent';
 import { GamesDependent } from './src/screens/GamesDependent';
+import { DependentListing } from './src/screens/DependentListing';
 
 export default function App() {
 
@@ -41,10 +42,11 @@ export default function App() {
     return (
 
       <>
-        <Navigation/>
-        {/* <ScreenGames /> */}
-        {/* <GamesDependent/> */}
-        <Toast />
+      {/* <ScreenGames/> */}
+      <Navigation/>
+      {/* <GamesDependent /> */}
+      {/* <GamesDependent/> */}
+      {/* <Toast /> */}
       </>
     );
   }

@@ -1,38 +1,40 @@
-
-import { MaterialIcons } from '@expo/vector-icons';
 import React, { useEffect, useState } from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-
 import styles from './style';
 import { COLORS } from '../../assets/const';
 import { Game } from '../../components/Games/Game';
 import { ModalApplyChildGame } from '../../components/Modal/ModalApplyChildGame';
 import { getGamesService } from '../../services/game';
+import { getGameKids } from '../../services/game';
+import { getGameByIdService } from '../../services/game';
 import { Loading } from '../Loading';
+import { ScreenGames } from '../ScreenGames';
 import { MainHeaderDependent } from '../../components/Header/MainHeaderDependent';
-import { getStepGames } from '../../services';
+import { getStepGames } from '../../services/game';
 
 export const GamesDependent = ({ navigation }) => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [games, setGames] = useState([]);
-    
-
+    const [idGames, setIdGames] = useState(0)
 
     const getGames = async () => {
-        const result = await getGamesService()
+        const result = await getGameKids()
         setGames(result.data)
     }
 
+    const openGame = () => {
+       setIdGames()
+        // console.log(idGames)
+
+        navigation.navigate('ScreenGames', {idGames})
+
+    }
     useEffect(() => {
         getGames()
         setIsLoading(false)
     }, [])
 
-const getId = (id) => {
-    const result = getStepGames(id)
-    return result
-}
 
     return (
 
@@ -58,22 +60,20 @@ const getId = (id) => {
                                             titleGame={item.name}
                                             gifGame={{ uri: item.icon }}
                                             key={item.id}
-                                            onPress={() => navigation.navigate('ScreenGames', getId(item.id))}
+                                            onPress={() => openGame(item.id)}
+
                                         />
+
                                     ))
+
+
                                 }
 
 
                             </View>
                         </ScrollView>
                     </View>
-
-                    {/* {showModal && (
-                        <ModalApplyChildGame
-                            close={() => setShowModal(false)}
-                            show={showModal}
-                        />
-                    )} */}
+                   
                 </>
             )}
         </View>

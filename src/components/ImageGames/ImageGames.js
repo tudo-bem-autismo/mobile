@@ -3,7 +3,6 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 
 import {COLORS, FONTS} from '../../assets/const';
 import feelingAnger from '../../assets/images/feelings.png';
-import {getStepGames} from '../../services/stepGames';
 
 
 export const ImageGames = ({srcImageGames}) =>{
