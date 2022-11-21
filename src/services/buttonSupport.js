@@ -11,7 +11,7 @@ export const registerButtonSupport = async (data) => {
     };
     //const id = await getData('@id')
 
-   
+   console.log(data)
 
     const formData = new FormData();
     formData.append("imagem", data.photo1);

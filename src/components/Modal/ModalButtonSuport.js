@@ -19,6 +19,7 @@ import { Loading } from "../../screens/Loading";
 import { Picker } from "@react-native-picker/picker";
 import * as ImagePicker from "expo-image-picker";
 
+
 import file from '../../assets/images/addIcon.png'
 import { colors } from "react-native-swiper-flatlist/src/themes";
 import { registerButtonSupport } from "../../services";
@@ -37,6 +38,13 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
   const [image4, setImage4] = useState(null);
   const [image5, setImage5] = useState(null);
 
+  const [midia1, setMidia1] = useState(null);
+  const [midia2, setMidia2] = useState(null);
+  const [midia3, setMidia3] = useState(null);
+  const [midia4, setMidia4] = useState(null);
+  const [midia5, setMidia5] = useState(null);
+
+
   const pickImage1 = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -44,6 +52,14 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
       aspect: [4, 3],
       quality: 1,
     });
+
+    const tipoMidia = result.type
+
+    if(tipoMidia == 'video') {
+      setMidia1(2)
+    } else {
+      setMidia1(1)
+    }
   
     if (!result.cancelled) {
       setImage1(result.uri);
@@ -57,6 +73,14 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
       aspect: [4, 3],
       quality: 1,
     });
+
+    const tipoMidia = result.type
+
+    if(tipoMidia == 'video') {
+      setMidia2(2)
+    } else {
+      setMidia2(1)
+    }
   
     if (!result.cancelled) {
       setImage2(result.uri);
@@ -70,6 +94,14 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
       aspect: [4, 3],
       quality: 1,
     });
+
+    const tipoMidia = result.type
+
+    if(tipoMidia == 'video') {
+      setMidia3(2)
+    } else {
+      setMidia3(1)
+    }
   
     if (!result.cancelled) {
       setImage3(result.uri);
@@ -83,6 +115,14 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
       aspect: [4, 3],
       quality: 1,
     });
+
+    const tipoMidia = result.type
+
+    if(tipoMidia == 'video') {
+      setMidia4(2)
+    } else {
+      setMidia4(1)
+    }
   
     if (!result.cancelled) {
       setImage4(result.uri);
@@ -96,21 +136,38 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
       aspect: [4, 3],
       quality: 1,
     });
+
+    const tipoMidia = result.type
+
+    if(tipoMidia == 'video') {
+      setMidia5(2)
+    } else {
+      setMidia5(1)
+    }
   
     if (!result.cancelled) {
       setImage5(result.uri);
     }
   };
 
-  const [selectedMidia, setSelectedMidia] = useState(1);
+  const [selectedMidia, setSelectedMidia] = useState(0);
 
   const criarButtonSupport = async () => {
 
-    let photo1 = false
+    // if (selectedMidia == 0) {
+    //   Toast.show({
+    //     type: "error",
+    //     text1: "Selecione a mídia desejada",
+    //   });
+    // }
 
-    if(image1){
-      
-      // Criando as configurações da imagem
+    let photo1 = false
+    let photo2 = false
+    let photo3 = false
+    let photo4 = false
+    let photo5 = false
+
+    if(midia1 == 1) {
       const filename = image1.split("/").pop();
       const match = /\.(\w+)$/.exec(filename);
       const type = match ? `image/${match[1]}` : `image`;
@@ -120,15 +177,18 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
         type,
         uri: image1,
       };
+    } else {
+      const filename = image1.split("/").pop();
+      const type = 'video/mp4'
 
-      //console.log(photo1)
+      photo1 = {
+        name: filename,
+        type,
+        uri: image1,
+      };
     }
 
-    let photo2 = false
-
-    if(image2){
-      
-      // Criando as configurações da imagem
+    if(midia2 == 1) {
       const filename = image2.split("/").pop();
       const match = /\.(\w+)$/.exec(filename);
       const type = match ? `image/${match[1]}` : `image`;
@@ -138,14 +198,18 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
         type,
         uri: image2,
       };
+    } else {
+      const filename = image2.split("/").pop();
+      const type = 'video/mp4'
 
-      //console.log(photo2)
+      photo2 = {
+        name: filename,
+        type,
+        uri: image2,
+      };
     }
-    let photo3 = false
 
-    if(image3){
-      
-      // Criando as configurações da imagem
+    if(midia3 == 1) {
       const filename = image3.split("/").pop();
       const match = /\.(\w+)$/.exec(filename);
       const type = match ? `image/${match[1]}` : `image`;
@@ -155,14 +219,18 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
         type,
         uri: image3,
       };
+    } else {
+      const filename = image3.split("/").pop();
+      const type = 'video/mp4'
 
+      photo3 = {
+        name: filename,
+        type,
+        uri: image3,
+      };
     }
 
-    let photo4 = false
-
-    if(image4){
-      
-      // Criando as configurações da imagem
+    if(midia4 == 1) {
       const filename = image4.split("/").pop();
       const match = /\.(\w+)$/.exec(filename);
       const type = match ? `image/${match[1]}` : `image`;
@@ -172,14 +240,18 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
         type,
         uri: image4,
       };
+    } else {
+      const filename = image4.split("/").pop();
+      const type = 'video/mp4'
 
+      photo4 = {
+        name: filename,
+        type,
+        uri: image4,
+      };
     }
 
-    let photo5 = false
-
-    if(image5){
-      
-      // Criando as configurações da imagem
+    if(midia5 == 1) {
       const filename = image5.split("/").pop();
       const match = /\.(\w+)$/.exec(filename);
       const type = match ? `image/${match[1]}` : `image`;
@@ -189,28 +261,34 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
         type,
         uri: image5,
       };
+    } else {
+      const filename = image1.split("/").pop();
+      const type = 'video/mp4'
 
-      const data = {
-        photo1,
-        photo2,
-        photo3,
-        photo4,
-        photo5
+      photo5 = {
+        name: filename,
+        type,
+        uri: image5,
       };
-
-      const result = await registerButtonSupport(data)
-      console.log(result)
-
-    if (result.success) {
-      return Toast.show({
-        type: "success",
-        text1: "Conteúdo inserido com sucesso com sucesso",
-      });
     }
-
-    }
-
-
+        const data = {
+          photo1,
+          photo2,
+          photo3,
+          photo4,
+          photo5
+        };
+  
+        const result = await registerButtonSupport(data)
+  
+        if (result.success) {
+          return Toast.show({
+            type: "success",
+            text1: "Conteúdo inserido com sucesso com sucesso",
+          });
+        }
+        close()
+         
   }
   
   
@@ -315,10 +393,12 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
                     setSelectedMidia(itemValue)
                   }
                   style={style.picker}
-                 >
-                      <Picker.Item label="Foto - Máx 20" value="0" />
-                      <Picker.Item label="Áudio - Máx 20" value="7" />
-                      <Picker.Item label="Vídeo - Máx 20" value="31" />
+                 >    
+                      <Picker.Item label="Selecione o tipo de mídia" value="0" />
+                      <Picker.Item label="Foto - Máx 20" value="1" />
+                      <Picker.Item label="Vídeo - Máx 20" value="2" />
+                      <Picker.Item label="Áudio - Máx 20" value="3" />
+                      
                   </Picker>
                   {/* <View style={{backgroundColor: COLORS.black, flex: 1, }}> */}
 

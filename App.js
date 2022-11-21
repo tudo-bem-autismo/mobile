@@ -27,6 +27,8 @@ import { DependentProfile } from './src/screens/DependentProfile';
 import { ResponsiveLogin } from './src/screens/Login';
 import { SupportButton } from './src/screens';
 
+
+
 export default function App() {
 
   const [fontsLoaded] = useFonts({
@@ -41,7 +43,7 @@ export default function App() {
     return (
 
       <>
-        <SupportButton />
+        <SupportButton/>
         <Toast />
       </>
     );

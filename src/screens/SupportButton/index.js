@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { Image, ScrollView, Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import { COLORS, FONTS } from '../../assets/const';
 import { getResponsibleDependentsService } from '../../services';
-
 import { MainHeader } from '../../components/Header/MainHeader';
+
 import { Loading } from '../Loading';
 import { Dependent } from "../../components/DependentListing/Dependent";
 import styles from './style';
-import { ModalButtonSuport } from '../../components';
+import { ModalButtonSuport }  from '../../components';
 
 export const SupportButton = ({ navigation }) => {
 
