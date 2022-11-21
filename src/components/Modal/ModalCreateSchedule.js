@@ -21,7 +21,7 @@ import { InputGaleryTasks } from "../Input/InputGaleryTasks";
 
 const { height } = Dimensions.get('window')
 
-export const ModalCreateSchedule = ({ close, show }) => {
+export const ModalCreateSchedule = ({ close, show, navigation }) => {
 
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
@@ -42,6 +42,10 @@ export const ModalCreateSchedule = ({ close, show }) => {
     const [selectDependentHasError, setSelectDependentHasError] = useState(false);
 
     const [selectedDependents, setSelectedDependents] = useState([]);
+
+    const [galeryTask, setGaleryTask] = useState(null);
+
+    const [imageTask, setImageTask] = useState(null);
 
     const DAYS_OFF_WEEK = [
         'DOM',
@@ -105,9 +109,7 @@ export const ModalCreateSchedule = ({ close, show }) => {
     }
 
     const handleSelectDays = (days) => {
-
         setSelectedDays(days)
-
     }
 
     const showDatePicker = () => {
@@ -177,7 +179,8 @@ export const ModalCreateSchedule = ({ close, show }) => {
             ...data,
             alarmHour,
             selectedDays,
-            selectedDependents
+            selectedDependents,
+            galeryTask
         };
 
         setGaleryHasError(true)
@@ -332,6 +335,7 @@ export const ModalCreateSchedule = ({ close, show }) => {
                                     </View>
 
                                     <InputGaleryTasks
+                                        image={{uri : imageTask}}
                                         onPress={() => setModalGaleryTasks(true)}
                                         hasError={galeryHasError}
                                     />
@@ -342,7 +346,9 @@ export const ModalCreateSchedule = ({ close, show }) => {
                                                 <ModalGaleryTasks
                                                     show={modalGaleryTasks}
                                                     close={() => setModalGaleryTasks(false)}
-
+                                                    setGaleryTask={setGaleryTask}
+                                                    setImageTask={setImageTask}
+                                                    navigation={navigation}
                                                 />
                                             </View>
                                         )

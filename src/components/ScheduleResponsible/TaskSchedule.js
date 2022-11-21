@@ -2,13 +2,16 @@ import React from "react";
 import { TouchableOpacity, StyleSheet, View, Image, Text } from "react-native";
 import { COLORS } from "../../assets/const";
 
-export const TaskSchedule = ({ image, title }) => {
+export const TaskSchedule = ({ image, title, onPress }) => {
 
     return (
 
         <View style={style.taskContainer}>
 
-            <TouchableOpacity style={style.taskButton}>
+            <TouchableOpacity 
+            style={style.taskButton}
+            onPress={() => onPress()}
+            >
 
                 <View style={style.imageTaskContainer}>
                     <Image

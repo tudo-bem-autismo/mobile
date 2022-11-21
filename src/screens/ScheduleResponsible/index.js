@@ -38,7 +38,8 @@ export const ScheduleResponsible = ({ navigation }) => {
                             <ModalCreateSchedule
                                 show={modalCreateSchedule}
                                 close={() => setModalCreateSchedule(false)}
-
+                                navigation={navigation}
+                                
                             />
                         </View>
 

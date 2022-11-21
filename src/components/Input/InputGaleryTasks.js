@@ -6,7 +6,7 @@ import { getGendersService } from "../../services/gender";
 import next from '../../assets/icons/next.png';
 
 
-export const InputGaleryTasks = ({ hasError, onPress }) => {
+export const InputGaleryTasks = ({ hasError, onPress, image }) => {
 
   return (
 
@@ -15,6 +15,7 @@ export const InputGaleryTasks = ({ hasError, onPress }) => {
       onPress={() => onPress()}
     >
       <Text style={style.textModalGalery}>Icone da tarefa</Text>
+      <Image style={style.imageTask} source={{uri : image}}/>
       <Image source={next} />
     </TouchableOpacity>
 
@@ -58,4 +59,9 @@ const style = StyleSheet.create({
     fontSize: 20,
     color: COLORS.gray
   },
+  imageTask: {
+    width: 50,
+    height: 50,
+    backgroundColor: COLORS.red
+  }
 });

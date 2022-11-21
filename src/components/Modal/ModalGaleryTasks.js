@@ -22,9 +22,32 @@ import studying from '../../assets/images/studying.png';
 
 const { height } = Dimensions.get('window')
 
-export const ModalGaleryTasks = ({ close, show }) => {
+export const ModalGaleryTasks = ({ close, show, setGaleryTask, setImageTask, navigation }) => {
 
     const [isLoading, setIsLoading] = useState(true);
+
+    const [task, setTask] = useState([
+        {
+            'id': 1,
+            'image': wake,
+            'title': 'beber agua'
+        },
+        {
+            'id': 2,
+            'image': brushingTeeth,
+            'title': 'escovar os dentes'
+        },
+        {
+            'id': 3,
+            'image': washHands,
+            'title': 'pentear cabelos'
+        },
+    ]);
+
+    const selectedTask = (task) => {
+        setGaleryTask(task.id)
+        close()
+    }
 
     useEffect(() => {
         setIsLoading(false)
@@ -103,105 +126,19 @@ export const ModalGaleryTasks = ({ close, show }) => {
 
                                 </View>
 
-                                <View style={style.selectTasksContainer}>
 
-                                    <View style={style.tasksGaleryContainer}>
-
+                                {
+                                    task.map(item => (
                                         <TaskSchedule
-                                            image={wake}
-                                            title="ACORDAR"
+                                            image={item.image}
+                                            title='oi'
+                                            key={item.id}
+                                            onPress={() =>
+                                                selectedTask(item)}
                                         />
+                                    ))
+                                }
 
-                                        <TaskSchedule
-                                            image={brushingTeeth}
-                                            title="ESCOVAR OS DENTES"
-                                        />
-
-                                        <TaskSchedule
-                                            image={washHands}
-                                            title="LAVAR AS MAOS"
-                                        />
-
-                                        <TaskSchedule
-                                            image={studying}
-                                            title="ESTUDAR"
-                                        />
-
-                                    </View>
-
-                                    <View style={style.tasksGaleryContainer}>
-
-                                        <TaskSchedule
-                                            image={wake}
-                                            title="ACORDAR"
-                                        />
-
-                                        <TaskSchedule
-                                            image={brushingTeeth}
-                                            title="ESCOVAR OS DENTES"
-                                        />
-
-                                        <TaskSchedule
-                                            image={washHands}
-                                            title="LAVAR AS MAOS"
-                                        />
-
-                                        <TaskSchedule
-                                            image={studying}
-                                            title="ESTUDAR"
-                                        />
-
-                                    </View>
-
-                                    <View style={style.tasksGaleryContainer}>
-
-                                        <TaskSchedule
-                                            image={wake}
-                                            title="ACORDAR"
-                                        />
-
-                                        <TaskSchedule
-                                            image={brushingTeeth}
-                                            title="ESCOVAR OS DENTES"
-                                        />
-
-                                        <TaskSchedule
-                                            image={washHands}
-                                            title="LAVAR AS MAOS"
-                                        />
-
-                                        <TaskSchedule
-                                            image={studying}
-                                            title="ESTUDAR"
-                                        />
-
-                                    </View>
-
-                                    <View style={style.tasksGaleryContainer}>
-
-                                        <TaskSchedule
-                                            image={wake}
-                                            title="ACORDAR"
-                                        />
-
-                                        <TaskSchedule
-                                            image={brushingTeeth}
-                                            title="ESCOVAR OS DENTES"
-                                        />
-
-                                        <TaskSchedule
-                                            image={washHands}
-                                            title="LAVAR AS MAOS"
-                                        />
-
-                                        <TaskSchedule
-                                            image={studying}
-                                            title="ESTUDAR"
-                                        />
-
-                                    </View>
-
-                                </View>
 
                             </View>
 
