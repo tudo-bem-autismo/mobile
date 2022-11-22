@@ -10,8 +10,9 @@ export const registerButtonSupport = async (data) => {
       },
     };
     //const id = await getData('@id')
+    
 
-   console.log(data)
+   
 
     const formData = new FormData();
     formData.append("imagem", data.photo1);
@@ -19,7 +20,7 @@ export const registerButtonSupport = async (data) => {
     formData.append("imagem", data.photo3);
     formData.append("imagem", data.photo4);
     formData.append("imagem", data.photo5);
-    formData.append("id_crianca", 1);
+    formData.append("id_crianca", data.idCrianca);
 
     const result = await api.post("/botaoApoio", formData, options);
 

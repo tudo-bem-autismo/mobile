@@ -18,6 +18,8 @@ export const SupportButton = ({ navigation }) => {
 
     const [dependents, setDependents] = useState([]);
 
+    const [idDependents, setIdDependents] = useState(0);
+
     const getDependents = async () => {
         const result = await getResponsibleDependentsService()
         setDependents(result.data)
@@ -69,7 +71,7 @@ export const SupportButton = ({ navigation }) => {
                                                     style={style.buttonContainer}
                                                     onPress={() => onPress()}>
                                                     <TouchableOpacity
-                                                        onPress={() => setModal(true)}
+                                                        onPress={() => {setModal(true); setIdDependents(item.id)}}
                                                         style={style.button}>
                                                         <Text style={style.textButton}>CRIAR</Text>
                                                     </TouchableOpacity>
@@ -91,6 +93,7 @@ export const SupportButton = ({ navigation }) => {
                     {modal && (
                         <ModalButtonSuport
                         close={() => setModal(false)}
+                        idCrianca={idDependents}
                         show={modal}
                         />
                     )}
