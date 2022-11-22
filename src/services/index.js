@@ -5,4 +5,5 @@ export * from './autimsLevel';
 export * from './kid';
 export * from './api';
 export * from './reports';
+export * from './game';
 

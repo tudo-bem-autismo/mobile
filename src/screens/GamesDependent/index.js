@@ -11,6 +11,7 @@ import { Loading } from '../Loading';
 import { ScreenGames } from '../ScreenGames';
 import { MainHeaderDependent } from '../../components/Header/MainHeaderDependent';
 import { getStepGames } from '../../services/game';
+import { getData } from '../../utils/storage';
 
 export const GamesDependent = ({ navigation }) => {
 
@@ -22,10 +23,8 @@ export const GamesDependent = ({ navigation }) => {
         const result = await getGameKids()
         setGames(result.data)
     }
-
     const openGame = () => {
        setIdGames()
-        // console.log(idGames)
 
         navigation.navigate('ScreenGames', {idGames})
 

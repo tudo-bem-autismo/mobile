@@ -166,7 +166,9 @@ export function ScreenGames({route ,navigation}) {
                                 }
                         
                         </View>
-                    ):(<MedalScreen/>)
+                    ):(<MedalScreen
+                        navigation={navigation}
+                        />)
                 )}
             
         </>

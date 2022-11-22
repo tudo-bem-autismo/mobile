@@ -153,9 +153,7 @@ export const getGamesByResponsible = async () => {
 export const getStepGames = async () => {
 
     try{
-        const idGames = await getData('@id')
-        console.log(idGames);
-
+        
         const result = await api.get(`/miniJogo/1`)
         const data = result.data[0].tbl_situacao_escolha
     
@@ -178,11 +176,10 @@ export const getStepGames = async () => {
         //  }
 
         //console.log(result.data[0])
-
-       
+        
         return{
                 success,
-                data: data,
+                data: data
                 // dataTwo: formattedDataTwo
         }
         
