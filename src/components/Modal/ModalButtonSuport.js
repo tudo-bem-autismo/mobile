@@ -23,7 +23,7 @@ import file from '../../assets/images/addIcon.png'
 import { colors } from "react-native-swiper-flatlist/src/themes";
 import { registerButtonSupport } from "../../services";
 import Toast from "react-native-toast-message";
-
+import { FontAwesome } from '@expo/vector-icons';
 
 
 const { height } = Dimensions.get("window");
@@ -44,7 +44,11 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
   const [midia5, setMidia5] = useState(null);
 
   const [tipoMidia1, setTipoMidia1] = useState('');
-  const [nomeMidia1, setNomeMidia1] = useState('');
+  const [tipoMidia2, setTipoMidia2] = useState('');
+  const [tipoMidia3, setTipoMidia3] = useState('');
+  const [tipoMidia4, setTipoMidia4] = useState('');
+  const [tipoMidia5, setTipoMidia5] = useState('');
+
 
 
   const pickImage1 = async () => {
@@ -55,15 +59,14 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
       quality: 1,
     });
 
-    console.log(result)
     const tipoMidia = result.type
 
     if(tipoMidia == 'video') {
       setMidia1(2)
-      setTipoMidia1('Vídeo')
+      setTipoMidia1('video-camera')
     } else {
       setMidia1(1)
-      setTipoMidia1('Imagem')
+      setTipoMidia1('photo')
      
     }
   
@@ -84,8 +87,10 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
 
     if(tipoMidia == 'video') {
       setMidia2(2)
+      setTipoMidia2('video-camera')
     } else {
       setMidia2(1)
+      setTipoMidia2('photo')
     }
   
     if (!result.cancelled) {
@@ -105,8 +110,10 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
 
     if(tipoMidia == 'video') {
       setMidia3(2)
+      setTipoMidia3('video-camera')
     } else {
       setMidia3(1)
+      setTipoMidia3('photo')
     }
   
     if (!result.cancelled) {
@@ -126,8 +133,10 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
 
     if(tipoMidia == 'video') {
       setMidia4(2)
+      setTipoMidia4('video-camera')
     } else {
       setMidia4(1)
+      setTipoMidia4('photo')
     }
   
     if (!result.cancelled) {
@@ -147,8 +156,10 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
 
     if(tipoMidia == 'video') {
       setMidia5(2)
+      setTipoMidia5('video-camera')
     } else {
       setMidia5(1)
+      setTipoMidia5('photo')
     }
   
     if (!result.cancelled) {
@@ -420,17 +431,20 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
                   style={{marginVertical: 50}}
                   >
                     
-                    <TouchableOpacity style={style.contentImg} onPress={pickImage1}>
-                      {image1 ?
-                        (<Image source={{ uri: image1 }} style={style.foto} />) : (<Image source={file} style={style.file} />)
-                      }
-                      <Text>{tipoMidia1}</Text>
-                    </TouchableOpacity>
+                      <TouchableOpacity style={style.contentImg} onPress={pickImage1}>
+                        {image1 ?
+                          (<Image source={{ uri: image1 }} style={style.foto} />) : (<Image source={file} style={style.file} />)
+                        }
+                        <FontAwesome name={tipoMidia1} style={style.iconMidia}/>
+                      </TouchableOpacity>
+                    
+                    
                     {image1 && (
                       <TouchableOpacity style={style.contentImg} onPress={pickImage2}>
                       {image2 ?
                         (<Image source={{ uri: image2 }} style={style.foto} />) : (<Image source={file} style={style.file} />)
                       }
+                      <FontAwesome name={tipoMidia2} style={style.iconMidia}/>
                     </TouchableOpacity>
                     )}
                     
@@ -440,6 +454,7 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
                         {image3 ?
                           (<Image source={{ uri: image3 }} style={style.foto} />) : (<Image source={file} style={style.file} />)
                         }
+                        <FontAwesome name={tipoMidia3} style={style.iconMidia}/>
                       </TouchableOpacity>
                      )} 
                     
@@ -449,6 +464,7 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
                           {image4 ?
                             (<Image source={{ uri: image4 }} style={style.foto} />) : (<Image source={file} style={style.file} />)
                           }
+                          <FontAwesome name={tipoMidia4} style={style.iconMidia}/>
                           </TouchableOpacity>
                         )
                       }
@@ -459,6 +475,7 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
                             {image5 ?
                               (<Image source={{ uri: image5 }} style={style.foto} />) : (<Image source={file} style={style.file} />)
                             }
+                            <FontAwesome name={tipoMidia5} style={style.iconMidia}/>
                           </TouchableOpacity>
                         )
                       }
@@ -595,11 +612,11 @@ const style = StyleSheet.create({
     //backgroundColor: COLORS.red
   },
   contentImg: {
-    width: 130,
-    height: 130,
+    width: 140,
+    height: 140,
     justifyContent: "center",
     alignItems: "center",
-    marginRight: 15
+    marginRight: 15,
   },
   foto: {
     width: "100%",
@@ -609,5 +626,11 @@ const style = StyleSheet.create({
   file: {
     width: "100%",
     height: "100%",
+  },
+  iconMidia: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 30,
+    marginTop: 5,
   },
 });

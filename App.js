@@ -26,6 +26,7 @@ import { HomeDependent } from './src/screens/HomeDependent';
 import { DependentProfile } from './src/screens/DependentProfile';
 import { ResponsiveLogin } from './src/screens/Login';
 import { SupportButton } from './src/screens';
+import { SupportButtonManagement } from './src/screens/SupportButton/buttonAlertManagement';
 
 
 
@@ -43,7 +44,7 @@ export default function App() {
     return (
 
       <>
-        <SupportButton/>
+        <SupportButtonManagement/>
         <Toast />
       </>
     );

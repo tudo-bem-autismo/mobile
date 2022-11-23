@@ -10,10 +10,6 @@ export const registerButtonSupport = async (data) => {
       },
     };
     //const id = await getData('@id')
-    
-
-   
-
     const formData = new FormData();
     formData.append("imagem", data.photo1);
     formData.append("imagem", data.photo2);
@@ -42,3 +38,36 @@ export const registerButtonSupport = async (data) => {
     };
   }
 };
+
+export const getButtonSupportDependent = async () => {
+  try {
+
+    // const id = await getData('@idDependent')
+
+    const result = await api.get(`/botaoApoio/4`)
+
+    const success = result.status === 200
+    
+    const formattedData = result.data.map(item => {
+      return {
+          id: item.id,
+          midia: item.midia,
+          nomeOriginal: item.nome_original,
+          tipoMidia: item.tbl_tipo_midia.tipo
+      }
+  })
+
+    return {
+      success,
+      data: formattedData
+    }
+
+
+  } catch (error) {
+    showErrorToast(error.response.data.message)
+    return {
+      success: false,
+      data: error.response.data
+    }
+  }
+}
