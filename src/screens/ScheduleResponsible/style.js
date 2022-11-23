@@ -17,6 +17,27 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         backgroundColor: COLORS.white
     },
+    backgroundContainer: {
+        width: '100%',
+        height: '92%',
+        marginBottom: 80,
+        alignSelf: 'stretch',
+    },  
+    dependentsContainer: {
+        flex: 3,
+        // backgroundColor: COLORS.red,
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        paddingLeft: 20,
+        paddingBottom: 40,
+    },
+    buttonContainer: {
+        flex: 2.5,
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        paddingRight: 50,
+        // backgroundColor: COLORS.red
+    },
     modalContainer: {
         position: 'absolute',
         justifyContent: 'flex-end',

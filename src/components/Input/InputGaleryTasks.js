@@ -15,7 +15,7 @@ export const InputGaleryTasks = ({ hasError, onPress, image }) => {
       onPress={() => onPress()}
     >
       <Text style={style.textModalGalery}>Icone da tarefa</Text>
-      <Image style={style.imageTask} source={{uri : image}}/>
+      {/* <Image style={style.imageTask} source={{uri : image}}/> */}
       <Image source={next} />
     </TouchableOpacity>
 

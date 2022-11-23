@@ -18,7 +18,6 @@ import { ModalGaleryTasks } from "./ModalGaleryTasks";
 import { scheduleCreateTaskDataSchema } from "../../utils/validations/Schedule";
 import { InputGaleryTasks } from "../Input/InputGaleryTasks";
 
-
 const { height } = Dimensions.get('window')
 
 export const ModalCreateSchedule = ({ close, show, navigation }) => {
@@ -335,7 +334,7 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
                                     </View>
 
                                     <InputGaleryTasks
-                                        image={{uri : imageTask}}
+                                        // image={{uri : imageTask}}
                                         onPress={() => setModalGaleryTasks(true)}
                                         hasError={galeryHasError}
                                     />
@@ -363,9 +362,9 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
                                             {
                                                 dependents.map(item => (
 
-                                                    <View 
-                                                    style={selectDependentHasError ? style.hasErrorDependentButton : style.dependentButton}
-                                                    key={item.id}
+                                                    <View
+                                                        style={selectDependentHasError ? style.hasErrorDependentButton : style.dependentButton}
+                                                        key={item.id}
                                                     >
 
                                                         <Dependent
