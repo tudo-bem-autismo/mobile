@@ -19,6 +19,12 @@ import { scheduleCreateTaskDataSchema } from "../../utils/validations/Schedule";
 import { InputGaleryTasks } from "../Input/InputGaleryTasks";
 import { Loading } from "../../screens/Loading";
 
+import exclude from "../../assets/icons/exclude.png";
+import manage from "../../assets/icons/manage.png";
+import done from "../../assets/icons/done.png";
+import brushingTeeth from '../../assets/images/brushingTeeth.png';
+
+
 const { height } = Dimensions.get('window')
 
 export const ModalListingSchedule = ({ close, show, navigation, idDependent }) => {
@@ -27,7 +33,7 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
 
     const [isLoading, setIsLoading] = useState(true);
 
-    const [selectedDays, setSelectedDays] = useState([]);
+    const [selectedDay, setSelectedDay] = useState([]);
 
     const [daysOfWeekHasError, setDaysOfWeekHasError] = useState(false);
 
@@ -109,31 +115,41 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
 
                             <View style={style.headerContainer}>
 
-                                <BackButton
-                                    title='Voltar'
-                                />
+                                <TouchableOpacity
+                                    style={style.backButton}
+                                    onPress={close}
+                                >
+
+                                    <MaterialIcons
+                                        name='chevron-left'
+                                        size={35}
+                                    />
+
+                                    <Text style={style.textBackButton}>Voltar</Text>
+
+                                </TouchableOpacity>
 
                                 <View style={style.dependentContainer}>
 
                                     <Dependent
                                         name={dependent.name}
                                         photo={{ uri: dependent.photo }}
-
                                     />
+
                                 </View>
 
                             </View>
 
                             <View style={style.listingContainer}>
 
-                                <View style={daysOfWeekHasError ? style.hasErrorDayButton : style.daysContainer}>
+                                <View style={style.daysContainer}>
 
                                     {
                                         DAYS_OFF_WEEK.map(item => (
 
                                             <TouchableOpacity
-                                                style={selectedDays.includes(item) ? style.selectedDayButton : style.dayButton}
-                                                onPress={() => manageDays(item)}
+                                                style={selectedDay.includes(item) ? style.selectedDayButton : style.dayButton}
+                                                onPress={() => setSelectedDay(item)}
                                                 key={item}
                                             >
                                                 <Text style={style.dayText}>{item}</Text>
@@ -143,6 +159,54 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
                                     }
 
                                 </View>
+
+                                <View style={style.tasksContainer}>
+
+                                    <View style={style.card}>
+
+                                        <View style={style.infoTaskContainer}>
+
+                                            <Image
+                                                source={brushingTeeth}
+                                                style={style.imageInfoTask}
+                                            />
+
+                                            <View style={style.textInfoTaskContainer}>
+                                                <Text style={style.textTitleInfoTask}>Escovar os dentes</Text>
+                                                <Text style={style.textHourInfoTask}>08:00</Text>
+                                            </View>
+
+                                        </View>
+
+                                        <View style={style.buttonsContainer}>
+
+                                            <TouchableOpacity style={style.button}>
+                                                {/* <Image
+                                                    source={exclude}
+                                                    style={style.imageButton}
+                                                /> */}
+                                            </TouchableOpacity>
+
+                                            <TouchableOpacity style={style.button}>
+                                                {/* <Image
+                                                    source={manage}
+                                                    style={style.imageButton}
+                                                /> */}
+                                            </TouchableOpacity>
+
+                                            <TouchableOpacity style={style.button}>
+                                                {/* <Image
+                                                    source={done}
+                                                    style={style.imageButton}
+                                                /> */}
+                                            </TouchableOpacity>
+
+                                        </View>
+
+                                    </View>
+
+                                </View>
+
                             </View>
 
 
@@ -195,6 +259,15 @@ const style = StyleSheet.create({
         marginTop: 20,
         // backgroundColor: COLORS.red,
     },
+    backButton: {
+        // backgroundColor: COLORS.red,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    textBackButton: {
+        fontSize: 20,
+
+    },
     dependentContainer: {
         // backgroundColor: COLORS.pink,
     },
@@ -209,32 +282,20 @@ const style = StyleSheet.create({
         alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 1,
-        borderColor: COLORS.blue,
-        borderRadius: 50
-    },
-    hasErrorDayButton: {
-        width: '95%',
-        height: 50,
-        borderWidth: 1,
-        borderRadius: 10,
-        borderColor: COLORS.red,
-        backgroundColor: COLORS.white,
-        fontSize: 17,
-        flexDirection: 'row',
-        padding: 5
+        borderWidth: 3,
+        borderColor: COLORS.yellowBold,
+        borderRadius: 10
     },
     daysContainer: {
-        width: '95%',
+        width: '92%',
         height: 50,
         borderWidth: 1,
         borderRadius: 5,
         borderColor: COLORS.black,
         backgroundColor: COLORS.white,
-        fontSize: 17,
         flexDirection: 'row',
         padding: 5,
-        marginLeft: 8
+        marginLeft: 15
     },
     dayButton: {
         flex: 1,
@@ -242,5 +303,72 @@ const style = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    dayText: {
+        fontFamily: FONTS.mandali,
+        fontSize: 15
+    },
+    tasksContainer: {
+        flex: 1,
+        // backgroundColor: COLORS.red
+    },
+    card: {
+        width: '92%',
+        height: '20%',
+        backgroundColor: COLORS.white,
+        borderWidth: 1,
+        borderColor: COLORS.black,
+        borderRadius: 10,
+        marginLeft: 15,
+        marginTop: 20,
+        ...bottomShadow
+    },
+    infoTaskContainer: {
+        flex: 4,
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingLeft: 10,
+        // backgroundColor: COLORS.red,
+    },
+    imageInfoTask: {
+        width: '20%',
+        height: '64%'
+    },
+    textInfoTaskContainer: {
+        flex: 2,
+        alignSelf: 'stretch',
+        justifyContent: 'center',
+        paddingLeft: 10,
+        // backgroundColor: COLORS.red,
+    },
+    textTitleInfoTask: {
+        fontFamily: FONTS.text,
+        fontSize: 20
+    },
+    textHourInfoTask: {
+        fontFamily: FONTS.text,
+        fontSize: 15
+    },
+    buttonsContainer: {
+        position: 'absolute',
+        flexDirection: 'row',
+        top: 80,
+        right: 30,
+        // backgroundColor: COLORS.pink
+    },
+    button: {
+        width: 35,
+        height: 35,
+        borderWidth: 1,
+        borderColor: COLORS.black,
+        borderRadius: 50,
+        margin: 5,
+        backgroundColor: COLORS.white,
+
+    },
+    imageButton: {
+        // width: '90%',
+        // height: '90%',
+        // borderRadius: 5
+    }
 });
 
