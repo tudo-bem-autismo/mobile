@@ -4,6 +4,7 @@ import { ButtonAlert, Button} from '../../components';
 import styles from './style.js';
 import { Loading } from '../Loading';
 import { getMedalsDependent } from '../../services/medal';
+import { GamesDependent } from '../GamesDependent';
 
 export function MedalScreen({navigation}){
 
@@ -32,6 +33,7 @@ export function MedalScreen({navigation}){
                     Você ganhou uma medalha!
                 </Text>
                 <View>
+                    
                     {
                         medals.map(item =>
                             <Image
@@ -40,16 +42,21 @@ export function MedalScreen({navigation}){
                                 key={item.id}
                                 setMedals={item.id}
                                 
+                                
                             />
                         )
                     }
+               
                     
                 </View>
-                <TouchableOpacity
-                     style={styles.buttonPlay}
-                     >
-                    <Text style = {styles.textPlay}>JOGAR DE NOVO</Text>
-                </TouchableOpacity>
+            
+                        <TouchableOpacity
+                            onPress={()=> {}}
+                            style={styles.buttonPlay}
+                            >
+                            <Text style = {styles.textPlay}>JOGAR DE NOVO</Text>
+                        </TouchableOpacity>
+                 
             
                 <TouchableOpacity 
                     onPress={() => navigation.navigate('GamesDependent')}

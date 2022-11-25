@@ -13,10 +13,6 @@ export function ScreenGames({route ,navigation}) {
 
     let {idGames} = route.params;
 
-    // console.log(idGames);
-
-    // const {dados} = route.params;
-
     const [game, setGame] = useState([{
         "id": 0,
         "ordem": 0,
@@ -123,8 +119,21 @@ export function ScreenGames({route ,navigation}) {
 
     const incorrectStep = () => {
         setMistakes(mistakes+1)
-        // console.log(mistakes)
+        //console.log(mistakes)
     }
+
+    const stepReports = () =>{
+        if(mistakes >=3){
+            return <CongratulationsScreen
+                        navigation={navigation}
+                    />
+        }else{
+            return <MedalScreen
+                    navigation={navigation}
+            />
+        }
+    }
+    
 
     return (
         <>
@@ -166,9 +175,7 @@ export function ScreenGames({route ,navigation}) {
                                 }
                         
                         </View>
-                    ):(<MedalScreen
-                        navigation={navigation}
-                        />)
+                    ):(stepReports())
                 )}
             
         </>

@@ -26,7 +26,7 @@ export function CongratulationsScreen({navigation}){
            
             <TouchableOpacity 
                 style={styles.buttonGoOut}
-                onPress={() => navigation.navigate('Games')}
+                onPress={() => navigation.navigate('GamesDependent')}
                 >
                 <Text style={styles.textGoOut}>SAIR</Text>
             </TouchableOpacity>

@@ -6,8 +6,6 @@ import { ButtonImageTwo } from '../Button/ButtonImageTwo';
 import { TextGamesTwo } from '../../components/TextGamesTwo';
 
 export const ComponentGamesTwo = ({firstStepImage, secondStepImage, firstStepText, correctStepFunction = () =>{}, incorrectStepFunction = ()=>{}, firstStepCorrect }) =>{
-
-console.log(firstStepCorrect);
     return(
         <View style = {styles.mainContainer}>
             <ButtonImage

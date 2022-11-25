@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         textAlign:'center',
     },
     medal:{
-        width:150,
+        width:140,
         height:139,
         bottom:50,
     },

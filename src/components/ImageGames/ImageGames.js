@@ -1,10 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 
-import {COLORS, FONTS} from '../../assets/const';
-import feelingAnger from '../../assets/images/feelings.png';
-
-
 export const ImageGames = ({srcImageGames}) =>{
 
     // const [image, setImage] = useState(null);
@@ -21,7 +17,7 @@ export const ImageGames = ({srcImageGames}) =>{
     return(
         <View style = {styles.imageContainer}>
             <Image style = {styles.image}
-            source ={{uri: srcImageGames}}
+            source ={{uri: srcImageGames ? srcImageGames : null}}
             reziseMode='stretch'
             />
         </View>
