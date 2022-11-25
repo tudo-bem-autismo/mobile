@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text, DatePickerIOSBase, Image } from "react-native";
+import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text, DatePickerIOSBase, Image, ScrollView } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { format } from "date-fns";
@@ -19,10 +19,8 @@ import { scheduleCreateTaskDataSchema } from "../../utils/validations/Schedule";
 import { InputGaleryTasks } from "../Input/InputGaleryTasks";
 import { Loading } from "../../screens/Loading";
 
-import exclude from "../../assets/icons/exclude.png";
-import manage from "../../assets/icons/manage.png";
-import done from "../../assets/icons/done.png";
 import brushingTeeth from '../../assets/images/brushingTeeth.png';
+import { CardSchedule } from "../ScheduleResponsible/CardSchedule";
 
 
 const { height } = Dimensions.get('window')
@@ -127,6 +125,7 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
 
                                     <Text style={style.textBackButton}>Voltar</Text>
 
+
                                 </TouchableOpacity>
 
                                 <View style={style.dependentContainer}>
@@ -137,6 +136,14 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
                                     />
 
                                 </View>
+
+                                <Button
+                                    label='HISTORICO'
+                                    backgroundColor={COLORS.white}
+                                    borderRadius={20}
+                                    width={100}
+                                    height={35}
+                                />
 
                             </View>
 
@@ -160,50 +167,59 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
 
                                 </View>
 
-                                <View style={style.tasksContainer}>
+                                <View style={style.listingCardsContainer}>
 
-                                    <View style={style.card}>
+                                    <ScrollView style={style.cardsContainer}>
 
-                                        <View style={style.infoTaskContainer}>
+                                        {/* <View style={style.tasksContainer}> */}
 
-                                            <Image
-                                                source={brushingTeeth}
-                                                style={style.imageInfoTask}
-                                            />
+                                        <CardSchedule
+                                            image={brushingTeeth}
+                                            title='Escovar os dentes'
+                                            hour='08:00'
+                                        />
 
-                                            <View style={style.textInfoTaskContainer}>
-                                                <Text style={style.textTitleInfoTask}>Escovar os dentes</Text>
-                                                <Text style={style.textHourInfoTask}>08:00</Text>
-                                            </View>
+                                        <CardSchedule
+                                            image={brushingTeeth}
+                                            title='Escovar os dentes'
+                                            hour='08:00'
+                                        />
 
-                                        </View>
+                                        <CardSchedule
+                                            image={brushingTeeth}
+                                            title='Escovar os dentes'
+                                            hour='08:00'
+                                        />
 
-                                        <View style={style.buttonsContainer}>
+                                        <CardSchedule
+                                            image={brushingTeeth}
+                                            title='Escovar os dentes'
+                                            hour='08:00'
+                                        />
 
-                                            <TouchableOpacity style={style.button}>
-                                                {/* <Image
-                                                    source={exclude}
-                                                    style={style.imageButton}
-                                                /> */}
-                                            </TouchableOpacity>
+                                        <CardSchedule
+                                            image={brushingTeeth}
+                                            title='Escovar os dentes'
+                                            hour='08:00'
+                                        />
 
-                                            <TouchableOpacity style={style.button}>
-                                                {/* <Image
-                                                    source={manage}
-                                                    style={style.imageButton}
-                                                /> */}
-                                            </TouchableOpacity>
+                                        <CardSchedule
+                                            image={brushingTeeth}
+                                            title='Escovar os dentes'
+                                            hour='08:00'
+                                        />
 
-                                            <TouchableOpacity style={style.button}>
-                                                {/* <Image
-                                                    source={done}
-                                                    style={style.imageButton}
-                                                /> */}
-                                            </TouchableOpacity>
+                                        <CardSchedule
+                                            image={brushingTeeth}
+                                            title='Escovar os dentes'
+                                            hour='08:00'
+                                        />
 
-                                        </View>
+                                        <View style={style.cardInvisible}></View>
 
-                                    </View>
+                                        {/* </View> */}
+
+                                    </ScrollView>
 
                                 </View>
 
@@ -255,14 +271,17 @@ const style = StyleSheet.create({
         width: '100%',
         height: '7%',
         position: 'absolute',
-        top: -120,
+        top: -100,
         marginTop: 20,
+        flexDirection: 'row',
         // backgroundColor: COLORS.red,
     },
     backButton: {
         // backgroundColor: COLORS.red,
         flexDirection: 'row',
         alignItems: 'center',
+        marginRight: 40,
+        marginBottom: 10,
     },
     textBackButton: {
         fontSize: 20,
@@ -273,7 +292,7 @@ const style = StyleSheet.create({
     },
     listingContainer: {
         flex: 1,
-        marginTop: 90,
+        marginTop: 70,
         // backgroundColor: COLORS.white,
         alignSelf: 'stretch'
     },
@@ -307,68 +326,20 @@ const style = StyleSheet.create({
         fontFamily: FONTS.mandali,
         fontSize: 15
     },
+    listingCardsContainer: {
+        height: 350,
+    },
     tasksContainer: {
-        flex: 1,
+        // paddingBottom: 50,
+        // backgroundColor: COLORS.yellowBold
+    },
+    cardsContainer: {
         // backgroundColor: COLORS.red
     },
-    card: {
+    cardInvisible: {
         width: '92%',
-        height: '20%',
-        backgroundColor: COLORS.white,
-        borderWidth: 1,
-        borderColor: COLORS.black,
-        borderRadius: 10,
-        marginLeft: 15,
+        height: 10,
         marginTop: 20,
-        ...bottomShadow
-    },
-    infoTaskContainer: {
-        flex: 4,
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingLeft: 10,
-        // backgroundColor: COLORS.red,
-    },
-    imageInfoTask: {
-        width: '20%',
-        height: '64%'
-    },
-    textInfoTaskContainer: {
-        flex: 2,
-        alignSelf: 'stretch',
-        justifyContent: 'center',
-        paddingLeft: 10,
-        // backgroundColor: COLORS.red,
-    },
-    textTitleInfoTask: {
-        fontFamily: FONTS.text,
-        fontSize: 20
-    },
-    textHourInfoTask: {
-        fontFamily: FONTS.text,
-        fontSize: 15
-    },
-    buttonsContainer: {
-        position: 'absolute',
-        flexDirection: 'row',
-        top: 80,
-        right: 30,
-        // backgroundColor: COLORS.pink
-    },
-    button: {
-        width: 35,
-        height: 35,
-        borderWidth: 1,
-        borderColor: COLORS.black,
-        borderRadius: 50,
-        margin: 5,
-        backgroundColor: COLORS.white,
-
-    },
-    imageButton: {
-        // width: '90%',
-        // height: '90%',
-        // borderRadius: 5
     }
 });
 
