@@ -21,11 +21,23 @@ import { Loading } from "../../screens/Loading";
 
 import brushingTeeth from '../../assets/images/brushingTeeth.png';
 import { CardSchedule } from "../ScheduleResponsible/CardSchedule";
+import { ModalCongratulationsTask } from "./ModalCongratulationsTask";
+import { ModalExludeTask } from "./ModalExcludeTask";
+import { ModalEditTask } from "./ModalEditTask";
+import { ModalHistoryTasks } from "./ModalHistoryTasks";
 
 
 const { height } = Dimensions.get('window')
 
 export const ModalListingSchedule = ({ close, show, navigation, idDependent }) => {
+
+    const [showDoneTaskModal, setShowDoneTaskModal] = useState(false);
+
+    const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
+
+    const [showEditTaskModal, setShowEditTaskModal] = useState(false);
+
+    const [showHistoryTaskModal, setShowHistoryTaskModal] = useState(false);
 
     const [dependent, setDependent] = useState({});
 
@@ -33,7 +45,28 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
 
     const [selectedDay, setSelectedDay] = useState([]);
 
-    const [daysOfWeekHasError, setDaysOfWeekHasError] = useState(false);
+    const [isTask, setIsTask] = useState([
+        {
+            'id': 1,
+            'title': 'escovar os dentes',
+            'image': brushingTeeth,
+            'hour': '08:00'
+        },
+        {
+            'id': 2,
+            'title': 'Pentear o cabelo',
+            'image': brushingTeeth,
+            'hour': '09:00'
+        },
+        {
+            'id': 3,
+            'title': 'Tomar os remedios',
+            'image': brushingTeeth,
+            'hour': '10:00'
+        },
+    ]);
+
+    const [checkedTasks, setCheckedTasks] = useState([]);
 
     const DAYS_OFF_WEEK = [
         'DOM',
@@ -44,6 +77,38 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
         'SEX',
         'SAB',
     ]
+
+    const manageDoneTask = async (idTask) => {
+
+        const doneTaskExist = checkedTasks?.find(doneTaskId => doneTaskId === idTask)
+
+        if (doneTaskExist) {
+            const filteredTask = checkedTasks.filter(item => item !== idTask)
+            return setCheckedTasks(filteredTask)
+        }
+
+        setShowDoneTaskModal(true)
+
+        const managedTasks = [
+            ...checkedTasks,
+            idTask
+        ]
+
+        setCheckedTasks(managedTasks)
+
+    }
+
+    const handleDeleteTask = (idTask) => {
+        setShowDeleteTaskModal(true)
+    }
+
+    const handleEditTask = (idTask) => {
+        setShowEditTaskModal(true)
+    }
+
+    // useEffect(() => {
+    //     console.log(checkedTasks)
+    // }, [checkedTasks])
 
     const getDependent = async () => {
         const result = await getKidService(idDependent);
@@ -111,123 +176,137 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
 
                         <View style={style.listingScheduleContainer}>
 
-                            <View style={style.headerContainer}>
-
-                                <TouchableOpacity
-                                    style={style.backButton}
-                                    onPress={close}
-                                >
-
-                                    <MaterialIcons
-                                        name='chevron-left'
-                                        size={35}
+                            {
+                                showDoneTaskModal && (
+                                    <ModalCongratulationsTask
+                                        close={() => setShowDoneTaskModal(false)}
                                     />
+                                )
 
-                                    <Text style={style.textBackButton}>Voltar</Text>
+                            }
 
-
-                                </TouchableOpacity>
-
-                                <View style={style.dependentContainer}>
-
-                                    <Dependent
-                                        name={dependent.name}
-                                        photo={{ uri: dependent.photo }}
+                            {
+                                showDeleteTaskModal && (
+                                    <ModalExludeTask
+                                        close={() => setShowDeleteTaskModal(false)}
                                     />
+                                )
+                            }
 
-                                </View>
+                            {
+                                showEditTaskModal && (
+                                    <ModalEditTask
+                                        close={() => setShowEditTaskModal(false)}
+                                    />
+                                )
 
-                                <Button
-                                    label='HISTORICO'
-                                    backgroundColor={COLORS.white}
-                                    borderRadius={20}
-                                    width={100}
-                                    height={35}
-                                />
+                            }
 
-                            </View>
+                            {
+                                showHistoryTaskModal && (
+                                    <ModalHistoryTasks
+                                        close={() => setShowHistoryTaskModal(false)}
+                                    />
+                                )
+                            }
 
-                            <View style={style.listingContainer}>
-
-                                <View style={style.daysContainer}>
-
-                                    {
-                                        DAYS_OFF_WEEK.map(item => (
+                            {
+                                !showHistoryTaskModal && !showEditTaskModal && (
+                                    <>
+                                        <View style={style.headerContainer}>
 
                                             <TouchableOpacity
-                                                style={selectedDay.includes(item) ? style.selectedDayButton : style.dayButton}
-                                                onPress={() => setSelectedDay(item)}
-                                                key={item}
+                                                style={style.backButton}
+                                                onPress={close}
                                             >
-                                                <Text style={style.dayText}>{item}</Text>
+
+                                                <MaterialIcons
+                                                    name='chevron-left'
+                                                    size={35}
+                                                />
+
+                                                <Text style={style.textBackButton}>Voltar</Text>
+
+
                                             </TouchableOpacity>
 
-                                        ))
-                                    }
+                                            <View style={style.dependentContainer}>
 
-                                </View>
+                                                <Dependent
+                                                    name={dependent.name}
+                                                    photo={{ uri: dependent.photo }}
+                                                />
 
-                                <View style={style.listingCardsContainer}>
+                                            </View>
 
-                                    <ScrollView style={style.cardsContainer}>
+                                            <Button
+                                                label='HISTORICO'
+                                                backgroundColor={COLORS.white}
+                                                borderRadius={20}
+                                                width={100}
+                                                height={35}
+                                                onPress={() => setShowHistoryTaskModal(true)}
+                                            />
 
-                                        {/* <View style={style.tasksContainer}> */}
+                                        </View>
 
-                                        <CardSchedule
-                                            image={brushingTeeth}
-                                            title='Escovar os dentes'
-                                            hour='08:00'
-                                        />
+                                        <View style={style.listingContainer}>
 
-                                        <CardSchedule
-                                            image={brushingTeeth}
-                                            title='Escovar os dentes'
-                                            hour='08:00'
-                                        />
+                                            <View style={style.daysContainer}>
 
-                                        <CardSchedule
-                                            image={brushingTeeth}
-                                            title='Escovar os dentes'
-                                            hour='08:00'
-                                        />
+                                                {
+                                                    DAYS_OFF_WEEK.map(item => (
 
-                                        <CardSchedule
-                                            image={brushingTeeth}
-                                            title='Escovar os dentes'
-                                            hour='08:00'
-                                        />
+                                                        <TouchableOpacity
+                                                            style={selectedDay.includes(item) ? style.selectedDayButton : style.dayButton}
+                                                            onPress={() => setSelectedDay(item)}
+                                                            key={item}
+                                                        >
+                                                            <Text style={style.dayText}>{item}</Text>
+                                                        </TouchableOpacity>
 
-                                        <CardSchedule
-                                            image={brushingTeeth}
-                                            title='Escovar os dentes'
-                                            hour='08:00'
-                                        />
+                                                    ))
+                                                }
 
-                                        <CardSchedule
-                                            image={brushingTeeth}
-                                            title='Escovar os dentes'
-                                            hour='08:00'
-                                        />
+                                            </View>
 
-                                        <CardSchedule
-                                            image={brushingTeeth}
-                                            title='Escovar os dentes'
-                                            hour='08:00'
-                                        />
+                                            <View style={style.listingCardsContainer}>
 
-                                        <View style={style.cardInvisible}></View>
+                                                <ScrollView style={style.cardsContainer}>
 
-                                        {/* </View> */}
-
-                                    </ScrollView>
-
-                                </View>
-
-                            </View>
+                                                    {
+                                                        isTask.map(item => (
+                                                            <CardSchedule
+                                                                image={item.image}
+                                                                title={item.title}
+                                                                hour={item.hour}
+                                                                key={item.id}
+                                                                selected={checkedTasks?.includes(item.id)}
+                                                                deleteTask={() => handleDeleteTask(item.id)}
+                                                                editTask={() => handleEditTask(item.id)}
+                                                                onPress={() => manageDoneTask(item.id)}
+                                                            />
+                                                        ))
+                                                    }
 
 
+                                                    <View style={style.cardInvisible}></View>
+
+                                                </ScrollView>
+
+                                            </View>
+
+                                        </View>
+
+
+                                    </>
+                                )
+                            }
 
                         </View>
+
+
+
                     </>
                 )}
 

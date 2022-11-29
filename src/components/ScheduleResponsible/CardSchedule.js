@@ -9,10 +9,9 @@ import manage from "../../assets/icons/manage.png";
 import done from "../../assets/icons/done.png";
 import button from "../../assets/icons/button.png";
 import { ModalCongratulationsTask } from "../Modal/ModalCongratulationsTask";
+import { ModalExludeTask } from "../Modal/ModalExcludeTask";
 
-export const CardSchedule = ({ title, hour, image }) => {
-
-    const [checked, setChecked] = React.useState(false);
+export const CardSchedule = ({ title, hour, image, selected, onPress, deleteTask, editTask }) => {
 
     return (
 
@@ -37,49 +36,41 @@ export const CardSchedule = ({ title, hour, image }) => {
 
                 <View style={style.buttonsContainer}>
 
-                    <TouchableOpacity style={style.button}>
+                    <TouchableOpacity style={style.button}
+                        onPress={() => deleteTask()}
+                    >
+
                         <Image
                             source={exclude}
                             style={style.imageExcludeButton}
                         />
+
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={style.button}>
+                    <TouchableOpacity style={style.button}
+                        onPress={() => editTask()}
+                    >
                         <Image
                             source={manage}
                             style={style.imageManageButton}
                         />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={style.button}
-                        onPress={() => setChecked(true)}
-                    >
-                        {/* <Image
-                            source={done}
-                            style={style.imageDoneButton}
-                        /> */}
+                    <TouchableOpacity
+                        onPress={() => onPress()}
+                        style={style.button}>
 
-                        <View style={checked ? style.checkedCheckBox : style.checkbox}>
+                        {
+                            selected && (
+                                <Image
+                                    source={done}
+                                    style={style.imageDoneButton}
+                                />
+                            )
 
-                            <Checkbox
-                                status={checked ? 'checked' : 'unchecked'}
-                                theme={DarkTheme}
-                                onPress={() => {
-                                    setChecked(!checked);
-                                }}
-                            />
-
-                        </View>
+                        }
 
                     </TouchableOpacity>
-
-                    {
-                        checked && (
-                            <View>
-                                <ModalCongratulationsTask />
-                            </View>
-                        )
-                    }
 
                 </View>
 

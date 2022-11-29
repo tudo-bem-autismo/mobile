@@ -30,9 +30,9 @@ export const ModalApplyChildGame = ({ close, show, selectedGameId }) => {
 
     const [game, setGame] = useState({});
 
-    // useEffect(() => {
-    //     console.log(newRestrictions)
-    // }, [newRestrictions])
+    useEffect(() => {
+        console.log(newRestrictions)
+    }, [newRestrictions])
 
     const getGame = async () => {
         const result = await getGameByIdService(selectedGameId)
@@ -59,6 +59,8 @@ export const ModalApplyChildGame = ({ close, show, selectedGameId }) => {
             const filteredRestriction = newRestrictions.filter(item => item.idDependent !== idDependent)
             return setNewRestrictions(filteredRestriction)
         }
+
+        // console.log(newRestrictions)
 
         const restriction = {
             idGame: selectedGameId,

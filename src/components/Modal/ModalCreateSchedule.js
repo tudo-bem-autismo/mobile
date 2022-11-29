@@ -222,8 +222,6 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
 
                                     <View style={style.headerContainer}>
 
-                                        {/* <Text style={style.textTitle}>CRIAR TAREFA</Text> */}
-
                                         <MaterialIcons
                                             name="close"
                                             size={35}
@@ -599,9 +597,9 @@ const style = StyleSheet.create({
         alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 1,
+        borderWidth: 2,
+        borderRadius: 10,
         borderColor: COLORS.blue,
-        borderRadius: 50
     },
     hasErrorDayButton: {
         width: '95%',
