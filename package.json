@@ -52,7 +52,8 @@
     "swiper": "^8.4.2",
     "toast": "^0.5.4",
     "victory-native": "^36.6.8",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "expo-updates": "~0.14.7"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

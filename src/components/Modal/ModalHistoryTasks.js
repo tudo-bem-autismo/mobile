@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text, Image } from "react-native";
+import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text, Image, ScrollView } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 import clock from '../../assets/icons/clock.png';
@@ -13,34 +13,62 @@ import { InputGaleryTasks } from "../Input/InputGaleryTasks";
 import { ModalGaleryTasks } from "./ModalGaleryTasks";
 import { Dependent } from "../DependentListing";
 
+import brushingTeeth from '../../assets/images/brushingTeeth.png';
+import { CardSchedule } from "../ScheduleResponsible/CardSchedule";
+import { getKidService } from "../../services";
 
 const { height } = Dimensions.get('window')
 
-export const ModalHistoryTasks = ({ close, navigation }) => {
+export const ModalHistoryTasks = ({ close, idDependent, navigation }) => {
 
-    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const [showDoneTaskModal, setShowDoneTaskModal] = useState(false);
 
-    const [modalGaleryTasks, setModalGaleryTasks] = useState(false)
+    const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
 
-    const [dependents, setDependents] = useState([]);
+    const [showEditTaskModal, setShowEditTaskModal] = useState(false);
 
-    const [alarmDate, setAlarmDate] = useState(new Date());
+    const [showHistoryTaskModal, setShowHistoryTaskModal] = useState(false);
 
-    const [alarmHour, setAlarmHour] = useState('12:00');
+    const [dependent, setDependent] = useState({});
 
-    const [selectedDays, setSelectedDays] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-    const [galeryHasError, setGaleryHasError] = useState(false);
+    const [selectedDay, setSelectedDay] = useState([]);
 
-    const [daysOfWeekHasError, setDaysOfWeekHasError] = useState(false);
+    const [isTask, setIsTask] = useState([
+        {
+            'id': 1,
+            'title': 'escovar os dentes',
+            'image': brushingTeeth,
+            'hour': '08:00'
+        },
+        {
+            'id': 2,
+            'title': 'Pentear o cabelo',
+            'image': brushingTeeth,
+            'hour': '09:00'
+        },
+        {
+            'id': 3,
+            'title': 'Tomar os remedios',
+            'image': brushingTeeth,
+            'hour': '10:00'
+        },
+        {
+            'id': 4,
+            'title': 'Tomar os remedios',
+            'image': brushingTeeth,
+            'hour': '10:00'
+        },
+        {
+            'id': 5,
+            'title': 'Tomar os remedios',
+            'image': brushingTeeth,
+            'hour': '10:00'
+        },
+    ]);
 
-    const [selectDependentHasError, setSelectDependentHasError] = useState(false);
-
-    const [selectedDependents, setSelectedDependents] = useState([]);
-
-    const [galeryTask, setGaleryTask] = useState(null);
-
-    const [imageTask, setImageTask] = useState(null);
+    const [checkedTasks, setCheckedTasks] = useState([]);
 
     const DAYS_OFF_WEEK = [
         'DOM',
@@ -52,281 +80,140 @@ export const ModalHistoryTasks = ({ close, navigation }) => {
         'SAB',
     ]
 
-    const WORKING_DAYS = [
-        'SEG',
-        'TER',
-        'QUA',
-        'QUI',
-        'SEX'
-    ]
+    const manageDoneTask = async (idTask) => {
 
-    const WEEKEND_DAYS = [
-        'SAB',
-        'DOM'
-    ]
+        const doneTaskExist = checkedTasks?.find(doneTaskId => doneTaskId === idTask)
 
-    const manageDays = (day) => {
-
-        const dayAlreadySelected = selectedDays.includes(day);
-
-        if (dayAlreadySelected) {
-            const newSelectedDays = selectedDays.filter(item => item !== day);
-
-            return setSelectedDays(newSelectedDays);
+        if (doneTaskExist) {
+            const filteredTask = checkedTasks.filter(item => item !== idTask)
+            return setCheckedTasks(filteredTask)
         }
 
-        setSelectedDays([
-            ...selectedDays,
-            day
-        ])
+        setShowDoneTaskModal(true)
 
-        // console.log(selectedDays);
+        const managedTasks = [
+            ...checkedTasks,
+            idTask
+        ]
 
-    }
-
-    const manageDependents = (dependent) => {
-
-        const dependentAlreadySelected = selectedDependents.includes(dependent);
-
-        if (dependentAlreadySelected) {
-            const newSelectedDependents = selectedDependents.filter(item => item !== dependent)
-
-            return setSelectedDependents(newSelectedDependents)
-        }
-
-        setSelectedDependents([
-            ...selectedDependents,
-            dependent
-        ])
-
-        // console.log(selectedDependents);
+        setCheckedTasks(managedTasks)
 
     }
 
-    const handleSelectDays = (days) => {
-        setSelectedDays(days)
+    const handleDeleteTask = (idTask) => {
+        setShowDeleteTaskModal(true)
     }
 
-    const showDatePicker = () => {
-        setDatePickerVisibility(true);
+    const handleEditTask = (idTask) => {
+        setShowEditTaskModal(true)
+    }
+
+    const getDependent = async () => {
+        const result = await getKidService(idDependent);
+        setDependent(result.data);
     };
-
-    const hideDatePicker = () => {
-        setDatePickerVisibility(false);
-    };
-
-    const handleHour = (date) => {
-
-        const hour = format(date, 'HH:mm')
-
-        setAlarmHour(hour)
-
-        hideDatePicker();
-    };
-
-    const getDependents = async () => {
-        const result = await getResponsibleDependentsService()
-        setDependents(result.data)
-
-    }
 
     useEffect(() => {
-        getDependents()
+        getDependent();
+        setIsLoading(false)
+
     }, []);
 
     return (
 
         <View style={style.container}>
 
-            <Formik
-                // validationSchema={scheduleCreateTaskDataSchema}
-                // initialValues={initialValues}
-                onSubmit={values => handleForm(values)}
-            >
-                {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
-                    <>
+            <View style={style.headerContainer}>
 
-                        <View style={style.formContainer}>
+                <TouchableOpacity
+                    style={style.backButton}
+                    onPress={close}
+                >
 
-                            <View style={style.headerContainer}>
+                    <MaterialIcons
+                        name='chevron-left'
+                        size={35}
+                    />
 
-                                <TouchableOpacity onPress={close}>
-
-                                    <MaterialIcons
-                                        name="close"
-                                        size={35}
-                                        style={modalGaleryTasks ? style.invisibleCloseModalIcon : style.closeModalIcon}
-
-                                    />
-
-                                </TouchableOpacity>
-
-                            </View>
-
-                            <Input
-                                title="TITULOOOOOOOOOOOOOOO"
-                                iconName="calendar-o"
-                                placeholder="Descreva a tarefa a ser criada"
-                                borderColor={COLORS.blue}
-                                backgroundColor={COLORS.white}
-                            // onChangeText={handleChange('title')}
-                            // onBlur={handleBlur('title')}
-                            // value={values.title}
-                            // hasError={!!errors.title}
-                            // errorMessage={errors.title}
-                            />
-
-                            <View style={style.dateTimeContainer}>
-
-                                <Text style={style.textDateTime}>DIA E HORA</Text>
-
-                                <View style={style.selectContainer}>
-
-                                    <TouchableOpacity
-                                        style={style.timeContainer}
-                                        onPress={showDatePicker}
-                                    >
-
-                                        <View style={style.clockContainer}>
-                                            <Text style={style.textClock}>{alarmHour}</Text>
-                                            <Image
-                                                source={clock}
-                                                style={style.iconClock}
-                                            />
-                                        </View>
-
-                                        <DateTimePickerModal
-                                            isVisible={isDatePickerVisible}
-                                            mode="time"
-                                            onConfirm={handleHour}
-                                            onCancel={hideDatePicker}
-                                            date={alarmDate}
-                                            is24Hour={true}
-                                            style={{ backgroundColor: COLORS.yellow, width: 200, }}
-                                        />
-
-                                    </TouchableOpacity>
+                    <Text style={style.textBackButton}>Voltar</Text>
 
 
-                                    <View style={style.periodDate}>
+                </TouchableOpacity>
 
-                                        <Picker
-                                            style={style.picker}
-                                            dropdownIconColor={COLORS.blue}
-                                            dropdownIconRippleColor={COLORS.purple}
-                                            onValueChange={(itemValue) => handleSelectDays(itemValue)}
-                                        >
+                <View style={style.dependentContainer}>
 
-                                            <Picker.Item
-                                                label="Selecionar dias"
-                                                value={[]}
-                                                style={style.item}
-                                            />
-                                            <Picker.Item
-                                                label="Todos os dias"
-                                                value={DAYS_OFF_WEEK}
-                                                style={style.item}
-                                            />
-                                            <Picker.Item
-                                                label="Seg a sex"
-                                                value={WORKING_DAYS}
-                                                style={style.item}
-                                            />
-                                            <Picker.Item
-                                                label="Final de semana"
-                                                value={WEEKEND_DAYS}
-                                                style={style.item}
-                                            />
+                    <Dependent
+                        name={dependent.name}
+                        photo={{ uri: dependent.photo }}
+                    />
 
-                                        </Picker>
+                </View>
 
-                                    </View>
-                                </View>
+            </View>
 
-                            </View>
+            <View style={style.listingContainer}>
 
-                            <View style={daysOfWeekHasError ? style.hasErrorDayButton : style.daysContainer}>
+                <View style={style.daysContainer}>
 
-                                {
-                                    DAYS_OFF_WEEK.map(item => (
+                    <View style={style.periodDate}>
 
-                                        <TouchableOpacity
-                                            style={selectedDays.includes(item) ? style.selectedDayButton : style.dayButton}
-                                            onPress={() => manageDays(item)}
-                                            key={item}
-                                        >
-                                            <Text style={style.dayText}>{item}</Text>
-                                        </TouchableOpacity>
-
-                                    ))
-                                }
-
-                            </View>
-
-                            <InputGaleryTasks
-                                // image={{uri : imageTask}}
-                                onPress={() => setModalGaleryTasks(true)}
-                                hasError={galeryHasError}
-                            />
-
-                            {
-                                modalGaleryTasks && (
-                                    <View style={style.modalContainer}>
-                                        <ModalGaleryTasks
-                                            show={modalGaleryTasks}
-                                            close={() => setModalGaleryTasks(false)}
-                                            setGaleryTask={setGaleryTask}
-                                            setImageTask={setImageTask}
-                                            navigation={navigation}
-                                        />
-                                    </View>
-                                )
-                            }
-
-                            <View style={style.selectDependentsContainer}>
-
-                                <Text style={style.text}>SELECIONE A CRIANÇA</Text>
-
-                                <View style={style.dependentsContainer}>
-
-                                    {
-                                        dependents.map(item => (
-
-                                            <View
-                                                style={selectDependentHasError ? style.hasErrorDependentButton : style.dependentButton}
-                                                key={item.id}
-                                            >
-
-                                                <Dependent
-                                                    name={item.name}
-                                                    photo={{ uri: item.photo }}
-                                                    selected={selectedDependents.includes(item.id)}
-                                                    onPress={() => manageDependents(item.id)}
-                                                />
-
-                                            </View>
-                                        ))
-                                    }
-
-                                </View>
-
-                            </View>
-
-                        </View>
-
-                        <TouchableOpacity
-                            style={modalGaleryTasks ? style.invisibleButtonContainer : style.buttonContainer}
-                            onPress={handleSubmit}
+                        <Picker
+                            style={style.picker}
+                            dropdownIconColor={COLORS.blue}
+                            dropdownIconRippleColor={COLORS.purple}
+                            onValueChange={(itemValue) => handleSelectDays(itemValue)}
                         >
-                            <Text style={style.textButton}>SALVAR</Text>
-                        </TouchableOpacity>
 
-                    </>
-                )}
-            </Formik>
+                            <Picker.Item
+                                label="semana"
+                                value={[]}
+                                style={style.item}
+                            />
+                            <Picker.Item
+                                label="mes"
+                                value={[]}
+                                style={style.item}
+                            />
+                            <Picker.Item
+                                label="ano"
+                                value={[]}
+                                style={style.item}
+                            />
 
+                        </Picker>
+
+                    </View>
+
+                </View>
+
+                <View style={style.listingCardsContainer}>
+
+                    <ScrollView style={style.cardsContainer}>
+
+                        {
+                            isTask.map(item => (
+                                <CardSchedule
+                                    image={item.image}
+                                    title={item.title}
+                                    hour={item.hour}
+                                    key={item.id}
+                                    selected={checkedTasks?.includes(item.id)}
+                                    deleteTask={() => handleDeleteTask(item.id)}
+                                    editTask={() => handleEditTask(item.id)}
+                                    onPress={() => manageDoneTask(item.id)}
+                                />
+                            ))
+                        }
+
+
+                        <View style={style.cardInvisible}></View>
+
+                    </ScrollView>
+
+                </View>
+
+            </View>
         </View>
-
     );
 
 }
@@ -342,162 +229,69 @@ const bottomShadow = {
 
 const style = StyleSheet.create({
     container: {
-        height: '100%',
         width: '100%',
+        height: '100%',
+        position: 'absolute',
     },
     modalContainer: {
         width: '100%',
         height: '100%',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        // bottom: 10,
-        // backgroundColor: COLORS.beige
     },
-    formContainer: {
-        flex: 1,
-        margin: 15,
-        // justifyContent: 'center',
-        alignItems: 'center',
-        // backgroundColor: COLORS.white
+    listingScheduleContainer: {
+        width: '95%',
+        height: '88%',
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        borderWidth: 1,
+        borderColor: COLORS.black,
+        backgroundColor: COLORS.yellowLight,
     },
     headerContainer: {
+        width: '100%',
+        height: '7%',
         position: 'absolute',
-        left: 285,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        alignSelf: 'stretch',
+        top: -100,
+        marginTop: 20,
         flexDirection: 'row',
-        paddingLeft: 15,
-        // zIndex: 5,
-        // paddingRight: 20,
-        // backgroundColor: COLORS.darkBlue
+        // backgroundColor: COLORS.red,
     },
-    textTitle: {
-        fontSize: 25,
-        fontFamily: FONTS.mandali,
-        color: COLORS.purpleBold
+    backButton: {
+        // backgroundColor: COLORS.red,
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginRight: 40,
+        marginBottom: 10,
     },
-    text: {
+    textBackButton: {
         fontSize: 20,
-        fontFamily: FONTS.mandali,
-        marginLeft: 20,
-    },
-    textDateTime: {
-        fontSize: 20,
-        fontFamily: FONTS.mandali,
-        marginLeft: 10,
 
     },
-    dateTimeContainer: {
+    dependentContainer: {
+        // backgroundColor: COLORS.pink,
+    },
+    listingContainer: {
+        flex: 1,
+        marginTop: 70,
+        // backgroundColor: COLORS.white,
+        alignSelf: 'stretch'
+    },
+    selectedDayButton: {
+        flex: 1,
         alignSelf: 'stretch',
         justifyContent: 'center',
-        // alignItems: 'center',
-        margin: 10,
-        // backgroundColor: COLORS.red
-    },
-    timeContainer: {
-        width: 150,
-        height: 50,
-        borderWidth: 1,
-        borderColor: COLORS.blue,
-        backgroundColor: COLORS.white,
-        borderRadius: 10,
-    },
-    clockContainer: {
-        position: 'absolute',
-        flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
-        top: 1,
-        width: 150,
-        height: 50,
-        padding: 10
-        // backgroundColor: COLORS.red
-    },
-    textClock: {
-        fontSize: 20,
-        color: COLORS.gray
-    },
-    iconClock: {
-        width: 30,
-        height: 30,
-    },
-    selectContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
-    item: {
-        fontSize: 20,
-        fontFamily: FONTS.mandali,
-        color: COLORS.gray
-
-    },
-    picker: {
-        width: 150,
-        height: 10,
-
-    },
-    periodDate: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 10,
-        borderWidth: 1,
-        borderColor: COLORS.blue,
-        backgroundColor: COLORS.white,
-
+        borderWidth: 3,
+        borderColor: COLORS.yellowBold,
+        borderRadius: 10
     },
     daysContainer: {
-        width: '95%',
+        width: '100%',
         height: 50,
-        borderWidth: 1,
-        borderRadius: 10,
-        borderColor: COLORS.blue,
-        backgroundColor: COLORS.white,
-        fontSize: 17,
-        flexDirection: 'row',
-        padding: 5
-    },
-    dependentsContainer: {
-        flexDirection: 'row',
-        marginLeft: 10,
-        // backgroundColor: COLORS.red
-    },
-    dependentButton: {
-
-    },
-    hasErrorDependentButton: {
-        borderWidth: 1,
-        borderRadius: 10,
-        marginRight: 10,
-        borderColor: COLORS.red
-    },
-    selectedDependentButton: {
-        borderRadius: 10,
-        backgroundColor: COLORS.purple
-    },
-    buttonContainer: {
-        position: 'absolute',
-        top: 390,
-        left: 270,
-        width: 75,
-        height: 75,
-        borderRadius: 50,
-        borderWidth: 1,
-        borderColor: COLORS.gray,
+        justifyContent: 'center',
         alignItems: 'center',
-        alignContent: 'center',
-        backgroundColor: COLORS.white,
-        ...bottomShadow
-
-    },
-    invisibleButtonContainer: {
-        position: 'absolute',
-        top: 700,
-        left: 280,
-    },
-    textButton: {
-        fontSize: 15,
-        marginTop: 25,
+        // backgroundColor: COLORS.white,
     },
     dayButton: {
         flex: 1,
@@ -509,39 +303,39 @@ const style = StyleSheet.create({
         fontFamily: FONTS.mandali,
         fontSize: 15
     },
-    selectedDayButton: {
-        flex: 1,
-        alignSelf: 'stretch',
+    listingCardsContainer: {
+        height: 450,
+    },
+    tasksContainer: {
+        // paddingBottom: 50,
+        // backgroundColor: COLORS.yellowBold
+    },
+    cardsContainer: {
+        // backgroundColor: COLORS.red
+    },
+    cardInvisible: {
+        width: '92%',
+        height: 10,
+        marginTop: 20,
+    },
+    periodDate: {
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 2,
-        borderRadius: 10,
-        borderColor: COLORS.blue,
-    },
-    hasErrorDayButton: {
-        width: '95%',
-        height: 50,
+        borderRadius: 5,
         borderWidth: 1,
-        borderRadius: 10,
-        borderColor: COLORS.red,
+        borderColor: COLORS.black,
         backgroundColor: COLORS.white,
-        fontSize: 17,
-        flexDirection: 'row',
-        padding: 5
-    },
-    selectDependentsContainer: {
-        // backgroundColor: COLORS.red,
-        alignSelf: 'stretch',
-        marginTop: 10
 
     },
-    invisibleCloseModalIcon: {
-        position: 'absolute',
-        top: 700,
-        left: 280,
+    item: {
+        fontSize: 20,
+        fontFamily: FONTS.mandali,
+        color: COLORS.gray
+
     },
-    closeModalIcon: {
-        // backgroundColor: COLORS.red,
-    }
+    picker: {
+        width: 190,
+
+    },
 });
 

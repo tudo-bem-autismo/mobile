@@ -206,6 +206,7 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
                                 showHistoryTaskModal && (
                                     <ModalHistoryTasks
                                         close={() => setShowHistoryTaskModal(false)}
+                                        idDependent={idDependent}
                                     />
                                 )
                             }
