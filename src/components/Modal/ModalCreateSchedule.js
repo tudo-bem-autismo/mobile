@@ -17,6 +17,9 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { ModalGaleryTasks } from "./ModalGaleryTasks";
 import { scheduleCreateTaskDataSchema } from "../../utils/validations/Schedule";
 import { InputGaleryTasks } from "../Input/InputGaleryTasks";
+import { getDaysService } from "../../services/day";
+import { getTasksService } from "../../services/task";
+import { taskRegisterService } from "../../services/schedule";
 
 const { height } = Dimensions.get('window')
 
@@ -34,6 +37,8 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
 
     const [selectedDays, setSelectedDays] = useState([]);
 
+    const [days, setDays] = useState([{}]);
+
     const [galeryHasError, setGaleryHasError] = useState(false);
 
     const [daysOfWeekHasError, setDaysOfWeekHasError] = useState(false);
@@ -42,46 +47,47 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
 
     const [selectedDependents, setSelectedDependents] = useState([]);
 
-    const [galeryTask, setGaleryTask] = useState(null);
+    const [idTask, setIdTask] = useState(0);
 
     const [imageTask, setImageTask] = useState(null);
 
     const DAYS_OFF_WEEK = [
-        'DOM',
-        'SEG',
-        'TER',
-        'QUA',
-        'QUI',
-        'SEX',
-        'SAB',
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
     ]
 
     const WORKING_DAYS = [
-        'SEG',
-        'TER',
-        'QUA',
-        'QUI',
-        'SEX'
+        2,
+        3,
+        4,
+        5,
+        6,
     ]
 
     const WEEKEND_DAYS = [
-        'SAB',
-        'DOM'
+        1,
+        7
     ]
 
-    const manageDays = (day) => {
 
-        const dayAlreadySelected = selectedDays.includes(day);
+    const manageDays = (idDay) => {
+
+        const dayAlreadySelected = selectedDays.includes(idDay);
 
         if (dayAlreadySelected) {
-            const newSelectedDays = selectedDays.filter(item => item !== day);
+            const newSelectedDays = selectedDays.filter(item => item !== idDay);
 
             return setSelectedDays(newSelectedDays);
         }
 
         setSelectedDays([
             ...selectedDays,
-            day
+            idDay
         ])
 
         // console.log(selectedDays);
@@ -134,8 +140,15 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
 
     }
 
+    const getDays = async () => {
+        const result = await getDaysService()
+        setDays(result.data)
+    }
+
     useEffect(() => {
         getDependents()
+        getDays()
+
     }, []);
 
     const [state, setState] = useState({
@@ -179,13 +192,44 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
             alarmHour,
             selectedDays,
             selectedDependents,
-            galeryTask
+            idTask
         };
 
-        setGaleryHasError(true)
-        setDaysOfWeekHasError(true)
-        setSelectDependentHasError(true)
+        if (selectedDays.length === 0) {
+            setDaysOfWeekHasError(true)
+
+            return
+        }
+
+        if (idTask === 0) {
+            setGaleryHasError(true)
+
+            return
+        }
+
+        if (selectedDependents.length === 0) {
+            setSelectDependentHasError(true)
+
+            return
+        }
+
+        setDaysOfWeekHasError(false)
+        setGaleryHasError(false)
+        setSelectDependentHasError(false)
+
         console.log(newData)
+
+        const result = await taskRegisterService(newData);
+
+        close()
+
+        if (result.success) {
+            return Toast.show({
+                type: 'success',
+                text1: 'Sucesso!',
+                text2: 'Tarefa criada com sucesso!'
+            })
+        }
 
     }
 
@@ -316,14 +360,14 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
                                     <View style={daysOfWeekHasError ? style.hasErrorDayButton : style.daysContainer}>
 
                                         {
-                                            DAYS_OFF_WEEK.map(item => (
+                                            days.map(item => (
 
                                                 <TouchableOpacity
-                                                    style={selectedDays.includes(item) ? style.selectedDayButton : style.dayButton}
-                                                    onPress={() => manageDays(item)}
-                                                    key={item}
+                                                    style={selectedDays.includes(item.id) ? style.selectedDayButton : style.dayButton}
+                                                    onPress={() => manageDays(item.id)}
+                                                    key={item.id}
                                                 >
-                                                    <Text style={style.dayText}>{item}</Text>
+                                                    <Text style={style.dayText}>{item.day}</Text>
                                                 </TouchableOpacity>
 
                                             ))
@@ -343,7 +387,7 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
                                                 <ModalGaleryTasks
                                                     show={modalGaleryTasks}
                                                     close={() => setModalGaleryTasks(false)}
-                                                    setGaleryTask={setGaleryTask}
+                                                    setGaleryTask={setIdTask}
                                                     setImageTask={setImageTask}
                                                     navigation={navigation}
                                                 />

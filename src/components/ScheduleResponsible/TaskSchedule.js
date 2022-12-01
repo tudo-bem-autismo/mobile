@@ -8,9 +8,9 @@ export const TaskSchedule = ({ image, title, onPress }) => {
 
         <View style={style.taskContainer}>
 
-            <TouchableOpacity 
-            style={style.taskButton}
-            onPress={() => onPress()}
+            <TouchableOpacity
+                style={style.taskButton}
+                onPress={() => onPress()}
             >
 
                 <View style={style.imageTaskContainer}>
@@ -32,11 +32,11 @@ export const TaskSchedule = ({ image, title, onPress }) => {
 
 const style = StyleSheet.create({
     taskContainer: {
-        width: 90,
-        height: 110,
+        width: 94,
+        height: 120,
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: COLORS.red
+        // backgroundColor: COLORS.pink
     },
     taskButton: {
         justifyContent: 'center',

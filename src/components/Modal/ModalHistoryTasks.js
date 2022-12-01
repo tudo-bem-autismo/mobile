@@ -16,6 +16,7 @@ import { Dependent } from "../DependentListing";
 import brushingTeeth from '../../assets/images/brushingTeeth.png';
 import { CardSchedule } from "../ScheduleResponsible/CardSchedule";
 import { getKidService } from "../../services";
+import { CardScheduleHistory } from "../ScheduleResponsible/CardScheduleHistory";
 
 const { height } = Dimensions.get('window')
 
@@ -79,34 +80,6 @@ export const ModalHistoryTasks = ({ close, idDependent, navigation }) => {
         'SEX',
         'SAB',
     ]
-
-    const manageDoneTask = async (idTask) => {
-
-        const doneTaskExist = checkedTasks?.find(doneTaskId => doneTaskId === idTask)
-
-        if (doneTaskExist) {
-            const filteredTask = checkedTasks.filter(item => item !== idTask)
-            return setCheckedTasks(filteredTask)
-        }
-
-        setShowDoneTaskModal(true)
-
-        const managedTasks = [
-            ...checkedTasks,
-            idTask
-        ]
-
-        setCheckedTasks(managedTasks)
-
-    }
-
-    const handleDeleteTask = (idTask) => {
-        setShowDeleteTaskModal(true)
-    }
-
-    const handleEditTask = (idTask) => {
-        setShowEditTaskModal(true)
-    }
 
     const getDependent = async () => {
         const result = await getKidService(idDependent);
@@ -192,15 +165,11 @@ export const ModalHistoryTasks = ({ close, idDependent, navigation }) => {
 
                         {
                             isTask.map(item => (
-                                <CardSchedule
+                                <CardScheduleHistory
                                     image={item.image}
                                     title={item.title}
                                     hour={item.hour}
                                     key={item.id}
-                                    selected={checkedTasks?.includes(item.id)}
-                                    deleteTask={() => handleDeleteTask(item.id)}
-                                    editTask={() => handleEditTask(item.id)}
-                                    onPress={() => manageDoneTask(item.id)}
                                 />
                             ))
                         }

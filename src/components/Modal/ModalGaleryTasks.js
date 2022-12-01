@@ -19,6 +19,7 @@ import wake from '../../assets/images/wake.png';
 import brushingTeeth from '../../assets/images/brushingTeeth.png';
 import washHands from '../../assets/images/washHands.png';
 import studying from '../../assets/images/studying.png';
+import { getTasksService } from '../../services/task';
 
 const { height } = Dimensions.get('window')
 
@@ -26,26 +27,20 @@ export const ModalGaleryTasks = ({ close, show, setGaleryTask, setImageTask, nav
 
     const [isLoading, setIsLoading] = useState(true);
 
-    const [task, setTask] = useState([
-        {
-            'id': 1,
-            'image': wake,
-            'title': 'beber agua'
-        },
-        {
-            'id': 2,
-            'image': brushingTeeth,
-            'title': 'escovar os dentes'
-        },
-        {
-            'id': 3,
-            'image': washHands,
-            'title': 'pentear cabelos'
-        },
-    ]);
+    const [tasks, setTasks] = useState([{}]);
 
-    const selectedTask = (task) => {
-        setGaleryTask(task.id)
+    const getTasks = async () => {
+        const result = await getTasksService()
+        setTasks(result.data)
+    }
+
+    useEffect(() => {
+        getTasks()
+
+    }, []);
+
+    const selectedTask = (idTask) => {
+        setGaleryTask(idTask)
         close()
     }
 
@@ -127,17 +122,21 @@ export const ModalGaleryTasks = ({ close, show, setGaleryTask, setImageTask, nav
                                 </View>
 
 
-                                {
-                                    task.map(item => (
-                                        <TaskSchedule
-                                            image={item.image}
-                                            title='oi'
-                                            key={item.id}
-                                            onPress={() =>
-                                                selectedTask(item)}
-                                        />
-                                    ))
-                                }
+                                <View style={style.tasksContainer}>
+
+                                    {
+                                        tasks.map(item => (
+                                            <TaskSchedule
+                                                image={{ uri: item.icon }}
+                                                title={item.title}
+                                                key={item.id}
+                                                onPress={() =>
+                                                    selectedTask(item.id)}
+                                            />
+                                        ))
+                                    }
+
+                                </View>
 
 
                             </View>
@@ -223,12 +222,17 @@ const style = StyleSheet.create({
         fontFamily: FONTS.mandali,
         paddingLeft: 70
     },
-    tasksGaleryContainer: {
-        flexDirection: 'row'
-    },
     selectTasksContainer: {
         flex: 3,
         // marginBottom: 10,
+        // backgroundColor: COLORS.red
+    },
+    tasksContainer: {
+        flex: 3,
+        alignSelf: 'stretch',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        justifyContent: 'center',
         // backgroundColor: COLORS.red
     }
 
