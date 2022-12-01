@@ -28,7 +28,7 @@ export const kidRegisterService = async (data) => {
     formData.append("data_nascimento", dataFinal);
     formData.append("id_genero", data.genderId);
     formData.append("id_nivel_autismo", data.autismLevelId);
-    formData.append("id_responsavel", 27);
+    formData.append("id_responsavel", id);
 
     const result = await api.post("/crianca", formData, options);
 

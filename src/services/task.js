@@ -30,3 +30,32 @@ export const getTasksService = async () => {
         }
     }
 }
+
+export const getHistoryTask = async (id, periodo) => {
+
+
+
+    try {
+        const result = await api.post('/tarefa/realizacao/listagem', {
+            id_crianca: 4,
+            periodo: 365
+        })
+
+        const success = result.status === 200
+
+        return {
+            success,
+            data: formattedData
+        }
+
+    } catch (error) {
+
+        showErrorToast(error.response.data.message)
+        return {
+            success: false,
+            data: error.response.data
+        }
+
+    }
+
+}

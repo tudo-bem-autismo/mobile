@@ -81,6 +81,31 @@ export const ModalHistoryTasks = ({ close, idDependent, navigation }) => {
         'SAB',
     ]
 
+    const periods = [
+        {
+          "id": 1,
+          "value": 1,
+          "name": "Hoje"
+        },
+        {
+          "id": 2,
+          "value": 7,
+          "name": "7 - Dias "
+        },
+        {
+          "id": 3,
+          "value": 31,
+          "name": "31 - Dias"
+        },
+        {
+          "id": 4,
+          "value": 365,
+          "name": "365 - Dias"
+        },
+  
+    ]
+
+
     const getDependent = async () => {
         const result = await getKidService(idDependent);
         setDependent(result.data);
@@ -134,10 +159,16 @@ export const ModalHistoryTasks = ({ close, idDependent, navigation }) => {
                             style={style.picker}
                             dropdownIconColor={COLORS.blue}
                             dropdownIconRippleColor={COLORS.purple}
-                            onValueChange={(itemValue) => handleSelectDays(itemValue)}
+                            onValueChange={(itemValue) => handleSelectDays(itemValue)
+                            }
                         >
-
                             <Picker.Item
+                                label="Selecione o periodo"
+                                value={[0]}
+                                style={style.item}
+                            />
+
+                            {/* <Picker.Item
                                 label="semana"
                                 value={[]}
                                 style={style.item}
@@ -151,7 +182,11 @@ export const ModalHistoryTasks = ({ close, idDependent, navigation }) => {
                                 label="ano"
                                 value={[]}
                                 style={style.item}
-                            />
+                            /> */}
+
+                            {
+
+                            }
 
                         </Picker>
 
