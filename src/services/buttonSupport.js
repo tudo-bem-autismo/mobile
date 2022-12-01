@@ -71,3 +71,25 @@ export const getButtonSupportDependent = async () => {
     }
   }
 }
+
+export const deleteMidiaButtonSupport = async (id) => {
+  try {
+    
+    const result = await api.delete(`/botaoApoio/${id}`)
+
+    const success = result.status === 200
+
+    return {
+      success,
+      data: result.data
+    }
+
+  } catch (error) {
+    showErrorToast(error.response.data.message)
+    return {
+      success: false,
+      data: error.response.data
+    }
+  }
+}
+

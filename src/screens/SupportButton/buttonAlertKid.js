@@ -8,11 +8,11 @@ import { Video, AVPlaybackStatus  } from 'expo-av';
 import { Loading } from '../Loading';
 import { Dependent } from "../../components/DependentListing/Dependent";
 import styles from './style';
-import { ModalViewButtonSuport }  from '../../components';
+import { ModalButtonSuportForKid, ModalViewButtonSuport }  from '../../components';
 
 import { FontAwesome } from '@expo/vector-icons';
 
-export const SupportButtonManagement = ({ navigation }) => {
+export const SupportButtonForKid = ({ navigation }) => {
 
     const [modal, setModal] = useState(false);
 
@@ -69,7 +69,7 @@ export const SupportButtonManagement = ({ navigation }) => {
                     <View style={styles.gamesContainer}>
 
                         <Text style={styles.textSelectGame}>
-                        gerencie os alertas das suas crianças
+                        :)))
                         </Text>
                         <ScrollView
                             horizontal={true}
@@ -114,10 +114,7 @@ export const SupportButtonManagement = ({ navigation }) => {
                                             onPress={() => status.isPlaying ? videoR.current.pauseAsync() : video.current.playAsync()}
                                             >
                                             <Text>{status.isPlaying ? 'Pause' : 'Play'}</Text>
-                                            <TouchableOpacity onPress={() => console.log('AAA')}>
-                                            <FontAwesome style={{fontSize: 24, color: COLORS.white}} name="trash"/>
-                                            </TouchableOpacity>
-                                            
+                                           
                                         </TouchableOpacity>
                                         
 
@@ -138,7 +135,7 @@ export const SupportButtonManagement = ({ navigation }) => {
                     </View>
                     
                     {modal && (
-                        <ModalViewButtonSuport
+                        <ModalButtonSuportForKid
                         close={() => setModal(false)}
                         midia={image1}
                         idImg={idMidia}
