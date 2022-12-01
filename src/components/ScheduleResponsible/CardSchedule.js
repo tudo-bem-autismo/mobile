@@ -23,7 +23,7 @@ export const CardSchedule = ({ title, hour, image, selected, onPress, deleteTask
                 <View style={style.infoTaskContainer}>
 
                     <Image
-                        source={image}
+                        source={{uri : image}}
                         style={style.imageInfoTask}
                     />
 

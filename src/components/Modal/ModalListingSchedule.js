@@ -20,11 +20,13 @@ import { InputGaleryTasks } from "../Input/InputGaleryTasks";
 import { Loading } from "../../screens/Loading";
 
 import brushingTeeth from '../../assets/images/brushingTeeth.png';
+import notFoundTask from '../../assets/images/notFoundTask.gif';
 import { CardSchedule } from "../ScheduleResponsible/CardSchedule";
 import { ModalCongratulationsTask } from "./ModalCongratulationsTask";
 import { ModalExludeTask } from "./ModalExcludeTask";
 import { ModalEditTask } from "./ModalEditTask";
 import { ModalHistoryTasks } from "./ModalHistoryTasks";
+import { deleteTaskService, getTasksService, taskIsDoneService } from "../../services/task";
 
 
 const { height } = Dimensions.get('window')
@@ -45,26 +47,9 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
 
     const [selectedDay, setSelectedDay] = useState([]);
 
-    const [isTask, setIsTask] = useState([
-        {
-            'id': 1,
-            'title': 'escovar os dentes',
-            'image': brushingTeeth,
-            'hour': '08:00'
-        },
-        {
-            'id': 2,
-            'title': 'Pentear o cabelo',
-            'image': brushingTeeth,
-            'hour': '09:00'
-        },
-        {
-            'id': 3,
-            'title': 'Tomar os remedios',
-            'image': brushingTeeth,
-            'hour': '10:00'
-        },
-    ]);
+    const [isTaskDaySelected, setIsTaskDaySelected] = useState([{}]);
+
+    const [isTask, setIsTask] = useState([{}]);
 
     const [checkedTasks, setCheckedTasks] = useState([]);
 
@@ -96,29 +81,65 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
 
         setCheckedTasks(managedTasks)
 
+        const data = {
+            idTask: idTask,
+            idDependent: idDependent
+        }
+
+        // console.log(data)
+
+        const result = await taskIsDoneService(data)
+
+        if (result.success) {
+            return Toast.show({
+                type: 'success',
+                text1: 'Sucesso!',
+                text2: 'Tarefa criada com sucesso!'
+            })
+        }
+
     }
 
-    const handleDeleteTask = (idTask) => {
+    const handleDeleteTask = () => {
         setShowDeleteTaskModal(true)
+    }
+
+    const deleteTask = async (idTask) => {
+        const result = await deleteTaskService(idTask);
+
+        if (result.success) {
+            return Toast.show({
+                type: 'success',
+                text1: 'Sucesso!',
+                text2: 'Tarefa criada com sucesso!'
+            })
+        }
     }
 
     const handleEditTask = (idTask) => {
         setShowEditTaskModal(true)
     }
 
-    // useEffect(() => {
-    //     console.log(checkedTasks)
-    // }, [checkedTasks])
-
     const getDependent = async () => {
         const result = await getKidService(idDependent);
         setDependent(result.data);
     };
 
+    const getTasks = async () => {
+        const result = await getTasksService(idDependent);
+        setIsTask(result.data);
+    }
+
+    const task = isTask.filter(item => item.initialsSelectedDays === selectedDay)
+
+    useEffect(() => {
+        // console.log(task)
+    }, [task])
+
     useEffect(() => {
         getDependent();
+        getTasks()
         setIsLoading(false)
-
     }, []);
 
     const [state, setState] = useState({
@@ -189,6 +210,7 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
                                 showDeleteTaskModal && (
                                     <ModalExludeTask
                                         close={() => setShowDeleteTaskModal(false)}
+                                        del={() => deleteTask()}
                                     />
                                 )
                             }
@@ -276,18 +298,29 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
                                                 <ScrollView style={style.cardsContainer}>
 
                                                     {
-                                                        isTask.map(item => (
-                                                            <CardSchedule
-                                                                image={item.image}
-                                                                title={item.title}
-                                                                hour={item.hour}
-                                                                key={item.id}
-                                                                selected={checkedTasks?.includes(item.id)}
-                                                                deleteTask={() => handleDeleteTask(item.id)}
-                                                                editTask={() => handleEditTask(item.id)}
-                                                                onPress={() => manageDoneTask(item.id)}
-                                                            />
-                                                        ))
+                                                        isTask.find(item => item.initialsSelectedDays === selectedDay) ? (
+
+                                                            task.map(item => (
+                                                                <CardSchedule
+                                                                    image={item.icon}
+                                                                    title={item.title}
+                                                                    hour={item.hour}
+                                                                    key={item.id}
+                                                                    selected={checkedTasks?.includes(item.idTask)}
+                                                                    deleteTask={() => handleDeleteTask(item.id)}
+                                                                    editTask={() => handleEditTask(item.id)}
+                                                                    onPress={() => manageDoneTask(item.idTask)}
+                                                                />
+                                                            ))
+
+                                                        ) : (
+                                                            <View style={style.notFoundCard}>
+                                                                <Text style={style.textNotFoundCard}>Nenhuma tarefa criada no momento</Text>
+                                                                <Image
+                                                                    style={style.imageNotFoundCard}
+                                                                    source={notFoundTask} />
+                                                            </View>
+                                                        )
                                                     }
 
 
@@ -420,6 +453,23 @@ const style = StyleSheet.create({
         width: '92%',
         height: 10,
         marginTop: 20,
+    },
+    notFoundCard: {
+        margin: 15,
+        height: 300,
+        alignItems: 'center',
+        justifyContent: 'center',
+        // backgroundColor: COLORS.red
+    },
+    textNotFoundCard: {
+        fontFamily: FONTS.text,
+        fontSize: 16,
+        textAlign: 'center'
+    },
+    imageNotFoundCard: {
+        width: '50%',
+        height: '50%',
+        // backgroundColor: COLORS.purple
     }
 });
 

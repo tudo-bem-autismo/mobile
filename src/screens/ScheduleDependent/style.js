@@ -25,7 +25,7 @@ const style = StyleSheet.create({
         justifyContent: 'flex-end',
     },
     listingScheduleContainer: {
-        height: 700,
+        height: 600,
         width: '95%',
         alignSelf: 'stretch',
         borderTopLeftRadius: 50,
@@ -39,7 +39,7 @@ const style = StyleSheet.create({
         flex: 1,
         position: 'absolute',
         top: -100,
-        left: 150,
+        left: 130,
         marginTop: 20,
         flexDirection: 'row',
         // backgroundColor: COLORS.red,
@@ -71,7 +71,7 @@ const style = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 3,
-        borderColor: COLORS.purple,
+        borderColor: COLORS.blue,
         borderRadius: 10
     },
     daysContainer: {

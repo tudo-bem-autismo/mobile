@@ -19,7 +19,7 @@ import wake from '../../assets/images/wake.png';
 import brushingTeeth from '../../assets/images/brushingTeeth.png';
 import washHands from '../../assets/images/washHands.png';
 import studying from '../../assets/images/studying.png';
-import { getTasksService } from '../../services/task';
+import { getIconsTasksService, getTasksService } from '../../services/task';
 
 const { height } = Dimensions.get('window')
 
@@ -30,7 +30,7 @@ export const ModalGaleryTasks = ({ close, show, setGaleryTask, setImageTask, nav
     const [tasks, setTasks] = useState([{}]);
 
     const getTasks = async () => {
-        const result = await getTasksService()
+        const result = await getIconsTasksService()
         setTasks(result.data)
     }
 
