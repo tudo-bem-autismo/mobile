@@ -16,6 +16,8 @@ import { DependentRegister } from '../screens/DependentRegister';
 import { DependentManagement } from '../screens/DependentManagement';
 import { SalutationScreen } from '../screens/SalutationScreen';
 import { ScheduleResponsible } from '../screens/ScheduleResponsible';
+import { RoutineResponsible } from '../screens/RoutineResponsible';
+// import { Games } from '../screens/Games';
 import { ScreenGames } from '../screens/ScreenGames';
 import { CongratulationsScreen } from '../screens/CongratulationsScreen';
 import { TabsDependent } from './tabsDependent';
@@ -47,7 +49,7 @@ const Navigation = () => {
                 <Stack.Screen name="DependentListing" component={DependentListing} options={{ headerShown: false }} />
                 <Stack.Screen name="DependentManagement" component={DependentManagement} options={{ headerShown: false }} />
                 <Stack.Screen name="DependentRegister" component={DependentRegister} options={{ headerShown: false }} />
-                <Stack.Screen name="Games" component={Games} options={{ headerShown: false }} />
+                {/* <Stack.Screen name="Games" component={Games} options={{ headerShown: false }} /> */}
                 <Stack.Screen name="ScreenGames" component={ScreenGames} options={{ headerShown: false }} />
                 <Stack.Screen name="CongratulationsScreen" component={CongratulationsScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="TabsResponsible" component={TabsResponsible} options={{ headerShown: false }} />
