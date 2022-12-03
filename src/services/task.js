@@ -33,8 +33,6 @@ export const getTasksService = async () => {
 
 export const getHistoryTask = async (id, periodo) => {
 
-
-
     try {
         const result = await api.post('/tarefa/realizacao/listagem', {
             id_crianca: 4,
@@ -55,7 +53,5 @@ export const getHistoryTask = async (id, periodo) => {
             success: false,
             data: error.response.data
         }
-
     }
-
 }

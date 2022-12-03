@@ -168,24 +168,14 @@ export const ModalHistoryTasks = ({ close, idDependent, navigation }) => {
                                 style={style.item}
                             />
 
-                            {/* <Picker.Item
-                                label="semana"
-                                value={[]}
-                                style={style.item}
-                            />
-                            <Picker.Item
-                                label="mes"
-                                value={[]}
-                                style={style.item}
-                            />
-                            <Picker.Item
-                                label="ano"
-                                value={[]}
-                                style={style.item}
-                            /> */}
-
                             {
-
+                                periods.map((period) => (
+                                    <Picker.Item
+                                        label={period.name}
+                                        value={period.value}
+                                        style={style.item}
+                                    />
+                                ))
                             }
 
                         </Picker>
