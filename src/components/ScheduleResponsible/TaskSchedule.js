@@ -32,8 +32,8 @@ export const TaskSchedule = ({ image, title, onPress }) => {
 
 const style = StyleSheet.create({
     taskContainer: {
-        width: 94,
-        height: 120,
+        width: '25%',
+        height: '25%',
         justifyContent: 'center',
         alignItems: 'center',
         // backgroundColor: COLORS.pink

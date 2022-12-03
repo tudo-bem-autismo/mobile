@@ -8,7 +8,7 @@ import { Button } from "../Button";
 
 const { height } = Dimensions.get('window')
 
-export const ModalExludeTask = ({ close, show, navigation }) => {
+export const ModalExludeTask = ({ close, show, navigation, del }) => {
 
     return (
 
@@ -38,7 +38,7 @@ export const ModalExludeTask = ({ close, show, navigation }) => {
                         borderRadius={15}
                         width={80}
                         height={45}
-                        onPress={() => { }}
+                        onPress={del}
                     />
                 </View>
 

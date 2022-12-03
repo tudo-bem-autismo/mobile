@@ -217,8 +217,6 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
         setGaleryHasError(false)
         setSelectDependentHasError(false)
 
-        console.log(newData)
-
         const result = await taskRegisterService(newData);
 
         close()
@@ -227,7 +225,7 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
             return Toast.show({
                 type: 'success',
                 text1: 'Sucesso!',
-                text2: 'Tarefa criada com sucesso!'
+                text2: 'Tarefa feita com sucesso!'
             })
         }
 
