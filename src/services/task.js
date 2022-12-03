@@ -1,5 +1,5 @@
 import { showErrorToast } from "../utils/errors";
-import { getData } from "../utils/storage";
+// import { getData } from "../utils/storage";
 import api from "./api";
 
 export const getTasksService = async (idDependent) => {
@@ -36,18 +36,35 @@ export const getTasksService = async (idDependent) => {
     }
 }
 
-export const getHistoryTask = async (id, periodo) => {
+export const getHistoryTask = async (idDependent, period) => {
 
     try {
         const result = await api.post('/tarefa/realizacao/listagem', {
-            id_crianca: 4,
-            periodo: 365
+            id_crianca: idDependent,
+            periodo: period
         })
 
         const success = result.status === 200
+
+        result.data.map((task) =>{
+            const fullDate = task.data.split('T')
+            const date = fullDate[0].split('-')
+            const time = fullDate[1].split(':')
+
+            task.data = date[2] + '/' + date[1] + '/' + date[0] + ' ' + time[0] + ':' + time[1] 
+        })
+
+        return{
+            success,
+            data: result.data
+        }
     }
     catch(error){
-        
+        showErrorToast(error.response.data)
+        return {
+            success: false,
+            data: error.response
+        }
     }
 }
 

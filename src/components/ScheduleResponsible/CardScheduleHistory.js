@@ -1,15 +1,6 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Checkbox, DarkTheme } from 'react-native-paper';
-
+import { Image, StyleSheet, Text, View } from "react-native";
 import { COLORS, FONTS } from "../../assets/const";
-
-import exclude from "../../assets/icons/exclude.png";
-import manage from "../../assets/icons/manage.png";
-import done from "../../assets/icons/done.png";
-import button from "../../assets/icons/button.png";
-import { ModalCongratulationsTask } from "../Modal/ModalCongratulationsTask";
-import { ModalExludeTask } from "../Modal/ModalExcludeTask";
 
 export const CardScheduleHistory = ({ title, hour, image, selected, onPress, deleteTask, editTask }) => {
 
@@ -23,7 +14,7 @@ export const CardScheduleHistory = ({ title, hour, image, selected, onPress, del
                 <View style={style.infoTaskContainer}>
 
                     <Image
-                        source={image}
+                        source={{uri : image}}
                         style={style.imageInfoTask}
                     />
 

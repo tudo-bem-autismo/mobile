@@ -49,7 +49,15 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
 
     const [isTaskDaySelected, setIsTaskDaySelected] = useState([{}]);
 
-    const [isTask, setIsTask] = useState([{}]);
+    const [isTask, setIsTask] = useState([{
+        idTask: 0,
+        hour: '',
+        title: '',
+        idSelectedDays: '',
+        initialsSelectedDays: '',
+        icon: '',
+        isToday: ''
+    }]);
 
     const [checkedTasks, setCheckedTasks] = useState([]);
 
@@ -97,7 +105,6 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
                 text2: 'Tarefa criada com sucesso!'
             })
         }
-
     }
 
     const handleDeleteTask = () => {
@@ -130,11 +137,11 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
         setIsTask(result.data);
     }
 
-    const task = isTask.filter(item => item.initialsSelectedDays === selectedDay)
+    // const task = isTask.filter(item => item.initialsSelectedDays === selectedDay)
 
-    useEffect(() => {
-        // console.log(task)
-    }, [task])
+    // useEffect(() => {
+    //     console.log(task)
+    // }, [task])
 
     useEffect(() => {
         getDependent();
@@ -189,7 +196,6 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
                     ]
                 }]}
             >
-
                 {isLoading ? (
                     <Loading />
                 ) : (
@@ -297,7 +303,7 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
 
                                                 <ScrollView style={style.cardsContainer}>
 
-                                                    {
+                                                    {/* {
                                                         isTask.find(item => item.initialsSelectedDays === selectedDay) ? (
 
                                                             task.map(item => (
@@ -321,7 +327,7 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
                                                                     source={notFoundTask} />
                                                             </View>
                                                         )
-                                                    }
+                                                    } */}
 
 
                                                     <View style={style.cardInvisible}></View>

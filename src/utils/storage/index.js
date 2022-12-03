@@ -4,7 +4,7 @@ export const storeData = async (value, key) => {
     try {
         await AsyncStorage.setItem(key, JSON.stringify(value))
     } catch (error) {
-        console.log(error)
+        // console.log(error)
     }
 }
 
@@ -16,7 +16,7 @@ export const getData = async (key) => {
         return JSON.parse(id)
 
     } catch (error) {
-        console.log(error)
+        // console.log(error)
     }
 }
 
@@ -24,6 +24,6 @@ export const clearData = async (key) => {
     try {
         await AsyncStorage.removeItem(key)
     } catch (error) {
-        console.log(error)
+        // console.log(error)
     }
 }

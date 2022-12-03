@@ -27,6 +27,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    invisibleCard:{
+        width: 250,
+        height: 150,
+    },
 
 
 });

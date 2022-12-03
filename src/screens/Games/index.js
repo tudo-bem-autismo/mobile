@@ -67,6 +67,8 @@ export const Games = ({ navigation }) => {
                                     ))
                                 }
 
+                                <View style={styles.invisibleCard}></View>
+
 
                             </View>
                         </ScrollView>
