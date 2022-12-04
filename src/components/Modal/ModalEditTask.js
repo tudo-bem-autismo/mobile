@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text, Image } from "react-native";
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
-import clock from '../../assets/icons/clock.png';
-import { FONTS, COLORS } from "../../assets/const";
-import { Button } from "../Button";
-import { Formik } from "formik";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Input } from "../Input";
 import { Picker } from "@react-native-picker/picker";
+import { Formik } from "formik";
+import { COLORS, FONTS } from "../../assets/const";
+import clock from '../../assets/icons/clock.png';
+import { DAYS_OFF_WEEK, WEEKEND_DAYS, WORKING_DAYS } from '../../utils/date/days';
+import { Dependent } from "../DependentListing";
+import { Input } from "../Input";
 import { InputGaleryTasks } from "../Input/InputGaleryTasks";
 import { ModalGaleryTasks } from "./ModalGaleryTasks";
-import { Dependent } from "../DependentListing";
 
 
 const { height } = Dimensions.get('window')
 
-export const ModalEditTask = ({ close, navigation }) => {
+export const ModalEditTask = ({ close, navigation, taskId }) => {
 
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
@@ -41,29 +41,6 @@ export const ModalEditTask = ({ close, navigation }) => {
     const [galeryTask, setGaleryTask] = useState(null);
 
     const [imageTask, setImageTask] = useState(null);
-
-    const DAYS_OFF_WEEK = [
-        'DOM',
-        'SEG',
-        'TER',
-        'QUA',
-        'QUI',
-        'SEX',
-        'SAB',
-    ]
-
-    const WORKING_DAYS = [
-        'SEG',
-        'TER',
-        'QUA',
-        'QUI',
-        'SEX'
-    ]
-
-    const WEEKEND_DAYS = [
-        'SAB',
-        'DOM'
-    ]
 
     const manageDays = (day) => {
 

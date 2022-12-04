@@ -5,21 +5,26 @@ import api from "./api";
 export const getTasksService = async (idDependent) => {
     try {
 
+
         const result = await api.get(`/tarefa/crianca/${idDependent}`)
+
+        console.log(result.data);
 
         const success = result.status === 200
 
         const formattedData = result.data.map(item => {
             return {
-                idTask: item.id_tarefa,
+                idTask: +item.id_tarefa,
                 hour: item.horario,
                 title: item.titulo,
-                idSelectedDays: item.id_dia_semana,
-                initialsSelectedDays: item.sigla,
+                idSelectedDays: +item.id_dia_semana,
+                day: item.sigla,
                 icon: item.icone,
                 isToday: item.hoje
             }
         })
+
+        console.log(formattedData)
 
         return {
             success,
@@ -28,6 +33,8 @@ export const getTasksService = async (idDependent) => {
 
 
     } catch (error) {
+        console.log(error);
+
         showErrorToast(error.response.data.message)
         return {
             success: false,
@@ -35,7 +42,6 @@ export const getTasksService = async (idDependent) => {
         }
     }
 }
-
 
 export const getIconsTasksService = async () => {
     try {
@@ -46,13 +52,9 @@ export const getIconsTasksService = async () => {
 
         const formattedData = result.data.map(item => {
             return {
-                idTask: item.id_tarefa,
-                hour: item.horario,
-                title: item.titulo,
-                idSelectedDays: item.id_dia_semana,
-                initialsSelectedDays: item.sigla,
+                id: item.id,
                 icon: item.icone,
-                isToday: item.hoje
+                title: item.titulo
             }
         })
 

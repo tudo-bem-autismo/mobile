@@ -5,12 +5,14 @@ export const taskRegisterService = async (data) => {
     try {
 
         const formattedData = {
+            id_icone: data.idTask,
             titulo: data.title,
             horario: data.alarmHour,
             id_dia_semana: data.selectedDays,
-            id_icone: data.idTask,
             id_crianca: data.selectedDependents
         }
+
+        console.log(formattedData);
 
         const result = await api.post("/tarefa", formattedData);
 

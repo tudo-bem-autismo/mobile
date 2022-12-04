@@ -47,7 +47,7 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
 
     const [selectedDependents, setSelectedDependents] = useState([]);
 
-    const [idTask, setIdTask] = useState(0);
+    const [idIcon, setIdIcon] = useState(0);
 
     const [imageTask, setImageTask] = useState(null);
 
@@ -192,7 +192,7 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
             alarmHour,
             selectedDays,
             selectedDependents,
-            idTask
+            idTask: idIcon
         };
 
         if (selectedDays.length === 0) {
@@ -201,7 +201,7 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
             return
         }
 
-        if (idTask === 0) {
+        if (idIcon === 0) {
             setGaleryHasError(true)
 
             return
@@ -385,7 +385,7 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
                                                 <ModalGaleryTasks
                                                     show={modalGaleryTasks}
                                                     close={() => setModalGaleryTasks(false)}
-                                                    setGaleryTask={setIdTask}
+                                                    setIdIcon={setIdIcon}
                                                     setImageTask={setImageTask}
                                                     navigation={navigation}
                                                 />
