@@ -58,21 +58,24 @@ export const ScheduleResponsible = ({ navigation }) => {
                             <View
                                 style={styles.dependentsContainer}
                             >
-                                {
-                                    dependents.map(item => (
-                                        <Dependent
-                                            name={item.name}
-                                            photo={{ uri: item.photo }}
-                                            key={item.id}
-                                            onPress={() => {
+                                <ScrollView style={styles.scroll} horizontal={true}>
 
-                                                setIdDependent(item.id)
-                                                setModalListingSchedule(true)
+                                    {
+                                        dependents.map(item => (
+                                            <Dependent
+                                                name={item.name}
+                                                photo={{ uri: item.photo }}
+                                                key={item.id}
+                                                onPress={() => {
 
-                                            }}
-                                        />
-                                    ))
-                                }
+                                                    setIdDependent(item.id)
+                                                    setModalListingSchedule(true)
+
+                                                }}
+                                            />
+                                        ))
+                                    }
+                                </ScrollView>
                             </View>
 
                             <View

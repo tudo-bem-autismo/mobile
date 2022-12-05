@@ -31,6 +31,9 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         paddingBottom: 40,
     },
+    // scroll:{
+    //     width:'1%'
+    // }
     buttonContainer: {
         flex: 2.5,
         alignItems: 'flex-end',

@@ -16,7 +16,7 @@ import { ECharts } from "react-native-echarts-wrapper";
 import { LineChart } from "react-native-charts-wrapper";
 import { Loading } from "../Loading";
 
-export const Reports = () => {
+export const Reports = ({navigation}) => {
   const [modal, setModal] = useState(false);
 
   const [renderRelatory, setRenderRelatory] = useState(false);
@@ -126,7 +126,7 @@ export const Reports = () => {
 
   return (
     <View style={styles.container}>
-      <MainHeader screenName={"RELATÓRIOS DOS JOGOS"} />
+      <MainHeader screenName={"RELATÓRIOS DOS JOGOS"} navigation={navigation} />
 
       <View style={styles.reportsContainer}>
         {chartIsLoading ? (<Loading />) : renderRelatory && (
