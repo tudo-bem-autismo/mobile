@@ -197,7 +197,7 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
     ).catch(
 
       (e) => {
-        console.log(e)
+        // console.log(e)
         setChartIsLoading(false)
       }
     )

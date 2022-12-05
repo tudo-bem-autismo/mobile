@@ -79,7 +79,7 @@ export function ScreenGames() {
     const getSteps = () => {
         getStepGames().then(
             (result) => {
-                console.log(result.data[1].cor_fundo)
+                // console.log(result.data[1].cor_fundo)
                 setGame(result.data)
                 setCurrentGame(result.data[0])
             }
@@ -98,16 +98,16 @@ export function ScreenGames() {
     }, [])
 
     const correctStep = () => {
-        console.log('vfgdsfb')
+        // console.log('vfgdsfb')
         setHits(hits + 1)
         setCurrenteStep(currentStep + 1)
         setCurrentGame(game[currentStep + 1])
-        console.log(hits)
+        // console.log(hits)
     }
 
     const incorrectStep = () => {
         setMistakes(mistakes+1)
-        console.log(mistakes)
+        // console.log(mistakes)
     }
 
     return (

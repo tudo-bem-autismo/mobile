@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { da } from "date-fns/locale";
 import { showErrorToast } from "../utils/errors";
 import { getData } from "../utils/storage";
 import api from "./api";
@@ -112,6 +113,7 @@ export const updateKidService = async (data) => {
     const dataFinal = dateY + '-' + dateM + '-' + dateD
     //const dateY = date.split('/')[0]
     //console.log(dateY)
+    const idResponsible = await getData('@id')
 
     const formData = new FormData();
     formData.append("arquivo", data.photo);
@@ -119,13 +121,13 @@ export const updateKidService = async (data) => {
     formData.append("data_nascimento", dataFinal);
     formData.append("id_genero", data.genderId);
     formData.append("id_nivel_autismo", data.autismLevelId);
-    formData.append("id_responsavel", 7);
+    formData.append("id_responsavel", idResponsible);
 
-    console.log(formData)
+    // console.log(formData)
 
-    const result = await api.put("/crianca/5", formData, options);
+    const result = await api.put(`/crianca/${data.idDependent}`, formData, options);
 
-    //console.log(result)
+    // console.log(result)
 
     const success = result.status === 200
 
@@ -145,10 +147,14 @@ export const updateKidService = async (data) => {
 
 }
 
-export const deleteKidService = async () => {
+export const deleteKidService = async (idDependent) => {
   try {
 
-    const result = await api.delete("/crianca/2")
+    console.log(idDependent)
+
+    const result = await api.delete(`/crianca/${idDependent}`)
+
+    console.log(result)
 
     const success = result.status === 200
 

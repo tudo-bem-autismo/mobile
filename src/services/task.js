@@ -122,7 +122,7 @@ export const taskIsDoneService = async (data) => {
         }
 
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         showErrorToast(error.response.data.message)
 
         return {
@@ -145,7 +145,7 @@ export const deleteTaskService = async (idTask) => {
         }
 
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         showErrorToast(error.response.data.message)
         return {
             success: false,

@@ -34,7 +34,7 @@ export const getGamesService = async () => {
         }
 
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         showErrorToast(error.response.data.message)
         return {
             success: false,
@@ -64,7 +64,7 @@ export const getGameByIdService = async (gameId) => {
         }
 
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         showErrorToast(error.response.data.message)
         return {
             success: false,

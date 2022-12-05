@@ -254,7 +254,7 @@ const style = StyleSheet.create({
         fontSize: 15
     },
     listingCardsContainer: {
-        height: 450,
+        height: '65%',
     },
     tasksContainer: {
         // paddingBottom: 50,
@@ -262,6 +262,8 @@ const style = StyleSheet.create({
     },
     cardsContainer: {
         // backgroundColor: COLORS.red
+        // height:'30%'
+
     },
     cardInvisible: {
         width: '92%',

@@ -31,7 +31,7 @@ export const ModalApplyChildGame = ({ close, show, selectedGameId }) => {
     const [game, setGame] = useState({});
 
     useEffect(() => {
-        console.log(newRestrictions)
+        // console.log(newRestrictions)
     }, [newRestrictions])
 
     const getGame = async () => {
