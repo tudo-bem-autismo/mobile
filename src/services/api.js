@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: "https://back-tudo-bem-autismo.azurewebsites.net"
+    baseURL: "http://192.168.2.104:3000"
 });
 
 export default api;

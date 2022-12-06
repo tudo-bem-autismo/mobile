@@ -7,40 +7,47 @@ import { getMedalsDependent } from '../../services/medal';
 import { GamesDependent } from '../GamesDependent';
 import { getReports } from '../../services';
 
-export function MedalScreen({ navigation }) {
+export function MedalScreen({route, navigation }) {
 
     const [isLoading, setIsLoading] = useState(true);
-    const [medals, setMedals] = useState([]);
-    const [medal, setMedal] = useState()
+    // const [medals, setMedals] = useState([]);
+    // const [medal, setMedal] = useState()
 
-    const [kidData, setKidData] = useState({
-        "acertos": 3,
-        "erros": 2,
-        "data": "2022-9-17 00:00:00",
-        "id_mini_jogo": 1,
-        "id_crianca": "4"
-    })
+    // const [kidData, setKidData] = useState({
+    //     "acertos": 3,
+    //     "erros": 2,
+    //     "data": "2022-9-17 00:00:00",
+    //     "id_mini_jogo": 1,
+    //     "id_crianca": "4"
+    // })
 
-    const getMedals = async () => {
-        const result = await getMedalsDependent()
-        setMedals(result.data)
-        // console.log(medals)
-    }
+    // const getMedals = async () => {
+    //     const result = await getMedalsDependent()
+    //     setMedals(result.data)
+    //     // console.log(medals)
+    // }
 
-    const getMedal = async () => {
-       const result = await getReports(kidData.acertos, kidData.erros, kidData.data, kidData.id_mini_jogo, kidData.id_crianca)
-       setMedal(result)
-    //console.log(medal)
+    // const getMedal = async () => {
+    //    const result = await getReports(kidData.acertos, kidData.erros, kidData.data, kidData.id_mini_jogo, kidData.id_crianca)
+    //    setMedal(result)
+    // //console.log(medal)
 
-    }
+    // }
 
 
     useEffect(() => {
-        getMedal()
-        getMedals()
-        setIsLoading(false)
+        if(medalha)
+            setIsLoading(false)
 
     }, [])
+
+    console.log(route.params)
+
+    let {nome, medalha} = route.params.data
+    let idGames = route.params.idGames
+
+
+
     return (
         <>
             {isLoading ? (
@@ -49,18 +56,18 @@ export function MedalScreen({ navigation }) {
                 <View style={styles.mainContainer}>
                     <ButtonAlert />
                     <Text style={styles.text}>
-                        Você ganhou uma medalha!
+                        Você ganhou uma {nome}!
                     </Text>
                     <View>
                         <Image
                             style={styles.medal}
-                            source={{ uri: medal.data.medalha  }}
+                            source={{ uri: medalha  }}
                         />
                         
                     </View>
 
                     <TouchableOpacity
-                        onPress={() => { }}
+                        onPress={() => {navigation.navigate('ScreenGames', idGames ) }}
                         style={styles.buttonPlay}
                     >
                         <Text style={styles.textPlay}>JOGAR DE NOVO</Text>

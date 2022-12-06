@@ -26,6 +26,7 @@ import { MenuDependent } from '../screens/MenuDependent';
 import { DependentProfile } from '../screens/DependentProfile';
 import { HomeDependent } from '../screens/HomeDependent';
 import { GamesDependent } from '../screens/GamesDependent';
+import { MedalScreen } from '../screens/MedalScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -58,6 +59,7 @@ const Navigation = () => {
                 <Stack.Screen name="DependentProfile" component={DependentProfile} options={{ headerShown: false }} />
                 <Stack.Screen name="HomeDependent" component={HomeDependent} options={{ headerShown: false }} />
                 <Stack.Screen name="GamesDependent" component={GamesDependent} options={{ headerShown: false }} />
+                <Stack.Screen name="MedalScreen" component={MedalScreen} options={{ headerShown: false }} />
 
             </Stack.Navigator>
         </NavigationContainer>
