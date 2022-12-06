@@ -4,8 +4,9 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { COLORS, FONTS } from "../../assets/const";
 
 import done from "../../assets/icons/done.png";
+import block from "../../assets/icons/block.png";
 
-export const CardScheduleDependent = ({ title, hour, image, selected, onPress, deleteTask, editTask }) => {
+export const CardScheduleDependent = ({ title, hour, image, selected, onPress, isToday }) => {
 
     return (
 
@@ -17,7 +18,7 @@ export const CardScheduleDependent = ({ title, hour, image, selected, onPress, d
                 <View style={style.infoTaskContainer}>
 
                     <Image
-                        source={image}
+                        source={{ uri: image }}
                         style={style.imageInfoTask}
                     />
 
@@ -32,7 +33,9 @@ export const CardScheduleDependent = ({ title, hour, image, selected, onPress, d
 
                     <TouchableOpacity
                         onPress={() => onPress()}
-                        style={style.button}>
+                        style={style.button}
+                        disabled={!isToday || selected}
+                    >
 
                         {
                             selected && (
@@ -122,6 +125,20 @@ const style = StyleSheet.create({
         margin: 5,
         backgroundColor: COLORS.white,
 
+    },
+    blockedButton: {
+        width: 30,
+        height: 30,
+        borderWidth: 1,
+        borderColor: COLORS.black,
+        borderRadius: 50,
+        margin: 5,
+    },
+    imageBlockedButton: {
+        width: '115%',
+        height: '115%',
+        bottom: 2,
+        right: 2,
     },
     imageExcludeButton: {
         width: '80%',

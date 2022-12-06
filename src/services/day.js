@@ -15,6 +15,8 @@ export const getDaysService = async () => {
             }
         })
 
+        // console.log(formattedData)
+
         return {
             success,
             data: formattedData

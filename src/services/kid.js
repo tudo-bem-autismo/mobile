@@ -28,7 +28,7 @@ export const kidRegisterService = async (data) => {
     formData.append("data_nascimento", dataFinal);
     formData.append("id_genero", data.genderId);
     formData.append("id_nivel_autismo", data.autismLevelId);
-    formData.append("id_responsavel", 27);
+    formData.append("id_responsavel", id);
 
     const result = await api.post("/crianca", formData, options);
 
@@ -145,10 +145,12 @@ export const updateKidService = async (data) => {
 
 }
 
-export const deleteKidService = async () => {
+export const deleteKidService = async (idDependent) => {
   try {
 
-    const result = await api.delete("/crianca/2")
+
+
+    const result = await api.delete(`/crianca/${idDependent}`)
 
     const success = result.status === 200
 

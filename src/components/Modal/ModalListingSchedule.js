@@ -36,68 +36,34 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
 
     const [selectedDay, setSelectedDay] = useState(getTodayInitials());
 
-    const [selectedTaskId, setSelectedTaskId] = useState(0);
+    const [selectedIdTask, setSelectedIdTask] = useState(0);
 
     const [dailyTasks, setDailyTasks] = useState([]);
 
     const [tasks, setTasks] = useState([]);
 
-    const [checkedTasks, setCheckedTasks] = useState([]);
+    const [idTask, setIdTask] = useState();
 
-
-    const manageDoneTask = async (idTask) => {
-
-        const doneTaskExist = checkedTasks?.find(doneTaskId => doneTaskId === idTask)
-
-        if (doneTaskExist) {
-            const filteredTask = checkedTasks.filter(item => item !== idTask)
-            return setCheckedTasks(filteredTask)
-        }
-
-        setShowDoneTaskModal(true)
-
-        const managedTasks = [
-            ...checkedTasks,
-            idTask
-        ]
-
-        setCheckedTasks(managedTasks)
-
-        const data = {
-            idTask: idTask,
-            idDependent: idDependent
-        }
-
-        const result = await taskIsDoneService(data)
-
-        if (result.success) {
-            return Toast.show({
-                type: 'success',
-                text1: 'Sucesso!',
-                text2: 'Tarefa criada com sucesso!'
-            })
-        }
-
-    }
-
-    const handleDeleteTask = () => {
+    const handleDeleteTask = async (idTask) => {
         setShowDeleteTaskModal(true)
     }
 
-    const deleteTask = async (idTask) => {
+    const deleteTask = async () => {
         const result = await deleteTaskService(idTask);
 
         if (result.success) {
-            return Toast.show({
-                type: 'success',
-                text1: 'Sucesso!',
-                text2: 'Tarefa excluida com sucesso!'
-            })
+            // return Toast.show({
+            //     type: 'success',
+            //     text1: 'Sucesso!',
+            //     text2: 'Tarefa excluida com sucesso!'
+            // })
+            setShowDeleteTaskModal(false)
         }
     }
 
     const handleEditTask = (idTask) => {
         setShowEditTaskModal(true)
+        setSelectedIdTask(idTask)
     }
 
     const getDependent = async () => {
@@ -111,6 +77,7 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
 
         const initialDailyTasks = result.data.filter((item) => item.day === selectedDay);
         setDailyTasks(initialDailyTasks);
+        // console.log(dailyTasks)
     }
 
     const handleDailyTasks = (day) => {
@@ -182,15 +149,6 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
                         <View style={style.listingScheduleContainer}>
 
                             {
-                                showDoneTaskModal && (
-                                    <ModalCongratulationsTask
-                                        close={() => setShowDoneTaskModal(false)}
-                                    />
-                                )
-
-                            }
-
-                            {
                                 showDeleteTaskModal && (
                                     <ModalExludeTask
                                         close={() => setShowDeleteTaskModal(false)}
@@ -202,7 +160,7 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
                             {
                                 showEditTaskModal && (
                                     <ModalEditTask
-                                        taskId={selectedTaskId}
+                                        idTask={selectedIdTask}
                                         close={() => setShowEditTaskModal(false)}
                                     />
                                 )
@@ -242,7 +200,7 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
 
                                                 <Dependent
                                                     name={dependent.name}
-                                                    photo={{ uri: dependent.photo }}
+                                                    photo={dependent.photo}
                                                 />
 
                                             </View>
@@ -290,11 +248,13 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
                                                                     image={item.icon}
                                                                     title={item.title}
                                                                     hour={item.hour}
-                                                                    key={item.id}
-                                                                    selected={checkedTasks?.includes(item.idTask)}
-                                                                    deleteTask={() => handleDeleteTask(item.id)}
-                                                                    editTask={() => handleEditTask(item.id)}
-                                                                    onPress={() => manageDoneTask(item.idTask)}
+                                                                    key={item.idTask}
+                                                                    deleteTask={() => {
+
+                                                                        setIdTask(item.idTask)
+                                                                        handleDeleteTask()
+                                                                    }}
+                                                                    editTask={() => handleEditTask(item.idTask)}
                                                                 />
                                                             ))
 

@@ -5,7 +5,7 @@ import { Text } from 'react-native';
 import Toast from 'react-native-toast-message';
 
 import Navigation from './src/navigation/navigation';
-import { ScreenGames } from './src/screens/ScreenGames';
+import { ScheduleDependent } from './src/screens/ScheduleDependent';
 
 export default function App() {
 

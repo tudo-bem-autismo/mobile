@@ -71,7 +71,7 @@ export const DependentListing = ({ navigation }) => {
                                     dependents.map(item => (
                                         <Dependent
                                             name={item.name}
-                                            photo={{ uri: item.photo }}
+                                            photo={item.photo}
                                             key={item.id}
                                             onPress={() => {
 

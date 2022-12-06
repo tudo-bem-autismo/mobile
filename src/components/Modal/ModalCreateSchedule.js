@@ -409,7 +409,7 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
 
                                                         <Dependent
                                                             name={item.name}
-                                                            photo={{ uri: item.photo }}
+                                                            photo={item.photo}
                                                             selected={selectedDependents.includes(item.id)}
                                                             onPress={() => manageDependents(item.id)}
                                                         />
