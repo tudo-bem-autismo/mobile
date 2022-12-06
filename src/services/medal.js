@@ -8,7 +8,7 @@ export const getMedalsDependent = async () => {
 
     const idDependent = await getData('@idDependent')
 
-    const result = await api.get(`/premiacao/${idDependent}`)
+    const result = await api.get(`/premiacao/${id}`)
 
     const success = result.status === 200
     

@@ -3,12 +3,12 @@ import { Button, Image, Pressable, ScrollView, StyleSheet, Text, Touchable, Touc
 import { TouchableRipple } from 'react-native-paper';
 import { COLORS, FONTS } from '../../assets/const';
 
-export const Game = ({ titleGame, gifGame, onPress }) => {
+export const Game = ({ titleGame, gifGame, onPress, navigation }) => {
 
     return (
         <View style={styles.game}>
 
-            <TouchableOpacity style={styles.buttonGame} onPress={() => onPress()}>
+            <TouchableOpacity style={styles.buttonGame} onPress={() => onPress()} navigation={navigation}>
 
                 <>
                     <Text style={styles.textGame}>{titleGame}</Text>

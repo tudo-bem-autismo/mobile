@@ -1,39 +1,34 @@
 import { showErrorToast } from "../utils/errors";
 import api from "./api";
 
-export const getReports = async (id_crianca, id_mini_jogo, periodo) => {
+export const getReports = async (acertos, erros, data, id_mini_jogo) => {
     try {
 
-        const data = {
-            id_crianca: id_crianca,
-            id_mini_jogo: id_mini_jogo,
-            periodo: periodo
-        }
+        // console.log(id_crianca)
+        
+        const id_crianca = await getData('@idDependent')
+        console.log(id_crianca)
 
-        const result = await api.post(`/relatorio/listagem`, data)
-
+        const result = await api.post(`/relatorio`, {acertos, erros, data, id_mini_jogo, id_crianca})
         const success = result.status === 200
 
-        const formattedData = result.data.map (item => {
-            return {
-                id: item.id,
-                erros: item.erros,
-                acertos: item.acertos,
-                data: item.data
-            }
-        }) 
+        // console.log(result.data)
+
+        const formattedData = result.data
             
-    
+        // console.log(result.data)
+
         return {
             success,
-            data: formattedData
+            data: result.status
         }
 
     } catch (error) {
+        // console.log(error)
         showErrorToast(error.response.data.message)
         return {
             success: false,
-            data: error.response.data
+            data: error.response
         }
     }
 }

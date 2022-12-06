@@ -22,10 +22,10 @@ import { ScreenGames } from '../screens/ScreenGames';
 import { CongratulationsScreen } from '../screens/CongratulationsScreen';
 import { TabsDependent } from './tabsDependent';
 import { TabsResponsible } from './tabsResponsible';
-import { Games } from '../screens/Games';
 import { MenuDependent } from '../screens/MenuDependent';
 import { DependentProfile } from '../screens/DependentProfile';
 import { HomeDependent } from '../screens/HomeDependent';
+import { GamesDependent } from '../screens/GamesDependent';
 
 
 const Stack = createNativeStackNavigator();
@@ -57,6 +57,7 @@ const Navigation = () => {
                 <Stack.Screen name="MenuDependent" component={MenuDependent} options={{ headerShown: false }} />
                 <Stack.Screen name="DependentProfile" component={DependentProfile} options={{ headerShown: false }} />
                 <Stack.Screen name="HomeDependent" component={HomeDependent} options={{ headerShown: false }} />
+                <Stack.Screen name="GamesDependent" component={GamesDependent} options={{ headerShown: false }} />
 
             </Stack.Navigator>
         </NavigationContainer>

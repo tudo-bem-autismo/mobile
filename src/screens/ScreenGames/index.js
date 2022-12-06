@@ -2,12 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, StatusBar } from 'react-native';
 import { ComponentGames } from '../../components/ComponentGames';
 import { ButtonAlert, ButtonGames, ButtonImage, ComponentGamesTwo } from '../../components';
-import { getStepGames } from '../../services';
+import { getStepGames } from '../../services/game';
+import { getReports } from '../../services';
 import { Loading } from '../Loading';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import { COLORS } from '../../assets/const';
+import { CongratulationsScreen } from '../CongratulationsScreen';
+import { MedalScreen } from '../MedalScreen';
+import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
 
-export function ScreenGames() {
+export function ScreenGames({route ,navigation}) {
+
+    let {idGames} = route.params;
+
+    const [reports, setReports] = useState([{
+        "acertos": 0,
+        "erros": 0,
+        "data": "",
+        "id_mini_jogo": 0,
+        "id_crianca": ""
+    }])
 
     const [game, setGame] = useState([{
         "id": 0,
@@ -76,79 +90,119 @@ export function ScreenGames() {
 
     });
 
-    const getSteps = () => {
-        getStepGames().then(
-            (result) => {
-                // console.log(result.data[1].cor_fundo)
-                setGame(result.data)
-                setCurrentGame(result.data[0])
-            }
-        )
-    }
-    useEffect(() => {
+    const getGames = async () =>{
+        const result = await getStepGames(idGames)
+        setGame(result.data)
+        setCurrentGame(result.data[0])
         setIsLoading(false)
 
-    }, [game])
-
-
-    useEffect(() => {
-        getSteps()
-
-
-    }, [])
-
-    const correctStep = () => {
-        // console.log('vfgdsfb')
-        setHits(hits + 1)
-        setCurrenteStep(currentStep + 1)
-        setCurrentGame(game[currentStep + 1])
-        // console.log(hits)
     }
 
-    const incorrectStep = () => {
-        setMistakes(mistakes+1)
-        // console.log(mistakes)
-    }
+    // const getSteps = async() => {
+    //     // getStepGames().then(
+    //     //     (result) => {
+    //     //         // console.log(result.data[1].cor_fundo)
+    //     //         setGame(result.data)
+    //     //         setCurrentGame(result.data[0])
+    //     //     }
+    //     // )
 
-    return (
-        <>
+    //     const result = await getStepGames(idGames) 
+    // }
+    
+    
+    // useEffect(() => {
+        //     getSteps()
+        
+        
+        // }, [])
+        
+        const sendReports =async () =>{
+
+            // console.log(idKid)
+            const date = new Date()
+            const result = await getReports(hits, mistakes, date, idGames)
+            console.log(result)
             
-                {isLoading ? (
-                    <Loading />
+            if(result.data.medalha){
+                
+                navigation.navigate('MedalScreen', {
+                    ...result
+                })
+            }else{
+                navigation.navigate('CongratulationsScreen')
+            }
+            
+        }
+        
+        const correctStep = () => {
+            
+            if(currentStep < (game.length - 1)){
+                
+                setHits(hits + 1)
+                setCurrenteStep(currentStep + 1)
+                setCurrentGame(game[currentStep + 1])
+                
+            }else{
+                sendReports()
+                // console.log('---------menor')
+            }
+        }
+        
+        const incorrectStep = () => {
+            setMistakes(mistakes+1) 
+        }
+        
+        useEffect(() => {
+            getGames()
+        }, [game[0]])
+        
+        return (
+            <>
+            {isLoading ? (
+                <Loading />
                 ) : (
+                    
+                    game ? (
+                        
+                        <View style={{ ...styles.mainContainer, backgroundColor: currentGame.cor_fundo }}>
+                            {/* <View style={styles.mainContainer}> */}
 
-                    <View style={{ ...styles.mainContainer, backgroundColor: currentGame.cor_fundo }}>
-                        {/* <View style={styles.mainContainer}> */}
+                            <ButtonAlert />
 
-                        <ButtonAlert />
+                                {
+                                    currentGame.imagem_exemplo == null ? (
 
-                            {
-                                currentGame.imagem_exemplo == null ? (
+                                        <ComponentGamesTwo
+                                            firstStepImage={currentGame.tbl_passo[0].imagem}
+                                            secondStepImage={currentGame.tbl_passo[1].imagem}
+                                            firstStepText={currentGame.dialogo}
+                                            correctStepFunction={()=>correctStep()}
+                                            incorrectStepFunction={()=> incorrectStep()}
+                                            firstStepCorrect = {currentGame.tbl_passo[0].passo_correto}
+                                            
+                                        />) : (
 
-                                    <ComponentGamesTwo
-                                        firstStepImage={currentGame.tbl_passo[0].imagem}
-                                        secondStepImage={currentGame.tbl_passo[1].imagem}
-                                        firstStepText={currentGame.dialogo}
-                                        correctStepFunction={()=>correctStep()}
-                                        incorrectStepFunction={()=> incorrectStep()}
-                                        firstStepCorrect = {currentGame.tbl_passo[0].passo_correto}
+                                        <ComponentGames
+                                            firstStepImageGames={currentGame.imagem_exemplo}
+                                            secondStepText={currentGame.dialogo}
+                                            firstStepButton={currentGame.tbl_passo[0].texto}
+                                            firstStepButtonTwo={currentGame.tbl_passo[1].texto}
+                                            firstStepColor={currentGame.tbl_passo[0].cor}
+                                            correctStepFunction={() => correctStep()}
+                                            incorrectStepFunction={()=> incorrectStep()}
+                                            firstStepCorrect = {currentGame.tbl_passo[0].passo_correto}
+                                        />)
                                         
-                                    />) : (
+                                        
+                                }
+                        
+                        </View>
 
-                                    <ComponentGames
-                                        firstStepImageGames={currentGame.imagem_exemplo}
-                                        secondStepText={currentGame.dialogo}
-                                        firstStepButton={currentGame.tbl_passo[0].texto}
-                                        firstStepButtonTwo={currentGame.tbl_passo[1].texto}
-                                        firstStepColor={currentGame.tbl_passo[0].cor}
-                                        correctStepFunction={() => correctStep()}
-                                        incorrectStepFunction={()=> incorrectStep()}
-                                        firstStepCorrect = {currentGame.tbl_passo[0].passo_correto}
-                                    />)
-                            }
-                       
-                    </View>
+                    ):([])
                 )}
+         
+                
             
         </>
     );

@@ -156,9 +156,15 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
     
     setChartIsLoading(true)
 
+    const data = {
+      id_crianca: selectedKid,
+      id_mini_jogo: selectedGame,
+      periodo: selectedPeriod
+    }
+
     
     // variaveis utilizadas para filtros, são passadas "?period=" chamadas como query params
-    api.get(`/crianca/perfil/relatorio/${selectedKid}/${selectedGame}/${selectedPeriod}`).then(
+    api.post(`/relatorio/listagem`, data).then(
       
       (result) => {
 
