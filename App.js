@@ -44,6 +44,7 @@ export default function App() {
       <>
       {/* <ScreenGames/> */}
       <Navigation/>
+      {/* <MedalScreen/> */}
       {/* <GamesDependent /> */}
       {/* <GamesDependent/> */}
       {/* <Toast /> */}

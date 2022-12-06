@@ -3,15 +3,25 @@ import { View, Text, StyleSheet, StatusBar } from 'react-native';
 import { ComponentGames } from '../../components/ComponentGames';
 import { ButtonAlert, ButtonGames, ButtonImage, ComponentGamesTwo } from '../../components';
 import { getStepGames } from '../../services/game';
+import { getReports } from '../../services';
 import { Loading } from '../Loading';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import { COLORS } from '../../assets/const';
 import { CongratulationsScreen } from '../CongratulationsScreen';
 import { MedalScreen } from '../MedalScreen';
+import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
 
 export function ScreenGames({route ,navigation}) {
 
     let {idGames} = route.params;
+
+    const [reports, setReports] = useState([{
+        "acertos": 0,
+        "erros": 0,
+        "data": "",
+        "id_mini_jogo": 0,
+        "id_crianca": ""
+    }])
 
     const [game, setGame] = useState([{
         "id": 0,
@@ -83,66 +93,77 @@ export function ScreenGames({route ,navigation}) {
     const getGames = async () =>{
         const result = await getStepGames(idGames)
         setGame(result.data)
-
-    }
-
-    const getSteps = () => {
-        getStepGames().then(
-            (result) => {
-                console.log(result.data[1].cor_fundo)
-                setGame(result.data)
-                setCurrentGame(result.data[0])
-            }
-        )
-    }
-    useEffect(() => {
+        setCurrentGame(result.data[0])
         setIsLoading(false)
-        getGames()
-        // console.log(game)
 
-        // console.log(idGames)
-    }, [game[0].ordem])
-
-
-    useEffect(() => {
-        getSteps()
-
-
-    }, [])
-
-    const correctStep = () => {
-        setHits(hits + 1)
-        setCurrenteStep(currentStep + 1)
-        setCurrentGame(game[currentStep + 1])
-        // console.log(hits)
     }
 
-    const incorrectStep = () => {
-        setMistakes(mistakes+1)
-        //console.log(mistakes)
-    }
+    // const getSteps = async() => {
+    //     // getStepGames().then(
+    //     //     (result) => {
+    //     //         // console.log(result.data[1].cor_fundo)
+    //     //         setGame(result.data)
+    //     //         setCurrentGame(result.data[0])
+    //     //     }
+    //     // )
 
-    const stepReports = () =>{
-        if(mistakes >=3){
-            return <CongratulationsScreen
-                        navigation={navigation}
-                    />
-        }else{
-            return <MedalScreen
-                    navigation={navigation}
-            />
-        }
-    }
+    //     const result = await getStepGames(idGames) 
+    // }
     
+    
+    // useEffect(() => {
+        //     getSteps()
+        
+        
+        // }, [])
+        
+        const sendReports =async () =>{
 
-    return (
-        <>
+            // console.log(idKid)
+            const date = new Date()
+            const result = await getReports(hits, mistakes, date, idGames)
+            console.log(result)
             
-                {isLoading ? (
-                    <Loading />
+            if(result.data.medalha){
+                
+                navigation.navigate('MedalScreen', {
+                    ...result
+                })
+            }else{
+                navigation.navigate('CongratulationsScreen')
+            }
+            
+        }
+        
+        const correctStep = () => {
+            
+            if(currentStep < (game.length - 1)){
+                
+                setHits(hits + 1)
+                setCurrenteStep(currentStep + 1)
+                setCurrentGame(game[currentStep + 1])
+                
+            }else{
+                sendReports()
+                // console.log('---------menor')
+            }
+        }
+        
+        const incorrectStep = () => {
+            setMistakes(mistakes+1) 
+        }
+        
+        useEffect(() => {
+            getGames()
+        }, [game[0]])
+        
+        return (
+            <>
+            {isLoading ? (
+                <Loading />
                 ) : (
                     
-                    currentStep.toString() < game.length ? (
+                    game ? (
                         
                         <View style={{ ...styles.mainContainer, backgroundColor: currentGame.cor_fundo }}>
                             {/* <View style={styles.mainContainer}> */}
@@ -172,11 +193,16 @@ export function ScreenGames({route ,navigation}) {
                                             incorrectStepFunction={()=> incorrectStep()}
                                             firstStepCorrect = {currentGame.tbl_passo[0].passo_correto}
                                         />)
+                                        
+                                        
                                 }
                         
                         </View>
-                    ):(stepReports())
+
+                    ):([])
                 )}
+         
+                
             
         </>
     );

@@ -3,6 +3,7 @@ import { getData } from "../utils/storage"
 import api from "./api"
 
 export const getGamesService = async () => {
+    
     try {
 
         const idResponsible = await getData('@id')
@@ -150,41 +151,25 @@ export const getGamesByResponsible = async () => {
     }
 }
 
-export const getStepGames = async () => {
+export const getStepGames = async (idGames) => {
 
     try{
         
-        const result = await api.get(`/miniJogo/1`)
+        console.log('----------------')
+        const result = await api.get(`/miniJogo/${idGames}`)
+        // console.log(result.data[0].tbl_situacao_escolha[0])
         const data = result.data[0].tbl_situacao_escolha
-    
-
         const success = result.status === 200
-
-        //  const formattedData = {
-        //     image: result.data[0].tbl_situacao_escolha[1].imagem_exemplo,
-        //     dialogo: result.data[0].tbl_situacao_escolha[1].dialogo,
-        //     passo1 : result.data[0].tbl_situacao_escolha[1].tbl_passo[0].texto,
-        //     passo2: result.data[0].tbl_situacao_escolha[1].tbl_passo[1].texto,
-        //     corBotao: result.data[0].tbl_situacao_escolha[1].tbl_passo[1].cor,
-            
-        //  }
-
-        // const formattedDataTwo = {
-        //  dialogo: result.data[0].tbl_situacao_escolha[0].dialogo,
-        //  imagem: result.data[0].tbl_situacao_escolha[0].tbl_passo[0].imagem,
-        //  imagemDois: result.data[0].tbl_situacao_escolha[0].tbl_passo[1].imagem
-        //  }
-
-        //console.log(result.data[0])
         
         return{
-                success,
-                data: data
-                // dataTwo: formattedDataTwo
+            success,
+            data: data
+            // dataTwo: formattedDataTwo
         }
         
     }
     catch(error){
+        console.log('----------------erro', error)
         showErrorToast(error.response.data.message)
         return{
             success:false,
