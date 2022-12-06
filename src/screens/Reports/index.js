@@ -130,11 +130,7 @@ export const Reports = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-<<<<<<< HEAD
-      <MainHeader screenName={"RELATÓRIOS DOS JOGOS"} navigation={navigation} />
-=======
       <MainHeader screenName={"RELATÓRIOS DOS JOGOS"} navigation={navigation}/>
->>>>>>> 775c4d701f5dac02ba46956003f637c1e689990b
 
       <View style={styles.reportsContainer}>
         {chartIsLoading ? (<Loading />) : renderRelatory && (
