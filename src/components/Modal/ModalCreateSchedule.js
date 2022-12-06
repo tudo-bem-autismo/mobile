@@ -365,7 +365,7 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
                                                     onPress={() => manageDays(item.id)}
                                                     key={item.id}
                                                 >
-                                                    <Text style={style.dayText}>{item.day}</Text>
+                                                    <Text style={style.dayText}>{item.initial}</Text>
                                                 </TouchableOpacity>
 
                                             ))

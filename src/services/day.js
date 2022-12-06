@@ -11,11 +11,9 @@ export const getDaysService = async () => {
         const formattedData = result.data.map(item => {
             return {
                 id: item.id,
-                day: item.sigla
+                initial: item.sigla
             }
         })
-
-        // console.log(formattedData)
 
         return {
             success,

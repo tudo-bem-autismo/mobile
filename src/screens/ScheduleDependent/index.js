@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ImageBackground, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Image, ImageBackground, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 import { Loading } from "../../screens/Loading";
 import style from "../../screens/ScheduleDependent/style";
@@ -15,6 +15,8 @@ import { getData } from "../../utils/storage";
 import { CardScheduleDependent } from "../../components/ScheduleDependent/CardSchedule";
 import { getTasksService, taskIsDoneService } from "../../services/task";
 import { getTodayInitials } from "../../utils/date/days";
+import notFoundTask from '../../assets/images/notFoundTask.gif';
+
 
 export const ScheduleDependent = ({ close, show, navigation }) => {
 
@@ -87,8 +89,6 @@ export const ScheduleDependent = ({ close, show, navigation }) => {
         const idDependent = await getData('@idDependent')
 
         const result = await getTasksService(idDependent);
-
-        console.log(result.data)
 
         const initialDailyTasks = result.data.filter((item) => item.day === selectedDay);
 
@@ -185,17 +185,27 @@ export const ScheduleDependent = ({ close, show, navigation }) => {
                                     <ScrollView style={style.cardsContainer}>
 
                                         {
-                                            dailyTasks?.map(item => (
-                                                <CardScheduleDependent
-                                                    image={item.icon}
-                                                    title={item.title}
-                                                    hour={item.hour}
-                                                    key={item.idTask}
-                                                    isToday={selectedDay === getTodayInitials()}
-                                                    selected={item.isDone}
-                                                    onPress={() => manageDoneTask(item.idTask)}
-                                                />
-                                            ))
+                                            dailyTasks.length ? (
+
+                                                dailyTasks?.map(item => (
+                                                    <CardScheduleDependent
+                                                        image={item.icon}
+                                                        title={item.title}
+                                                        hour={item.hour}
+                                                        key={item.idTask}
+                                                        isToday={selectedDay === getTodayInitials()}
+                                                        selected={item.isDone}
+                                                        onPress={() => manageDoneTask(item.idTask)}
+                                                    />
+                                                ))
+                                            ) : (
+                                                <View style={style.notFoundCard}>
+                                                    <Text style={style.textNotFoundCard}>Nenhuma tarefa no momento</Text>
+                                                    <Image
+                                                        style={style.imageNotFoundCard}
+                                                        source={notFoundTask} />
+                                                </View>
+                                            )
                                         }
 
 

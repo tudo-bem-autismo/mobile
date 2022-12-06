@@ -58,6 +58,7 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
             //     text2: 'Tarefa excluida com sucesso!'
             // })
             setShowDeleteTaskModal(false)
+            close()
         }
     }
 
@@ -201,6 +202,7 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
                                                 <Dependent
                                                     name={dependent.name}
                                                     photo={dependent.photo}
+
                                                 />
 
                                             </View>

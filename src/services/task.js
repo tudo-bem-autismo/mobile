@@ -48,9 +48,7 @@ export const getTaskByIdService = async (idTask) => {
 
         const success = result.status === 200
 
-        const days = result.data.tbl_tarefa_dia_semana.map(item => {
-            return item.tbl_dia_semana.sigla
-        })
+        const days = result.data.tbl_tarefa_dia_semana.map(item => item.tbl_dia_semana.id)
 
         const dependents = result.data.tbl_crianca_tarefa.map(item => {
             return item.id_crianca
@@ -64,6 +62,8 @@ export const getTaskByIdService = async (idTask) => {
             dependents,
             icon: result.data.id_icone,
         }
+
+        // console.log(formattedData)
 
         return {
             success,
@@ -111,7 +111,6 @@ export const getIconsTasksService = async () => {
         }
     }
 }
-
 
 export const taskIsDoneService = async (data) => {
     try {
@@ -163,3 +162,34 @@ export const deleteTaskService = async (idTask) => {
     }
 }
 
+export const updateTaskService = async (data) => {
+    try {
+
+        const formattedData = {
+            id_crianca: data.selectedDependents,
+            id_tarefa: data.idTask,
+            titulo: data.title,
+            horario: data.alarmHour,
+            id_dia_semana: data.selectedDays,
+            id_icone: data.idIcon
+        }
+
+        const result = await api.post("/tarefa", formattedData);
+
+        const success = result.status === 200
+
+        return {
+            success,
+            data: result.data,
+        }
+
+    } catch (error) {
+        console.log(error)
+        showErrorToast(error.response.data.message)
+
+        return {
+            success: false,
+            data: error.response.data
+        }
+    }
+}
