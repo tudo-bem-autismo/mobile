@@ -1,3 +1,4 @@
+import React from 'react';
 import { Mandali_400Regular } from '@expo-google-fonts/mandali';
 import { Outfit_400Regular } from '@expo-google-fonts/outfit';
 import { Poppins_400Regular, useFonts } from '@expo-google-fonts/poppins';

@@ -33,13 +33,11 @@ export function ResponsiveLogin({ navigation }) {
 
                         <View style={styles.infoContainer}>
 
-                            {/* <FormLogin
+                            <FormLogin
                                 navigation={navigation}
-                            /> */}
+                            />
 
                         </View>
-
-
 
                     </View>
 

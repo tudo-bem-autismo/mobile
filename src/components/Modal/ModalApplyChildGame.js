@@ -1,6 +1,6 @@
 import { BlurView } from 'expo-blur';
 import React, { useEffect, useState } from "react";
-import { Animated, Dimensions, StyleSheet, Text, View } from "react-native";
+import { Animated, Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { MaterialIcons } from "@expo/vector-icons";
 import Toast from "react-native-toast-message";
@@ -187,18 +187,23 @@ export const ModalApplyChildGame = ({ close, show, selectedGameId }) => {
 
                                     <View style={style.dependentsList}>
 
+                                        <ScrollView
+                                            horizontal={true}
+                                        >
+                                            {
+                                                dependents.map(item => (
+                                                    <Dependent
+                                                        name={item.name}
+                                                        photo={{ uri: item.photo }}
+                                                        key={item.id}
+                                                        selected={newRestrictions?.find(restriction => restriction.idDependent === item.id)}
+                                                        onPress={() => manageDependentRestriction(item.id)}
+                                                    />
+                                                ))
+                                            }
+                                        </ScrollView>
 
-                                        {
-                                            dependents.map(item => (
-                                                <Dependent
-                                                    name={item.name}
-                                                    photo={{ uri: item.photo }}
-                                                    key={item.id}
-                                                    selected={newRestrictions?.find(restriction => restriction.idDependent === item.id)}
-                                                    onPress={() => manageDependentRestriction(item.id)}
-                                                />
-                                            ))
-                                        }
+
 
                                     </View>
 
