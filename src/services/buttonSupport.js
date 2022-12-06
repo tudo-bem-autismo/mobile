@@ -44,7 +44,7 @@ export const getButtonSupportDependent = async () => {
 
     // const id = await getData('@idDependent')
 
-    const result = await api.get(`/botaoApoio/4`)
+    const result = await api.get(`/botaoApoio/5`)
 
     const success = result.status === 200
     

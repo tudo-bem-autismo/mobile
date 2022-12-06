@@ -60,18 +60,17 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
     });
 
     const tipoMidia = result.type
-
-    if(tipoMidia == 'video') {
-      setMidia1(2)
-      setTipoMidia1('video-camera')
-    } else {
-      setMidia1(1)
-      setTipoMidia1('photo')
-     
-    }
   
     if (!result.cancelled) {
       setImage1(result.uri);
+      if(tipoMidia == 'video') {
+        setMidia1(2)
+        setTipoMidia1('video-camera')
+      } else {
+        setMidia1(1)
+        setTipoMidia1('photo')
+       
+      }
     }
   };
 
@@ -180,6 +179,9 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
     if(midia1) {
 
       if(midia1 == 1) {
+        if(image1) {
+          
+        }
         const filename = image1.split("/").pop();
         const match = /\.(\w+)$/.exec(filename);
         const type = match ? `image/${match[1]}` : `image`;
@@ -316,9 +318,11 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
             return Toast.show({
               type: "success",
               text1: "Conteúdo inserido com sucesso com sucesso",
-            });
+            },
+            );
+           
           }
-
+         
         }
   
         

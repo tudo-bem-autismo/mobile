@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         marginTop: StatusBar.currentHeight,
     },
     gamesContainer: {
-        flex: 15,
+        flex: 16,
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'stretch',

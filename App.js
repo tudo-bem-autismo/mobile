@@ -47,7 +47,7 @@ export default function App() {
       <>
         {/* <SupportButtonForKid/> */}
         <SupportButtonManagement/>
-        {/* <SupportButton/> */}
+        {/* <SupportButton/>  */}
         <Toast />
       </>
     );

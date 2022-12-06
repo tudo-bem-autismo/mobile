@@ -4,4 +4,4 @@ export * from "./ModalSavePassword";
 export * from "./ModalReports";
 export * from "./ModalButtonSuport";
 export * from "./ModalButtonSuportForKid";
-export * from "./ModalButtonSuportForKid";
+export * from "./ModalButtonSuportImage";

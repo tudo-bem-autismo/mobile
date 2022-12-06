@@ -30,8 +30,26 @@ import { deleteMidiaButtonSupport } from "../../services";
 
 const { height } = Dimensions.get("window");
 
-export const ModalButtonSuportForKid = ({ label, close, show, del, updateChart, setChartIsLoading, midia, idImg }) => {
+export const ModalButtonSuportImage = ({ label, close, show, del, updateChart, setChartIsLoading, midia, idImg }) => {
   const [isLoading, setIsLoading] = useState(true);
+
+  const [modal, setModal] = useState(false);
+
+  const deleteImage = async () => {
+
+    setModal(false)
+
+    const result = await deleteMidiaButtonSupport(idImg)
+
+    if (result.success) {
+        return Toast.show({
+            type: 'success',
+            text1: 'Imagem deletada com sucesso',
+        },
+        close());
+    }
+
+}
 
   const [state, setState] = useState({
     opacity: new Animated.Value(0),
@@ -127,7 +145,12 @@ export const ModalButtonSuportForKid = ({ label, close, show, del, updateChart, 
                 </View>
 
                 <View style={style.dependentsContainer}>
-                  <Image style={{ height: 300, width: 300 }} source={{uri: midia}} resizeMode="contain"/>
+                  <Image style={{ height: 300, width: 300, marginBottom: 15}} source={{uri: midia}} resizeMode="contain"/>
+                  <TouchableOpacity
+                    onPress={()=>setModal(true)}>
+                    <FontAwesome name="trash" style={{fontSize: 28}}/>
+                  </TouchableOpacity>
+                  
                 </View>
       
               </View>
@@ -135,6 +158,18 @@ export const ModalButtonSuportForKid = ({ label, close, show, del, updateChart, 
           </Animated.View>
         </Animated.View>
       )}
+
+      {modal && (
+                  <View style={style.modalContainer}>
+                    <ModalDeleteData
+                      label="Tem certeza que quer excluir a imagem?"
+                      close={() => setModal(false)}
+                      show={modal}
+                      del={() => deleteImage()}
+                      //navigation={navigation}
+                    />
+                  </View>
+                )}
 
     </View>
   );

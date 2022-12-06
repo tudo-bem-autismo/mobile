@@ -8,7 +8,7 @@ import { Video, AVPlaybackStatus  } from 'expo-av';
 import { Loading } from '../Loading';
 import { Dependent } from "../../components/DependentListing/Dependent";
 import styles from './style';
-import { ModalButtonSuportForKid, ModalViewButtonSuport }  from '../../components';
+import { ModalButtonSuportForKid }  from '../../components';
 
 import { FontAwesome } from '@expo/vector-icons';
 
@@ -43,9 +43,8 @@ export const SupportButtonForKid = ({ navigation }) => {
 
     }
 
-    const getImage = (image, id) => {
+    const getImage = (image) => {
         setImage1(image)
-        setIdMidia(id)
         setModal(true)
     }
 
@@ -67,24 +66,21 @@ export const SupportButtonForKid = ({ navigation }) => {
                     />
 
                     <View style={styles.gamesContainer}>
-
-                        <Text style={styles.textSelectGame}>
-                        :)))
-                        </Text>
+                        <Text style={{fontSize: 18, marginBottom: 10, fontStyle: 'bold', left: '-35%'}}>IMAGENS</Text>
                         <ScrollView
                             horizontal={true}
                             showsHorizontalScrollIndicator={false}
                             pagingEnabled={true}
                             contentContainerStyle={{flexGrow : 1, justifyContent : 'center', alignItems: 'center', padding: 15}}
-                            style={{marginVertical: 0}}
+                            style={{marginBottom: 0}}
                             >
-
+                            
                             {
                                 image.map(item => (        
                                     
-                                    <TouchableOpacity key={item.id} style={{backgroundColor: COLORS.black, alignItems: 'center', justifyContent: 'center', marginRight: 20, }}
+                                    <TouchableOpacity key={item.id} style={{alignItems: 'center', justifyContent: 'center', marginRight: 20, }}
                                     onPress={() => getImage(item.midia,item.id)}>
-                                        <Image source={{uri: item.midia}} style={{width: 300, height: 260}}/>
+                                        <Image source={{uri: item.midia}} style={{width: 300, height: 240}} resizeMode='cover'/>
                                         
                                     </TouchableOpacity>
                                     
@@ -93,28 +89,30 @@ export const SupportButtonForKid = ({ navigation }) => {
                             }
                           </ScrollView>
 
+
+                          <Text style={{fontSize: 18, marginBottom: 10, fontStyle: 'bold', left: '-35%'}}>VÍDEOS</Text>
+                        
                           <ScrollView
                                     horizontal={true}
                                     showsHorizontalScrollIndicator={false}
                                     pagingEnabled={true}
                                     contentContainerStyle={{flexGrow : 1, justifyContent : 'center', alignItems: 'center', padding: 15}}
-                                    style={{marginVertical: 50}}
+                                    style={{marginVertical: 0}}
                                     >
                             {
                                 video.map(item => (        
-                                    <View key={item.id} style={{backgroundColor: COLORS.black, alignItems: 'center', justifyContent: 'center', marginRight: 20}}>
+                                    <View key={item.id} style={{backgroundColor: COLORS.black, alignItems: 'center', marginRight: 20}}>
                                         <Video
                                         ref={videoR}
                                         useNativeControls
-                                        source={{uri: item.midia}} style={{width: 300, height: 180}}
+                                        source={{uri: item.midia}} style={{width: 240, height: 280}}
                                         resizeMode="contain"
                                         isLooping
                                         onPlaybackStatusUpdate={status => setStatus(() => status)}/>
                                         <TouchableOpacity
                                             onPress={() => status.isPlaying ? videoR.current.pauseAsync() : video.current.playAsync()}
                                             >
-                                            <Text>{status.isPlaying ? 'Pause' : 'Play'}</Text>
-                                           
+
                                         </TouchableOpacity>
                                         
 
