@@ -5,19 +5,21 @@ import api from "./api";
 export const getTasksService = async (idDependent) => {
     try {
 
+
         const result = await api.get(`/tarefa/crianca/${idDependent}`)
 
         const success = result.status === 200
 
         const formattedData = result.data.map(item => {
             return {
-                idTask: item.id_tarefa,
+                idTask: +item.id_tarefa,
                 hour: item.horario,
                 title: item.titulo,
-                idSelectedDays: item.id_dia_semana,
-                initialsSelectedDays: item.sigla,
+                idSelectedDays: +item.id_dia_semana,
+                day: item.sigla,
                 icon: item.icone,
-                isToday: item.hoje
+                isToday: +item.hoje,
+                isDone: !!+item.realizada
             }
         })
 
@@ -28,6 +30,8 @@ export const getTasksService = async (idDependent) => {
 
 
     } catch (error) {
+        console.log(error);
+
         showErrorToast(error.response.data.message)
         return {
             success: false,
@@ -68,6 +72,47 @@ export const getHistoryTask = async (idDependent, period) => {
     }
 }
 
+export const getTaskByIdService = async (idTask) => {
+    try {
+
+
+        const result = await api.get(`/tarefa/${idTask}`)
+
+        const success = result.status === 200
+
+        const days = result.data.tbl_tarefa_dia_semana.map(item => item.tbl_dia_semana.id)
+
+        const dependents = result.data.tbl_crianca_tarefa.map(item => {
+            return item.id_crianca
+        })
+
+        const formattedData = {
+            idTask: result.data.id,
+            hour: result.data.horario,
+            title: result.data.titulo,
+            days,
+            dependents,
+            icon: result.data.id_icone,
+        }
+
+        // console.log(formattedData)
+
+        return {
+            success,
+            data: formattedData
+        }
+
+
+    } catch (error) {
+        console.log(error);
+
+        showErrorToast(error.response.data.message)
+        return {
+            success: false,
+            data: error.response.data
+        }
+    }
+}
 
 export const getIconsTasksService = async () => {
     try {
@@ -78,13 +123,9 @@ export const getIconsTasksService = async () => {
 
         const formattedData = result.data.map(item => {
             return {
-                idTask: item.id_tarefa,
-                hour: item.horario,
-                title: item.titulo,
-                idSelectedDays: item.id_dia_semana,
-                initialsSelectedDays: item.sigla,
+                id: item.id,
                 icon: item.icone,
-                isToday: item.hoje
+                title: item.titulo
             }
         })
 
@@ -102,7 +143,6 @@ export const getIconsTasksService = async () => {
         }
     }
 }
-
 
 export const taskIsDoneService = async (data) => {
     try {
@@ -154,3 +194,34 @@ export const deleteTaskService = async (idTask) => {
     }
 }
 
+export const updateTaskService = async (data) => {
+    try {
+
+        const formattedData = {
+            id_crianca: data.selectedDependents,
+            id_tarefa: data.idTask,
+            titulo: data.title,
+            horario: data.alarmHour,
+            id_dia_semana: data.selectedDays,
+            id_icone: data.idIcon
+        }
+
+        const result = await api.post("/tarefa", formattedData);
+
+        const success = result.status === 200
+
+        return {
+            success,
+            data: result.data,
+        }
+
+    } catch (error) {
+        console.log(error)
+        showErrorToast(error.response.data.message)
+
+        return {
+            success: false,
+            data: error.response.data
+        }
+    }
+}

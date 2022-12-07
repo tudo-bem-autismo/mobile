@@ -109,6 +109,23 @@ const style = StyleSheet.create({
         width: '92%',
         height: 10,
         marginTop: 20,
+    },
+    notFoundCard: {
+        margin: 15,
+        height: 300,
+        alignItems: 'center',
+        justifyContent: 'center',
+        // backgroundColor: COLORS.red
+    },
+    textNotFoundCard: {
+        fontFamily: FONTS.text,
+        fontSize: 16,
+        textAlign: 'center'
+    },
+    imageNotFoundCard: {
+        width: '50%',
+        height: '50%',
+        // backgroundColor: COLORS.purple
     }
 });
 

@@ -23,7 +23,7 @@ import { getIconsTasksService, getTasksService } from '../../services/task';
 
 const { height } = Dimensions.get('window')
 
-export const ModalGaleryTasks = ({ close, show, setGaleryTask, setImageTask, navigation }) => {
+export const ModalGaleryTasks = ({ close, show, setIdIcon, setImageTask, navigation }) => {
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -40,7 +40,7 @@ export const ModalGaleryTasks = ({ close, show, setGaleryTask, setImageTask, nav
     }, []);
 
     const selectedTask = (idTask) => {
-        setGaleryTask(idTask)
+        setIdIcon(idTask)
         close()
     }
 

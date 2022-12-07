@@ -1,22 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text, Image } from "react-native";
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
-import clock from '../../assets/icons/clock.png';
-import { FONTS, COLORS } from "../../assets/const";
-import { Button } from "../Button";
-import { Formik } from "formik";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Input } from "../Input";
 import { Picker } from "@react-native-picker/picker";
+import { Formik } from "formik";
+import { COLORS, FONTS } from "../../assets/const";
+import clock from '../../assets/icons/clock.png';
+import { DAYS_OFF_WEEK, DAYS_OFF_WEEK_EDIT, WEEKEND_DAYS, WORKING_DAYS } from '../../utils/date/days';
+import { Dependent } from "../DependentListing";
+import { Input } from "../Input";
 import { InputGaleryTasks } from "../Input/InputGaleryTasks";
 import { ModalGaleryTasks } from "./ModalGaleryTasks";
-import { Dependent } from "../DependentListing";
+import { getResponsibleDependentsService } from "../../services";
+import { getTaskByIdService, updateTaskService } from "../../services/task";
+import { Loading } from "../../screens/Loading";
+import { scheduleEditTaskDataSchema } from "../../utils/validations/Schedule";
+import { format } from "date-fns";
+import { getDaysService } from "../../services/day";
 
 
 const { height } = Dimensions.get('window')
 
-export const ModalEditTask = ({ close, navigation }) => {
+export const ModalEditTask = ({ close, navigation, idTask }) => {
 
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
@@ -28,7 +34,7 @@ export const ModalEditTask = ({ close, navigation }) => {
 
     const [alarmHour, setAlarmHour] = useState('12:00');
 
-    const [selectedDays, setSelectedDays] = useState([]);
+    const [selectedDaysIds, setSelectedDaysIds] = useState([]);
 
     const [galeryHasError, setGaleryHasError] = useState(false);
 
@@ -42,61 +48,46 @@ export const ModalEditTask = ({ close, navigation }) => {
 
     const [imageTask, setImageTask] = useState(null);
 
-    const DAYS_OFF_WEEK = [
-        'DOM',
-        'SEG',
-        'TER',
-        'QUA',
-        'QUI',
-        'SEX',
-        'SAB',
-    ]
+    const [task, setTask] = useState({});
 
-    const WORKING_DAYS = [
-        'SEG',
-        'TER',
-        'QUA',
-        'QUI',
-        'SEX'
-    ]
+    const [idIcon, setIdIcon] = useState(0);
 
-    const WEEKEND_DAYS = [
-        'SAB',
-        'DOM'
-    ]
+    const [daysOfWeek, setDaysOfWeek] = useState([{}]);
 
-    const manageDays = (day) => {
+    const [isLoading, setIsLoading] = useState(true);
 
-        const dayAlreadySelected = selectedDays.includes(day);
+    const manageDays = (idDay) => {
+
+        const dayAlreadySelected = selectedDaysIds.includes(idDay);
 
         if (dayAlreadySelected) {
-            const newSelectedDays = selectedDays.filter(item => item !== day);
+            const newSelectedDays = selectedDaysIds.filter(item => item !== idDay);
 
-            return setSelectedDays(newSelectedDays);
+            return setSelectedDaysIds(newSelectedDays);
         }
 
-        setSelectedDays([
-            ...selectedDays,
-            day
+        setSelectedDaysIds([
+            ...selectedDaysIds,
+            idDay
         ])
 
         // console.log(selectedDays);
 
     }
 
-    const manageDependents = (dependent) => {
+    const manageDependents = (idDependent) => {
 
-        const dependentAlreadySelected = selectedDependents.includes(dependent);
+        const dependentAlreadySelected = selectedDependents.includes(idDependent);
 
         if (dependentAlreadySelected) {
-            const newSelectedDependents = selectedDependents.filter(item => item !== dependent)
+            const newSelectedDependents = selectedDependents.filter(item => item !== idDependent)
 
             return setSelectedDependents(newSelectedDependents)
         }
 
         setSelectedDependents([
             ...selectedDependents,
-            dependent
+            idDependent
         ])
 
         // console.log(selectedDependents);
@@ -104,7 +95,7 @@ export const ModalEditTask = ({ close, navigation }) => {
     }
 
     const handleSelectDays = (days) => {
-        setSelectedDays(days)
+        setSelectedDaysIds(days)
     }
 
     const showDatePicker = () => {
@@ -116,7 +107,6 @@ export const ModalEditTask = ({ close, navigation }) => {
     };
 
     const handleHour = (date) => {
-
         const hour = format(date, 'HH:mm')
 
         setAlarmHour(hour)
@@ -127,204 +117,252 @@ export const ModalEditTask = ({ close, navigation }) => {
     const getDependents = async () => {
         const result = await getResponsibleDependentsService()
         setDependents(result.data)
+    }
 
+    const getTask = async () => {
+        const result = await getTaskByIdService(idTask)
+        setTask(result.data)
+        setSelectedDaysIds(result.data.days)
+        setAlarmHour(result.data.hour)
+        setIdIcon(result.data.icon)
+        setSelectedDependents(result.data.dependents)
+        setIsLoading(false)
+    }
+
+    const getDaysOfWeek = async () => {
+        const result = await getDaysService()
+        setDaysOfWeek(result.data)
+    }
+
+    const handleForm = async (data) => {
+
+        const newData = {
+            ...data,
+            alarmHour,
+            selectedDays: selectedDaysIds,
+            selectedDependents,
+            idIcon
+        };
+
+        // console.log(newData)
+
+        const result = await updateTaskService(newData)
+
+        if (result.success) {
+            return Toast.show({
+                type: 'success',
+                text1: 'Sucesso!',
+                text2: 'Tarefa excluida com sucesso!'
+            })
+        }
+
+        close()
+
+    }
+
+    const initialValues = {
+        title: task.title
     }
 
     useEffect(() => {
         getDependents()
+        getTask()
+        getDaysOfWeek()
     }, []);
 
     return (
 
         <View style={style.container}>
+            {isLoading ? (
+                <Loading />
+            ) : (
+                <Formik
+                    validationSchema={scheduleEditTaskDataSchema}
+                    initialValues={initialValues}
+                    onSubmit={values => handleForm(values)}
+                >
+                    {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+                        <>
 
-            <Formik
-                // validationSchema={scheduleCreateTaskDataSchema}
-                // initialValues={initialValues}
-                onSubmit={values => handleForm(values)}
-            >
-                {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
-                    <>
+                            <View style={style.formContainer}>
 
-                        <View style={style.formContainer}>
+                                <View style={style.headerContainer}>
 
-                            <View style={style.headerContainer}>
+                                    <TouchableOpacity onPress={close}>
 
-                                <TouchableOpacity onPress={close}>
+                                        <MaterialIcons
+                                            name="close"
+                                            size={40}
+                                            style={modalGaleryTasks ? style.invisibleCloseModalIcon : style.closeModalIcon}
 
-                                    <MaterialIcons
-                                        name="close"
-                                        size={35}
-                                        style={modalGaleryTasks ? style.invisibleCloseModalIcon : style.closeModalIcon}
-
-                                    />
-
-                                </TouchableOpacity>
-
-                            </View>
-
-                            <Input
-                                title="TITULO"
-                                iconName="calendar-o"
-                                placeholder="Descreva a tarefa a ser criada"
-                                borderColor={COLORS.blue}
-                                backgroundColor={COLORS.white}
-                            // onChangeText={handleChange('title')}
-                            // onBlur={handleBlur('title')}
-                            // value={values.title}
-                            // hasError={!!errors.title}
-                            // errorMessage={errors.title}
-                            />
-
-                            <View style={style.dateTimeContainer}>
-
-                                <Text style={style.textDateTime}>DIA E HORA</Text>
-
-                                <View style={style.selectContainer}>
-
-                                    <TouchableOpacity
-                                        style={style.timeContainer}
-                                        onPress={showDatePicker}
-                                    >
-
-                                        <View style={style.clockContainer}>
-                                            <Text style={style.textClock}>{alarmHour}</Text>
-                                            <Image
-                                                source={clock}
-                                                style={style.iconClock}
-                                            />
-                                        </View>
-
-                                        <DateTimePickerModal
-                                            isVisible={isDatePickerVisible}
-                                            mode="time"
-                                            onConfirm={handleHour}
-                                            onCancel={hideDatePicker}
-                                            date={alarmDate}
-                                            is24Hour={true}
-                                            style={{ backgroundColor: COLORS.yellow, width: 200, }}
                                         />
 
                                     </TouchableOpacity>
 
-
-                                    <View style={style.periodDate}>
-
-                                        <Picker
-                                            style={style.picker}
-                                            dropdownIconColor={COLORS.blue}
-                                            dropdownIconRippleColor={COLORS.purple}
-                                            onValueChange={(itemValue) => handleSelectDays(itemValue)}
-                                        >
-
-                                            <Picker.Item
-                                                label="Selecionar dias"
-                                                value={[]}
-                                                style={style.item}
-                                            />
-                                            <Picker.Item
-                                                label="Todos os dias"
-                                                value={DAYS_OFF_WEEK}
-                                                style={style.item}
-                                            />
-                                            <Picker.Item
-                                                label="Seg a sex"
-                                                value={WORKING_DAYS}
-                                                style={style.item}
-                                            />
-                                            <Picker.Item
-                                                label="Final de semana"
-                                                value={WEEKEND_DAYS}
-                                                style={style.item}
-                                            />
-
-                                        </Picker>
-
-                                    </View>
                                 </View>
 
-                            </View>
+                                <Input
+                                    title="TITULO"
+                                    iconName="calendar-o"
+                                    placeholder="Descreva a tarefa a ser criada"
+                                    borderColor={COLORS.blue}
+                                    backgroundColor={COLORS.white}
+                                    onChangeText={handleChange('title')}
+                                    onBlur={handleBlur('title')}
+                                    value={values.title}
+                                    hasError={!!errors.title}
+                                    errorMessage={errors.title}
+                                />
 
-                            <View style={daysOfWeekHasError ? style.hasErrorDayButton : style.daysContainer}>
+                                <View style={style.dateTimeContainer}>
 
-                                {
-                                    DAYS_OFF_WEEK.map(item => (
+                                    <Text style={style.textDateTime}>DIA E HORA</Text>
+
+                                    <View style={style.selectContainer}>
 
                                         <TouchableOpacity
-                                            style={selectedDays.includes(item) ? style.selectedDayButton : style.dayButton}
-                                            onPress={() => manageDays(item)}
-                                            key={item}
+                                            style={style.timeContainer}
+                                            onPress={showDatePicker}
                                         >
-                                            <Text style={style.dayText}>{item}</Text>
+
+                                            <View style={style.clockContainer}>
+                                                <Text style={style.textClock}>{alarmHour}</Text>
+                                                <Image
+                                                    source={clock}
+                                                    style={style.iconClock}
+                                                />
+                                            </View>
+
+                                            <DateTimePickerModal
+                                                isVisible={isDatePickerVisible}
+                                                mode="time"
+                                                onConfirm={handleHour}
+                                                onCancel={hideDatePicker}
+                                                date={alarmDate}
+                                                is24Hour={true}
+                                                style={{ backgroundColor: COLORS.yellow, width: 200, }}
+                                            />
+
                                         </TouchableOpacity>
 
-                                    ))
-                                }
 
-                            </View>
+                                        <View style={style.periodDate}>
 
-                            <InputGaleryTasks
-                                // image={{uri : imageTask}}
-                                onPress={() => setModalGaleryTasks(true)}
-                                hasError={galeryHasError}
-                            />
-
-                            {
-                                modalGaleryTasks && (
-                                    <View style={style.modalContainer}>
-                                        <ModalGaleryTasks
-                                            show={modalGaleryTasks}
-                                            close={() => setModalGaleryTasks(false)}
-                                            setGaleryTask={setGaleryTask}
-                                            setImageTask={setImageTask}
-                                            navigation={navigation}
-                                        />
-                                    </View>
-                                )
-                            }
-
-                            <View style={style.selectDependentsContainer}>
-
-                                <Text style={style.text}>SELECIONE A CRIANÇA</Text>
-
-                                <View style={style.dependentsContainer}>
-
-                                    {
-                                        dependents.map(item => (
-
-                                            <View
-                                                style={selectDependentHasError ? style.hasErrorDependentButton : style.dependentButton}
-                                                key={item.id}
+                                            <Picker
+                                                style={style.picker}
+                                                dropdownIconColor={COLORS.blue}
+                                                dropdownIconRippleColor={COLORS.purple}
+                                                onValueChange={(itemValue) => handleSelectDays(itemValue)}
                                             >
 
-                                                <Dependent
-                                                    name={item.name}
-                                                    photo={{ uri: item.photo }}
-                                                    selected={selectedDependents.includes(item.id)}
-                                                    onPress={() => manageDependents(item.id)}
+                                                <Picker.Item
+                                                    label="Selecionar dias"
+                                                    value={[]}
+                                                    style={style.item}
+                                                />
+                                                <Picker.Item
+                                                    label="Todos os dias"
+                                                    value={DAYS_OFF_WEEK}
+                                                    style={style.item}
+                                                />
+                                                <Picker.Item
+                                                    label="Seg a sex"
+                                                    value={WORKING_DAYS}
+                                                    style={style.item}
+                                                />
+                                                <Picker.Item
+                                                    label="Final de semana"
+                                                    value={WEEKEND_DAYS}
+                                                    style={style.item}
                                                 />
 
-                                            </View>
+                                            </Picker>
+
+                                        </View>
+                                    </View>
+
+                                </View>
+
+                                <View style={daysOfWeekHasError ? style.hasErrorDayButton : style.daysContainer}>
+
+                                    {
+                                        daysOfWeek.map(item => (
+
+                                            <TouchableOpacity
+                                                style={selectedDaysIds.includes(item.id) ? style.selectedDayButton : style.dayButton}
+                                                onPress={() => manageDays(item.id)}
+                                                key={item.id}
+                                            >
+                                                <Text style={style.dayText}>{item.initial}</Text>
+                                            </TouchableOpacity>
+
                                         ))
                                     }
 
                                 </View>
 
+                                <InputGaleryTasks
+                                    onPress={() => setModalGaleryTasks(true)}
+                                    hasError={galeryHasError}
+                                />
+
+                                {
+                                    modalGaleryTasks && (
+                                        <View style={style.modalContainer}>
+                                            <ModalGaleryTasks
+                                                show={modalGaleryTasks}
+                                                close={() => setModalGaleryTasks(false)}
+                                                setIdIcon={setIdIcon}
+                                                setGaleryTask={setGaleryTask}
+                                                setImageTask={setImageTask}
+                                                navigation={navigation}
+                                            />
+                                        </View>
+                                    )
+                                }
+
+                                <View style={style.selectDependentsContainer}>
+
+                                    <Text style={style.text}>SELECIONE A CRIANÇA</Text>
+
+                                    <View style={style.dependentsContainer}>
+
+                                        {
+                                            dependents.map(item => (
+
+                                                <View
+                                                    style={selectDependentHasError ? style.hasErrorDependentButton : style.dependentButton}
+                                                    key={item.id}
+                                                >
+
+                                                    <Dependent
+                                                        name={item.name}
+                                                        photo={item.photo}
+                                                        selected={selectedDependents?.find(selectedDependent => selectedDependent === item.id)}
+                                                        onPress={() => manageDependents(item.id)}
+                                                    />
+
+                                                </View>
+                                            ))
+                                        }
+
+                                    </View>
+
+                                </View>
+
                             </View>
 
-                        </View>
+                            <TouchableOpacity
+                                style={modalGaleryTasks ? style.invisibleButtonContainer : style.buttonContainer}
+                                onPress={handleSubmit}
+                            >
+                                <Text style={style.textButton}>SALVAR</Text>
+                            </TouchableOpacity>
 
-                        <TouchableOpacity
-                            style={modalGaleryTasks ? style.invisibleButtonContainer : style.buttonContainer}
-                            onPress={handleSubmit}
-                        >
-                            <Text style={style.textButton}>SALVAR</Text>
-                        </TouchableOpacity>
-
-                    </>
-                )}
-            </Formik>
-
+                        </>
+                    )}
+                </Formik>
+            )}
         </View>
 
     );
@@ -416,7 +454,7 @@ const style = StyleSheet.create({
     },
     textClock: {
         fontSize: 20,
-        color: COLORS.gray
+        // color: COLORS.gray
     },
     iconClock: {
         width: 30,
@@ -541,6 +579,8 @@ const style = StyleSheet.create({
         left: 280,
     },
     closeModalIcon: {
+        width: 50,
+        height: 50,
         // backgroundColor: COLORS.red,
     }
 });

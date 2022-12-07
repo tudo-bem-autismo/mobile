@@ -67,7 +67,7 @@ export const DependentProfile = ({ navigation }) => {
                             <View style={styles.dependentContainer}>
 
                                 <Dependent
-                                    photo={{ uri: dependent.photo }}
+                                    photo={dependent.photo}
                                 />
 
                             </View>

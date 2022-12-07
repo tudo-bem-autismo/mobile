@@ -23,7 +23,7 @@ export const CardSchedule = ({ title, hour, image, selected, onPress, deleteTask
                 <View style={style.infoTaskContainer}>
 
                     <Image
-                        source={{uri : image}}
+                        source={{ uri: image }}
                         style={style.imageInfoTask}
                     />
 
@@ -56,7 +56,7 @@ export const CardSchedule = ({ title, hour, image, selected, onPress, deleteTask
                         />
                     </TouchableOpacity>
 
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         onPress={() => onPress()}
                         style={style.button}>
 
@@ -70,7 +70,7 @@ export const CardSchedule = ({ title, hour, image, selected, onPress, deleteTask
 
                         }
 
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
 
                 </View>
 
