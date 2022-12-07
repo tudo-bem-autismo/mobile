@@ -9,6 +9,7 @@ import { Option } from "../../components/DependentListing/Option";
 import { getResponsibleDependentsService } from "../../services";
 import style from "../DependentListing/style";
 import { Loading } from "../Loading";
+import { ScrollView } from "react-native";
 
 export const DependentListing = ({ navigation }) => {
 
@@ -56,32 +57,37 @@ export const DependentListing = ({ navigation }) => {
 
                             <View style={style.selectedContainer}>
 
-                                <TouchableOpacity
-                                    style={style.addButton}
-                                    onPress={() => navigation.navigate('DependentRegister')}
+                                <ScrollView style={style.scroll}
+                                    horizontal={true}
                                 >
-                                    <Image
-                                        style={style.addIcon}
-                                        source={addIcon}
-                                    />
-                                    <Text style={style.textAddOption}>ADICIONAR</Text>
-                                </TouchableOpacity>
-
-                                {
-                                    dependents.map(item => (
-                                        <Dependent
-                                            name={item.name}
-                                            photo={item.photo}
-                                            key={item.id}
-                                            onPress={() => {
-
-                                                setOption(true)
-                                                setIdDependents(item.id)
-
-                                            }}
+                                    <TouchableOpacity
+                                        style={style.addButton}
+                                        onPress={() => navigation.navigate('DependentRegister')}
+                                    >
+                                        <Image
+                                            style={style.addIcon}
+                                            source={addIcon}
                                         />
-                                    ))
-                                }
+                                        <Text style={style.textAddOption}>ADICIONAR</Text>
+                                    </TouchableOpacity>
+                                    {
+                                        dependents && dependents.map(item => (
+                                            <Dependent
+                                                name={item.name}
+                                                photo={{ uri: item.photo }}
+                                                key={item.id}
+                                                onPress={() => {
+
+                                                    setOption(true)
+                                                    setIdDependents(item.id)
+
+                                                }}
+                                            />
+                                        ))
+                                    }
+                                </ScrollView>
+
+
 
                             </View>
 

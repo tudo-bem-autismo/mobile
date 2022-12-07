@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text, DatePickerIOSBase, Image } from "react-native";
+import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text, DatePickerIOSBase, Image, ScrollView } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { format } from "date-fns";
@@ -399,13 +399,10 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
 
                                         <View style={style.dependentsContainer}>
 
-                                            {
-                                                dependents.map(item => (
+                                            <ScrollView horizontal={true}>
 
-                                                    <View
-                                                        style={selectDependentHasError ? style.hasErrorDependentButton : style.dependentButton}
-                                                        key={item.id}
-                                                    >
+                                                {
+                                                    dependents.map(item => (
 
                                                         <Dependent
                                                             name={item.name}
@@ -413,10 +410,10 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
                                                             selected={selectedDependents.includes(item.id)}
                                                             onPress={() => manageDependents(item.id)}
                                                         />
+                                                    )
+                                                )}
 
-                                                    </View>
-                                                ))
-                                            }
+                                            </ScrollView>
 
                                         </View>
 

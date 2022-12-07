@@ -1,7 +1,7 @@
+import React,{ useEffect, useState } from "react";
 import { format } from "date-fns";
 import * as ImagePicker from "expo-image-picker";
 import { Formik } from "formik";
-import { useEffect, useState } from "react";
 import {
   Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View
 } from "react-native";
@@ -89,6 +89,7 @@ export const FormManagementDependent = ({ navigation, idDependent }) => {
       genderId,
       autismLevelId,
       photo,
+      idDependent
     };
 
     setShowModalSaveData(false)

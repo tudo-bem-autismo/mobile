@@ -1,6 +1,5 @@
 import { StatusBar, StyleSheet } from "react-native";
 import {COLORS, FONTS} from '../../assets/const';
-
 const styles = StyleSheet.create({
 
     mainContainer: {
@@ -14,17 +13,16 @@ const styles = StyleSheet.create({
         zIndex: 2,
     },
     text:{
-        flex:3,
+        flex:1.5,
         fontFamily:FONTS.title,
         color:COLORS.white,
-        fontSize:40,
+        fontSize:48,
         fontWeight:'bold',
-        textAlign:'center',
     },
-    medal:{
-        width:200,
-        height:209,
-        bottom:150,
+    happy:{
+        width:453,
+        height:333,
+        bottom:80,
     },
     buttonPlay:{
         width:179,

@@ -3,8 +3,6 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { COLORS, FONTS } from '../../assets/const';
 
-import { getStepGames } from '../../services';
-
 export const ButtonGamesTwo = ({ backgroundColor, borderRadius, widht, height, labelButton, color , onPress = ()=>{}}) => {
 
     // const [passo2, setPasso2] = useState('');

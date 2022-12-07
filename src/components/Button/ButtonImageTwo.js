@@ -26,7 +26,7 @@ export const ButtonImageTwo = ({source, borderRadius, widht, height, srcImage, o
                 >
                  <Image
                     style = {styles.image}
-                    source={{uri: srcImage}}
+                    source={{uri: srcImage ? srcImage : null}}
                 />
                 </TouchableOpacity>
             </View>

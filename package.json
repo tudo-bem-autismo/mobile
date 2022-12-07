@@ -30,6 +30,7 @@
     "expo-font": "^10.2.0",
     "expo-image-picker": "^13.3.1",
     "expo-status-bar": "~1.4.0",
+    "expo-updates": "~0.14.7",
     "formik": "^2.2.9",
     "is-equal": "^1.6.4",
     "react": "18.0.0",
@@ -52,11 +53,11 @@
     "swiper": "^8.4.2",
     "toast": "^0.5.4",
     "victory-native": "^36.6.8",
-    "yup": "^0.32.11",
-    "expo-updates": "~0.14.7"
+    "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "babel-preset-expo": "~8.3.0"
   },
   "private": true
 }

@@ -1,13 +1,11 @@
-
 import React, { useEffect, useState } from 'react';
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 
 import { Game } from '../../components/Games/Game';
 import { MainHeader } from '../../components/Header/MainHeader';
 import { ModalApplyChildGame } from '../../components/Modal/ModalApplyChildGame';
 import { getGamesService } from '../../services/game';
 import { Loading } from '../Loading';
-import style from '../Loading/style';
 import styles from './style';
 
 export const Games = ({ navigation }) => {
@@ -21,6 +19,7 @@ export const Games = ({ navigation }) => {
     const [selectedGameId, setSelectedGameId] = useState(null);
 
     const openGameModal = (gameId) => {
+        // console.log(gameId)
         setSelectedGameId(gameId)
         setShowModal(true)
     }
@@ -50,7 +49,7 @@ export const Games = ({ navigation }) => {
                     <View style={styles.gamesContainer}>
 
                         <Text style={styles.textSelectGame}>
-                            selecione os jogos que estarão indisponíveis para seu filho(a)
+                            Selecione os jogos que estarão indisponíveis para seu filho(a)
                         </Text>
 
                         <ScrollView style={styles.listGames}>
@@ -68,29 +67,11 @@ export const Games = ({ navigation }) => {
                                     ))
                                 }
 
-                                <View style={styles.game}>
+                                <View style={styles.invisibleCard}></View>
 
-                                    <TouchableOpacity style={styles.buttonGame}>
 
-                                        <>
-                                            <Text style={styles.textGame}></Text>
-
-                                            <View style={styles.imageGameContainer}>
-                                                <Image
-
-                                                    resizeMode='cover'
-                                                    style={styles.imageGame} />
-                                            </View>
-
-                                        </>
-
-                                    </TouchableOpacity>
-
-                                </View >
                             </View>
-
                         </ScrollView>
-
                     </View>
 
                     {showModal && (
@@ -99,6 +80,7 @@ export const Games = ({ navigation }) => {
                             show={showModal}
                             selectedGameId={selectedGameId}
                             games={games}
+                            navigation={navigation}
                         />
                     )}
                 </>

@@ -1,85 +1,47 @@
 import React, { useEffect, useState } from "react";
-import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text, Image, ScrollView } from "react-native";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
-
-import clock from '../../assets/icons/clock.png';
+import { View, StyleSheet, TouchableOpacity, Dimensions, Text, Image, ScrollView } from "react-native";
 import { FONTS, COLORS } from "../../assets/const";
-import { Button } from "../Button";
-import { Formik } from "formik";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Input } from "../Input";
 import { Picker } from "@react-native-picker/picker";
-import { InputGaleryTasks } from "../Input/InputGaleryTasks";
-import { ModalGaleryTasks } from "./ModalGaleryTasks";
 import { Dependent } from "../DependentListing";
-
-import brushingTeeth from '../../assets/images/brushingTeeth.png';
-import { CardSchedule } from "../ScheduleResponsible/CardSchedule";
 import { getKidService } from "../../services";
+import { getHistoryTask } from "../../services/task";
 import { CardScheduleHistory } from "../ScheduleResponsible/CardScheduleHistory";
+import notFoundTask from '../../assets/images/notFoundTask.gif';
 
 const { height } = Dimensions.get('window')
 
 export const ModalHistoryTasks = ({ close, idDependent, navigation }) => {
 
-    const [showDoneTaskModal, setShowDoneTaskModal] = useState(false);
-
-    const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
-
-    const [showEditTaskModal, setShowEditTaskModal] = useState(false);
-
-    const [showHistoryTaskModal, setShowHistoryTaskModal] = useState(false);
 
     const [dependent, setDependent] = useState({});
 
-    const [isLoading, setIsLoading] = useState(true);
+    const [completedTask, setCompletedTask] = useState() 
 
-    const [selectedDay, setSelectedDay] = useState([]);
-
-    const [isTask, setIsTask] = useState([
+    const periods = [
         {
-            'id': 1,
-            'title': 'escovar os dentes',
-            'image': brushingTeeth,
-            'hour': '08:00'
+          "id": 1,
+          "value": 1,
+          "name": "Hoje"
         },
         {
-            'id': 2,
-            'title': 'Pentear o cabelo',
-            'image': brushingTeeth,
-            'hour': '09:00'
+          "id": 2,
+          "value": 7,
+          "name": "7 - Dias "
         },
         {
-            'id': 3,
-            'title': 'Tomar os remedios',
-            'image': brushingTeeth,
-            'hour': '10:00'
+          "id": 3,
+          "value": 31,
+          "name": "31 - Dias"
         },
         {
-            'id': 4,
-            'title': 'Tomar os remedios',
-            'image': brushingTeeth,
-            'hour': '10:00'
+          "id": 4,
+          "value": 365,
+          "name": "365 - Dias"
         },
-        {
-            'id': 5,
-            'title': 'Tomar os remedios',
-            'image': brushingTeeth,
-            'hour': '10:00'
-        },
-    ]);
-
-    const [checkedTasks, setCheckedTasks] = useState([]);
-
-    const DAYS_OFF_WEEK = [
-        'DOM',
-        'SEG',
-        'TER',
-        'QUA',
-        'QUI',
-        'SEX',
-        'SAB',
+  
     ]
+
 
     const getDependent = async () => {
         const result = await getKidService(idDependent);
@@ -88,9 +50,19 @@ export const ModalHistoryTasks = ({ close, idDependent, navigation }) => {
 
     useEffect(() => {
         getDependent();
-        setIsLoading(false)
+        
 
     }, []);
+
+    const handleSelectedPeriod = (value) => {
+
+        getHistory(value)
+    } 
+
+    const getHistory = async (period) => {
+        const result = await getHistoryTask(idDependent, period)
+        setCompletedTask(result.data)
+    }
 
     return (
 
@@ -134,24 +106,25 @@ export const ModalHistoryTasks = ({ close, idDependent, navigation }) => {
                             style={style.picker}
                             dropdownIconColor={COLORS.blue}
                             dropdownIconRippleColor={COLORS.purple}
-                            onValueChange={(itemValue) => handleSelectDays(itemValue)}
+                            onValueChange={(itemValue) => handleSelectedPeriod(itemValue)
+                            }
                         >
+                            <Picker.Item
+                                label="Selecione o periodo"
+                                value={[0]}
+                                style={style.item}
+                            />
 
-                            <Picker.Item
-                                label="semana"
-                                value={[]}
-                                style={style.item}
-                            />
-                            <Picker.Item
-                                label="mes"
-                                value={[]}
-                                style={style.item}
-                            />
-                            <Picker.Item
-                                label="ano"
-                                value={[]}
-                                style={style.item}
-                            />
+                            {
+                                periods.map((period) => (
+                                    <Picker.Item
+                                        key={period.id}
+                                        label={period.name}
+                                        value={period.value}
+                                        style={style.item}
+                                    />
+                                ))
+                            }
 
                         </Picker>
 
@@ -164,14 +137,22 @@ export const ModalHistoryTasks = ({ close, idDependent, navigation }) => {
                     <ScrollView style={style.cardsContainer}>
 
                         {
-                            isTask.map(item => (
+                            completedTask ? completedTask.map(item => (
                                 <CardScheduleHistory
-                                    image={item.image}
-                                    title={item.title}
-                                    hour={item.hour}
+                                    image={item.tbl_tarefa.tbl_icone.icone}
+                                    title={item.tbl_tarefa.tbl_icone.titulo}
+                                    hour={item.data}
                                     key={item.id}
                                 />
-                            ))
+                            )) : 
+                            (
+                                <View style={style.notFoundCard}>
+                                    <Text style={style.textNotFoundCard}>Nenhuma tarefa encontrada</Text>
+                                    <Image
+                                        style={style.imageNotFoundCard}
+                                        source={notFoundTask} />
+                                </View>
+                            )
                         }
 
 
@@ -273,7 +254,7 @@ const style = StyleSheet.create({
         fontSize: 15
     },
     listingCardsContainer: {
-        height: 450,
+        height: '65%',
     },
     tasksContainer: {
         // paddingBottom: 50,
@@ -281,6 +262,8 @@ const style = StyleSheet.create({
     },
     cardsContainer: {
         // backgroundColor: COLORS.red
+        // height:'30%'
+
     },
     cardInvisible: {
         width: '92%',
@@ -288,6 +271,7 @@ const style = StyleSheet.create({
         marginTop: 20,
     },
     periodDate: {
+        width:'90%',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 5,
@@ -303,8 +287,25 @@ const style = StyleSheet.create({
 
     },
     picker: {
-        width: 190,
+        width: '100%',
 
     },
+    notFoundCard: {
+        margin: 15,
+        height: 300,
+        alignItems: 'center',
+        justifyContent: 'center',
+        // backgroundColor: COLORS.red
+    },
+    textNotFoundCard: {
+        fontFamily: FONTS.text,
+        fontSize: 16,
+        textAlign: 'center'
+    },
+    imageNotFoundCard: {
+        width: '50%',
+        height: '50%',
+        // backgroundColor: COLORS.purple
+    }
 });
 

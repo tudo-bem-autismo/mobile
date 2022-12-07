@@ -141,7 +141,6 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
                     ]
                 }]}
             >
-
                 {isLoading ? (
                     <Loading />
                 ) : (
@@ -268,7 +267,7 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
                                                                     source={notFoundTask} />
                                                             </View>
                                                         )
-                                                    }
+                                                    } 
 
 
                                                     <View style={style.cardInvisible}></View>

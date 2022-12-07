@@ -1,3 +1,4 @@
+import React from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
 import {

@@ -26,34 +26,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    listingCardsContainer: {
-        height: 350,
-    },
-    game: {
+    invisibleCard:{
         width: 250,
-        height: 120,
-        margin: 10,
-        borderRadius: 40,
-        backgroundColor: COLORS.white,
-    },
-    buttonGame: {
-        height: 160,
-        width: '100%',
-        borderRadius: 40,
-        borderColor: COLORS.white,
-        backgroundColor: COLORS.white,
-    },
-    textGame: {
-        fontSize: 20,
-        fontFamily: FONTS.title,
-        color: COLORS.black,
-        textShadowColor: COLORS.black,
-        textShadowOffset: { width: 0, height: 0 },
-        textShadowRadius: 1,
-        zIndex: 2,
-        marginTop: 10,
-        marginLeft: 20,
-
+        height: 150,
     },
     imageGameContainer: {
         width: '100%',

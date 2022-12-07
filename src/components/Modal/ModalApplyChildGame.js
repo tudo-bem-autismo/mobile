@@ -1,6 +1,6 @@
 import { BlurView } from 'expo-blur';
 import React, { useEffect, useState } from "react";
-import { Animated, Dimensions, StyleSheet, Text, View } from "react-native";
+import { Animated, Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { MaterialIcons } from "@expo/vector-icons";
 import Toast from "react-native-toast-message";
@@ -13,10 +13,13 @@ import { Button } from "../Button";
 import { PlayButton } from "../Button/PlayButton";
 import { Dependent } from "../DependentListing";
 import { Game } from "../Games/Game";
+// import Navigation from '../../navigation/navigation';
 
 const { height } = Dimensions.get('window')
 
-export const ModalApplyChildGame = ({ close, show, selectedGameId }) => {
+export const ModalApplyChildGame = ({ close, show, selectedGameId, navigation }) => {
+
+    // console.log(selectedGameId)
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -31,7 +34,7 @@ export const ModalApplyChildGame = ({ close, show, selectedGameId }) => {
     const [game, setGame] = useState({});
 
     useEffect(() => {
-        console.log(newRestrictions)
+        // console.log(newRestrictions)
     }, [newRestrictions])
 
     const getGame = async () => {
@@ -177,7 +180,9 @@ export const ModalApplyChildGame = ({ close, show, selectedGameId }) => {
                                     />
 
 
-                                    <PlayButton />
+                                    <PlayButton 
+                                        onPress={() => navigation.navigate('ScreenGamesResponsible', {idGames:selectedGameId})}    
+                                    />
 
                                 </View>
 
@@ -187,18 +192,23 @@ export const ModalApplyChildGame = ({ close, show, selectedGameId }) => {
 
                                     <View style={style.dependentsList}>
 
+                                        <ScrollView
+                                            horizontal={true}
+                                        >
+                                            {
+                                                dependents.map(item => (
+                                                    <Dependent
+                                                        name={item.name}
+                                                        photo={{ uri: item.photo }}
+                                                        key={item.id}
+                                                        selected={newRestrictions?.find(restriction => restriction.idDependent === item.id)}
+                                                        onPress={() => manageDependentRestriction(item.id)}
+                                                    />
+                                                ))
+                                            }
+                                        </ScrollView>
 
-                                        {
-                                            dependents.map(item => (
-                                                <Dependent
-                                                    name={item.name}
-                                                    photo={{ uri: item.photo }}
-                                                    key={item.id}
-                                                    selected={newRestrictions?.find(restriction => restriction.idDependent === item.id)}
-                                                    onPress={() => manageDependentRestriction(item.id)}
-                                                />
-                                            ))
-                                        }
+
 
                                     </View>
 
