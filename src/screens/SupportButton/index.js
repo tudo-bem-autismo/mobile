@@ -46,7 +46,7 @@ export const SupportButton = ({ navigation }) => {
                     <View style={styles.gamesContainer}>
 
                         <Text style={styles.textSelectGame}>
-                            gerencie os alertas das suas crianças
+                            gerencie os arquivos das suas crianças
                         </Text>
 
                         <Text style={{ marginBottom: 30, fontWeight: '400', fontSize: 20 }}>

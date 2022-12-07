@@ -99,9 +99,9 @@ export const SupportButtonManagement = ({ navigation, route }) => {
 
                     <View style={styles.gamesContainer}>
 
-                        <Text style={styles.textSelectGame}>
-                        gerencie os alertas das suas crianças
-                        </Text>
+                        {/* <Text style={styles.textSelectGame}>
+                        gerencie os arquivos das suas crianças
+                        </Text> */}
 
                         <Text style={{fontSize: 18, marginBottom: 10, fontStyle: 'bold', left: '-35%'}}>IMAGENS</Text>
                         <ScrollView
