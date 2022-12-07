@@ -22,11 +22,7 @@ export default function App() {
     return (
 
       <>
-      {/* <ScreenGames/> */}
       <Navigation/>
-      {/* <MedalScreen/> */}
-      {/* <GamesDependent /> */}
-      {/* <GamesDependent/> */}
       <Toast />
       </>
     );

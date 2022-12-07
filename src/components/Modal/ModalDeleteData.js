@@ -137,15 +137,15 @@ const style = StyleSheet.create({
         // backgroundColor: COLORS.gray
     },
     questionContainer: {
-        flex: 1,
+        flex: 1.5,
         width: 300,
         alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 40,
         top: 20,
-        left: 35,
-        // backgroundColor: COLORS.blue,
+        left: 25,
+        //backgroundColor: COLORS.blue,
     },
     questionText: {
         fontSize: 25,
