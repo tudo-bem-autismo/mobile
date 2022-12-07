@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ImageBackground, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Image, ImageBackground, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 import { Loading } from "../../screens/Loading";
 import style from "../../screens/ScheduleDependent/style";
@@ -13,8 +13,12 @@ import { Dependent } from "../../components";
 import { getKidService } from "../../services";
 import { getData } from "../../utils/storage";
 import { CardScheduleDependent } from "../../components/ScheduleDependent/CardSchedule";
+import { getTasksService, taskIsDoneService } from "../../services/task";
+import { getTodayInitials } from "../../utils/date/days";
+import notFoundTask from '../../assets/images/notFoundTask.gif';
 
-export const ScheduleDependent = ({ close, show, navigation, idDependent }) => {
+
+export const ScheduleDependent = ({ close, show, navigation }) => {
 
     const [showDoneTaskModal, setShowDoneTaskModal] = useState(false);
 
@@ -22,30 +26,13 @@ export const ScheduleDependent = ({ close, show, navigation, idDependent }) => {
 
     const [isLoading, setIsLoading] = useState(true);
 
-    const [selectedDay, setSelectedDay] = useState([]);
-
-    const [isTask, setIsTask] = useState([
-        {
-            'id': 1,
-            'title': 'escovar os dentes',
-            'image': brushingTeeth,
-            'hour': '08:00'
-        },
-        {
-            'id': 2,
-            'title': 'Pentear o cabelo',
-            'image': brushingTeeth,
-            'hour': '09:00'
-        },
-        {
-            'id': 3,
-            'title': 'Tomar os remedios',
-            'image': brushingTeeth,
-            'hour': '10:00'
-        },
-    ]);
-
     const [checkedTasks, setCheckedTasks] = useState([]);
+
+    const [selectedDay, setSelectedDay] = useState(getTodayInitials());
+
+    const [dailyTasks, setDailyTasks] = useState([]);
+
+    const [tasks, setTasks] = useState([]);
 
     const DAYS_OFF_WEEK = [
         'DOM',
@@ -59,21 +46,31 @@ export const ScheduleDependent = ({ close, show, navigation, idDependent }) => {
 
     const manageDoneTask = async (idTask) => {
 
-        const doneTaskExist = checkedTasks?.find(doneTaskId => doneTaskId === idTask)
+        const doneTaskExist = dailyTasks?.find(doneTaskId => doneTaskId === idTask)
 
-        if (doneTaskExist) {
-            const filteredTask = checkedTasks.filter(item => item !== idTask)
-            return setCheckedTasks(filteredTask)
+        if (doneTaskExist?.isDone)
+            return
+
+        const idDependent = await getData('@idDependent')
+
+        const data = {
+            idTask,
+            idDependent
         }
 
         setShowDoneTaskModal(true)
 
-        const managedTasks = [
-            ...checkedTasks,
-            idTask
-        ]
+        const result = await taskIsDoneService(data)
 
-        setCheckedTasks(managedTasks)
+        if (result.success) {
+            return Toast.show({
+                type: 'success',
+                text1: 'Sucesso!',
+                text2: 'Tarefa criada com sucesso!'
+            })
+        }
+
+        await getTasks()
 
     }
 
@@ -87,8 +84,33 @@ export const ScheduleDependent = ({ close, show, navigation, idDependent }) => {
 
     }
 
+    const getTasks = async () => {
+
+        const idDependent = await getData('@idDependent')
+
+        const result = await getTasksService(idDependent);
+
+        const initialDailyTasks = result.data.filter((item) => item.day === selectedDay);
+
+        const initialCheckedTasks = result.data
+            .filter(item => item.isDone)
+            .map(item => item.idTask);
+
+        setTasks(result.data);
+        setDailyTasks(initialDailyTasks);
+        setCheckedTasks(initialCheckedTasks)
+    }
+
+    const handleDailyTasks = (day) => {
+        const newDailyTasks = tasks.filter((item) => item.day === day);
+
+        setDailyTasks(newDailyTasks);
+        setSelectedDay(day);
+    }
+
     useEffect(() => {
         getDependent()
+        getTasks()
         setIsLoading(false)
 
     }, [])
@@ -131,7 +153,7 @@ export const ScheduleDependent = ({ close, show, navigation, idDependent }) => {
 
                                     <Dependent
                                         name={dependent.name}
-                                        photo={{ uri: dependent.photo }}
+                                        photo={dependent.photo}
                                     />
 
                                 </View>
@@ -147,7 +169,7 @@ export const ScheduleDependent = ({ close, show, navigation, idDependent }) => {
 
                                             <TouchableOpacity
                                                 style={selectedDay.includes(item) ? style.selectedDayButton : style.dayButton}
-                                                onPress={() => setSelectedDay(item)}
+                                                onPress={() => handleDailyTasks(item)}
                                                 key={item}
                                             >
                                                 <Text style={style.dayText}>{item}</Text>
@@ -163,15 +185,27 @@ export const ScheduleDependent = ({ close, show, navigation, idDependent }) => {
                                     <ScrollView style={style.cardsContainer}>
 
                                         {
-                                            isTask.map(item => (
-                                                <CardScheduleDependent
-                                                    image={item.image}
-                                                    title={item.title}
-                                                    hour={item.hour}
-                                                    key={item.id}
-                                                    onPress={() => manageDoneTask(item.id)}
-                                                />
-                                            ))
+                                            dailyTasks.length ? (
+
+                                                dailyTasks?.map(item => (
+                                                    <CardScheduleDependent
+                                                        image={item.icon}
+                                                        title={item.title}
+                                                        hour={item.hour}
+                                                        key={item.idTask}
+                                                        isToday={selectedDay === getTodayInitials()}
+                                                        selected={item.isDone}
+                                                        onPress={() => manageDoneTask(item.idTask)}
+                                                    />
+                                                ))
+                                            ) : (
+                                                <View style={style.notFoundCard}>
+                                                    <Text style={style.textNotFoundCard}>Nenhuma tarefa no momento</Text>
+                                                    <Image
+                                                        style={style.imageNotFoundCard}
+                                                        source={notFoundTask} />
+                                                </View>
+                                            )
                                         }
 
 

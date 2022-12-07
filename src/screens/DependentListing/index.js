@@ -57,8 +57,6 @@ export const DependentListing = ({ navigation }) => {
 
                             <View style={style.selectedContainer}>
 
-
-
                                 <ScrollView style={style.scroll}
                                     horizontal={true}
                                 >

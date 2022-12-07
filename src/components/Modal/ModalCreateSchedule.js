@@ -47,7 +47,7 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
 
     const [selectedDependents, setSelectedDependents] = useState([]);
 
-    const [idTask, setIdTask] = useState(0);
+    const [idIcon, setIdIcon] = useState(0);
 
     const [imageTask, setImageTask] = useState(null);
 
@@ -192,7 +192,7 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
             alarmHour,
             selectedDays,
             selectedDependents,
-            idTask
+            idTask: idIcon
         };
 
         if (selectedDays.length === 0) {
@@ -201,7 +201,7 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
             return
         }
 
-        if (idTask === 0) {
+        if (idIcon === 0) {
             setGaleryHasError(true)
 
             return
@@ -365,7 +365,7 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
                                                     onPress={() => manageDays(item.id)}
                                                     key={item.id}
                                                 >
-                                                    <Text style={style.dayText}>{item.day}</Text>
+                                                    <Text style={style.dayText}>{item.initial}</Text>
                                                 </TouchableOpacity>
 
                                             ))
@@ -385,7 +385,7 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
                                                 <ModalGaleryTasks
                                                     show={modalGaleryTasks}
                                                     close={() => setModalGaleryTasks(false)}
-                                                    setGaleryTask={setIdTask}
+                                                    setIdIcon={setIdIcon}
                                                     setImageTask={setImageTask}
                                                     navigation={navigation}
                                                 />
@@ -404,23 +404,16 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
                                                 {
                                                     dependents.map(item => (
 
-                                                        <View
-                                                            style={selectDependentHasError ? style.hasErrorDependentButton : style.dependentButton}
-                                                            key={item.id}
-                                                        >
+                                                        <Dependent
+                                                            name={item.name}
+                                                            photo={item.photo}
+                                                            selected={selectedDependents.includes(item.id)}
+                                                            onPress={() => manageDependents(item.id)}
+                                                        />
+                                                    )
+                                                )}
 
-                                                            <Dependent
-                                                                name={item.name}
-                                                                photo={{ uri: item.photo }}
-                                                                selected={selectedDependents.includes(item.id)}
-                                                                onPress={() => manageDependents(item.id)}
-                                                            />
-
-                                                        </View>
-                                                    ))
-                                                }
                                             </ScrollView>
-
 
                                         </View>
 

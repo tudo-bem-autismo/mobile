@@ -1,32 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text, DatePickerIOSBase, Image, ScrollView } from "react-native";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
-import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { format } from "date-fns";
+import { Animated, Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-import modalBackground from '../../assets/images/modalBackground.png';
-import clock from '../../assets/icons/clock.png';
-import { FONTS, COLORS } from "../../assets/const";
-import { BackButton, Button } from "../Button";
-import { Formik } from "formik";
-import { Input, MaskedInput } from "../Input";
-import { Picker } from "@react-native-picker/picker";
-import { getKidService, getResponsibleDependentsService } from "../../services";
-import { Dependent } from "../DependentListing/Dependent";
 import { MaterialIcons } from "@expo/vector-icons";
-import { ModalGaleryTasks } from "./ModalGaleryTasks";
-import { scheduleCreateTaskDataSchema } from "../../utils/validations/Schedule";
-import { InputGaleryTasks } from "../Input/InputGaleryTasks";
+import { COLORS, FONTS } from "../../assets/const";
 import { Loading } from "../../screens/Loading";
+import { getKidService } from "../../services";
+import { Button } from "../Button";
+import { Dependent } from "../DependentListing/Dependent";
 
-import brushingTeeth from '../../assets/images/brushingTeeth.png';
 import notFoundTask from '../../assets/images/notFoundTask.gif';
+import { deleteTaskService, getTasksService, taskIsDoneService } from "../../services/task";
+import { DAYS_OFF_WEEK, getTodayInitials } from '../../utils/date/days';
 import { CardSchedule } from "../ScheduleResponsible/CardSchedule";
 import { ModalCongratulationsTask } from "./ModalCongratulationsTask";
-import { ModalExludeTask } from "./ModalExcludeTask";
 import { ModalEditTask } from "./ModalEditTask";
+import { ModalExludeTask } from "./ModalExcludeTask";
 import { ModalHistoryTasks } from "./ModalHistoryTasks";
-import { deleteTaskService, getTasksService, taskIsDoneService } from "../../services/task";
 
 
 const { height } = Dimensions.get('window')
@@ -45,86 +34,37 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
 
     const [isLoading, setIsLoading] = useState(true);
 
-    const [selectedDay, setSelectedDay] = useState([]);
+    const [selectedDay, setSelectedDay] = useState(getTodayInitials());
 
-    const [isTaskDaySelected, setIsTaskDaySelected] = useState([{}]);
+    const [selectedIdTask, setSelectedIdTask] = useState(0);
 
-    const [isTask, setIsTask] = useState([{
-        idTask: 0,
-        hour: '',
-        title: '',
-        idSelectedDays: '',
-        initialsSelectedDays: '',
-        icon: '',
-        isToday: ''
-    }]);
+    const [dailyTasks, setDailyTasks] = useState([]);
 
-    const [checkedTasks, setCheckedTasks] = useState([]);
+    const [tasks, setTasks] = useState([]);
 
-    const DAYS_OFF_WEEK = [
-        'DOM',
-        'SEG',
-        'TER',
-        'QUA',
-        'QUI',
-        'SEX',
-        'SAB',
-    ]
+    const [idTask, setIdTask] = useState();
 
-    const manageDoneTask = async (idTask) => {
-
-        const doneTaskExist = checkedTasks?.find(doneTaskId => doneTaskId === idTask)
-
-        if (doneTaskExist) {
-            const filteredTask = checkedTasks.filter(item => item !== idTask)
-            return setCheckedTasks(filteredTask)
-        }
-
-        setShowDoneTaskModal(true)
-
-        const managedTasks = [
-            ...checkedTasks,
-            idTask
-        ]
-
-        setCheckedTasks(managedTasks)
-
-        const data = {
-            idTask: idTask,
-            idDependent: idDependent
-        }
-
-        // console.log(data)
-
-        const result = await taskIsDoneService(data)
-
-        if (result.success) {
-            return Toast.show({
-                type: 'success',
-                text1: 'Sucesso!',
-                text2: 'Tarefa criada com sucesso!'
-            })
-        }
-    }
-
-    const handleDeleteTask = () => {
+    const handleDeleteTask = async (idTask) => {
         setShowDeleteTaskModal(true)
     }
 
-    const deleteTask = async (idTask) => {
+    const deleteTask = async () => {
         const result = await deleteTaskService(idTask);
 
         if (result.success) {
-            return Toast.show({
-                type: 'success',
-                text1: 'Sucesso!',
-                text2: 'Tarefa criada com sucesso!'
-            })
+            // return Toast.show({
+            //     type: 'success',
+            //     text1: 'Sucesso!',
+            //     text2: 'Tarefa excluida com sucesso!'
+            // })
+            setShowDeleteTaskModal(false)
+            close()
         }
     }
 
     const handleEditTask = (idTask) => {
         setShowEditTaskModal(true)
+        setSelectedIdTask(idTask)
     }
 
     const getDependent = async () => {
@@ -134,14 +74,19 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
 
     const getTasks = async () => {
         const result = await getTasksService(idDependent);
-        setIsTask(result.data);
+        setTasks(result.data);
+
+        const initialDailyTasks = result.data.filter((item) => item.day === selectedDay);
+        setDailyTasks(initialDailyTasks);
+        // console.log(dailyTasks)
     }
 
-    // const task = isTask.filter(item => item.initialsSelectedDays === selectedDay)
+    const handleDailyTasks = (day) => {
+        const newDailyTasks = tasks.filter((item) => item.day === day);
 
-    // useEffect(() => {
-    //     console.log(task)
-    // }, [task])
+        setDailyTasks(newDailyTasks);
+        setSelectedDay(day);
+    }
 
     useEffect(() => {
         getDependent();
@@ -204,15 +149,6 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
                         <View style={style.listingScheduleContainer}>
 
                             {
-                                showDoneTaskModal && (
-                                    <ModalCongratulationsTask
-                                        close={() => setShowDoneTaskModal(false)}
-                                    />
-                                )
-
-                            }
-
-                            {
                                 showDeleteTaskModal && (
                                     <ModalExludeTask
                                         close={() => setShowDeleteTaskModal(false)}
@@ -224,6 +160,7 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
                             {
                                 showEditTaskModal && (
                                     <ModalEditTask
+                                        idTask={selectedIdTask}
                                         close={() => setShowEditTaskModal(false)}
                                     />
                                 )
@@ -263,7 +200,8 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
 
                                                 <Dependent
                                                     name={dependent.name}
-                                                    photo={{ uri: dependent.photo }}
+                                                    photo={dependent.photo}
+
                                                 />
 
                                             </View>
@@ -287,8 +225,8 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
                                                     DAYS_OFF_WEEK.map(item => (
 
                                                         <TouchableOpacity
-                                                            style={selectedDay.includes(item) ? style.selectedDayButton : style.dayButton}
-                                                            onPress={() => setSelectedDay(item)}
+                                                            style={selectedDay === item ? style.selectedDayButton : style.dayButton}
+                                                            onPress={() => handleDailyTasks(item)}
                                                             key={item}
                                                         >
                                                             <Text style={style.dayText}>{item}</Text>
@@ -303,19 +241,21 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
 
                                                 <ScrollView style={style.cardsContainer}>
 
-                                                    {/* {
-                                                        isTask.find(item => item.initialsSelectedDays === selectedDay) ? (
+                                                    {
+                                                        dailyTasks.length ? (
 
-                                                            task.map(item => (
+                                                            dailyTasks?.map(item => (
                                                                 <CardSchedule
                                                                     image={item.icon}
                                                                     title={item.title}
                                                                     hour={item.hour}
-                                                                    key={item.id}
-                                                                    selected={checkedTasks?.includes(item.idTask)}
-                                                                    deleteTask={() => handleDeleteTask(item.id)}
-                                                                    editTask={() => handleEditTask(item.id)}
-                                                                    onPress={() => manageDoneTask(item.idTask)}
+                                                                    key={item.idTask}
+                                                                    deleteTask={() => {
+
+                                                                        setIdTask(item.idTask)
+                                                                        handleDeleteTask()
+                                                                    }}
+                                                                    editTask={() => handleEditTask(item.idTask)}
                                                                 />
                                                             ))
 
@@ -327,7 +267,7 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
                                                                     source={notFoundTask} />
                                                             </View>
                                                         )
-                                                    } */}
+                                                    } 
 
 
                                                     <View style={style.cardInvisible}></View>

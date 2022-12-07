@@ -14,7 +14,7 @@ export const Dependent = ({ name, photo, onPress, selected }) => {
             <ImageBackground
                 style={style.dependent}
                 imageStyle={style.dependent}
-                source={photo}
+                source={{ uri: photo }}
             >
                 <View style={selected ? style.selectedDependent : style.dependent}></View>
             </ImageBackground>

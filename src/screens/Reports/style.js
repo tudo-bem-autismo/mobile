@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'stretch',
         backgroundColor: COLORS.white,
-        
+
     },
     textSelectGame: {
     },
@@ -32,6 +32,13 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.white,
         width: 130,
         height: 100
+    }, 
+    image: {
+        width: 300,
+        height: 200,
+        // backgroundColor: COLORS.red
+        // position: 'absolute',
+        // top: 50
     }
 
 
