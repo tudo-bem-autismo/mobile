@@ -13,10 +13,13 @@ import { Button } from "../Button";
 import { PlayButton } from "../Button/PlayButton";
 import { Dependent } from "../DependentListing";
 import { Game } from "../Games/Game";
+// import Navigation from '../../navigation/navigation';
 
 const { height } = Dimensions.get('window')
 
-export const ModalApplyChildGame = ({ close, show, selectedGameId }) => {
+export const ModalApplyChildGame = ({ close, show, selectedGameId, navigation }) => {
+
+    // console.log(selectedGameId)
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -177,7 +180,9 @@ export const ModalApplyChildGame = ({ close, show, selectedGameId }) => {
                                     />
 
 
-                                    <PlayButton />
+                                    <PlayButton 
+                                        onPress={() => navigation.navigate('ScreenGamesResponsible', {idGames:selectedGameId})}    
+                                    />
 
                                 </View>
 

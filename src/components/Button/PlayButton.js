@@ -7,6 +7,7 @@ export const PlayButton = ({ onPress }) => {
     return (
         <TouchableOpacity
             style={style.button}
+            onPress={()=> onPress()}
         >
             <Text style={style.text}>JOGAR</Text>
         </TouchableOpacity>

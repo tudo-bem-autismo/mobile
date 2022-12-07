@@ -19,7 +19,9 @@ import { ScheduleResponsible } from '../screens/ScheduleResponsible';
 // import { RoutineResponsible } from '../screens/RoutineResponsible';
 // import { Games } from '../screens/Games';
 import { ScreenGames } from '../screens/ScreenGames';
+import { ScreenGamesResponsible } from '../screens/ScreenGamesResponsible'
 import { CongratulationsScreen } from '../screens/CongratulationsScreen';
+import { CongratulationsScreenResponsible } from '../screens/CongratulationsScreenResponsible';
 import { TabsDependent } from './tabsDependent';
 import { TabsResponsible } from './tabsResponsible';
 import { MenuDependent } from '../screens/MenuDependent';
@@ -52,7 +54,9 @@ const Navigation = () => {
                 <Stack.Screen name="DependentRegister" component={DependentRegister} options={{ headerShown: false }} />
                 {/* <Stack.Screen name="Games" component={Games} options={{ headerShown: false }} /> */}
                 <Stack.Screen name="ScreenGames" component={ScreenGames} options={{ headerShown: false }} />
+                <Stack.Screen name="ScreenGamesResponsible" component={ScreenGamesResponsible} options={{ headerShown: false }} />
                 <Stack.Screen name="CongratulationsScreen" component={CongratulationsScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="CongratulationsScreenResponsible" component={CongratulationsScreenResponsible} options={{ headerShown: false }} />
                 <Stack.Screen name="TabsResponsible" component={TabsResponsible} options={{ headerShown: false }} />
                 <Stack.Screen name="TabsDependent" component={TabsDependent} options={{ headerShown: false }} />
                 <Stack.Screen name="MenuDependent" component={MenuDependent} options={{ headerShown: false }} />

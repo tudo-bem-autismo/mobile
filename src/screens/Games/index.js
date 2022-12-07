@@ -20,6 +20,7 @@ export const Games = ({ navigation }) => {
     const [selectedGameId, setSelectedGameId] = useState(null);
 
     const openGameModal = (gameId) => {
+        // console.log(gameId)
         setSelectedGameId(gameId)
         setShowModal(true)
     }
@@ -49,7 +50,7 @@ export const Games = ({ navigation }) => {
                     <View style={styles.gamesContainer}>
 
                         <Text style={styles.textSelectGame}>
-                            selecione os jogos que estarão indisponíveis para seu filho(a)
+                            Selecione os jogos que estarão indisponíveis para seu filho(a)
                         </Text>
 
                         <ScrollView style={styles.listGames}>
@@ -80,6 +81,7 @@ export const Games = ({ navigation }) => {
                             show={showModal}
                             selectedGameId={selectedGameId}
                             games={games}
+                            navigation={navigation}
                         />
                     )}
                 </>
