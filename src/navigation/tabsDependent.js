@@ -1,6 +1,6 @@
+import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { RoutineResponsible } from '../screens/RoutineResponsible';
 import { DependentProfile } from '../screens/DependentProfile';
 import { GamesDependent } from '../screens/GamesDependent';
 import { COLORS } from '../assets/const';
@@ -10,6 +10,7 @@ import routine from '../assets/icons/routine.png';
 import games from '../assets/icons/games.png';
 import reports from '../assets/icons/reports.png'
 import { storeData } from '../utils/storage';
+import { ScheduleDependent } from '../screens/ScheduleDependent';
 
 export const TabsDependent = ({ route, navigation }) => {
 
@@ -30,7 +31,7 @@ export const TabsDependent = ({ route, navigation }) => {
         >
             <Tab.Screen
                 name="RoutineDependent"
-                component={RoutineResponsible}
+                component={ScheduleDependent}
                 navigation={navigation}
                 options={{
                     headerShown: false,

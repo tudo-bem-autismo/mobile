@@ -54,6 +54,9 @@ const style = StyleSheet.create({
         textAlign: 'center',
         marginTop: 5,
     },
+    scroll:{
+        width: 'auto'
+    }
 
 });
 

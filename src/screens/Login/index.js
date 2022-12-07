@@ -39,8 +39,6 @@ export function ResponsiveLogin({ navigation }) {
 
                         </View>
 
-
-
                     </View>
 
                     <View style={styles.loginContainer}>
