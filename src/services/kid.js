@@ -150,11 +150,11 @@ export const updateKidService = async (data) => {
 export const deleteKidService = async (idDependent) => {
   try {
 
-    console.log(idDependent)
+    // console.log(idDependent)
 
     const result = await api.delete(`/crianca/${idDependent}`)
 
-    console.log(result)
+    // console.log(result)
 
     const success = result.status === 200
 

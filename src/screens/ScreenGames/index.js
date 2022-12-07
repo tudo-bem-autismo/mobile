@@ -213,7 +213,6 @@ export function ScreenGames({ route, navigation }) {
             getGames()
         // }
         // setCurrentGame(game[0])
-        setIsLoading(false)
     }, [gameLoaded])
 
     return (

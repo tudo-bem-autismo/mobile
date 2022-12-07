@@ -31,7 +31,7 @@ export function CongratulationsScreenResponsible({ route, navigation}){
             <TouchableOpacity 
                 style={styles.buttonGoOut}
                 onPress={() => navigation.navigate('Games')}
-                >
+            >
                 <Text style={styles.textGoOut}>SAIR</Text>
             </TouchableOpacity>
           

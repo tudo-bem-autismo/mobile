@@ -51,8 +51,6 @@ export function ScreenGamesResponsible({ route, navigation }) {
     }])
     const [currentStep, setCurrenteStep] = useState(0)
     const [isLoading, setIsLoading] = useState(true)
-    // const [hits, setHits] = useState(0)
-    // const [mistakes, setMistakes] = useState(0)
     const [currentGame, setCurrentGame] = useState({
         "id": 0,
         "ordem": 1,
@@ -92,30 +90,6 @@ export function ScreenGamesResponsible({ route, navigation }) {
 
     }
 
-    // const sendReports = async () => {
-
-    //     const date = new Date()
-    //     const result = await getReports(hits, mistakes, date, idGames)
-
-    //     if (result.data.medalha) {
-
-    //         await navigation.navigate('MedalScreen', {
-    //             ...result,
-    //             idGames
-    //         })
-    //     } else {
-    //     await navigation.navigate('CongratulationsScreen', {idGames})
-    // }
-
-    // // setIsLoading(true)
-
-    // setTimeout(() => {
-    //     clearGame()
-
-    // }, 1000)
-    // // setIsLoading(tur)
-
-    // }
 
     const clearGame = () => {
 
@@ -182,8 +156,6 @@ export function ScreenGamesResponsible({ route, navigation }) {
 
         setCurrenteStep(0)
         setIsLoading(false)
-        // setMistakes(0)
-        // setHits(0)
         getGames()
         setGameLoaded(false)
     }
@@ -192,87 +164,73 @@ export function ScreenGamesResponsible({ route, navigation }) {
 
         if (currentStep < (game.length - 1)) {
 
-            // setHits(hits + 1)
             setCurrenteStep(currentStep + 1)
             setCurrentGame(game[currentStep + 1])
 
         } else {
 
-            // sendReports()
             await navigation.navigate('CongratulationsScreenResponsible', { idGames })
-            
+
             setTimeout(() => {
                 clearGame()
 
             }, 1000)
         }
 
-        // setIsLoading(true)
-
-        // setIsLoading(tur)
     }
 
-// const incorrectStep = () => {
-//     setMistakes(mistakes + 1)
-// }
 
-useEffect(() => {
+    useEffect(() => {
+        getGames()
+    }, [gameLoaded])
 
-    // if(game[0].id == 0){
+    return (
+        <>
+            {isLoading ? (
+                <Loading />
+            ) : (
 
-    getGames()
-    // }
-    // setCurrentGame(game[0])
-    setIsLoading(false)
-}, [gameLoaded])
+                game && currentGame && (
 
-return (
-    <>
-        {isLoading ? (
-            <Loading />
-        ) : (
+                    <View style={{ ...styles.mainContainer, backgroundColor: currentGame.cor_fundo }}>
 
-            game && currentGame && (
+                        <ButtonAlert />
 
-                <View style={{ ...styles.mainContainer, backgroundColor: currentGame.cor_fundo }}>
+                        {
+                            currentGame.imagem_exemplo == null ? (
 
-                    <ButtonAlert />
+                                <ComponentGamesTwo
+                                    firstStepImage={currentGame.tbl_passo[0].imagem}
+                                    secondStepImage={currentGame.tbl_passo[1].imagem}
+                                    firstStepText={currentGame.dialogo}
+                                    correctStepFunction={() => correctStep()}
+                                    incorrectStepFunction={() => { }}
+                                    firstStepCorrect={currentGame.tbl_passo[0].passo_correto}
 
-                    {
-                        currentGame.imagem_exemplo == null ? (
+                                />) : (
 
-                            <ComponentGamesTwo
-                                firstStepImage={currentGame.tbl_passo[0].imagem}
-                                secondStepImage={currentGame.tbl_passo[1].imagem}
-                                firstStepText={currentGame.dialogo}
-                                correctStepFunction={() => correctStep()}
-                                incorrectStepFunction={() => { }}
-                                firstStepCorrect={currentGame.tbl_passo[0].passo_correto}
+                                <ComponentGames
+                                    firstStepImageGames={currentGame.imagem_exemplo}
+                                    secondStepText={currentGame.dialogo}
+                                    firstStepButton={currentGame.tbl_passo[0].texto}
+                                    firstStepButtonTwo={currentGame.tbl_passo[1].texto}
+                                    firstStepColor={currentGame.tbl_passo[0].cor}
+                                    correctStepFunction={() => correctStep()}
+                                    incorrectStepFunction={() => { }}
+                                    firstStepCorrect={currentGame.tbl_passo[0].passo_correto}
+                                />)
+                        }
 
-                            />) : (
+                    </View>
 
-                            <ComponentGames
-                                firstStepImageGames={currentGame.imagem_exemplo}
-                                secondStepText={currentGame.dialogo}
-                                firstStepButton={currentGame.tbl_passo[0].texto}
-                                firstStepButtonTwo={currentGame.tbl_passo[1].texto}
-                                firstStepColor={currentGame.tbl_passo[0].cor}
-                                correctStepFunction={() => correctStep()}
-                                incorrectStepFunction={() => { }}
-                                firstStepCorrect={currentGame.tbl_passo[0].passo_correto}
-                            />)
-                    }
-
-                </View>
-
-            )
-            // : (<Loading />)
-        )}
+                )
+                // : (<Loading />)
+            )}
 
 
 
-    </>
-);
+        </>
+    );
 }
 const styles = StyleSheet.create({
     mainContainer: {
