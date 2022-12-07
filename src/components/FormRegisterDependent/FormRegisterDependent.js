@@ -1,7 +1,7 @@
 import { isEqual } from "date-fns";
 import * as ImagePicker from "expo-image-picker";
 import { Formik } from "formik";
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Image, StyleSheet,
   TouchableOpacity, View, Text
@@ -61,8 +61,8 @@ export const FormDependentRegister = ({ navigation }) => {
 
     let photo = false
 
-    if(image){
-      
+    if (image) {
+
       // Criando as configurações da imagem
       const filename = image.split("/").pop();
       const match = /\.(\w+)$/.exec(filename);
@@ -144,7 +144,7 @@ export const FormDependentRegister = ({ navigation }) => {
                   errorMessage={errors.name}
                 ></Input>
               </View>
-  
+
               <View style={styles.input}>
                 <MaskedInput
                   title="Data de Nascimento"
@@ -160,7 +160,7 @@ export const FormDependentRegister = ({ navigation }) => {
                   options={{
                     format: 'DD/MM/YYYY'
                   }}
-                  />
+                />
               </View>
 
               {/* <DataInput

@@ -1,4 +1,4 @@
-
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -15,16 +15,20 @@ import { ResponsiveRegister } from "../screens/ResponsibleRegister";
 import { DependentRegister } from '../screens/DependentRegister';
 import { DependentManagement } from '../screens/DependentManagement';
 import { SalutationScreen } from '../screens/SalutationScreen';
-import { RoutineResponsible } from '../screens/RoutineResponsible';
+import { ScheduleResponsible } from '../screens/ScheduleResponsible';
+// import { RoutineResponsible } from '../screens/RoutineResponsible';
 // import { Games } from '../screens/Games';
 import { ScreenGames } from '../screens/ScreenGames';
+import { ScreenGamesResponsible } from '../screens/ScreenGamesResponsible'
 import { CongratulationsScreen } from '../screens/CongratulationsScreen';
+import { CongratulationsScreenResponsible } from '../screens/CongratulationsScreenResponsible';
 import { TabsDependent } from './tabsDependent';
 import { TabsResponsible } from './tabsResponsible';
-import { Games } from '../screens/Games';
 import { MenuDependent } from '../screens/MenuDependent';
 import { DependentProfile } from '../screens/DependentProfile';
 import { HomeDependent } from '../screens/HomeDependent';
+import { GamesDependent } from '../screens/GamesDependent';
+import { MedalScreen } from '../screens/MedalScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -42,7 +46,7 @@ const Navigation = () => {
                 <Stack.Screen name="Salutation" component={SalutationScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="Menu" component={Menu} options={{ headerShown: false }} />
                 <Stack.Screen name="HomeResponsible" component={HomeResponsible} options={{ headerShown: false }} />
-                <Stack.Screen name="RoutineResponsible" component={RoutineResponsible} options={{ headerShown: false }} />
+                <Stack.Screen name="RoutineResponsible" component={ScheduleResponsible} options={{ headerShown: false }} />
                 <Stack.Screen name="Management" component={ResponsibleManagement} options={{ headerShown: false }} />
                 <Stack.Screen name="Password" component={ResponsiblePassword} options={{ headerShown: false }} />
                 <Stack.Screen name="DependentListing" component={DependentListing} options={{ headerShown: false }} />
@@ -50,13 +54,16 @@ const Navigation = () => {
                 <Stack.Screen name="DependentRegister" component={DependentRegister} options={{ headerShown: false }} />
                 {/* <Stack.Screen name="Games" component={Games} options={{ headerShown: false }} /> */}
                 <Stack.Screen name="ScreenGames" component={ScreenGames} options={{ headerShown: false }} />
+                <Stack.Screen name="ScreenGamesResponsible" component={ScreenGamesResponsible} options={{ headerShown: false }} />
                 <Stack.Screen name="CongratulationsScreen" component={CongratulationsScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="CongratulationsScreenResponsible" component={CongratulationsScreenResponsible} options={{ headerShown: false }} />
                 <Stack.Screen name="TabsResponsible" component={TabsResponsible} options={{ headerShown: false }} />
                 <Stack.Screen name="TabsDependent" component={TabsDependent} options={{ headerShown: false }} />
-                <Stack.Screen name="Games" component={Games} options={{ headerShown: false }} />
                 <Stack.Screen name="MenuDependent" component={MenuDependent} options={{ headerShown: false }} />
                 <Stack.Screen name="DependentProfile" component={DependentProfile} options={{ headerShown: false }} />
                 <Stack.Screen name="HomeDependent" component={HomeDependent} options={{ headerShown: false }} />
+                <Stack.Screen name="GamesDependent" component={GamesDependent} options={{ headerShown: false }} />
+                <Stack.Screen name="MedalScreen" component={MedalScreen} options={{ headerShown: false }} />
 
             </Stack.Navigator>
         </NavigationContainer>

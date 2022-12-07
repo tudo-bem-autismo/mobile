@@ -1,6 +1,7 @@
+import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { RoutineResponsible } from '../screens/RoutineResponsible';
+import { ScheduleResponsible } from '../screens/ScheduleResponsible';
 import { Reports } from '../screens/Reports';
 import { Games } from '../screens/Games';
 import { COLORS } from '../assets/const';
@@ -24,8 +25,8 @@ export const TabsResponsible = ({ navigation }) => {
             initialRouteName="Games"
         >
             <Tab.Screen
-                name="RoutineResponsible"
-                component={RoutineResponsible}
+                name="ScheduleResponsible"
+                component={ScheduleResponsible}
                 navigation={navigation}
                 options={{
                     headerShown: false,
@@ -42,7 +43,7 @@ export const TabsResponsible = ({ navigation }) => {
                                 />
                             </View>
 
-                            <Text style={styles.screenName}>ROTINA</Text>
+                            <Text style={styles.screenName}>AGENDA</Text>
 
                         </View>
 
