@@ -15,6 +15,10 @@ export function ScreenGames({ route, navigation }) {
 
     let { idGames } = route.params;
 
+    console.log(idGames, '------game')
+
+    const [gameLoaded, setGameLoaded] = useState(false)
+
     const [game, setGame] = useState([{
         "id": 0,
         "ordem": 1,
@@ -51,7 +55,7 @@ export function ScreenGames({ route, navigation }) {
     const [mistakes, setMistakes] = useState(0)
     const [currentGame, setCurrentGame] = useState({
         "id": 0,
-        "ordem": 0,
+        "ordem": 1,
         "dialogo": "",
         "imagem_exemplo": "",
         "imagem_fundo": null,
@@ -83,6 +87,7 @@ export function ScreenGames({ route, navigation }) {
         const result = await getStepGames(idGames)
         setGame(result.data)
         setCurrentGame(result.data[0])
+        setGameLoaded(true)
         setIsLoading(false)
 
     }
@@ -99,10 +104,10 @@ export function ScreenGames({ route, navigation }) {
                 idGames
             })
         } else {
-            await navigation.navigate('CongratulationsScreen', { idGames })
+            await navigation.navigate('CongratulationsScreen', {idGames})
         }
 
-        setIsLoading(true)
+        // setIsLoading(true)
 
         setTimeout(() => {
             clearGame()
@@ -116,7 +121,7 @@ export function ScreenGames({ route, navigation }) {
 
         setGame([{
             "id": 0,
-            "ordem": 0,
+            "ordem": 1,
             "dialogo": "",
             "imagem_exemplo": "",
             "imagem_fundo": null,
@@ -146,11 +151,11 @@ export function ScreenGames({ route, navigation }) {
         }])
         setCurrentGame({
             "id": 0,
-            "ordem": 0,
+            "ordem": 1,
             "dialogo": "",
             "imagem_exemplo": "",
             "imagem_fundo": null,
-            "cor_fundo": "",
+            "cor_fundo": "#fff",
             "id_mini_jogo": 0,
             "tbl_passo": [
                 {
@@ -176,10 +181,11 @@ export function ScreenGames({ route, navigation }) {
         })
 
         setCurrenteStep(0)
-        setIsLoading(true)
+        setIsLoading(false)
         setMistakes(0)
         setHits(0)
-
+        getGames()
+        setGameLoaded(false)
     }
 
     const correctStep = () => {
@@ -201,8 +207,14 @@ export function ScreenGames({ route, navigation }) {
     }
 
     useEffect(() => {
-        getGames()
-    }, [game[0].ordem])
+
+        // if(game[0].id == 0){
+
+            getGames()
+        // }
+        // setCurrentGame(game[0])
+        setIsLoading(false)
+    }, [gameLoaded])
 
     return (
         <>
@@ -210,7 +222,7 @@ export function ScreenGames({ route, navigation }) {
                 <Loading />
             ) : (
 
-                game ? (
+                game && currentGame && (
 
                     <View style={{ ...styles.mainContainer, backgroundColor: currentGame.cor_fundo }}>
 
@@ -239,13 +251,12 @@ export function ScreenGames({ route, navigation }) {
                                     incorrectStepFunction={() => incorrectStep()}
                                     firstStepCorrect={currentGame.tbl_passo[0].passo_correto}
                                 />)
-
-
                         }
 
                     </View>
 
-                ) : ([])
+                ) 
+                // : (<Loading />)
             )}
 
 

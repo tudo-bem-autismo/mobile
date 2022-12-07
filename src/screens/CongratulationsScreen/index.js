@@ -8,7 +8,8 @@ import styles from './style.js';
 
 export function CongratulationsScreen({ route, navigation}){
 
-    let idGames = route.params.idGames
+    let {idGames} = route.params
+    // console.log(idGames, '-------congra')
 
     return(
         <View style={styles.mainContainer}>
@@ -24,7 +25,7 @@ export function CongratulationsScreen({ route, navigation}){
             </View>
          
             <TouchableOpacity style={styles.buttonPlay}
-                 onPress={() => navigation.navigate('ScreenGames', idGames)}
+                 onPress={() => navigation.navigate('ScreenGames', {idGames})}
             >
                 <Text style = {styles.textPlay}>JOGAR DE NOVO</Text>
             </TouchableOpacity>

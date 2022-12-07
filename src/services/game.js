@@ -65,7 +65,7 @@ export const getGameKids = async () =>{
             data:formattedData,
         }
     }catch (error){
-        console.log(error)
+        // console.log(error)
 
         showErrorToast(error.response.data.message)
         return{
@@ -152,6 +152,8 @@ export const getGamesByResponsible = async () => {
 }
 
 export const getStepGames = async (idGames) => {
+
+    // console.log(idGames)
 
     try{
         const result = await api.get(`/miniJogo/${idGames}`)

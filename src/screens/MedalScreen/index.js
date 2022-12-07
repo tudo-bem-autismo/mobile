@@ -45,6 +45,7 @@ export function MedalScreen({route, navigation }) {
 
     let {nome, medalha} = route.params.data
     let idGames = route.params.idGames
+    console.log(idGames, '----medal')
 
 
 
@@ -67,7 +68,7 @@ export function MedalScreen({route, navigation }) {
                     </View>
 
                     <TouchableOpacity
-                        onPress={() => {navigation.navigate('ScreenGames', idGames ) }}
+                        onPress={() => {navigation.navigate('ScreenGames', {idGames} ) }}
                         style={styles.buttonPlay}
                     >
                         <Text style={styles.textPlay}>JOGAR DE NOVO</Text>
