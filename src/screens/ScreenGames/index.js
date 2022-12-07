@@ -102,7 +102,7 @@ export function ScreenGames({ route, navigation }) {
                 idGames
             })
         } else {
-            await navigation.navigate('CongratulationsScreen', {idGames})
+            await navigation.navigate('CongratulationsScreen', { idGames })
         }
 
         // setIsLoading(true)
@@ -208,7 +208,7 @@ export function ScreenGames({ route, navigation }) {
 
         // if(game[0].id == 0){
 
-            getGames()
+        getGames()
         // }
         // setCurrentGame(game[0])
     }, [gameLoaded])
@@ -223,7 +223,9 @@ export function ScreenGames({ route, navigation }) {
 
                     <View style={{ ...styles.mainContainer, backgroundColor: currentGame.cor_fundo }}>
 
-                        <ButtonAlert />
+                        <ButtonAlert
+                            onPress={() => navigation.navigate('SupportButtonForKid')}
+                        />
 
                         {
                             currentGame.imagem_exemplo == null ? (
@@ -252,7 +254,7 @@ export function ScreenGames({ route, navigation }) {
 
                     </View>
 
-                ) 
+                )
                 // : (<Loading />)
             )}
 

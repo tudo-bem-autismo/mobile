@@ -12,7 +12,11 @@ import { ModalButtonSuportImage, ModalDeleteData, ModalViewButtonSuport }  from 
 import { FontAwesome } from '@expo/vector-icons';
 import Toast from "react-native-toast-message";
 
-export const SupportButtonManagement = ({ navigation }) => {
+export const SupportButtonManagement = ({ navigation, route }) => {
+
+    let {idDependents} = route.params;
+
+    console.log(idDependents);
 
     const [modal, setModal] = useState(false);
 
@@ -52,7 +56,8 @@ export const SupportButtonManagement = ({ navigation }) => {
     }
 
     const getDependents = async () => {
-        const result = await getButtonSupportDependent()
+        const result = await getButtonSupportDependent(idDependents)
+        console.log(result)
         const file = result.data
         
         const images = file.filter(item => item.tipoMidia === 'Imagens')

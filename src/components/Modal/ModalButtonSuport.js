@@ -30,7 +30,7 @@ const { height } = Dimensions.get("window");
 
 export const ModalButtonSuport = ({ label, close, show, del, updateChart, setChartIsLoading, idCrianca }) => {
   const [isLoading, setIsLoading] = useState(true);
-  
+
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
   const [image3, setImage3] = useState(null);
@@ -60,16 +60,16 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
     });
 
     const tipoMidia = result.type
-  
+
     if (!result.cancelled) {
       setImage1(result.uri);
-      if(tipoMidia == 'video') {
+      if (tipoMidia == 'video') {
         setMidia1(2)
         setTipoMidia1('video-camera')
       } else {
         setMidia1(1)
         setTipoMidia1('photo')
-       
+
       }
     }
   };
@@ -84,14 +84,14 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
 
     const tipoMidia = result.type
 
-    if(tipoMidia == 'video') {
+    if (tipoMidia == 'video') {
       setMidia2(2)
       setTipoMidia2('video-camera')
     } else {
       setMidia2(1)
       setTipoMidia2('photo')
     }
-  
+
     if (!result.cancelled) {
       setImage2(result.uri);
     }
@@ -107,14 +107,14 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
 
     const tipoMidia = result.type
 
-    if(tipoMidia == 'video') {
+    if (tipoMidia == 'video') {
       setMidia3(2)
       setTipoMidia3('video-camera')
     } else {
       setMidia3(1)
       setTipoMidia3('photo')
     }
-  
+
     if (!result.cancelled) {
       setImage3(result.uri);
     }
@@ -130,14 +130,14 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
 
     const tipoMidia = result.type
 
-    if(tipoMidia == 'video') {
+    if (tipoMidia == 'video') {
       setMidia4(2)
       setTipoMidia4('video-camera')
     } else {
       setMidia4(1)
       setTipoMidia4('photo')
     }
-  
+
     if (!result.cancelled) {
       setImage4(result.uri);
     }
@@ -153,14 +153,14 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
 
     const tipoMidia = result.type
 
-    if(tipoMidia == 'video') {
+    if (tipoMidia == 'video') {
       setMidia5(2)
       setTipoMidia5('video-camera')
     } else {
       setMidia5(1)
       setTipoMidia5('photo')
     }
-  
+
     if (!result.cancelled) {
       setImage5(result.uri);
     }
@@ -176,26 +176,26 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
     let photo5 = null
 
 
-    if(midia1) {
+    if (midia1) {
 
-      if(midia1 == 1) {
-        if(image1) {
-          
+      if (midia1 == 1) {
+        if (image1) {
+
         }
         const filename = image1.split("/").pop();
         const match = /\.(\w+)$/.exec(filename);
         const type = match ? `image/${match[1]}` : `image`;
-  
+
         photo1 = {
           name: filename,
           type,
           uri: image1,
         };
-        
+
       } else {
         const filename = image1.split("/").pop();
         const type = 'video/mp4'
-  
+
         photo1 = {
           name: filename,
           type,
@@ -204,13 +204,13 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
       }
 
     }
-    
-    if(midia2) {
-      if(midia2 == 1) {
+
+    if (midia2) {
+      if (midia2 == 1) {
         const filename = image2.split("/").pop();
         const match = /\.(\w+)$/.exec(filename);
         const type = match ? `image/${match[1]}` : `image`;
-  
+
         photo2 = {
           name: filename,
           type,
@@ -219,7 +219,7 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
       } else {
         const filename = image2.split("/").pop();
         const type = 'video/mp4'
-  
+
         photo2 = {
           name: filename,
           type,
@@ -227,13 +227,13 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
         };
       }
     }
-    
-    if(midia3) {
-      if(midia3 == 1) {
+
+    if (midia3) {
+      if (midia3 == 1) {
         const filename = image3.split("/").pop();
         const match = /\.(\w+)$/.exec(filename);
         const type = match ? `image/${match[1]}` : `image`;
-  
+
         photo3 = {
           name: filename,
           type,
@@ -242,7 +242,7 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
       } else {
         const filename = image3.split("/").pop();
         const type = 'video/mp4'
-  
+
         photo3 = {
           name: filename,
           type,
@@ -250,13 +250,13 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
         };
       }
     }
-    
-    if(midia4) {
-      if(midia4 == 1) {
+
+    if (midia4) {
+      if (midia4 == 1) {
         const filename = image4.split("/").pop();
         const match = /\.(\w+)$/.exec(filename);
         const type = match ? `image/${match[1]}` : `image`;
-  
+
         photo4 = {
           name: filename,
           type,
@@ -265,7 +265,7 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
       } else {
         const filename = image4.split("/").pop();
         const type = 'video/mp4'
-  
+
         photo4 = {
           name: filename,
           type,
@@ -273,13 +273,13 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
         };
       }
     }
-    
-    if(midia5) {
-      if(midia5 == 1) {
+
+    if (midia5) {
+      if (midia5 == 1) {
         const filename = image5.split("/").pop();
         const match = /\.(\w+)$/.exec(filename);
         const type = match ? `image/${match[1]}` : `image`;
-  
+
         photo5 = {
           name: filename,
           type,
@@ -288,7 +288,7 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
       } else {
         const filename = image1.split("/").pop();
         const type = 'video/mp4'
-  
+
         photo5 = {
           name: filename,
           type,
@@ -296,41 +296,41 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
         };
       }
     }
-    
-        const data = {
-          idCrianca,
-          photo1,
-          photo2,
-          photo3,
-          photo4,
-          photo5
-        };
 
-        if (photo1 == null && photo2 == null && photo3 == null && photo4 == null && photo5 == null) {
-          return Toast.show({
-            type: "error",
-            text1: "Não foi selecionado nenhuma mídia",
-          })
-        } else {
-          const result = await registerButtonSupport(data)
-  
-          if (result.success) {
-            return Toast.show({
-              type: "success",
-              text1: "Conteúdo inserido com sucesso com sucesso",
-            },
-            );
-           
-          }
-         
-        }
-  
-        
-       
-         
+    const data = {
+      idCrianca,
+      photo1,
+      photo2,
+      photo3,
+      photo4,
+      photo5
+    };
+
+    if (photo1 == null && photo2 == null && photo3 == null && photo4 == null && photo5 == null) {
+      return Toast.show({
+        type: "error",
+        text1: "Não foi selecionado nenhuma mídia",
+      })
+    } else {
+      const result = await registerButtonSupport(data)
+
+      if (result.success) {
+        close()
+        return Toast.show({
+          type: "success",
+          text1: "Conteúdo inserido com sucesso com sucesso",
+        });
+
+      }
+
+    }
+
+
+
+
   }
-  
-  
+
+
 
   const [state, setState] = useState({
     opacity: new Animated.Value(0),
@@ -378,7 +378,7 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
     ]).start();
   };
 
-        
+
   useEffect(() => {
     if (show) {
       //gerarRelatorio();
@@ -428,72 +428,72 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
                   <Text style={style.text}>Selecione a mídia:</Text>
 
                   <ScrollView
-                  horizontal={true}
-                  showsHorizontalScrollIndicator={false}
-                  pagingEnabled={true}
-                  contentContainerStyle={{flexGrow : 1, justifyContent : 'center', alignItems: 'center', padding: 15}}
-                  style={{marginVertical: 50}}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    pagingEnabled={true}
+                    contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center', padding: 15 }}
+                    style={{ marginVertical: 50 }}
                   >
-                    
-                      <TouchableOpacity style={style.contentImg} onPress={pickImage1}>
-                        {image1 ?
-                          (<Image source={{ uri: image1 }} style={style.foto} />) : (<Image source={file} style={style.file} />)
-                        }
-                        <FontAwesome name={tipoMidia1} style={style.iconMidia}/>
-                      </TouchableOpacity>
-                    
-                    
+
+                    <TouchableOpacity style={style.contentImg} onPress={pickImage1}>
+                      {image1 ?
+                        (<Image source={{ uri: image1 }} style={style.foto} />) : (<Image source={file} style={style.file} />)
+                      }
+                      <FontAwesome name={tipoMidia1} style={style.iconMidia} />
+                    </TouchableOpacity>
+
+
                     {image1 && (
                       <TouchableOpacity style={style.contentImg} onPress={pickImage2}>
-                      {image2 ?
-                        (<Image source={{ uri: image2 }} style={style.foto} />) : (<Image source={file} style={style.file} />)
-                      }
-                      <FontAwesome name={tipoMidia2} style={style.iconMidia}/>
-                    </TouchableOpacity>
-                    )}
-                    
-                     {image2 && 
-                     (
-                      <TouchableOpacity style={style.contentImg} onPress={pickImage3}>    
-                        {image3 ?
-                          (<Image source={{ uri: image3 }} style={style.foto} />) : (<Image source={file} style={style.file} />)
+                        {image2 ?
+                          (<Image source={{ uri: image2 }} style={style.foto} />) : (<Image source={file} style={style.file} />)
                         }
-                        <FontAwesome name={tipoMidia3} style={style.iconMidia}/>
+                        <FontAwesome name={tipoMidia2} style={style.iconMidia} />
                       </TouchableOpacity>
-                     )} 
-                    
-                      {image3 && 
-                        (
-                          <TouchableOpacity style={style.contentImg} onPress={pickImage4}>
+                    )}
+
+                    {image2 &&
+                      (
+                        <TouchableOpacity style={style.contentImg} onPress={pickImage3}>
+                          {image3 ?
+                            (<Image source={{ uri: image3 }} style={style.foto} />) : (<Image source={file} style={style.file} />)
+                          }
+                          <FontAwesome name={tipoMidia3} style={style.iconMidia} />
+                        </TouchableOpacity>
+                      )}
+
+                    {image3 &&
+                      (
+                        <TouchableOpacity style={style.contentImg} onPress={pickImage4}>
                           {image4 ?
                             (<Image source={{ uri: image4 }} style={style.foto} />) : (<Image source={file} style={style.file} />)
                           }
-                          <FontAwesome name={tipoMidia4} style={style.iconMidia}/>
-                          </TouchableOpacity>
-                        )
-                      }
+                          <FontAwesome name={tipoMidia4} style={style.iconMidia} />
+                        </TouchableOpacity>
+                      )
+                    }
 
-                      {image4 && 
-                        (
-                          <TouchableOpacity style={style.contentImg} onPress={pickImage5}>
-                            {image5 ?
-                              (<Image source={{ uri: image5 }} style={style.foto} />) : (<Image source={file} style={style.file} />)
-                            }
-                            <FontAwesome name={tipoMidia5} style={style.iconMidia}/>
-                          </TouchableOpacity>
-                        )
-                      }
-  
+                    {image4 &&
+                      (
+                        <TouchableOpacity style={style.contentImg} onPress={pickImage5}>
+                          {image5 ?
+                            (<Image source={{ uri: image5 }} style={style.foto} />) : (<Image source={file} style={style.file} />)
+                          }
+                          <FontAwesome name={tipoMidia5} style={style.iconMidia} />
+                        </TouchableOpacity>
+                      )
+                    }
+
                   </ScrollView>
 
                   {/* </View> */}
-                  
+
                 </View>
-                
+
 
                 <View style={style.buttonContainer}>
 
-                  
+
                   <Button
                     label="CRIAR"
                     backgroundColor={COLORS.pink}
@@ -502,7 +502,7 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
                     height={45}
                     onPress={criarButtonSupport}
                   />
-                 
+
                 </View>
               </View>
             </BlurView>

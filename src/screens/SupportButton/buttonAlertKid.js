@@ -11,6 +11,7 @@ import styles from './style';
 import { ModalButtonSuportForKid }  from '../../components';
 
 import { FontAwesome } from '@expo/vector-icons';
+import { MainHeaderDependent } from '../../components/Header/MainHeaderDependent';
 
 export const SupportButtonForKid = ({ navigation }) => {
 
@@ -60,7 +61,7 @@ export const SupportButtonForKid = ({ navigation }) => {
                 <Loading />
             ) : (
                 <>
-                    <MainHeader
+                    <MainHeaderDependent
                         screenName="BOTÃO DE APOIO"
                         navigation={navigation}
                     />

@@ -57,7 +57,7 @@ export const GamesDependent = ({ navigation }) => {
                                     games?.map(item => (
                                         <Game
                                             titleGame={item.name}
-                                            gifGame={{ uri: item.icon }}
+                                            gifGame={item.icon}
                                             key={item.id}
                                             onPress={() => openGame(item.id)}
 
