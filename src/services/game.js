@@ -46,7 +46,7 @@ export const getGamesService = async () => {
 
 export const getGameKids = async () =>{
     try{
-        const idKid = await getData('@id')
+        const idKid = await getData('@idDependent')
 
         const result = await api.get(`minijogo/listagem/crianca/${idKid}`)
 

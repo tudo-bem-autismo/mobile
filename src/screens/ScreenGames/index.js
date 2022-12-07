@@ -15,8 +15,6 @@ export function ScreenGames({ route, navigation }) {
 
     let { idGames } = route.params;
 
-    console.log(idGames, '------game')
-
     const [gameLoaded, setGameLoaded] = useState(false)
 
     const [game, setGame] = useState([{

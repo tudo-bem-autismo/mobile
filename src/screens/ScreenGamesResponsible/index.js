@@ -15,7 +15,7 @@ export function ScreenGamesResponsible({ route, navigation }) {
 
     let { idGames } = route.params;
 
-    console.log(idGames, '------gameRRRR')
+    // console.log(idGames, '------gameRRRR')
 
     const [gameLoaded, setGameLoaded] = useState(false)
 
