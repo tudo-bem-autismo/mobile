@@ -24,9 +24,9 @@ export const GamesDependent = ({ navigation }) => {
         setGames(result.data)
     }
     const openGame = (idGames) => {
-    //    setIdGames()
+        //    setIdGames()
 
-        navigation.navigate('ScreenGames', {idGames})
+        navigation.navigate('ScreenGames', { idGames })
 
     }
     useEffect(() => {
@@ -68,11 +68,13 @@ export const GamesDependent = ({ navigation }) => {
 
                                 }
 
+                                <View style={styles.invisibleCard}></View>
+
 
                             </View>
                         </ScrollView>
                     </View>
-                   
+
                 </>
             )}
         </View>
