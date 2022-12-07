@@ -176,7 +176,7 @@ export const ModalApplyChildGame = ({ close, show, selectedGameId, navigation })
 
                                     <Game
                                         titleGame={game.name}
-                                        gifGame={{ uri: game.icon }}
+                                        gifGame={game.icon }
                                     />
 
 
@@ -199,7 +199,7 @@ export const ModalApplyChildGame = ({ close, show, selectedGameId, navigation })
                                                 dependents.map(item => (
                                                     <Dependent
                                                         name={item.name}
-                                                        photo={{ uri: item.photo }}
+                                                        photo={item.photo}
                                                         key={item.id}
                                                         selected={newRestrictions?.find(restriction => restriction.idDependent === item.id)}
                                                         onPress={() => manageDependentRestriction(item.id)}

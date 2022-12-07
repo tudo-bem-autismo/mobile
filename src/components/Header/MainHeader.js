@@ -27,7 +27,10 @@ export const MainHeader = ({ screenName, navigation }) => {
                 <Text style={styles.screenName}>{screenName}</Text>
             </View>
 
-            <TouchableOpacity style={styles.buttonAlert}>
+            <TouchableOpacity 
+                style={styles.buttonAlert}
+                onPress={() => navigation.navigate('SupportButton')}
+            >
                 <Image source={attackButton} />
             </TouchableOpacity>
         </View>

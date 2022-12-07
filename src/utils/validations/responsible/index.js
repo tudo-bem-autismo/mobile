@@ -7,7 +7,7 @@ export const responsibleRegisterPersonalDataSchema = yup.object().shape({
     name: yup
         .string()
         .min(4, 'No mínimo 4 caracteres')
-        .max(20, 'No máximo 20 caracteres')
+        .max(80, 'No máximo 80 caracteres')
         .required('Insira seu nome'),
     phone: yup
         .string()
@@ -31,7 +31,7 @@ export const responsibleUpdateSchema = yup.object().shape({
     name: yup
         .string()
         .min(4, 'No mínimo 4 caracteres')
-        .max(20, 'No máximo 20 caracteres')
+        .max(80, 'No máximo 80 caracteres')
         .required('Insira seu nome'),
     phone: yup
         .string()

@@ -18,9 +18,9 @@ export const registerButtonSupport = async (data) => {
     formData.append("imagem", data.photo5);
     formData.append("id_crianca", data.idCrianca);
 
+    console.log(formData)
     const result = await api.post("/botaoApoio", formData, options);
 
-    
     const success = result.status === 201;
 
     return {
@@ -42,9 +42,9 @@ export const registerButtonSupport = async (data) => {
 export const getButtonSupportDependent = async () => {
   try {
 
-    // const id = await getData('@idDependent')
+    const id = await getData('@idDependent')
 
-    const result = await api.get(`/botaoApoio/5`)
+    const result = await api.get(`/botaoApoio/${id}`)
 
     const success = result.status === 200
     

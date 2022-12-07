@@ -60,7 +60,7 @@ export const Games = ({ navigation }) => {
                                     games?.map(item => (
                                         <Game
                                             titleGame={item.name}
-                                            gifGame={{ uri: item.icon }}
+                                            gifGame={item.icon }
                                             key={item.id}
                                             onPress={() => openGameModal(item.id)}
                                         />
