@@ -1,3 +1,4 @@
+import React from "react"
 import { StyleSheet, Text, TouchableOpacity } from "react-native"
 import { COLORS } from "../../assets/const"
 
@@ -6,6 +7,7 @@ export const PlayButton = ({ onPress }) => {
     return (
         <TouchableOpacity
             style={style.button}
+            onPress={()=> onPress()}
         >
             <Text style={style.text}>JOGAR</Text>
         </TouchableOpacity>

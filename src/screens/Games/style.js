@@ -21,13 +21,29 @@ const styles = StyleSheet.create({
     },
     listGames: {
         width: '100%',
-
     },
     listGamesContainer: {
         alignItems: 'center',
         justifyContent: 'center',
     },
-
+    invisibleCard:{
+        width: 250,
+        height: 150,
+    },
+    imageGameContainer: {
+        width: '100%',
+        height: 193,
+        borderRadius: 40,
+        backgroundColor: COLORS.white,
+        position: 'absolute',
+        overflow: 'hidden',
+    },
+    imageGame: {
+        borderRadius: 40,
+        alignSelf: 'center',
+        width: '100%',
+        height: '100%',
+    }
 
 });
 

@@ -17,16 +17,16 @@ export const GamesDependent = ({ navigation }) => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [games, setGames] = useState([]);
-    const [idGames, setIdGames] = useState(0)
+    // const [idGames, setIdGames] = useState(0)
 
     const getGames = async () => {
         const result = await getGameKids()
         setGames(result.data)
     }
-    const openGame = () => {
-       setIdGames()
+    const openGame = (idGames) => {
+        //    setIdGames()
 
-        navigation.navigate('ScreenGames', {idGames})
+        navigation.navigate('ScreenGames', { idGames })
 
     }
     useEffect(() => {
@@ -68,11 +68,13 @@ export const GamesDependent = ({ navigation }) => {
 
                                 }
 
+                                <View style={styles.invisibleCard}></View>
+
 
                             </View>
                         </ScrollView>
                     </View>
-                   
+
                 </>
             )}
         </View>

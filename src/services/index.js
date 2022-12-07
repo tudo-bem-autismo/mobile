@@ -6,4 +6,5 @@ export * from './kid';
 export * from './api';
 export * from './reports';
 export * from './game';
+export * from './buttonSupport';
 

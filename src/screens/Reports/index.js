@@ -6,6 +6,7 @@ import {
   StyleSheet,
   processColor,
   SafeAreaView,
+  Image,
 } from "react-native";
 import styles from "./style";
 import { MainHeader } from "../../components/Header/MainHeader";
@@ -15,6 +16,7 @@ import { ModalReports } from "../../components";
 import { ECharts } from "react-native-echarts-wrapper";
 import { LineChart } from "react-native-charts-wrapper";
 import { Loading } from "../Loading";
+import reports from "../../assets/images/reports.gif";
 
 export const Reports = ({ navigation }) => {
   const [modal, setModal] = useState(false);
@@ -61,12 +63,12 @@ export const Reports = ({ navigation }) => {
           fontSize: 16
         },
       },
-      
-      tooltip:{
+
+      tooltip: {
         trigger: 'axis'
-      },   
+      },
       series: [
-        { 
+        {
           name: 'Erros',
           data: values.errors,
           type: "line",
@@ -74,7 +76,7 @@ export const Reports = ({ navigation }) => {
           symbolSize: 10,
           lineStyle: {
             color: COLORS.missRed,
-            width: 5,  
+            width: 5,
           },
           itemStyle: {
             borderWidth: 1,
@@ -90,7 +92,7 @@ export const Reports = ({ navigation }) => {
           symbolSize: 10,
           lineStyle: {
             color: COLORS.hitGreen,
-            width: 5,  
+            width: 5,
           },
           itemStyle: {
             borderWidth: 1,
@@ -130,19 +132,23 @@ export const Reports = ({ navigation }) => {
 
       <View style={styles.reportsContainer}>
         {chartIsLoading ? (<Loading />) : renderRelatory && (
-          <View style={{width: "90%", flex: 1, marginBottom: '20%'}}>
-            <SafeAreaView style={{height: '220%', borderWidth: 1}}>
-            <ECharts
-              option={options} 
-              backgroundColor={COLORS.white}
+          <View style={{ width: "90%", flex: 1, marginBottom: '20%' }}>
+            <SafeAreaView style={{ height: '220%', borderWidth: 1 }}>
+              <ECharts
+                option={options}
+                backgroundColor={COLORS.white}
               //additionalCode={additionalCode}
               //onData={onData}  
               />
             </SafeAreaView>
           </View>
-          
-      
+
+
         )}
+
+        <Image
+          style={styles.image}
+          source={reports} />
 
         <Button
           label={"GERAR RELATÓRIO"}

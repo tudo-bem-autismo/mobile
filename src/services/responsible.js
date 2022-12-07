@@ -23,7 +23,7 @@ export const responsibleRegisterService = async (data) => {
         }
 
     } catch (error) {
-
+        // console.log(error)
         showErrorToast(error.response.data.message)
 
         return {
@@ -149,9 +149,7 @@ export const getResponsibleDependentsService = async () => {
 
         const id = await getData('@id')
 
-        const result = await api.get(`/responsavel/27`)
-
-        // console.log(result.data)
+        const result = await api.get(`/responsavel/${id}`)
 
         const success = result.status === 200
 

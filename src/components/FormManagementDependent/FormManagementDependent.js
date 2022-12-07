@@ -1,7 +1,7 @@
+import React,{ useEffect, useState } from "react";
 import { format } from "date-fns";
 import * as ImagePicker from "expo-image-picker";
 import { Formik } from "formik";
-import { useEffect, useState } from "react";
 import {
   Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View
 } from "react-native";
@@ -58,7 +58,7 @@ export const FormManagementDependent = ({ navigation, idDependent }) => {
 
   const handleForm = async (data) => {
 
-  
+
     //setDateHasError(false);
     setGenderHasError(false);
     setAutismLevelHasError(false);
@@ -89,20 +89,21 @@ export const FormManagementDependent = ({ navigation, idDependent }) => {
       genderId,
       autismLevelId,
       photo,
+      idDependent
     };
 
     setShowModalSaveData(false)
     //console.log(kid.photo)
-    const result = await updateKidService(newData) 
+    const result = await updateKidService(newData)
     //console.log(newData)
 
-      if (result.success) {
-        return Toast.show({
-          type: 'success',
-          text1: 'Dados atualizados com sucesso'
-        });
-        //console.log('DEU CERTO')
-      }
+    if (result.success) {
+      return Toast.show({
+        type: 'success',
+        text1: 'Dados atualizados com sucesso'
+      });
+      //console.log('DEU CERTO')
+    }
 
   };
 
@@ -110,16 +111,16 @@ export const FormManagementDependent = ({ navigation, idDependent }) => {
 
     setShowModal(false)
 
-    const result = await deleteKidService()
+    const result = await deleteKidService(idDependent)
 
     if (result.success) {
-        return Toast.show({
-            type: 'success',
-            text1: 'Criança deletada com sucesso',
-        });
+      return Toast.show({
+        type: 'success',
+        text1: 'Criança deletada com sucesso',
+      });
     }
 
-}
+  }
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -183,22 +184,22 @@ export const FormManagementDependent = ({ navigation, idDependent }) => {
 
                   <View style={styles.input}>
                     <MaskedInput
-                    title="Data de Nascimento"
-                    iconName="calendar"
-                    placeholder="00/00/0000"
-                    borderColor={COLORS.blue}
-                    onChangeText={handleChange('date')}
-                    onBlur={handleBlur('date')}
-                    value={values.date}
-                    hasError={!!errors.date}
-                    errorMessage={errors.date}
-                    type={'datetime'}
-                    options={{
-                      format: 'DD/MM/YYYY'
-                    }}
+                      title="Data de Nascimento"
+                      iconName="calendar"
+                      placeholder="00/00/0000"
+                      borderColor={COLORS.blue}
+                      onChangeText={handleChange('date')}
+                      onBlur={handleBlur('date')}
+                      value={values.date}
+                      hasError={!!errors.date}
+                      errorMessage={errors.date}
+                      type={'datetime'}
+                      options={{
+                        format: 'DD/MM/YYYY'
+                      }}
                     />
-                      
-                    
+
+
                   </View>
 
                   {/* <DataInput
@@ -248,7 +249,7 @@ export const FormManagementDependent = ({ navigation, idDependent }) => {
                       close={() => setShowModal(false)}
                       show={showModal}
                       del={() => deleteKid()}
-                      //navigation={navigation}
+                    //navigation={navigation}
                     />
                   </View>
                 )}

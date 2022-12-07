@@ -25,7 +25,11 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "softwareKeyboardLayoutMode": "pan"
+      "softwareKeyboardLayoutMode": "pan",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "sp.senai.tudobemautismo"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -38,6 +42,5 @@
         }
       ]
     ]
-
   }
 }

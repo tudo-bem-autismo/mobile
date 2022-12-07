@@ -1,3 +1,4 @@
+import React from "react";
 import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { COLORS, FONTS } from "../../assets/const";
@@ -13,7 +14,7 @@ export const Dependent = ({ name, photo, onPress, selected }) => {
             <ImageBackground
                 style={style.dependent}
                 imageStyle={style.dependent}
-                source={photo}
+                source={{ uri: photo }}
             >
                 <View style={selected ? style.selectedDependent : style.dependent}></View>
             </ImageBackground>
@@ -29,6 +30,7 @@ export const Dependent = ({ name, photo, onPress, selected }) => {
 const style = StyleSheet.create({
     option: {
         padding: 10,
+        alignItems: 'center'
     },
     textOption: {
         fontFamily: FONTS.title,

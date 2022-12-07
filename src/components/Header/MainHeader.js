@@ -7,6 +7,8 @@ import attackButton from '../../assets/icons/botao-crise.png';
 
 export const MainHeader = ({ screenName, navigation }) => {
 
+    // console.log(navigation)
+
     return (
         <View style={styles.headerContainer}>
 
