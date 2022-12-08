@@ -18,7 +18,7 @@ export const TabsDependent = ({ route, navigation }) => {
 
     let { idDependent } = route.params;
 
-    const id = storeData(idDependent, '@idDependent')
+    let id = storeData(idDependent, '@idDependent')
 
     return (
 

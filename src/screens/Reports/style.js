@@ -32,13 +32,18 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.white,
         width: 130,
         height: 100
-    }, 
+    },
     image: {
         width: 300,
         height: 200,
         // backgroundColor: COLORS.red
-        // position: 'absolute',
-        // top: 50
+        position: 'absolute',
+        top: 150
+    },
+    noImage: {
+        position: 'absolute',
+        top: 300,
+        backgroundColor: COLORS.red
     }
 
 

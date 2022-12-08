@@ -3,6 +3,7 @@ import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensio
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { format } from "date-fns";
+import Toast from "react-native-toast-message";
 
 import modalBackground from '../../assets/images/modalBackground.png';
 import clock from '../../assets/icons/clock.png';
@@ -219,13 +220,12 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
 
         const result = await taskRegisterService(newData);
 
-        close()
-
         if (result.success) {
+            close()
             return Toast.show({
                 type: 'success',
                 text1: 'Sucesso!',
-                text2: 'Tarefa feita com sucesso!'
+                text2: 'Tarefa Criada com sucesso!'
             })
         }
 
@@ -411,7 +411,7 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
                                                             onPress={() => manageDependents(item.id)}
                                                         />
                                                     )
-                                                )}
+                                                    )}
 
                                             </ScrollView>
 
@@ -582,6 +582,7 @@ const style = StyleSheet.create({
     dependentsContainer: {
         flexDirection: 'row',
         marginLeft: 10,
+        width: 250
         // backgroundColor: COLORS.red
     },
     dependentButton: {

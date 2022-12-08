@@ -13,13 +13,12 @@ import { Button } from "../Button";
 import { PlayButton } from "../Button/PlayButton";
 import { Dependent } from "../DependentListing";
 import { Game } from "../Games/Game";
+import clothes from "../../assets/images/clothes.gif";
 // import Navigation from '../../navigation/navigation';
 
 const { height } = Dimensions.get('window')
 
 export const ModalApplyChildGame = ({ close, show, selectedGameId, navigation }) => {
-
-    // console.log(selectedGameId)
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -32,10 +31,6 @@ export const ModalApplyChildGame = ({ close, show, selectedGameId, navigation })
     const [newRestrictions, setNewRestrictions] = useState([]);
 
     const [game, setGame] = useState({});
-
-    useEffect(() => {
-        // console.log(newRestrictions)
-    }, [newRestrictions])
 
     const getGame = async () => {
         const result = await getGameByIdService(selectedGameId)
@@ -62,8 +57,6 @@ export const ModalApplyChildGame = ({ close, show, selectedGameId, navigation })
             const filteredRestriction = newRestrictions.filter(item => item.idDependent !== idDependent)
             return setNewRestrictions(filteredRestriction)
         }
-
-        // console.log(newRestrictions)
 
         const restriction = {
             idGame: selectedGameId,
@@ -176,12 +169,12 @@ export const ModalApplyChildGame = ({ close, show, selectedGameId, navigation })
 
                                     <Game
                                         titleGame={game.name}
-                                        gifGame={game.icon }
+                                        gifGame={game.icon}
                                     />
 
 
-                                    <PlayButton 
-                                        onPress={() => navigation.navigate('ScreenGamesResponsible', {idGames:selectedGameId})}    
+                                    <PlayButton
+                                        onPress={() => navigation.navigate('ScreenGamesResponsible', { idGames: selectedGameId })}
                                     />
 
                                 </View>
@@ -190,40 +183,64 @@ export const ModalApplyChildGame = ({ close, show, selectedGameId, navigation })
 
                                     <Text style={style.text}>Qual filho(a) não poderá jogar?</Text>
 
-                                    <View style={style.dependentsList}>
 
-                                        <ScrollView
-                                            horizontal={true}
-                                        >
+                                    <ScrollView
+                                        horizontal={true}
+                                        style={style.scrollList}
+                                    >
+                                        <View style={style.dependentsList}>
+
                                             {
-                                                dependents.map(item => (
-                                                    <Dependent
-                                                        name={item.name}
-                                                        photo={item.photo}
-                                                        key={item.id}
-                                                        selected={newRestrictions?.find(restriction => restriction.idDependent === item.id)}
-                                                        onPress={() => manageDependentRestriction(item.id)}
-                                                    />
-                                                ))
+                                                dependents.length ? (
+
+                                                    dependents.map(item => (
+                                                        <Dependent
+                                                            name={item.name}
+                                                            photo={item.photo}
+                                                            key={item.id}
+                                                            selected={newRestrictions?.find(restriction => restriction.idDependent === item.id)}
+                                                            onPress={() => manageDependentRestriction(item.id)}
+                                                        />
+                                                    ))
+                                                ) : (
+                                                    <Text>Não há criança cadastrada no momento</Text>
+                                                )
                                             }
-                                        </ScrollView>
+
+                                        </View>
+
+                                    </ScrollView>
 
 
 
-                                    </View>
 
                                 </View>
 
                                 <View style={style.buttonContainer}>
 
-                                    <Button
-                                        label="APLICAR"
-                                        backgroundColor={COLORS.white}
-                                        borderRadius={25}
-                                        width={100}
-                                        height={45}
-                                        onPress={() => updateDependentRestrictions()}
-                                    />
+                                    {
+                                        dependents.length ? (
+
+                                            <Button
+                                                label="APLICAR"
+                                                backgroundColor={COLORS.white}
+                                                borderRadius={25}
+                                                width={100}
+                                                height={45}
+                                                onPress={() => updateDependentRestrictions()}
+                                            />
+
+                                        ) : (
+                                            <Button
+                                                label="CADASTRAR CRIANCA"
+                                                backgroundColor={COLORS.white}
+                                                borderRadius={25}
+                                                width={200}
+                                                height={45}
+                                                onPress={() => navigation.navigate('DependentListing')}
+                                            />
+                                        )
+                                    }
 
                                 </View>
 
@@ -306,10 +323,15 @@ const style = StyleSheet.create({
         // backgroundColor: COLORS.pink
     },
     dependentsList: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        // backgroundColor: COLORS.pink
+    },
+    scrollList: {
     },
     gameContainer: {
-        flex: 5,
+        flex: 6,
         alignItems: 'center',
         justifyContent: 'flex-start',
         alignSelf: 'stretch',
@@ -330,14 +352,14 @@ const style = StyleSheet.create({
         // backgroundColor: COLORS.blue
     },
     buttonContainer: {
-        flex: 1.5,
-        // marginBottom: 5,
+        flex: 1,
+        marginBottom: 20,
         // backgroundColor: COLORS.darkBlue
     },
     text: {
         textAlign: 'center',
         fontSize: 20,
-        margin: 10,
+        marginTop: 15,
         // backgroundColor: COLORS.darkBlue
 
     }

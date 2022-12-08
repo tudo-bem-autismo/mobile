@@ -50,20 +50,20 @@ export const getHistoryTask = async (idDependent, period) => {
 
         const success = result.status === 200
 
-        result.data.map((task) =>{
+        result.data.map((task) => {
             const fullDate = task.data.split('T')
             const date = fullDate[0].split('-')
             const time = fullDate[1].split(':')
 
-            task.data = date[2] + '/' + date[1] + '/' + date[0] + ' ' + time[0] + ':' + time[1] 
+            task.data = date[2] + '/' + date[1] + '/' + date[0] + ' ' + time[0] + ':' + time[1]
         })
 
-        return{
+        return {
             success,
             data: result.data
         }
     }
-    catch(error){
+    catch (error) {
         showErrorToast(error.response.data)
         return {
             success: false,
@@ -208,7 +208,7 @@ export const updateTaskService = async (data) => {
 
         const result = await api.post("/tarefa", formattedData);
 
-        const success = result.status === 200
+        const success = result.status === 201
 
         return {
             success,

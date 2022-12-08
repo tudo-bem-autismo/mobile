@@ -7,7 +7,7 @@ import { getMedalsDependent } from '../../services/medal';
 import { GamesDependent } from '../GamesDependent';
 import { getReports } from '../../services';
 
-export function MedalScreen({route, navigation }) {
+export function MedalScreen({ route, navigation }) {
 
     const [isLoading, setIsLoading] = useState(true);
     // const [medals, setMedals] = useState([]);
@@ -36,18 +36,13 @@ export function MedalScreen({route, navigation }) {
 
 
     useEffect(() => {
-        if(medalha)
+        if (medalha)
             setIsLoading(false)
 
     }, [])
 
-    console.log(route.params)
-
-    let {nome, medalha} = route.params.data
-    let idGames = route.params.idGames
-    console.log(idGames, '----medal')
-
-
+    let { nome, medalha } = route.params.data
+    let { idGames } = route.params
 
     return (
         <>
@@ -55,20 +50,22 @@ export function MedalScreen({route, navigation }) {
                 <Loading />
             ) : (
                 <View style={styles.mainContainer}>
-                    <ButtonAlert />
+                    <ButtonAlert
+                        onPress={() => navigation.navigate('SupportButtonForKid')}
+                    />
                     <Text style={styles.text}>
                         Você ganhou uma {nome}!
                     </Text>
                     <View>
                         <Image
                             style={styles.medal}
-                            source={{ uri: medalha  }}
+                            source={{ uri: medalha }}
                         />
-                        
+
                     </View>
 
                     <TouchableOpacity
-                        onPress={() => {navigation.navigate('ScreenGames', {idGames} ) }}
+                        onPress={() => { navigation.navigate('ScreenGames', { idGames }) }}
                         style={styles.buttonPlay}
                     >
                         <Text style={styles.textPlay}>JOGAR DE NOVO</Text>
@@ -76,7 +73,7 @@ export function MedalScreen({route, navigation }) {
 
 
                     <TouchableOpacity
-                        onPress={() => navigation.navigate('GamesDependent')}
+                        onPress={() => navigation.navigate('TabsDependent')}
                         style={styles.buttonGoOut}
                     >
                         <Text style={styles.textGoOut}>SAIR</Text>

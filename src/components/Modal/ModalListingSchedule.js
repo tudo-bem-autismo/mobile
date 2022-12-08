@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Animated, Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Toast from "react-native-toast-message";
 
 import { MaterialIcons } from "@expo/vector-icons";
 import { COLORS, FONTS } from "../../assets/const";
@@ -52,13 +53,13 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
         const result = await deleteTaskService(idTask);
 
         if (result.success) {
-            // return Toast.show({
-            //     type: 'success',
-            //     text1: 'Sucesso!',
-            //     text2: 'Tarefa excluida com sucesso!'
-            // })
             setShowDeleteTaskModal(false)
-            close()
+            getTasks()
+            return Toast.show({
+                type: 'success',
+                text1: 'Sucesso!',
+                text2: 'Tarefa excluida com sucesso!'
+            })
         }
     }
 
@@ -161,7 +162,11 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
                                 showEditTaskModal && (
                                     <ModalEditTask
                                         idTask={selectedIdTask}
-                                        close={() => setShowEditTaskModal(false)}
+                                        close={() => {
+                                            getTasks()
+                                            setShowEditTaskModal(false)
+                                        }
+                                        }
                                     />
                                 )
 
@@ -267,7 +272,7 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
                                                                     source={notFoundTask} />
                                                             </View>
                                                         )
-                                                    } 
+                                                    }
 
 
                                                     <View style={style.cardInvisible}></View>
