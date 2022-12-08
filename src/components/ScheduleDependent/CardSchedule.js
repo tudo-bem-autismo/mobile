@@ -33,8 +33,8 @@ export const CardScheduleDependent = ({ title, hour, image, selected, onPress, i
 
                     <TouchableOpacity
                         onPress={() => onPress()}
-                        style={style.button}
-                        disabled={!isToday || selected}
+                        style={!isToday || selected ? style.doneButton : style.button}
+                    // disabled={!isToday || selected}
                     >
 
                         {
@@ -125,6 +125,11 @@ const style = StyleSheet.create({
         margin: 5,
         backgroundColor: COLORS.white,
 
+    },
+    doneButton: {
+        width: 30,
+        height: 30,
+        // backgroundColor: COLORS.pink,
     },
     blockedButton: {
         width: 30,

@@ -29,6 +29,9 @@ import { DependentProfile } from '../screens/DependentProfile';
 import { HomeDependent } from '../screens/HomeDependent';
 import { GamesDependent } from '../screens/GamesDependent';
 import { MedalScreen } from '../screens/MedalScreen';
+import { SupportButton } from '../screens/SupportButton';
+import { SupportButtonForKid } from '../screens/SupportButton/buttonAlertKid';
+import { SupportButtonManagement } from '../screens/SupportButton/buttonAlertManagement';
 
 
 const Stack = createNativeStackNavigator();
@@ -64,6 +67,10 @@ const Navigation = () => {
                 <Stack.Screen name="HomeDependent" component={HomeDependent} options={{ headerShown: false }} />
                 <Stack.Screen name="GamesDependent" component={GamesDependent} options={{ headerShown: false }} />
                 <Stack.Screen name="MedalScreen" component={MedalScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="SupportButton" component={SupportButton} options={{ headerShown: false }} />
+                <Stack.Screen name="SupportButtonForKid" component={SupportButtonForKid} options={{ headerShown: false }} />
+                <Stack.Screen name="SupportButtonManagement" component={SupportButtonManagement} options={{ headerShown: false }} />
+
 
             </Stack.Navigator>
         </NavigationContainer>

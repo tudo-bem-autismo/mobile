@@ -22,14 +22,34 @@ const styles = StyleSheet.create({
         height: '92%',
         marginBottom: 80,
         alignSelf: 'stretch',
-    },  
+    },
     dependentsContainer: {
         flex: 3,
-        // backgroundColor: COLORS.red,
+        // backgroundColor: COLORS.pink,
         flexDirection: 'row',
         alignItems: 'flex-end',
         paddingLeft: 20,
-        paddingBottom: 40,
+        marginBottom: 40,
+    },
+    noDependentsContainer: {
+        flex: 3,
+        // backgroundColor: COLORS.red,
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        // paddingLeft: 20,
+        // paddingBottom: 0,
+    },
+    noDependentsText: {
+        // backgroundColor: COLORS.pink,
+        marginTop: 20,
+        fontSize: 15,
+    },
+    noDependentsButton: {
+        height: 100,
+        // alignItems: 'flex-end',
+        // justifyContent: 'center',
+        alignSelf: 'stretch',
+        // backgroundColor: COLORS.pink,
     },
     // scroll:{
     //     width:'1%'

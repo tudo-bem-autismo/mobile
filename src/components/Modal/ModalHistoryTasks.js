@@ -89,7 +89,7 @@ export const ModalHistoryTasks = ({ close, idDependent, navigation }) => {
 
                     <Dependent
                         name={dependent.name}
-                        photo={{ uri: dependent.photo }}
+                        photo={dependent.photo}
                     />
 
                 </View>

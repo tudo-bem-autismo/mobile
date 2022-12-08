@@ -27,6 +27,10 @@ export const DependentListing = ({ navigation }) => {
 
     }
 
+    // useEffect(() => {
+    //     console.log(idDependents)
+    // }, [idDependents])
+
     useEffect(() => {
         getDependents()
         setIsLoading(false)
@@ -57,37 +61,41 @@ export const DependentListing = ({ navigation }) => {
 
                             <View style={style.selectedContainer}>
 
+                                <TouchableOpacity
+                                    style={style.addButton}
+                                    onPress={() => navigation.navigate('DependentRegister')}
+                                >
+                                    <Image
+                                        style={style.addIcon}
+                                        source={addIcon}
+                                    />
+                                    <Text style={style.textAddOption}>ADICIONAR</Text>
+                                </TouchableOpacity>
+
                                 <ScrollView style={style.scroll}
                                     horizontal={true}
                                 >
-                                    <TouchableOpacity
-                                        style={style.addButton}
-                                        onPress={() => navigation.navigate('DependentRegister')}
-                                    >
-                                        <Image
-                                            style={style.addIcon}
-                                            source={addIcon}
-                                        />
-                                        <Text style={style.textAddOption}>ADICIONAR</Text>
-                                    </TouchableOpacity>
-                                    {
-                                        dependents && dependents.map(item => (
-                                            <Dependent
-                                                name={item.name}
-                                                photo={{ uri: item.photo }}
-                                                key={item.id}
-                                                onPress={() => {
 
-                                                    setOption(true)
-                                                    setIdDependents(item.id)
+                                    <View style={style.dependentsContainer}>
 
-                                                }}
-                                            />
-                                        ))
-                                    }
+                                        {
+                                            dependents && dependents.map(item => (
+                                                <Dependent
+                                                    name={item.name}
+                                                    photo={item.photo}
+                                                    key={item.id}
+                                                    onPress={() => {
+
+                                                        setOption(true)
+                                                        setIdDependents(item.id)
+
+                                                    }}
+                                                />
+                                            ))
+                                        }
+                                    </View>
+
                                 </ScrollView>
-
-
 
                             </View>
 

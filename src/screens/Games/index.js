@@ -19,7 +19,6 @@ export const Games = ({ navigation }) => {
     const [selectedGameId, setSelectedGameId] = useState(null);
 
     const openGameModal = (gameId) => {
-        // console.log(gameId)
         setSelectedGameId(gameId)
         setShowModal(true)
     }
@@ -60,7 +59,7 @@ export const Games = ({ navigation }) => {
                                     games?.map(item => (
                                         <Game
                                             titleGame={item.name}
-                                            gifGame={{ uri: item.icon }}
+                                            gifGame={item.icon}
                                             key={item.id}
                                             onPress={() => openGameModal(item.id)}
                                         />

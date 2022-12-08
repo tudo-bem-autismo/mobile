@@ -3,7 +3,7 @@ import { getData } from "../utils/storage"
 import api from "./api"
 
 export const getGamesService = async () => {
-    
+
     try {
 
         const idResponsible = await getData('@id')
@@ -44,32 +44,32 @@ export const getGamesService = async () => {
     }
 }
 
-export const getGameKids = async () =>{
-    try{
+export const getGameKids = async () => {
+    try {
         const idKid = await getData('@idDependent')
 
         const result = await api.get(`minijogo/listagem/crianca/${idKid}`)
 
         const sucess = result.status === 200
 
-        const formattedData = result.data.map(item =>{
+        const formattedData = result.data.map(item => {
             return {
-                id:item.id,
-                name:item.nome,
-                icon:item.icone,
+                id: item.id,
+                name: item.nome,
+                icon: item.icone,
             }
         })
 
-        return{
+        return {
             sucess,
-            data:formattedData,
+            data: formattedData,
         }
-    }catch (error){
+    } catch (error) {
         // console.log(error)
 
         showErrorToast(error.response.data.message)
-        return{
-            success:false,
+        return {
+            success: false,
             data: error.response.data
         }
     }
@@ -79,7 +79,7 @@ export const getGameKids = async () =>{
 export const getGameByIdService = async (gameId) => {
     try {
 
-        const result = await api.get(`/minijogo/${gameId}`)
+        const result = await api.get(`/miniJogo/${gameId}`)
 
         const success = result.status === 200
 
@@ -94,11 +94,11 @@ export const getGameByIdService = async (gameId) => {
         return {
             success,
             data: formattedData,
-            data: data
+            // data: data
         }
 
     } catch (error) {
-        // console.log(error)
+        console.log(error)
         showErrorToast(error.response.data.message)
         return {
             success: false,
@@ -155,21 +155,21 @@ export const getStepGames = async (idGames) => {
 
     // console.log(idGames)
 
-    try{
+    try {
         const result = await api.get(`/miniJogo/${idGames}`)
         const data = result.data[0].tbl_situacao_escolha
         const success = result.status === 200
-        
-        return{
+
+        return {
             success,
             data: data
-        }        
+        }
     }
-    catch(error){
+    catch (error) {
         showErrorToast(error.response.data.message)
-        return{
-            success:false,
-            data:error.response.data
+        return {
+            success: false,
+            data: error.response.data
 
         }
     }

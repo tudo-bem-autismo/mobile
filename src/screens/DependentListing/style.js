@@ -25,9 +25,11 @@ const style = StyleSheet.create({
         justifyContent: 'center',
     },
     textContainer: {
-        flex: 1,
+        flex: .5,
         alignItems: 'center',
         justifyContent: 'center',
+        marginTop: 50,
+        // backgroundColor: COLORS.red
     },
     textSelect: {
         fontSize: 20,
@@ -35,14 +37,16 @@ const style = StyleSheet.create({
         color: COLORS.white
     },
     selectedContainer: {
-        flex: 4,
-        flexDirection: 'row',
-        alignItems: 'flex-start',
+        flex: 5,
+        alignItems: 'center',
         justifyContent: 'center',
-        padding: 10,
+        alignSelf: 'stretch',
+        // paddingLeft: '38%',
+        // backgroundColor: COLORS.red
     },
     addButton: {
-        padding: 10,
+        paddingBottom: 30,
+        // backgroundColor: COLORS.yellow
     },
     addIcon: {
         width: 90,
@@ -54,8 +58,18 @@ const style = StyleSheet.create({
         textAlign: 'center',
         marginTop: 5,
     },
-    scroll:{
-        width: 'auto'
+    scroll: {
+        // backgroundColor: COLORS.pink
+        // width: 'auto'
+    },
+    scrollContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    dependentsContainer: {
+        flexDirection: 'row',
+        // backgroundColor: COLORS.pink,
+        height: 150
     }
 
 });

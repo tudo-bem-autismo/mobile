@@ -12,11 +12,9 @@ export const taskRegisterService = async (data) => {
             id_crianca: data.selectedDependents
         }
 
-        console.log(formattedData);
-
         const result = await api.post("/tarefa", formattedData);
 
-        const success = result.status === 200
+        const success = result.status === 201
 
         return {
             success,

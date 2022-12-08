@@ -10,22 +10,14 @@ export const MainHeaderDependent = ({ screenName, navigation }) => {
     return (
         <View style={styles.headerContainer}>
 
-            {/* <TouchableOpacity 
-            style={styles.buttonMenu}
-            onPress={() => navigation.navigate('MenuDependent')}
-            >
-                <MaterialIcons
-                    name="notes"
-                    size={40}
-                    color="black"
-                />
-            </TouchableOpacity> */}
-
             <View style={styles.screenNameContainer}>
                 <Text style={styles.screenName}>{screenName}</Text>
             </View>
 
-            <TouchableOpacity style={styles.buttonAlert}>
+            <TouchableOpacity 
+            style={styles.buttonAlert}
+            onPress={() => navigation.navigate('SupportButtonForKid')}
+            >
                 <Image source={attackButton} />
             </TouchableOpacity>
         </View>
