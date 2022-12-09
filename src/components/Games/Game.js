@@ -15,7 +15,7 @@ export const Game = ({ titleGame, gifGame, onPress, navigation }) => {
 
                     <View style={styles.imageGameContainer}>
                         <Image
-                            source={{uri:gifGame}}
+                            source={{ uri: gifGame }}
                             resizeMode='cover'
                             style={styles.imageGame} />
                     </View>

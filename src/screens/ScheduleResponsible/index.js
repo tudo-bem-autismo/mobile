@@ -61,19 +61,40 @@ export const ScheduleResponsible = ({ navigation }) => {
                                 <ScrollView style={styles.scroll} horizontal={true}>
 
                                     {
-                                        dependents.map(item => (
-                                            <Dependent
-                                                name={item.name}
-                                                photo={item.photo}
-                                                key={item.id}
-                                                onPress={() => {
+                                        dependents.length ? (
 
-                                                    setIdDependent(item.id)
-                                                    setModalListingSchedule(true)
+                                            dependents.map(item => (
+                                                <Dependent
+                                                    name={item.name}
+                                                    photo={item.photo}
+                                                    key={item.id}
+                                                    onPress={() => {
 
-                                                }}
-                                            />
-                                        ))
+                                                        setIdDependent(item.id)
+                                                        setModalListingSchedule(true)
+
+                                                    }}
+                                                />
+                                            ))
+                                        ) : (
+                                            <View style={styles.noDependentsContainer}>
+
+                                                <Text style={styles.noDependentsText}>Não há criança cadastrada no momento</Text>
+
+                                                <View style={styles.noDependentsButton}>
+
+                                                    <Button
+                                                        label="CADASTRAR CRIANCA"
+                                                        backgroundColor={COLORS.white}
+                                                        borderRadius={25}
+                                                        width={200}
+                                                        height={45}
+                                                        onPress={() => navigation.navigate('DependentListing')}
+                                                    />
+                                                </View>
+
+                                            </View>
+                                        )
                                     }
                                 </ScrollView>
                             </View>

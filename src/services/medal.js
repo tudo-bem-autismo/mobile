@@ -8,23 +8,23 @@ export const getMedalsDependent = async () => {
 
     const idDependent = await getData('@idDependent')
 
-    const result = await api.get(`/premiacao/${id}`)
+    const result = await api.get(`/premiacao/${idDependent}`)
 
     const success = result.status === 200
-    
+
     const formattedData = result.data.map(item => {
       return {
-          id: item.id,
-          name: item.nome,
-          medal: item.medalha,
-          amount: item.quantidade
+        id: item.id,
+        name: item.nome,
+        medal: item.medalha,
+        amount: item.quantidade
       }
-  })
+    })
 
     return {
       success,
       data: formattedData
-    }   
+    }
 
 
   } catch (error) {

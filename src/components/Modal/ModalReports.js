@@ -80,26 +80,26 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
   const [selectedPeriod, setSelectedPeriod] = useState(1);
 
   const periods = [
-      {
-        "id": 1,
-        "value": 1,
-        "name": "Hoje"
-      },
-      {
-        "id": 2,
-        "value": 7,
-        "name": "7 - Dias "
-      },
-      {
-        "id": 3,
-        "value": 31,
-        "name": "31 - Dias"
-      },
-      {
-        "id": 4,
-        "value": 365,
-        "name": "365 - Dias"
-      },
+    {
+      "id": 1,
+      "value": 1,
+      "name": "Hoje"
+    },
+    {
+      "id": 2,
+      "value": 7,
+      "name": "7 - Dias "
+    },
+    {
+      "id": 3,
+      "value": 31,
+      "name": "31 - Dias"
+    },
+    {
+      "id": 4,
+      "value": 365,
+      "name": "365 - Dias"
+    },
 
   ]
 
@@ -109,7 +109,7 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
   const getKid = async () => {
     const result = await getResponsibleDependentsService();
     setKidName(result.data);
-   
+
   };
 
   const [games, setGames] = useState([]);
@@ -117,8 +117,8 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
   const getGames = async () => {
     const result = await getGamesService();
     setGames(result.data);
-  };        
-        
+  };
+
   useEffect(() => {
     if (show) {
       //gerarRelatorio();
@@ -153,7 +153,7 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
 
 
   const gerarRelatorio = async () => {
-    
+
     setChartIsLoading(true)
 
     const data = {
@@ -162,24 +162,24 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
       periodo: selectedPeriod
     }
 
-    
+
     // variaveis utilizadas para filtros, são passadas "?period=" chamadas como query params
     api.post(`/relatorio/listagem`, data).then(
-      
+
       (result) => {
 
         setData(result.data)
-        
-        
+
+
         const relatoryDays = result.data.map(item => format(new Date(item.data), "dd/MM/yyyy"))
-        
+
         const relatoryErrors = result.data.map(item => item.erros)
-        
+
         const relatoryHits = result.data.map(item => item.acertos)
 
 
-        //console.log(relatoryDays)
-        if (relatoryDays == '') {
+        // console.log(relatoryDays)
+        if (relatoryDays === '') {
           setMsgRelatorio('Não há relatório com estes dados')
           setChartIsLoading(false)
         } else {
@@ -188,16 +188,16 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
             errors: relatoryErrors,
             hits: relatoryHits
           })
-  
+
           close()
           setChartIsLoading(false)
         }
 
         // console.log(result.data)
 
-        
-        //setMsgRelatorio('Relátorio gerado com sucesso')
-       
+
+        // setMsgRelatorio('Relátorio gerado com sucesso')
+
       }
 
     ).catch(
@@ -337,7 +337,7 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
                           <Picker.Item
                             label={period.name}
                             value={period.value}
-                            key={period.id}/>
+                            key={period.id} />
                         ))
                       }
                       {/* <Picker.Item label="Hoje" value="0" />
@@ -350,7 +350,7 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
 
                 <View style={style.buttonContainer}>
                   <Text>{msgRelatorio}</Text>
-                  
+
                   <Button
                     label="GERAR"
                     backgroundColor={COLORS.pink}
@@ -361,7 +361,7 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
                       gerarRelatorio()
                     }}
                   />
-                 
+
                 </View>
               </View>
             </BlurView>

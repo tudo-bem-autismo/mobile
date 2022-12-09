@@ -194,7 +194,7 @@ export function ScreenGamesResponsible({ route, navigation }) {
 
                     <View style={{ ...styles.mainContainer, backgroundColor: currentGame.cor_fundo }}>
 
-                        <ButtonAlert />
+                        <View style={styles.header} />
 
                         {
                             currentGame.imagem_exemplo == null ? (
@@ -241,5 +241,9 @@ const styles = StyleSheet.create({
         position: 'relative',
         marginTop: StatusBar.currentHeight,
     },
+    header: {
+        flex: 1,
+
+    }
 
 });

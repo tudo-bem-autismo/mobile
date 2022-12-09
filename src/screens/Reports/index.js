@@ -25,7 +25,7 @@ export const Reports = ({ navigation }) => {
 
   const [options, setOptions] = useState({});
 
-  const [chartIsLoading, setChartIsLoading] = useState(false);
+  const [chartIsLoading, setChartIsLoading] = useState(true);
 
   const updateChart = (values) => {
 
@@ -104,6 +104,7 @@ export const Reports = ({ navigation }) => {
     }
 
     setOptions(chartOptions)
+    setChartIsLoading(false)
     setRenderRelatory(true)
   }
 
@@ -128,10 +129,15 @@ export const Reports = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <MainHeader screenName={"RELATÓRIOS DOS JOGOS"} navigation={navigation}/>
+      <MainHeader screenName={"RELATÓRIOS DOS JOGOS"} navigation={navigation} />
 
       <View style={styles.reportsContainer}>
-        {chartIsLoading ? (<Loading />) : renderRelatory && (
+        {chartIsLoading ? (
+          <Image
+            style={styles.image}
+            source={reports}
+          />
+        ) : renderRelatory && (
           <View style={{ width: "90%", flex: 1, marginBottom: '20%' }}>
             <SafeAreaView style={{ height: '220%', borderWidth: 1 }}>
               <ECharts
@@ -145,10 +151,6 @@ export const Reports = ({ navigation }) => {
 
 
         )}
-
-        <Image
-          style={styles.image}
-          source={reports} />
 
         <Button
           label={"GERAR RELATÓRIO"}

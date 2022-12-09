@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
         marginTop: StatusBar.currentHeight,
         backgroundColor:COLORS.yellowContainer,
         zIndex: 2,
+        // color: COLORS.blue
     },
     backButton:{
         margin:10,

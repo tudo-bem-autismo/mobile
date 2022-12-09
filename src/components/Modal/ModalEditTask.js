@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import Toast from "react-native-toast-message";
 
 import { MaterialIcons } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
@@ -141,18 +142,18 @@ export const ModalEditTask = ({ close, navigation, idTask }) => {
             alarmHour,
             selectedDays: selectedDaysIds,
             selectedDependents,
-            idIcon
+            idIcon,
+            idTask
         };
-
-        // console.log(newData)
 
         const result = await updateTaskService(newData)
 
         if (result.success) {
+            close()
             return Toast.show({
                 type: 'success',
                 text1: 'Sucesso!',
-                text2: 'Tarefa excluida com sucesso!'
+                text2: 'Tarefa atualizada com sucesso!'
             })
         }
 
@@ -193,7 +194,7 @@ export const ModalEditTask = ({ close, navigation, idTask }) => {
                                         <MaterialIcons
                                             name="close"
                                             size={40}
-                                            style={modalGaleryTasks ? style.invisibleCloseModalIcon : style.closeModalIcon}
+                                        // style={modalGaleryTasks ? style.invisibleCloseModalIcon : style.closeModalIcon}
 
                                         />
 
@@ -327,24 +328,27 @@ export const ModalEditTask = ({ close, navigation, idTask }) => {
 
                                     <View style={style.dependentsContainer}>
 
-                                        {
-                                            dependents.map(item => (
+                                        <ScrollView horizontal={true}>
 
-                                                <View
-                                                    style={selectDependentHasError ? style.hasErrorDependentButton : style.dependentButton}
-                                                    key={item.id}
-                                                >
+                                            {
+                                                dependents.map(item => (
 
-                                                    <Dependent
-                                                        name={item.name}
-                                                        photo={item.photo}
-                                                        selected={selectedDependents?.find(selectedDependent => selectedDependent === item.id)}
-                                                        onPress={() => manageDependents(item.id)}
-                                                    />
+                                                    <View
+                                                        style={selectDependentHasError ? style.hasErrorDependentButton : style.dependentButton}
+                                                        key={item.id}
+                                                    >
 
-                                                </View>
-                                            ))
-                                        }
+                                                        <Dependent
+                                                            name={item.name}
+                                                            photo={item.photo}
+                                                            selected={selectedDependents?.find(selectedDependent => selectedDependent === item.id)}
+                                                            onPress={() => manageDependents(item.id)}
+                                                        />
+
+                                                    </View>
+                                                ))
+                                            }
+                                        </ScrollView>
 
                                     </View>
 
@@ -399,15 +403,11 @@ const style = StyleSheet.create({
         // backgroundColor: COLORS.white
     },
     headerContainer: {
-        position: 'absolute',
-        left: 285,
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-end',
         alignSelf: 'stretch',
         flexDirection: 'row',
-        paddingLeft: 15,
-        // zIndex: 5,
-        // paddingRight: 20,
+        paddingRight: 15,
         // backgroundColor: COLORS.darkBlue
     },
     textTitle: {
@@ -498,6 +498,7 @@ const style = StyleSheet.create({
     dependentsContainer: {
         flexDirection: 'row',
         marginLeft: 10,
+        width: 220
         // backgroundColor: COLORS.red
     },
     dependentButton: {
@@ -581,7 +582,7 @@ const style = StyleSheet.create({
     closeModalIcon: {
         width: 50,
         height: 50,
-        // backgroundColor: COLORS.red,
+        backgroundColor: COLORS.red,
     }
 });
 

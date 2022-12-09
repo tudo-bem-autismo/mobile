@@ -7,11 +7,19 @@ export const PlayButton = ({ onPress }) => {
     return (
         <TouchableOpacity
             style={style.button}
-            onPress={()=> onPress()}
+            onPress={() => onPress()}
         >
             <Text style={style.text}>JOGAR</Text>
         </TouchableOpacity>
     )
+}
+
+const bottomShadow = {
+    shadowOffset: { width: 0, height: 0, },
+    shadowColor: 'black',
+    shadowOpacity: 1,
+    shadowRadius: 5,
+    elevation: 5,
 }
 
 const style = StyleSheet.create({
@@ -26,7 +34,8 @@ const style = StyleSheet.create({
         justifyContent: 'center',
         position: 'absolute',
         right: '35%',
-        bottom: 0
+        bottom: 0,
+        ...bottomShadow
     },
     text: {
         textAlign: 'center'

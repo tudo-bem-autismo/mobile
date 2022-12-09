@@ -97,12 +97,12 @@ export function ScreenGames({ route, navigation }) {
 
         if (result.data.medalha) {
 
-            await navigation.navigate('MedalScreen', {
+            navigation.navigate('MedalScreen', {
                 ...result,
                 idGames
             })
         } else {
-            await navigation.navigate('CongratulationsScreen', { idGames })
+            navigation.navigate('CongratulationsScreen', { idGames })
         }
 
         // setIsLoading(true)
@@ -110,7 +110,7 @@ export function ScreenGames({ route, navigation }) {
         setTimeout(() => {
             clearGame()
 
-        }, 1000)
+        }, 500)
         // setIsLoading(tur)
 
     }
@@ -222,6 +222,7 @@ export function ScreenGames({ route, navigation }) {
                 game && currentGame && (
 
                     <View style={{ ...styles.mainContainer, backgroundColor: currentGame.cor_fundo }}>
+                    {/* <View style={{ ...styles.mainContainer}}> */}
 
                         <ButtonAlert
                             onPress={() => navigation.navigate('SupportButtonForKid')}
@@ -266,11 +267,13 @@ export function ScreenGames({ route, navigation }) {
 const styles = StyleSheet.create({
     mainContainer: {
         display: 'flex',
-        flex: 1,
+        // flex: 1,
+        height:'100%',
+        width:'100%',
         alignItems: 'center',
         justifyContent: 'center',
-        position: 'relative',
+        // position: 'relative',
         marginTop: StatusBar.currentHeight,
-    },
-
+        // backgroundColor: COLORS.gray
+    }
 });

@@ -75,8 +75,8 @@ export const ModalLogOutAccount = ({ label, close, show, handleLogout }) => {
                             backgroundColor={COLORS.white}
                             borderRadius={15}
                             onPress={handleLogout}
-                            width={55}
-                            height={30}
+                            width={70}
+                            height={40}
                         />
                     </View>
                 </View>

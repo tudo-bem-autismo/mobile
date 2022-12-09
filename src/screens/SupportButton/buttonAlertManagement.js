@@ -16,7 +16,7 @@ export const SupportButtonManagement = ({ navigation, route }) => {
 
     let {idDependents} = route.params;
 
-    console.log(idDependents);
+    // console.log(idDependents);
 
     const [modal, setModal] = useState(false);
 
@@ -57,7 +57,7 @@ export const SupportButtonManagement = ({ navigation, route }) => {
 
     const getDependents = async () => {
         const result = await getButtonSupportDependent(idDependents)
-        console.log(result)
+        // console.log(result)
         const file = result.data
         
         const images = file.filter(item => item.tipoMidia === 'Imagens')
