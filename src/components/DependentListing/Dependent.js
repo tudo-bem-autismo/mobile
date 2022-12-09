@@ -1,7 +1,7 @@
 import React from "react";
-import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-import { COLORS, FONTS } from "../../assets/const";
+import { FONTS } from "../../assets/const";
 
 export const Dependent = ({ name, photo, onPress, selected }) => {
 

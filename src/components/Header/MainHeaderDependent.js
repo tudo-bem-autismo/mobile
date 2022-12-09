@@ -1,4 +1,3 @@
-import { MaterialIcons } from '@expo/vector-icons';
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { COLORS } from '../../assets/const';
@@ -6,7 +5,7 @@ import { COLORS } from '../../assets/const';
 import attackButton from '../../assets/icons/botao-crise.png';
 
 export const MainHeaderDependent = ({ screenName, navigation }) => {
-
+    1
     return (
         <View style={styles.headerContainer}>
 
@@ -14,9 +13,9 @@ export const MainHeaderDependent = ({ screenName, navigation }) => {
                 <Text style={styles.screenName}>{screenName}</Text>
             </View>
 
-            <TouchableOpacity 
-            style={styles.buttonAlert}
-            onPress={() => navigation.navigate('SupportButtonForKid')}
+            <TouchableOpacity
+                style={styles.buttonAlert}
+                onPress={() => navigation.navigate('SupportButtonForKid')}
             >
                 <Image source={attackButton} />
             </TouchableOpacity>

@@ -1,25 +1,13 @@
 import { BlurView } from 'expo-blur';
 import React, { useEffect, useState } from "react";
-import { Animated, Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Animated, Dimensions, StyleSheet, Text, View } from "react-native";
 
 import { MaterialIcons } from "@expo/vector-icons";
-import Toast from "react-native-toast-message";
 import { COLORS, FONTS } from "../../assets/const";
 import { Loading } from "../../screens/Loading";
-import { getResponsibleDependentsService } from "../../services";
-import { getGameByIdService, getGamesService } from "../../services/game";
-import { createDependentRestrictionsService, deleteDependentRestrictionsService } from "../../services/restriction";
-import { Button } from "../Button";
-import { PlayButton } from "../Button/PlayButton";
-import { Dependent } from "../DependentListing";
-import { Game } from "../Games/Game";
 import { TaskSchedule } from '../ScheduleResponsible/TaskSchedule';
 
-import wake from '../../assets/images/wake.png';
-import brushingTeeth from '../../assets/images/brushingTeeth.png';
-import washHands from '../../assets/images/washHands.png';
-import studying from '../../assets/images/studying.png';
-import { getIconsTasksService, getTasksService } from '../../services/task';
+import { getIconsTasksService } from '../../services/task';
 
 const { height } = Dimensions.get('window')
 
@@ -36,7 +24,6 @@ export const ModalGaleryTasks = ({ close, show, setIdIcon, setImageTask, navigat
 
     useEffect(() => {
         getTasks()
-
     }, []);
 
     const selectedTask = (idTask) => {
@@ -152,14 +139,6 @@ export const ModalGaleryTasks = ({ close, show, setIdIcon, setImageTask, navigat
 
 }
 
-const bottomShadow = {
-    shadowOffset: { width: 0, height: 0, },
-    shadowColor: 'black',
-    shadowOpacity: 1,
-    shadowRadius: 5,
-    elevation: 5,
-}
-
 const style = StyleSheet.create({
     mainContainer: {
         width: '100%',
@@ -168,20 +147,16 @@ const style = StyleSheet.create({
         bottom: 340,
         alignItems: 'center',
         justifyContent: 'center',
-        // backgroundColor: COLORS.red
     },
     container: {
         width: '100%',
         height: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-        // backgroundColor: COLORS.blue
-
     },
     modalContainer: {
         height: '100%',
         width: '100%',
-        // backgroundColor: COLORS.blue
     },
     blurContainer: {
         position: 'absolute',
@@ -215,7 +190,6 @@ const style = StyleSheet.create({
         justifyContent: 'space-around',
         alignSelf: 'stretch',
         flexDirection: 'row',
-        // backgroundColor: COLORS.darkBlue
     },
     textTitle: {
         fontSize: 25,
@@ -224,8 +198,6 @@ const style = StyleSheet.create({
     },
     selectTasksContainer: {
         flex: 3,
-        // marginBottom: 10,
-        // backgroundColor: COLORS.red
     },
     tasksContainer: {
         flex: 3,
@@ -233,7 +205,6 @@ const style = StyleSheet.create({
         flexWrap: 'wrap',
         alignItems: 'center',
         justifyContent: 'center',
-        // backgroundColor: COLORS.red
     }
 
 });

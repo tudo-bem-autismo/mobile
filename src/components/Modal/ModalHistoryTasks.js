@@ -1,47 +1,45 @@
-import React, { useEffect, useState } from "react";
-import { View, StyleSheet, TouchableOpacity, Dimensions, Text, Image, ScrollView } from "react-native";
-import { FONTS, COLORS } from "../../assets/const";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
-import { Dependent } from "../DependentListing";
+import React, { useEffect, useState } from "react";
+import { Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { COLORS, FONTS } from "../../assets/const";
+import notFoundTask from '../../assets/images/notFoundTask.gif';
 import { getKidService } from "../../services";
 import { getHistoryTask } from "../../services/task";
+import { Dependent } from "../DependentListing";
 import { CardScheduleHistory } from "../ScheduleResponsible/CardScheduleHistory";
-import notFoundTask from '../../assets/images/notFoundTask.gif';
 
 const { height } = Dimensions.get('window')
 
 export const ModalHistoryTasks = ({ close, idDependent, navigation }) => {
 
-
     const [dependent, setDependent] = useState({});
 
-    const [completedTask, setCompletedTask] = useState() 
+    const [completedTask, setCompletedTask] = useState()
 
     const periods = [
         {
-          "id": 1,
-          "value": 1,
-          "name": "Hoje"
+            "id": 1,
+            "value": 1,
+            "name": "Hoje"
         },
         {
-          "id": 2,
-          "value": 7,
-          "name": "7 - Dias "
+            "id": 2,
+            "value": 7,
+            "name": "7 - Dias "
         },
         {
-          "id": 3,
-          "value": 31,
-          "name": "31 - Dias"
+            "id": 3,
+            "value": 31,
+            "name": "31 - Dias"
         },
         {
-          "id": 4,
-          "value": 365,
-          "name": "365 - Dias"
+            "id": 4,
+            "value": 365,
+            "name": "365 - Dias"
         },
-  
-    ]
 
+    ]
 
     const getDependent = async () => {
         const result = await getKidService(idDependent);
@@ -50,14 +48,11 @@ export const ModalHistoryTasks = ({ close, idDependent, navigation }) => {
 
     useEffect(() => {
         getDependent();
-        
-
     }, []);
 
     const handleSelectedPeriod = (value) => {
-
         getHistory(value)
-    } 
+    }
 
     const getHistory = async (period) => {
         const result = await getHistoryTask(idDependent, period)
@@ -144,15 +139,15 @@ export const ModalHistoryTasks = ({ close, idDependent, navigation }) => {
                                     hour={item.data}
                                     key={item.id}
                                 />
-                            )) : 
-                            (
-                                <View style={style.notFoundCard}>
-                                    <Text style={style.textNotFoundCard}>Nenhuma tarefa encontrada</Text>
-                                    <Image
-                                        style={style.imageNotFoundCard}
-                                        source={notFoundTask} />
-                                </View>
-                            )
+                            )) :
+                                (
+                                    <View style={style.notFoundCard}>
+                                        <Text style={style.textNotFoundCard}>Nenhuma tarefa encontrada</Text>
+                                        <Image
+                                            style={style.imageNotFoundCard}
+                                            source={notFoundTask} />
+                                    </View>
+                                )
                         }
 
 
@@ -166,15 +161,6 @@ export const ModalHistoryTasks = ({ close, idDependent, navigation }) => {
         </View>
     );
 
-}
-
-
-const bottomShadow = {
-    shadowOffset: { width: 0, height: 0, },
-    shadowColor: 'black',
-    shadowOpacity: 1,
-    shadowRadius: 5,
-    elevation: 5,
 }
 
 const style = StyleSheet.create({
@@ -205,10 +191,8 @@ const style = StyleSheet.create({
         top: -100,
         marginTop: 20,
         flexDirection: 'row',
-        // backgroundColor: COLORS.red,
     },
     backButton: {
-        // backgroundColor: COLORS.red,
         flexDirection: 'row',
         alignItems: 'center',
         marginRight: 40,
@@ -219,12 +203,11 @@ const style = StyleSheet.create({
 
     },
     dependentContainer: {
-        // backgroundColor: COLORS.pink,
+
     },
     listingContainer: {
         flex: 1,
         marginTop: 70,
-        // backgroundColor: COLORS.white,
         alignSelf: 'stretch'
     },
     selectedDayButton: {
@@ -241,7 +224,6 @@ const style = StyleSheet.create({
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: COLORS.white,
     },
     dayButton: {
         flex: 1,
@@ -257,12 +239,9 @@ const style = StyleSheet.create({
         height: '65%',
     },
     tasksContainer: {
-        // paddingBottom: 50,
-        // backgroundColor: COLORS.yellowBold
+
     },
     cardsContainer: {
-        // backgroundColor: COLORS.red
-        // height:'30%'
 
     },
     cardInvisible: {
@@ -271,7 +250,7 @@ const style = StyleSheet.create({
         marginTop: 20,
     },
     periodDate: {
-        width:'90%',
+        width: '90%',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 5,
@@ -295,7 +274,6 @@ const style = StyleSheet.create({
         height: 300,
         alignItems: 'center',
         justifyContent: 'center',
-        // backgroundColor: COLORS.red
     },
     textNotFoundCard: {
         fontFamily: FONTS.text,
@@ -305,7 +283,6 @@ const style = StyleSheet.create({
     imageNotFoundCard: {
         width: '50%',
         height: '50%',
-        // backgroundColor: COLORS.purple
     }
 });
 

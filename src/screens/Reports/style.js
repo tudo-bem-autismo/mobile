@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
     image: {
         width: 300,
         height: 200,
-        // backgroundColor: COLORS.red
         position: 'absolute',
         top: 150
     },

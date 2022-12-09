@@ -1,4 +1,3 @@
-import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { COLORS } from "../../assets/const";

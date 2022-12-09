@@ -53,7 +53,7 @@ export const FormLogin = ({ navigation }) => {
                                 title="Email"
                                 iconName="envelope"
                                 placeholder="exemplo@gmail.com"
-                                borderColor={COLORS.pink}
+                                borderColor={COLORS.pinkBold}
                                 onChangeText={handleChange('email')}
                                 onBlur={handleBlur('email')}
                                 value={values.email}
@@ -64,7 +64,7 @@ export const FormLogin = ({ navigation }) => {
                             <PasswordInput
                                 title="Senha"
                                 placeholder="com no mínimo 4 caracteres"
-                                borderColor={COLORS.yellow}
+                                borderColor={COLORS.yellowBold}
                                 onChangeText={handleChange('password')}
                                 onBlur={handleBlur('password')}
                                 value={values.password}
@@ -96,8 +96,8 @@ const styles = StyleSheet.create({
         flex: 3,
     },
     inputsContainer: {
-        flex: 8,
-        marginBottom: 2
+        flex: 3,
+        marginBottom: 2,
     },
 
 });

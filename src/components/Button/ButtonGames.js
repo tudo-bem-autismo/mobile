@@ -1,26 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, onclick } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { COLORS, FONTS } from '../../assets/const';
 
-import { getStepGames } from '../../services';
 
 export const ButtonGames = ({ backgroundColor, borderRadius, widht, height, labelButton, color, onPress = () => { } }) => {
-
-    // const [passo1, setPasso1] = useState('');
-    // const [passo2, setPasso2] = useState('');
-    // const [cor, setCor] = useState('');
-
-    // const getPassos = async () =>{
-    //     const result = await getStepGames()
-    //     setPasso1(result.data.passo1)
-    //     setPasso2(result.data.passo2)
-    //     setCor(result.data.corBotao)
-    // }
-    // useEffect(() =>{
-    //     getPassos()
-    // }, [])
-
 
     return (
 
@@ -52,7 +36,6 @@ const bottomShadow = {
 const styles = StyleSheet.create({
 
     container: {
-        // flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
@@ -60,7 +43,6 @@ const styles = StyleSheet.create({
         left: 0,
         width: 200,
         height: 50,
-        // zIndex: 10,
         backgroundColor: COLORS.red,
     },
     buttonGames: {
@@ -72,9 +54,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginBottom: '450%',
         marginRight: '90%',
-        // position: 'relative',
-        // top: 100,
-        // right: 400,
         zIndex: 2,
         ...bottomShadow
     },

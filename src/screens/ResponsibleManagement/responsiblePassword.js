@@ -3,7 +3,6 @@ import { useState } from "react";
 import { ImageBackground, Text, View } from "react-native";
 import Toast from 'react-native-toast-message';
 
-
 import { BackButton, Button, PasswordInput } from "../../components";
 import style from "./style.js";
 

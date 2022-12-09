@@ -11,13 +11,10 @@ import { Input, MaskedInput } from "../Input";
 export const PersonalDataForm = ({ nextFormPage, setResponsibleData, navigation }) => {
 
     const handleForm = async (data) => {
-
         setResponsibleData(data)
         nextFormPage()
-
     }
 
-    // Todos os campos irão iniciar com esses valores, ou seja, vazios
     const initialValues = {
         name: '',
         phone: '',
@@ -28,15 +25,10 @@ export const PersonalDataForm = ({ nextFormPage, setResponsibleData, navigation 
         <View style={styles.formContainer}>
 
             <Formik
-                // Informa como deve ser o formato dos dados
                 validationSchema={responsibleRegisterPersonalDataSchema}
-                // Informa com quais dados o formulário irá iniciar
                 initialValues={initialValues}
-                // Evento de quando o formulário é enviado
-                // Ele recebe todos os dados dos inputs na variável "values"
                 onSubmit={values => handleForm(values)}
             >
-                {/* Mais propriedades do Formik para manipular o formulário */}
                 {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
                     <>
                         <View style={styles.inputsContainer}>
@@ -48,9 +40,7 @@ export const PersonalDataForm = ({ nextFormPage, setResponsibleData, navigation 
                                 onChangeText={handleChange('name')}
                                 onBlur={handleBlur('name')}
                                 value={values.name}
-                                // Propriedade para saber se existe algum erro de validação do campo, convertendo para booleano
                                 hasError={!!errors.name}
-                                // Mensagem de erro vinda do yup
                                 errorMessage={errors.name}
                             />
                             <MaskedInput

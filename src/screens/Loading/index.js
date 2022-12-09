@@ -3,8 +3,7 @@ import { Image, Text, View } from "react-native";
 
 import style from "./style";
 
-import loading from "../../assets/images/loading.gif"
-import chicken from "../../assets/images/chicken.gif"
+import loading from "../../assets/images/loading.gif";
 
 export const Loading = () => {
 

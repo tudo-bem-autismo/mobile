@@ -26,64 +26,71 @@ export const Games = ({ navigation }) => {
     const getGames = async () => {
         const result = await getGamesService()
         setGames(result.data)
+        setIsLoading(false)
+
     }
 
     useEffect(() => {
         getGames()
-        setIsLoading(false)
     }, [])
 
     return (
 
         <View style={styles.container}>
-            {isLoading ? (
-                <Loading />
-            ) : (
-                <>
-                    <MainHeader
-                        screenName="GERENCIAMENTO DOS JOGOS"
+            <>
+                <MainHeader
+                    screenName="GERENCIAMENTO DOS JOGOS"
+                    navigation={navigation}
+                />
+
+                <View style={styles.gamesContainer}>
+
+                    <Text style={styles.textSelectGame}>
+                        Selecione os jogos que estarão indisponíveis para seu filho(a)
+                    </Text>
+
+                    {
+                        !!isLoading ? (
+                            <Loading />
+                        ) : (
+
+                            <ScrollView style={styles.listGames}>
+
+                                <View style={styles.listGamesContainer}>
+
+                                    {
+                                        games?.map(item => (
+                                            <Game
+                                                titleGame={item.name}
+                                                gifGame={item.icon}
+                                                key={item.id}
+                                                onPress={() => openGameModal(item.id)}
+                                            />
+                                        ))
+
+
+                                    }
+
+                                    <View style={styles.invisibleCard}></View>
+
+                                </View>
+
+                            </ScrollView>
+
+                        )
+                    }
+                </View>
+
+                {showModal && (
+                    <ModalApplyChildGame
+                        close={() => setShowModal(false)}
+                        show={showModal}
+                        selectedGameId={selectedGameId}
+                        games={games}
                         navigation={navigation}
                     />
-
-                    <View style={styles.gamesContainer}>
-
-                        <Text style={styles.textSelectGame}>
-                            Selecione os jogos que estarão indisponíveis para seu filho(a)
-                        </Text>
-
-                        <ScrollView style={styles.listGames}>
-
-                            <View style={styles.listGamesContainer}>
-
-                                {
-                                    games?.map(item => (
-                                        <Game
-                                            titleGame={item.name}
-                                            gifGame={item.icon}
-                                            key={item.id}
-                                            onPress={() => openGameModal(item.id)}
-                                        />
-                                    ))
-                                }
-
-                                <View style={styles.invisibleCard}></View>
-
-
-                            </View>
-                        </ScrollView>
-                    </View>
-
-                    {showModal && (
-                        <ModalApplyChildGame
-                            close={() => setShowModal(false)}
-                            show={showModal}
-                            selectedGameId={selectedGameId}
-                            games={games}
-                            navigation={navigation}
-                        />
-                    )}
-                </>
-            )}
+                )}
+            </>
         </View>
 
     );

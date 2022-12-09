@@ -35,7 +35,6 @@ export const getGamesService = async () => {
         }
 
     } catch (error) {
-        // console.log(error)
         showErrorToast(error.response.data.message)
         return {
             success: false,
@@ -65,8 +64,6 @@ export const getGameKids = async () => {
             data: formattedData,
         }
     } catch (error) {
-        // console.log(error)
-
         showErrorToast(error.response.data.message)
         return {
             success: false,
@@ -94,7 +91,6 @@ export const getGameByIdService = async (gameId) => {
         return {
             success,
             data: formattedData,
-            // data: data
         }
 
     } catch (error) {
@@ -152,12 +148,11 @@ export const getGamesByResponsible = async () => {
 }
 
 export const getStepGames = async (idGames) => {
-
-    // console.log(idGames)
-
     try {
         const result = await api.get(`/miniJogo/${idGames}`)
+
         const data = result.data[0].tbl_situacao_escolha
+
         const success = result.status === 200
 
         return {

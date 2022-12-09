@@ -1,34 +1,24 @@
+import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import { BlurView } from "expo-blur";
+import * as ImagePicker from "expo-image-picker";
 import React, { useEffect, useState } from "react";
 import {
-  ImageBackground,
-  View,
-  StyleSheet,
-  TouchableOpacity,
   Animated,
-  Dimensions,
-  Text,
-  Image,
-  ScrollView,
-  ScrollViewBase
+  Dimensions, Image,
+  ScrollView, StyleSheet, Text, TouchableOpacity, View
 } from "react-native";
-import { BlurView } from "expo-blur";
-import { FONTS, COLORS } from "../../assets/const";
-import { BackButton, Button } from "../Button";
-import { MaterialIcons } from "@expo/vector-icons";
-import { Loading } from "../../screens/Loading";
-import { Picker } from "@react-native-picker/picker";
-import * as ImagePicker from "expo-image-picker";
-import { showErrorToast } from "../../utils/errors";
-import file from '../../assets/images/addIcon.png'
-import { colors } from "react-native-swiper-flatlist/src/themes";
-import { registerButtonSupport } from "../../services";
 import Toast from "react-native-toast-message";
-import { FontAwesome } from '@expo/vector-icons';
+import { COLORS } from "../../assets/const";
+import file from '../../assets/images/addIcon.png';
+import { Loading } from "../../screens/Loading";
+import { registerButtonSupport } from "../../services";
+import { Button } from "../Button";
 
 
 const { height } = Dimensions.get("window");
 
 export const ModalButtonSuport = ({ label, close, show, del, updateChart, setChartIsLoading, idCrianca }) => {
+
   const [isLoading, setIsLoading] = useState(true);
 
   const [image1, setImage1] = useState(null);
@@ -325,12 +315,7 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
 
     }
 
-
-
-
   }
-
-
 
   const [state, setState] = useState({
     opacity: new Animated.Value(0),
@@ -381,8 +366,6 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
 
   useEffect(() => {
     if (show) {
-      //gerarRelatorio();
-      //   gerarRelatorio();
       openModal();
       setIsLoading(false);
     } else {
@@ -486,8 +469,6 @@ export const ModalButtonSuport = ({ label, close, show, del, updateChart, setCha
 
                   </ScrollView>
 
-                  {/* </View> */}
-
                 </View>
 
 
@@ -522,19 +503,16 @@ const style = StyleSheet.create({
     left: 0,
     alignItems: "center",
     justifyContent: "center",
-    // backgroundColor: COLORS.red
   },
   container: {
     width: "100%",
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
-    // backgroundColor: COLORS.blue
   },
   modalContainer: {
     height: "100%",
     width: "100%",
-    // backgroundColor: COLORS.blue
   },
   blurContainer: {
     position: "absolute",
@@ -567,7 +545,6 @@ const style = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "stretch",
-    // backgroundColor: COLORS.pink
   },
   dependentsList: {
     flexDirection: "row",
@@ -578,7 +555,6 @@ const style = StyleSheet.create({
     justifyContent: "flex-start",
     alignSelf: "stretch",
     position: "relative",
-    // backgroundColor: COLORS.red
   },
   closeModalIconContainer: {
     flex: 1,
@@ -586,24 +562,18 @@ const style = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "stretch",
     paddingRight: 10,
-    // backgroundColor: COLORS.darkBlue
   },
   closeModalIcon: {
-    // flex: .5,
-    // margin: 5,
-    // backgroundColor: COLORS.blue
+
   },
   buttonContainer: {
     flex: 1.5,
-    // marginBottom: 5,
-    // backgroundColor: COLORS.darkBlue
   },
   text: {
     textAlign: "center",
     fontSize: 20,
     margin: 10,
     fontWeight: "bold",
-    // backgroundColor: COLORS.darkBlue
   },
   containerList: {
     flex: 1,
@@ -613,7 +583,6 @@ const style = StyleSheet.create({
   },
   picker: {
     width: 180,
-    //backgroundColor: COLORS.red
   },
   contentImg: {
     width: 140,

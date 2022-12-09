@@ -1,28 +1,25 @@
-import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, StatusBar} from 'react-native';
-import {COLORS} from '../../assets/const/colors';
+import React from 'react';
+import { StatusBar, StyleSheet, View } from 'react-native';
 import { ButtonImage } from '../../components/Button/ButtonImage';
-import { ButtonImageTwo } from '../Button/ButtonImageTwo';
 import { TextGamesTwo } from '../../components/TextGamesTwo';
+import { ButtonImageTwo } from '../Button/ButtonImageTwo';
 
-export const ComponentGamesTwo = ({firstStepImage, secondStepImage, firstStepText, correctStepFunction = () =>{}, incorrectStepFunction = ()=>{}, firstStepCorrect }) =>{
-    return(
-        <View style = {styles.mainContainer}>
+export const ComponentGamesTwo = ({ firstStepImage, secondStepImage, firstStepText, correctStepFunction = () => { }, incorrectStepFunction = () => { }, firstStepCorrect }) => {
+    return (
+        <View style={styles.mainContainer}>
             <ButtonImage
                 borderRadius={80}
                 widht={150}
                 height={149}
-                srcImage={firstStepImage}   
-                // onPress={() => { correctStepFunction() }}
-                onPress={()=>firstStepCorrect ? correctStepFunction() : incorrectStepFunction()  }
+                srcImage={firstStepImage}
+                onPress={() => firstStepCorrect ? correctStepFunction() : incorrectStepFunction()}
             />
             <ButtonImageTwo
                 borderRadius={80}
                 widht={150}
-                height={149}  
-                srcImage={secondStepImage}  
-                //onPress={()=>{incorrectStepFunction()}}    
-                onPress={()=>firstStepCorrect ?  incorrectStepFunction(): correctStepFunction()  }    
+                height={149}
+                srcImage={secondStepImage}
+                onPress={() => firstStepCorrect ? incorrectStepFunction() : correctStepFunction()}
             />
             <TextGamesTwo
                 labelText={firstStepText}
@@ -35,12 +32,11 @@ export const ComponentGamesTwo = ({firstStepImage, secondStepImage, firstStepTex
 const styles = StyleSheet.create({
     mainContainer: {
         display: 'flex',
-        flex:2,
-        alignItems:'center',
-        justifyContent:'center',
+        flex: 2,
+        alignItems: 'center',
+        justifyContent: 'center',
         position: 'relative',
         marginTop: StatusBar.currentHeight,
-        // backgroundColor:COLORS.purpleContainer,
     },
 
 });

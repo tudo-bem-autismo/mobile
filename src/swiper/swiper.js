@@ -1,6 +1,6 @@
-import React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
-import Swiper from 'react-native-swiper'
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import Swiper from 'react-native-swiper';
 
 import { Onboarding } from '../screens/Onboarding';
 import { OnboardingGames } from '../screens/OnboardingGames';

@@ -10,7 +10,6 @@ const shadow = {
   elevation: 20,
 }
 
-
 const style = StyleSheet.create({
   mainContainer: {
     display: 'flex',
@@ -18,14 +17,13 @@ const style = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'center',
     marginTop: StatusBar.currentHeight,
-    backgroundColor: COLORS.black,
   },
   background: {
     flex: 1,
     alignSelf: 'stretch',
   },
   formContainer: {
-    flex: 24,
+    flex: 30,
     alignSelf: 'stretch',
     backgroundColor: COLORS.white,
     borderTopLeftRadius: 50,

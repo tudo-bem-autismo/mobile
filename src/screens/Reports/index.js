@@ -1,24 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
-  Text,
-  TouchableOpacity,
-  View,
-  StyleSheet,
-  processColor,
-  SafeAreaView,
-  Image,
+  Image, SafeAreaView, View
 } from "react-native";
-import styles from "./style";
-import { MainHeader } from "../../components/Header/MainHeader";
-import { Button } from "../../components";
-import { COLORS } from "../../assets/const";
-import { ModalReports } from "../../components";
 import { ECharts } from "react-native-echarts-wrapper";
-import { LineChart } from "react-native-charts-wrapper";
-import { Loading } from "../Loading";
+import { COLORS } from "../../assets/const";
 import reports from "../../assets/images/reports.gif";
+import { Button, ModalReports } from "../../components";
+import { MainHeader } from "../../components/Header/MainHeader";
+import styles from "./style";
 
 export const Reports = ({ navigation }) => {
+
   const [modal, setModal] = useState(false);
 
   const [renderRelatory, setRenderRelatory] = useState(false);
@@ -143,13 +135,9 @@ export const Reports = ({ navigation }) => {
               <ECharts
                 option={options}
                 backgroundColor={COLORS.white}
-              //additionalCode={additionalCode}
-              //onData={onData}  
               />
             </SafeAreaView>
           </View>
-
-
         )}
 
         <Button

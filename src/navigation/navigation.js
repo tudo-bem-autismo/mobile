@@ -17,7 +17,6 @@ import { DependentManagement } from '../screens/DependentManagement';
 import { SalutationScreen } from '../screens/SalutationScreen';
 import { ScheduleResponsible } from '../screens/ScheduleResponsible';
 import { Games } from '../screens/Games';
-// import { RoutineResponsible } from '../screens/RoutineResponsible';
 import { ScreenGames } from '../screens/ScreenGames';
 import { ScreenGamesResponsible } from '../screens/ScreenGamesResponsible'
 import { CongratulationsScreen } from '../screens/CongratulationsScreen';

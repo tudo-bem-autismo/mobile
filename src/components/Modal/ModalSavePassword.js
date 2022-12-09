@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text } from "react-native";
+import { Animated, Dimensions, ImageBackground, StyleSheet, Text, View } from "react-native";
 
+import { COLORS, FONTS } from "../../assets/const";
 import modalBackground from '../../assets/images/modalBackground.png';
-import { FONTS, COLORS } from "../../assets/const";
 import { Button } from "../Button";
-
 
 const { height } = Dimensions.get('window')
 
@@ -58,7 +57,6 @@ export const ModalSavePasswordData = ({ label, close, show, password, navigation
                 }]}
             >
 
-                {/* <View style={style.modal}> */}
                 <ImageBackground
                     source={modalBackground}
                     style={style.modalBackground}
@@ -73,15 +71,6 @@ export const ModalSavePasswordData = ({ label, close, show, password, navigation
 
                         <View style={style.buttonsContainer}>
 
-                            {/* <View style={style.buttonContainer}>
-                            <TouchableOpacity
-                                onPress={close}
-                                style={{ ...style.button, backgroundColor: COLORS.purple }}
-                            >
-                                <Text>NÃO</Text>
-                            </TouchableOpacity>
-                        </View> */}
-
                             <Button
                                 label="NÃO"
                                 backgroundColor={COLORS.purple}
@@ -90,15 +79,6 @@ export const ModalSavePasswordData = ({ label, close, show, password, navigation
                                 height={40}
                                 onPress={close}
                             />
-
-                            {/* <View style={style.buttonContainer}>
-                            <TouchableOpacity
-                                onPress={() => navigation.navigate('Menu')}
-                                style={{ ...style.button, backgroundColor: COLORS.turquoise }}
-                            >
-                                <Text>SIM</Text>
-                            </TouchableOpacity>
-                        </View> */}
 
                             <Button
                                 label="SIM"
@@ -110,8 +90,8 @@ export const ModalSavePasswordData = ({ label, close, show, password, navigation
                             />
                         </View>
                     </View>
+
                 </ImageBackground>
-                {/* </View> */}
 
             </Animated.View>
         </Animated.View >
@@ -151,14 +131,12 @@ const style = StyleSheet.create({
         height: '50%',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        // backgroundColor: COLORS.darkBlue,
     },
     modalBackground: {
         width: '100%',
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: COLORS.gray
     },
     questionContainer: {
         flex: 1,
@@ -168,7 +146,6 @@ const style = StyleSheet.create({
         alignItems: 'center',
         marginTop: 40,
         top: 20,
-        // backgroundColor: COLORS.blue,
     },
     questionText: {
         fontSize: 25,
@@ -184,15 +161,12 @@ const style = StyleSheet.create({
         paddingHorizontal: 15,
         marginBottom: 100,
         margin: 5,
-        // backgroundColor: COLORS.purple,
     },
     buttonContainer: {
         flex: 2,
         alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'center',
-        // paddingBottom: 150,
-        // backgroundColor: COLORS.darkBlue,
     },
     button: {
         width: 100,

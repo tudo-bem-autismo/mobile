@@ -20,8 +20,9 @@ const styles = StyleSheet.create({
         flex: 1,
         alignSelf: 'stretch',
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'flex-end',
         justifyContent: 'center',
+        paddingBottom: 40,
     },
     loginQuestionText: {
         fontSize: 17,

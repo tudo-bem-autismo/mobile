@@ -1,25 +1,25 @@
-import React,{ useEffect, useState } from "react";
-import { format } from "date-fns";
 import * as ImagePicker from "expo-image-picker";
 import { Formik } from "formik";
+import React, { useEffect, useState } from "react";
 import {
   Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View
 } from "react-native";
-import Toast from "react-native-toast-message";
 
+import Toast from 'react-native-toast-message';
 import { COLORS } from "../../assets/const";
 import { Loading } from "../../screens/Loading";
 import { deleteKidService, getKidService } from "../../services/kid.js";
 import { kidRegisterDataSchema } from "../../utils/validations/dependent";
 import { Button } from "../Button/Button";
-import { DataInput, Input, InputGenero, MaskedInput } from "../Input";
+import { Input, InputGenero, MaskedInput } from "../Input";
 import { InputNivelAutismo } from "../Input/InputNivelAutismo";
 import { ModalDeleteData } from "../Modal/ModalDeleteData.js";
 import { ModalSaveData } from "../Modal/ModalSaveData.js";
 
+
 import backgroundManagement from '../../assets/images/backgroundKidManagement.png';
-import { BackButton } from "../Button";
 import { updateKidService } from "../../services";
+import { BackButton } from "../Button";
 
 
 export const FormManagementDependent = ({ navigation, idDependent }) => {
@@ -29,9 +29,6 @@ export const FormManagementDependent = ({ navigation, idDependent }) => {
   const [kid, setKid] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [genderId, setGenderId] = useState();
-  const initialValues = kid;
-  //const [date, setDate] = useState(new Date());
-  //const [dateHasError, setDateHasError] = useState(false);
   const [genderHasError, setGenderHasError] = useState(false);
   const [autismLevelId, setAutismLevelId] = useState();
   const [autismLevelHasError, setAutismLevelHasError] = useState(false);
@@ -41,16 +38,13 @@ export const FormManagementDependent = ({ navigation, idDependent }) => {
   const getKid = async () => {
     const result = await getKidService(idDependent);
     setKid(result.data);
-    //console.log(result.data.date);
-    //const data = result.data.date;
-    //console.log(data)
-    //const dataF = data.split("T")[0];
-    //setDate(new Date(result.data.date))
     setGenderId(result.data.genderId);
     setAutismLevelId(result.data.autismLevelId);
     setImage(result.data.photo)
     setIsLoading(false);
   };
+
+  const initialValues = kid;
 
   useEffect(() => {
     getKid();
@@ -93,16 +87,19 @@ export const FormManagementDependent = ({ navigation, idDependent }) => {
     };
 
     setShowModalSaveData(false)
-    //console.log(kid.photo)
+    setIsLoading(true)
+
     const result = await updateKidService(newData)
-    //console.log(newData)
+
 
     if (result.success) {
+      setIsLoading(false)
+      navigation.navigate('DependentListing')
       return Toast.show({
         type: 'success',
         text1: 'Dados atualizados com sucesso'
       });
-      //console.log('DEU CERTO')
+
     }
 
   };
@@ -110,10 +107,13 @@ export const FormManagementDependent = ({ navigation, idDependent }) => {
   const deleteKid = async () => {
 
     setShowModal(false)
+    setIsLoading(true)
 
     const result = await deleteKidService(idDependent)
 
     if (result.success) {
+      setIsLoading(false)
+      navigation.navigate('DependentListing')
       return Toast.show({
         type: 'success',
         text1: 'Criança deletada com sucesso',
@@ -134,6 +134,7 @@ export const FormManagementDependent = ({ navigation, idDependent }) => {
       setImage(result.uri);
     }
   };
+
 
   return (
     <View style={styles.mainContainer}>
@@ -199,15 +200,7 @@ export const FormManagementDependent = ({ navigation, idDependent }) => {
                       }}
                     />
 
-
                   </View>
-
-                  {/* <DataInput
-                    date={date}
-                    setDate={setDate}
-                    hasError={dateHasError}
-                    value={format(date, "dd/MM/yyyy")}
-                  /> */}
 
                   <InputGenero
                     setGenderId={setGenderId}
@@ -249,7 +242,6 @@ export const FormManagementDependent = ({ navigation, idDependent }) => {
                       close={() => setShowModal(false)}
                       show={showModal}
                       del={() => deleteKid()}
-                    //navigation={navigation}
                     />
                   </View>
                 )}
@@ -292,13 +284,12 @@ const styles = StyleSheet.create({
   },
   contentImg: {
     width: "30%",
-    borderRadius: 200,
-    height: "20%",
+    borderRadius: 10,
+    height: "18%",
     borderWidth: 1,
     borderColor: COLORS.black,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: COLORS.purple,
   },
   input: {
     alignItems: "center",
@@ -321,7 +312,7 @@ const styles = StyleSheet.create({
   },
   foto: {
     width: "100%",
-    borderRadius: 200,
+    borderRadius: 10,
     height: "100%",
   },
   background: {

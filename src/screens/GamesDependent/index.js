@@ -1,34 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import styles from './style';
-import { COLORS } from '../../assets/const';
+import { ScrollView, View } from 'react-native';
 import { Game } from '../../components/Games/Game';
-import { ModalApplyChildGame } from '../../components/Modal/ModalApplyChildGame';
-import { getGamesService } from '../../services/game';
-import { getGameKids } from '../../services/game';
-import { getGameByIdService } from '../../services/game';
-import { Loading } from '../Loading';
-import { ScreenGames } from '../ScreenGames';
 import { MainHeaderDependent } from '../../components/Header/MainHeaderDependent';
-import { getStepGames } from '../../services/game';
-import { getData } from '../../utils/storage';
+import { getGameKids } from '../../services/game';
+import { Loading } from '../Loading';
+import styles from './style';
 
 export const GamesDependent = ({ navigation }) => {
 
     const [isLoading, setIsLoading] = useState(true);
+
     const [games, setGames] = useState([]);
-    // const [idGames, setIdGames] = useState(0)
 
     const getGames = async () => {
         const result = await getGameKids()
         setGames(result.data)
     }
+
     const openGame = (idGames) => {
-        //    setIdGames()
-
         navigation.navigate('ScreenGames', { idGames })
-
     }
+
     useEffect(() => {
         getGames()
         setIsLoading(false)

@@ -1,16 +1,13 @@
 
-import React, { useEffect, useState, useRef } from 'react';
-import { Image, ScrollView, Text, View, StyleSheet, TouchableOpacity, Modal } from 'react-native';
+import { Video } from 'expo-av';
+import React, { useEffect, useRef, useState } from 'react';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { COLORS, FONTS } from '../../assets/const';
-import { getButtonSupportDependent,} from '../../services';
-import { MainHeader } from '../../components/Header/MainHeader';
-import { Video, AVPlaybackStatus  } from 'expo-av';
+import { ModalButtonSuportForKid } from '../../components';
+import { getButtonSupportDependent } from '../../services';
 import { Loading } from '../Loading';
-import { Dependent } from "../../components/DependentListing/Dependent";
 import styles from './style';
-import { ModalButtonSuportForKid }  from '../../components';
 
-import { FontAwesome } from '@expo/vector-icons';
 import { MainHeaderDependent } from '../../components/Header/MainHeaderDependent';
 
 export const SupportButtonForKid = ({ navigation }) => {
@@ -30,6 +27,7 @@ export const SupportButtonForKid = ({ navigation }) => {
     const [video, setVideo] = useState([]);
 
     const videoR = useRef(null);
+
     const [status, setStatus] = useState({});
 
     const getDependents = async () => {
@@ -57,7 +55,7 @@ export const SupportButtonForKid = ({ navigation }) => {
     return (
 
         <View style={styles.container}>
-             {isLoading ? (
+            {isLoading ? (
                 <Loading />
             ) : (
                 <>
@@ -67,78 +65,78 @@ export const SupportButtonForKid = ({ navigation }) => {
                     />
 
                     <View style={styles.gamesContainer}>
-                        <Text style={{fontSize: 18, marginBottom: 10, fontStyle: 'bold', left: '-35%'}}>IMAGENS</Text>
+                        <Text style={{ fontSize: 18, marginBottom: 10, fontStyle: 'bold', left: '-35%' }}>IMAGENS</Text>
                         <ScrollView
                             horizontal={true}
                             showsHorizontalScrollIndicator={false}
                             pagingEnabled={true}
-                            contentContainerStyle={{flexGrow : 1, justifyContent : 'center', alignItems: 'center', padding: 15}}
-                            style={{marginBottom: 0}}
-                            >
-                            
+                            contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center', padding: 15 }}
+                            style={{ marginBottom: 0 }}
+                        >
+
                             {
-                                image.map(item => (        
-                                    
-                                    <TouchableOpacity key={item.id} style={{alignItems: 'center', justifyContent: 'center', marginRight: 20, }}
-                                    onPress={() => getImage(item.midia,item.id)}>
-                                        <Image source={{uri: item.midia}} style={{width: 300, height: 240}} resizeMode='cover'/>
-                                        
+                                image.map(item => (
+
+                                    <TouchableOpacity key={item.id} style={{ alignItems: 'center', justifyContent: 'center', marginRight: 20, }}
+                                        onPress={() => getImage(item.midia, item.id)}>
+                                        <Image source={{ uri: item.midia }} style={{ width: 300, height: 240 }} resizeMode='cover' />
+
                                     </TouchableOpacity>
-                                    
-                                    
+
+
                                 ))
                             }
-                          </ScrollView>
+                        </ScrollView>
 
 
-                          <Text style={{fontSize: 18, marginBottom: 10, fontStyle: 'bold', left: '-35%'}}>VÍDEOS</Text>
-                        
-                          <ScrollView
-                                    horizontal={true}
-                                    showsHorizontalScrollIndicator={false}
-                                    pagingEnabled={true}
-                                    contentContainerStyle={{flexGrow : 1, justifyContent : 'center', alignItems: 'center', padding: 15}}
-                                    style={{marginVertical: 0}}
-                                    >
+                        <Text style={{ fontSize: 18, marginBottom: 10, fontStyle: 'bold', left: '-35%' }}>VÍDEOS</Text>
+
+                        <ScrollView
+                            horizontal={true}
+                            showsHorizontalScrollIndicator={false}
+                            pagingEnabled={true}
+                            contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center', padding: 15 }}
+                            style={{ marginVertical: 0 }}
+                        >
                             {
-                                video.map(item => (        
-                                    <View key={item.id} style={{backgroundColor: COLORS.black, alignItems: 'center', marginRight: 20}}>
+                                video.map(item => (
+                                    <View key={item.id} style={{ backgroundColor: COLORS.black, alignItems: 'center', marginRight: 20 }}>
                                         <Video
-                                        ref={videoR}
-                                        useNativeControls
-                                        source={{uri: item.midia}} style={{width: 240, height: 280}}
-                                        resizeMode="contain"
-                                        isLooping
-                                        onPlaybackStatusUpdate={status => setStatus(() => status)}/>
+                                            ref={videoR}
+                                            useNativeControls
+                                            source={{ uri: item.midia }} style={{ width: 240, height: 280 }}
+                                            resizeMode="contain"
+                                            isLooping
+                                            onPlaybackStatusUpdate={status => setStatus(() => status)} />
                                         <TouchableOpacity
                                             onPress={() => status.isPlaying ? videoR.current.pauseAsync() : video.current.playAsync()}
-                                            >
+                                        >
 
                                         </TouchableOpacity>
-                                        
 
 
-                                    
-                                    
-                                </View>
-                                
-                                    
+
+
+
+                                    </View>
+
+
                                 ))
                             }
-                          </ScrollView>
+                        </ScrollView>
 
 
-                       
+
 
 
                     </View>
-                    
+
                     {modal && (
                         <ModalButtonSuportForKid
-                        close={() => setModal(false)}
-                        midia={image1}
-                        idImg={idMidia}
-                        show={modal}
+                            close={() => setModal(false)}
+                            midia={image1}
+                            idImg={idMidia}
+                            show={modal}
                         />
                     )}
 
@@ -164,7 +162,7 @@ const style = StyleSheet.create({
         flex: 3,
         alignItems: 'center',
         justifyContent: 'center',
-        
+
     },
     button: {
         width: 200,

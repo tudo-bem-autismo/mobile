@@ -17,9 +17,9 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-      },
-      titleText: {
+    },
+    titleText: {
         fontSize: 30,
         fontFamily: FONTS.title,
-      },
+    },
 });

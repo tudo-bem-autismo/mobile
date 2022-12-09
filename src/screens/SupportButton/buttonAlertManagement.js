@@ -1,22 +1,19 @@
 
-import React, { useEffect, useState, useRef } from 'react';
-import { Image, ScrollView, Text, View, StyleSheet, TouchableOpacity, Modal } from 'react-native';
-import { COLORS, FONTS } from '../../assets/const';
-import { deleteMidiaButtonSupport, getButtonSupportDependent,} from '../../services';
-import { MainHeader } from '../../components/Header/MainHeader';
-import { Video, AVPlaybackStatus  } from 'expo-av';
-import { Loading } from '../Loading';
-import { Dependent } from "../../components/DependentListing/Dependent";
-import styles from './style';
-import { ModalButtonSuportImage, ModalDeleteData, ModalViewButtonSuport }  from '../../components';
 import { FontAwesome } from '@expo/vector-icons';
+import { Video } from 'expo-av';
+import React, { useEffect, useRef, useState } from 'react';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Toast from "react-native-toast-message";
+import { COLORS, FONTS } from '../../assets/const';
+import { ModalButtonSuportImage, ModalDeleteData } from '../../components';
+import { MainHeader } from '../../components/Header/MainHeader';
+import { deleteMidiaButtonSupport, getButtonSupportDependent } from '../../services';
+import { Loading } from '../Loading';
+import styles from './style';
 
 export const SupportButtonManagement = ({ navigation, route }) => {
 
-    let {idDependents} = route.params;
-
-    console.log(idDependents);
+    let { idDependents } = route.params;
 
     const [modal, setModal] = useState(false);
 
@@ -37,29 +34,30 @@ export const SupportButtonManagement = ({ navigation, route }) => {
     const [video, setVideo] = useState([]);
 
     const videoR = useRef(null);
+
     const [status, setStatus] = useState({});
 
     const deleteVideo = async (id) => {
 
-    setModalDelete(false)
+        setModalDelete(false)
 
-    const result = await deleteMidiaButtonSupport(id)
+        const result = await deleteMidiaButtonSupport(id)
 
-    if (result.success) {
-        return Toast.show({
-            type: 'success',
-            text1: 'Vídeo deletado com sucesso',
-        });
-    }
-       
-    
+        if (result.success) {
+            return Toast.show({
+                type: 'success',
+                text1: 'Vídeo deletado com sucesso',
+            });
+        }
+
+
     }
 
     const getDependents = async () => {
         const result = await getButtonSupportDependent(idDependents)
-        console.log(result)
+
         const file = result.data
-        
+
         const images = file.filter(item => item.tipoMidia === 'Imagens')
         setImage(images)
 
@@ -75,9 +73,7 @@ export const SupportButtonManagement = ({ navigation, route }) => {
     }
 
     const getVideo = (id) => {
-        
         setIdVideo(id)
-        
     }
 
     useEffect(() => {
@@ -88,7 +84,7 @@ export const SupportButtonManagement = ({ navigation, route }) => {
     return (
 
         <View style={styles.container}>
-             {isLoading ? (
+            {isLoading ? (
                 <Loading />
             ) : (
                 <>
@@ -99,96 +95,91 @@ export const SupportButtonManagement = ({ navigation, route }) => {
 
                     <View style={styles.gamesContainer}>
 
-                        {/* <Text style={styles.textSelectGame}>
-                        gerencie os arquivos das suas crianças
-                        </Text> */}
-
-                        <Text style={{fontSize: 18, marginBottom: 10, fontStyle: 'bold', left: '-35%'}}>IMAGENS</Text>
+                        <Text style={{ fontSize: 18, marginBottom: 10, fontStyle: 'bold', left: '-35%' }}>IMAGENS</Text>
                         <ScrollView
                             horizontal={true}
                             showsHorizontalScrollIndicator={false}
                             pagingEnabled={true}
-                            contentContainerStyle={{justifyContent : 'center', alignItems: 'center', padding: 15, }}
-                            >
+                            contentContainerStyle={{ justifyContent: 'center', alignItems: 'center', padding: 15, }}
+                        >
 
                             {
-                                image.map(item => (        
-                                    
-                                    <TouchableOpacity key={item.id} style={{alignItems: 'center', justifyContent: 'center', marginRight: 20, }}
-                                    onPress={() => getImage(item.midia,item.id)}>
-                                        <Image source={{uri: item.midia}} style={{width: 300, height: 240}}/>
-                                        
+                                image.map(item => (
+
+                                    <TouchableOpacity key={item.id} style={{ alignItems: 'center', justifyContent: 'center', marginRight: 20, }}
+                                        onPress={() => getImage(item.midia, item.id)}>
+                                        <Image source={{ uri: item.midia }} style={{ width: 300, height: 240 }} />
+
                                     </TouchableOpacity>
-                                    
-                                    
+
+
                                 ))
                             }
-                          </ScrollView>
-                        
-                          <Text style={{fontSize: 18, marginBottom: 10, fontStyle: 'bold', left: '-35%'}}>VÍDEOS</Text>
-                          <ScrollView
-                                    horizontal={true}
-                                    showsHorizontalScrollIndicator={false}
-                                    pagingEnabled={true}
-                                    contentContainerStyle={{justifyContent : 'center', alignItems: 'center', padding: 15,}}
-                                    style={{marginVertical: 0}}
-                                    >
+                        </ScrollView>
+
+                        <Text style={{ fontSize: 18, marginBottom: 10, fontStyle: 'bold', left: '-35%' }}>VÍDEOS</Text>
+                        <ScrollView
+                            horizontal={true}
+                            showsHorizontalScrollIndicator={false}
+                            pagingEnabled={true}
+                            contentContainerStyle={{ justifyContent: 'center', alignItems: 'center', padding: 15, }}
+                            style={{ marginVertical: 0 }}
+                        >
                             {
-                                video.map(item => (        
-                                    <View key={item.id} style={{backgroundColor: COLORS.black, alignItems: 'center', marginRight: 20}}>
+                                video.map(item => (
+                                    <View key={item.id} style={{ backgroundColor: COLORS.black, alignItems: 'center', marginRight: 20 }}>
                                         <Video
-                                        ref={videoR}
-                                        useNativeControls
-                                        source={{uri: item.midia}} style={{width: 200, height: 200}}
-                                        resizeMode="contain"
-                                        isLooping
-                                        onPlaybackStatusUpdate={status => setStatus(() => status)}/>
+                                            ref={videoR}
+                                            useNativeControls
+                                            source={{ uri: item.midia }} style={{ width: 200, height: 200 }}
+                                            resizeMode="contain"
+                                            isLooping
+                                            onPlaybackStatusUpdate={status => setStatus(() => status)} />
                                         <TouchableOpacity
                                             onPress={() => status.isPlaying ? videoR.current.pauseAsync() : video.current.playAsync()}
-                                            >
-                                            <TouchableOpacity onPress={() => {setModalDelete(true); getVideo(item.id)}}>
-                                            <FontAwesome style={{fontSize: 24, color: COLORS.white}} name="trash"/>
+                                        >
+                                            <TouchableOpacity onPress={() => { setModalDelete(true); getVideo(item.id) }}>
+                                                <FontAwesome style={{ fontSize: 24, color: COLORS.white }} name="trash" />
                                             </TouchableOpacity>
-                                            
+
                                         </TouchableOpacity>
-                                        
 
 
-                                    
-                                    
-                                </View>
-                                
-                                    
+
+
+
+                                    </View>
+
+
                                 ))
                             }
-                          </ScrollView>
+                        </ScrollView>
 
 
-                       
+
 
 
                     </View>
-                    
+
                     {modal && (
                         <ModalButtonSuportImage
-                        close={() => setModal(false)}
-                        midia={image1}
-                        idImg={idMidia}
-                        show={modal}
+                            close={() => setModal(false)}
+                            midia={image1}
+                            idImg={idMidia}
+                            show={modal}
                         />
                     )}
 
-            {modalDelete && (
-                  <View style={style.modalContainer}>
-                    <ModalDeleteData
-                      label="Tem certeza que quer excluir o vídeo?"
-                      close={() => setModalDelete(false)}
-                      show={modalDelete}
-                      del={() => deleteVideo(idVideo)}
-                      //navigation={navigation}
-                    />
-                  </View>
-                )}
+                    {modalDelete && (
+                        <View style={style.modalContainer}>
+                            <ModalDeleteData
+                                label="Tem certeza que quer excluir o vídeo?"
+                                close={() => setModalDelete(false)}
+                                show={modalDelete}
+                                del={() => deleteVideo(idVideo)}
+                            />
+                        </View>
+                    )}
 
                 </>
             )}
@@ -212,7 +203,7 @@ const style = StyleSheet.create({
         flex: 3,
         alignItems: 'center',
         justifyContent: 'center',
-        
+
     },
     button: {
         width: 200,
@@ -240,5 +231,5 @@ const style = StyleSheet.create({
         top: 0,
         left: 0,
         zIndex: 5,
-      },
+    },
 });

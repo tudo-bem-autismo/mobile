@@ -4,19 +4,16 @@ import { Image, ImageBackground, ScrollView, Text, TouchableOpacity, View } from
 import { Loading } from "../../screens/Loading";
 import style from "../../screens/ScheduleDependent/style";
 
-import brushingTeeth from '../../assets/images/brushingTeeth.png';
 import backgroundSchedule from '../../assets/images/backgroundScheduleDependent.png';
-import { CardSchedule } from "../../components/ScheduleResponsible/CardSchedule";
-import { ModalCongratulationsTask } from "../../components/Modal/ModalCongratulationsTask";
-import { MainHeaderDependent } from "../../components/Header/MainHeaderDependent";
+import notFoundTask from '../../assets/images/notFoundTask.gif';
 import { Dependent } from "../../components";
-import { getKidService } from "../../services";
-import { getData } from "../../utils/storage";
+import { MainHeaderDependent } from "../../components/Header/MainHeaderDependent";
+import { ModalCongratulationsTask } from "../../components/Modal/ModalCongratulationsTask";
 import { CardScheduleDependent } from "../../components/ScheduleDependent/CardSchedule";
+import { getKidService } from "../../services";
 import { getTasksService, taskIsDoneService } from "../../services/task";
 import { getTodayInitials } from "../../utils/date/days";
-import notFoundTask from '../../assets/images/notFoundTask.gif';
-
+import { getData } from "../../utils/storage";
 
 export const ScheduleDependent = ({ close, show, navigation }) => {
 

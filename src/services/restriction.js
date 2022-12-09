@@ -23,7 +23,6 @@ export const createDependentRestrictionsService = async (restrictions) => {
         }
 
     } catch (error) {
-        // console.log(error)
         showErrorToast(error.response.data.message)
         return {
             success: false,
@@ -48,7 +47,6 @@ export const deleteDependentRestrictionsService = async (restrictions) => {
 
 
     } catch (error) {
-        // console.log(error)
         showErrorToast(error.response.data.message)
         return {
             success: false,

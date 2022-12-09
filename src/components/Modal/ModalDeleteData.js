@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text } from "react-native";
+import { Animated, Dimensions, ImageBackground, StyleSheet, Text, View } from "react-native";
 
+import { COLORS, FONTS } from "../../assets/const";
 import modalBackground from '../../assets/images/modalBackground.png';
-import { FONTS, COLORS } from "../../assets/const";
 import { Button } from "../Button";
 
 
@@ -58,37 +58,37 @@ export const ModalDeleteData = ({ label, close, show, del }) => {
                 }]}
             >
 
-                {/* <View style={style.modal}> */}
-                    <ImageBackground
-                        source={modalBackground}
-                        style={style.modalBackground}
-                        resizeMode="cover"
-                    >
+                <ImageBackground
+                    source={modalBackground}
+                    style={style.modalBackground}
+                    resizeMode="cover"
+                >
 
-                        <View style={style.questionContainer}>
-                            <Text style={style.questionText}>{label}</Text>
-                        </View>
+                    <View style={style.questionContainer}>
+                        <Text style={style.questionText}>{label}</Text>
+                    </View>
 
-                        <View style={style.buttonsContainer}>
-                            <Button
-                                label="NÃO"
-                                backgroundColor={COLORS.purple}
-                                borderRadius={15} 
-                                width={80}
-                                height={40}
-                                onPress={close}
-                            />
-                            <Button
-                                label="SIM"
-                                backgroundColor={COLORS.turquoise}
-                                borderRadius={15}
-                                width={80}
-                                height={40}
-                                onPress={del}
-                            />
-                        </View>
-                    </ImageBackground>
-                {/* </View> */}
+                    <View style={style.buttonsContainer}>
+                        <Button
+                            label="NÃO"
+                            backgroundColor={COLORS.purple}
+                            borderRadius={15}
+                            width={80}
+                            height={40}
+                            onPress={close}
+                        />
+                        <Button
+                            label="SIM"
+                            backgroundColor={COLORS.turquoise}
+                            borderRadius={15}
+                            width={80}
+                            height={40}
+                            onPress={del}
+                        />
+                    </View>
+
+                </ImageBackground>
+
 
             </Animated.View>
         </Animated.View >
@@ -127,14 +127,12 @@ const style = StyleSheet.create({
         height: '50%',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        // backgroundColor: COLORS.darkBlue,
     },
     modalBackground: {
         width: '100%',
         height: '100%',
         justifyContent: 'center',
         alignItems: 'flex-end',
-        // backgroundColor: COLORS.gray
     },
     questionContainer: {
         flex: 1.5,
@@ -145,7 +143,6 @@ const style = StyleSheet.create({
         marginTop: 40,
         top: 20,
         left: 25,
-        //backgroundColor: COLORS.blue,
     },
     questionText: {
         fontSize: 25,
@@ -161,15 +158,12 @@ const style = StyleSheet.create({
         paddingHorizontal: 25,
         marginBottom: 100,
         margin: 15,
-        // backgroundColor: COLORS.purple,
     },
     buttonContainer: {
         flex: 2,
         alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'center',
-        // paddingBottom: 150,
-        // backgroundColor: COLORS.darkBlue,
     },
     button: {
         width: 100,

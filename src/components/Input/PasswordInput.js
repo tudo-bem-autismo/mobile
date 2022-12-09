@@ -21,7 +21,7 @@ export const PasswordInput = ({
 
             <Text style={styles.inputText}>{title}</Text>
 
-            <View>
+            <View style={styles.container}>
 
                 <TouchableOpacity
                     style={styles.iconButton}
@@ -61,6 +61,9 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         padding: 10,
         zIndex: 1,
+    },
+    container: {
+        backgroundColor: COLORS.white
     },
     icon: {
         position: 'absolute',

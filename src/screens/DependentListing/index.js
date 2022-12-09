@@ -22,14 +22,22 @@ export const DependentListing = ({ navigation }) => {
     const [idDependents, setIdDependents] = useState(0);
 
     const getDependents = async () => {
+
+        setIsLoading(true)
+
         const result = await getResponsibleDependentsService()
-        setDependents(result.data)
+
+        if (result.data) {
+            setDependents(result.data)
+            setIsLoading(false)
+        }
 
     }
 
-    // useEffect(() => {
-    //     console.log(idDependents)
-    // }, [idDependents])
+    useEffect(() => {
+        getDependents()
+        setIsLoading(false)
+    }, [dependents])
 
     useEffect(() => {
         getDependents()
@@ -61,22 +69,23 @@ export const DependentListing = ({ navigation }) => {
 
                             <View style={style.selectedContainer}>
 
-                                <TouchableOpacity
-                                    style={style.addButton}
-                                    onPress={() => navigation.navigate('DependentRegister')}
-                                >
-                                    <Image
-                                        style={style.addIcon}
-                                        source={addIcon}
-                                    />
-                                    <Text style={style.textAddOption}>ADICIONAR</Text>
-                                </TouchableOpacity>
 
                                 <ScrollView style={style.scroll}
                                     horizontal={true}
                                 >
 
                                     <View style={style.dependentsContainer}>
+
+                                        <TouchableOpacity
+                                            style={style.addButton}
+                                            onPress={() => navigation.navigate('DependentRegister')}
+                                        >
+                                            <Image
+                                                style={style.addIcon}
+                                                source={addIcon}
+                                            />
+                                            <Text style={style.textAddOption}>ADICIONAR</Text>
+                                        </TouchableOpacity>
 
                                         {
                                             dependents && dependents.map(item => (

@@ -1,6 +1,5 @@
 import React from "react";
-import { TouchableOpacity, StyleSheet, View, Image, Text } from "react-native";
-import { COLORS } from "../../assets/const";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export const TaskSchedule = ({ image, title, onPress }) => {
 
@@ -36,7 +35,6 @@ const style = StyleSheet.create({
         height: '25%',
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: COLORS.pink
     },
     taskButton: {
         justifyContent: 'center',
@@ -47,13 +45,10 @@ const style = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'stretch',
-        // backgroundColor: COLORS.purple
-
     },
     imageTask: {
         width: 55,
         height: 55,
-        // backgroundColor: COLORS.white
     },
     textTask: {
         flex: 1,

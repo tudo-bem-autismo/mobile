@@ -1,10 +1,9 @@
-import { isEqual } from "date-fns";
 import * as ImagePicker from "expo-image-picker";
 import { Formik } from "formik";
 import React, { useState } from "react";
 import {
   Image, StyleSheet,
-  TouchableOpacity, View, Text
+  TouchableOpacity, View
 } from "react-native";
 import Toast from "react-native-toast-message";
 
@@ -12,19 +11,15 @@ import Toast from "react-native-toast-message";
 
 import { COLORS } from "../../assets/const";
 import file from "../../assets/icons/file.png";
+import { Loading } from "../../screens/Loading";
 import { kidRegisterService } from "../../services/kid.js";
-import { getData, storeData } from "../../utils/storage";
+import { storeData } from "../../utils/storage";
 import { kidRegisterDataSchema } from "../../utils/validations/dependent";
 import { Button } from "../Button/Button";
-import { DataInput, Input, InputGenero, MaskedInput } from "../Input";
+import { Input, InputGenero, MaskedInput } from "../Input";
 import { InputNivelAutismo } from "../Input/InputNivelAutismo";
 
 export const FormDependentRegister = ({ navigation }) => {
-  //const now = new Date();
-
-  // const [date, setDate] = useState(now);
-
-  // const [dateHasError, setDateHasError] = useState(false);
 
   const [genderHasError, setGenderHasError] = useState(false);
 
@@ -36,12 +31,9 @@ export const FormDependentRegister = ({ navigation }) => {
 
   const [image, setImage] = useState(null);
 
-  const handleForm = async (data) => {
-    // if (isEqual(date, now)) {
-    //   setDateHasError(true);
+  const [isLoading, setIsLoading] = useState(false);
 
-    //   return;
-    // }
+  const handleForm = async (data) => {
 
     if (genderId === 0) {
       setGenderHasError(true);
@@ -55,7 +47,6 @@ export const FormDependentRegister = ({ navigation }) => {
       return;
     }
 
-    // setDateHasError(false);
     setGenderHasError(false);
     setAutismLevelHasError(false);
 
@@ -77,16 +68,19 @@ export const FormDependentRegister = ({ navigation }) => {
 
     const newData = {
       ...data,
-      //date,
       genderId,
       autismLevelId,
       photo,
     };
 
+    setIsLoading(true)
+
     const result = await kidRegisterService(newData);
 
     if (result.success) {
       await storeData(result.data.id, '@idDependent')
+      setIsLoading(false)
+      navigation.navigate('DependentListing')
       return Toast.show({
         type: "success",
         text1: "Criança cadastrada com sucesso",
@@ -116,93 +110,91 @@ export const FormDependentRegister = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={(values) => handleForm(values)}
-        validationSchema={kidRegisterDataSchema}
-      >
-        {/* Mais propriedades do Formik para manipular o formulário */}
-        {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
-          <>
-            <View style={styles.containerInputs}>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Formik
+          initialValues={initialValues}
+          onSubmit={(values) => handleForm(values)}
+          validationSchema={kidRegisterDataSchema}
+        >
+          {/* Mais propriedades do Formik para manipular o formulário */}
+          {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+            <>
+              <View style={styles.containerInputs}>
 
-              <TouchableOpacity style={styles.contentImg} onPress={pickImage}>
-                {image ?
-                  (<Image source={{ uri: image }} style={styles.foto} />) : (<Image source={file} style={styles.file} />)}
-              </TouchableOpacity>
+                <TouchableOpacity style={styles.contentImg} onPress={pickImage}>
+                  {image ?
+                    (<Image source={{ uri: image }} style={styles.foto} />) : (<Image source={file} style={styles.file} />)}
+                </TouchableOpacity>
 
-              <View style={styles.input}>
-                <Input
-                  title="Nome"
-                  iconName="user-circle-o"
-                  placeholder="seu nome completo"
-                  borderColor={COLORS.blue}
-                  onChangeText={handleChange("name")}
-                  onBlur={handleBlur("name")}
-                  value={values.name}
-                  hasError={!!errors.name}
-                  errorMessage={errors.name}
-                ></Input>
+                <View style={styles.input}>
+                  <Input
+                    title="Nome"
+                    iconName="user-circle-o"
+                    placeholder="seu nome completo"
+                    borderColor={COLORS.blue}
+                    onChangeText={handleChange("name")}
+                    onBlur={handleBlur("name")}
+                    value={values.name}
+                    hasError={!!errors.name}
+                    errorMessage={errors.name}
+                  ></Input>
+                </View>
+
+                <View style={styles.input}>
+                  <MaskedInput
+                    title="Data de Nascimento"
+                    iconName="calendar"
+                    placeholder="00/00/0000"
+                    borderColor={COLORS.blue}
+                    onChangeText={handleChange('date')}
+                    onBlur={handleBlur('date')}
+                    value={values.date}
+                    hasError={!!errors.date}
+                    errorMessage={errors.date}
+                    type={'datetime'}
+                    options={{
+                      format: 'DD/MM/YYYY'
+                    }}
+                  />
+                </View>
+
+                <InputGenero
+                  setGenderId={setGenderId}
+                  hasError={genderHasError}
+                />
+
+                <InputNivelAutismo
+                  setAutismLevelId={setAutismLevelId}
+                  hasError={autismLevelHasError}
+                />
+
+                <View style={styles.buttons}>
+
+                  <Button
+                    label="CANCELAR"
+                    backgroundColor={COLORS.purple}
+                    borderRadius={20}
+                    width={120}
+                    height={50}
+                    onPress={() => navigation.navigate('DependentListing')}
+                  />
+                  <Button
+                    label="CRIAR"
+                    backgroundColor={COLORS.blue}
+                    borderRadius={20}
+                    width={120}
+                    height={50}
+                    onPress={handleSubmit}
+                  />
+                </View>
               </View>
 
-              <View style={styles.input}>
-                <MaskedInput
-                  title="Data de Nascimento"
-                  iconName="calendar"
-                  placeholder="00/00/0000"
-                  borderColor={COLORS.blue}
-                  onChangeText={handleChange('date')}
-                  onBlur={handleBlur('date')}
-                  value={values.date}
-                  hasError={!!errors.date}
-                  errorMessage={errors.date}
-                  type={'datetime'}
-                  options={{
-                    format: 'DD/MM/YYYY'
-                  }}
-                />
-              </View>
-
-              {/* <DataInput
-                date={date}
-                setDate={setDate}
-                hasError={dateHasError}
-              /> */}
-
-              <InputGenero
-                setGenderId={setGenderId}
-                hasError={genderHasError}
-              />
-
-              <InputNivelAutismo
-                setAutismLevelId={setAutismLevelId}
-                hasError={autismLevelHasError}
-              />
-
-              <View style={styles.buttons}>
-
-                <Button
-                  label="CANCELAR"
-                  backgroundColor={COLORS.purple}
-                  borderRadius={20}
-                  width={120}
-                  height={50}
-                  onPress={() => navigation.navigate('DependentListing')}
-                />
-                <Button
-                  label="CRIAR"
-                  backgroundColor={COLORS.blue}
-                  borderRadius={20}
-                  width={120}
-                  height={50}
-                  onPress={handleSubmit}
-                />
-              </View>
-            </View>
-
-          </>
-        )}
-      </Formik>
+            </>
+          )}
+        </Formik>
+      )}
     </View>
   );
 };

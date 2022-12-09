@@ -1,30 +1,25 @@
+import { MaterialIcons } from "@expo/vector-icons";
+import { Picker } from "@react-native-picker/picker";
+import { format } from "date-fns";
+import { BlurView } from "expo-blur";
 import React, { useEffect, useState } from "react";
 import {
-  ImageBackground,
-  View,
-  StyleSheet,
-  TouchableOpacity,
   Animated,
-  Dimensions,
-  Text,
+  Dimensions, StyleSheet, Text, View
 } from "react-native";
-import { BlurView } from "expo-blur";
-import { FONTS, COLORS } from "../../assets/const";
-import { BackButton, Button } from "../Button";
-import { Picker } from "@react-native-picker/picker";
-import { MaterialIcons } from "@expo/vector-icons";
+import { COLORS } from "../../assets/const";
+import { Loading } from "../../screens/Loading";
 import styles from "../../screens/Reports/style";
 import { getResponsibleDependentsService } from "../../services";
-import { getGamesService } from "../../services/game";
-import { Loading } from "../../screens/Loading";
-import { getReports } from "../../services";
 import api from "../../services/api";
-import { format } from "date-fns";
+import { getGamesService } from "../../services/game";
+import { Button } from "../Button";
 
 
 const { height } = Dimensions.get("window");
 
 export const ModalReports = ({ label, close, show, del, updateChart, setChartIsLoading }) => {
+
   const [isLoading, setIsLoading] = useState(true);
 
   const [state, setState] = useState({
@@ -121,10 +116,8 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
 
   useEffect(() => {
     if (show) {
-      //gerarRelatorio();
       getGames();
       getKid();
-      //   gerarRelatorio();
       openModal();
       setIsLoading(false);
     } else {
@@ -134,23 +127,13 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
 
   const [error, setError] = useState([]);
 
-  // setErrorsKid(error);
-
   const [dateReports, setDateReports] = useState([]);
-
-  // setDateErrorsKid(dateReports);
 
   const [acerto, setAcerto] = useState([]);
 
-  // setAcertosKid(acerto);
-
-
-  //   const [result, setResult] = useState()
   const [data, setData] = useState()
 
   const [msgRelatorio, setMsgRelatorio] = useState('')
-
-
 
   const gerarRelatorio = async () => {
 
@@ -161,7 +144,6 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
       id_mini_jogo: selectedGame,
       periodo: selectedPeriod
     }
-
 
     // variaveis utilizadas para filtros, são passadas "?period=" chamadas como query params
     api.post(`/relatorio/listagem`, data).then(
@@ -177,8 +159,6 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
 
         const relatoryHits = result.data.map(item => item.acertos)
 
-
-        // console.log(relatoryDays)
         if (relatoryDays === '') {
           setMsgRelatorio('Não há relatório com estes dados')
           setChartIsLoading(false)
@@ -193,24 +173,16 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
           setChartIsLoading(false)
         }
 
-        // console.log(result.data)
-
-
-        // setMsgRelatorio('Relátorio gerado com sucesso')
-
       }
 
     ).catch(
 
       (e) => {
-        // console.log(e)
         setChartIsLoading(false)
       }
     )
 
   };
-
-
 
   useEffect(() => {
 
@@ -240,17 +212,10 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
       )
       setAcerto(acertos)
 
-
-
-
     } else {
-      // console.log('')
     }
 
   }, [data])
-
-
-
 
   return (
 
@@ -340,10 +305,6 @@ export const ModalReports = ({ label, close, show, del, updateChart, setChartIsL
                             key={period.id} />
                         ))
                       }
-                      {/* <Picker.Item label="Hoje" value="0" />
-                      <Picker.Item label="7 - Dias" value="7" />
-                      <Picker.Item label="31 - Dias" value="31" />
-                      <Picker.Item label="365 - Dias" value="365" /> */}
                     </Picker>
                   </View>
                 </View>
@@ -381,19 +342,16 @@ const style = StyleSheet.create({
     left: 0,
     alignItems: "center",
     justifyContent: "center",
-    // backgroundColor: COLORS.red
   },
   container: {
     width: "100%",
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
-    // backgroundColor: COLORS.blue
   },
   modalContainer: {
     height: "100%",
     width: "100%",
-    // backgroundColor: COLORS.blue
   },
   blurContainer: {
     position: "absolute",
@@ -426,7 +384,6 @@ const style = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "stretch",
-    // backgroundColor: COLORS.pink
   },
   dependentsList: {
     flexDirection: "row",
@@ -437,7 +394,6 @@ const style = StyleSheet.create({
     justifyContent: "flex-start",
     alignSelf: "stretch",
     position: "relative",
-    // backgroundColor: COLORS.red
   },
   closeModalIconContainer: {
     flex: 1,
@@ -445,24 +401,20 @@ const style = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "stretch",
     paddingRight: 10,
-    // backgroundColor: COLORS.darkBlue
   },
   closeModalIcon: {
-    // flex: .5,
-    // margin: 5,
-    // backgroundColor: COLORS.blue
+
   },
   buttonContainer: {
     flex: 1.5,
-    // marginBottom: 5,
-    // backgroundColor: COLORS.darkBlue
+
   },
   text: {
     textAlign: "center",
     fontSize: 20,
     margin: 10,
     fontWeight: "bold",
-    // backgroundColor: COLORS.darkBlue
+
   },
   containerList: {
     flex: 1,
@@ -472,6 +424,6 @@ const style = StyleSheet.create({
   },
   picker: {
     width: 180,
-    //backgroundColor: COLORS.red
+
   },
 });

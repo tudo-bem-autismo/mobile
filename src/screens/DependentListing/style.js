@@ -29,7 +29,6 @@ const style = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 50,
-        // backgroundColor: COLORS.red
     },
     textSelect: {
         fontSize: 20,
@@ -41,12 +40,10 @@ const style = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'stretch',
-        // paddingLeft: '38%',
-        // backgroundColor: COLORS.red
+        padding: 10,
     },
     addButton: {
-        paddingBottom: 30,
-        // backgroundColor: COLORS.yellow
+
     },
     addIcon: {
         width: 90,
@@ -59,16 +56,12 @@ const style = StyleSheet.create({
         marginTop: 5,
     },
     scroll: {
-        // backgroundColor: COLORS.pink
-        // width: 'auto'
-    },
-    scrollContainer: {
-        alignItems: 'center',
-        justifyContent: 'center',
+
     },
     dependentsContainer: {
         flexDirection: 'row',
-        // backgroundColor: COLORS.pink,
+        alignItems: 'center',
+        justifyContent: 'center',
         height: 150
     }
 

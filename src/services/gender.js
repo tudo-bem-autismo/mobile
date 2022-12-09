@@ -6,7 +6,6 @@ export const getGendersService = async () => {
 
         const result = await api.get('/genero')
 
-
         const sucess = result.status === 200
 
         const formattedData = result.data.map(item => {

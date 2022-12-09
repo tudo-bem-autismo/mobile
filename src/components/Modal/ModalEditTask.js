@@ -5,20 +5,20 @@ import Toast from "react-native-toast-message";
 
 import { MaterialIcons } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
+import { format } from "date-fns";
 import { Formik } from "formik";
 import { COLORS, FONTS } from "../../assets/const";
 import clock from '../../assets/icons/clock.png';
-import { DAYS_OFF_WEEK, DAYS_OFF_WEEK_EDIT, WEEKEND_DAYS, WORKING_DAYS } from '../../utils/date/days';
+import { Loading } from "../../screens/Loading";
+import { getResponsibleDependentsService } from "../../services";
+import { getDaysService } from "../../services/day";
+import { getTaskByIdService, updateTaskService } from "../../services/task";
+import { DAYS_OFF_WEEK, WEEKEND_DAYS, WORKING_DAYS } from '../../utils/date/days';
+import { scheduleEditTaskDataSchema } from "../../utils/validations/Schedule";
 import { Dependent } from "../DependentListing";
 import { Input } from "../Input";
 import { InputGaleryTasks } from "../Input/InputGaleryTasks";
 import { ModalGaleryTasks } from "./ModalGaleryTasks";
-import { getResponsibleDependentsService } from "../../services";
-import { getTaskByIdService, updateTaskService } from "../../services/task";
-import { Loading } from "../../screens/Loading";
-import { scheduleEditTaskDataSchema } from "../../utils/validations/Schedule";
-import { format } from "date-fns";
-import { getDaysService } from "../../services/day";
 
 
 const { height } = Dimensions.get('window')
@@ -72,8 +72,6 @@ export const ModalEditTask = ({ close, navigation, idTask }) => {
             idDay
         ])
 
-        // console.log(selectedDays);
-
     }
 
     const manageDependents = (idDependent) => {
@@ -90,8 +88,6 @@ export const ModalEditTask = ({ close, navigation, idTask }) => {
             ...selectedDependents,
             idDependent
         ])
-
-        // console.log(selectedDependents);
 
     }
 
@@ -193,8 +189,6 @@ export const ModalEditTask = ({ close, navigation, idTask }) => {
                                         <MaterialIcons
                                             name="close"
                                             size={40}
-                                        // style={modalGaleryTasks ? style.invisibleCloseModalIcon : style.closeModalIcon}
-
                                         />
 
                                     </TouchableOpacity>
@@ -372,7 +366,6 @@ export const ModalEditTask = ({ close, navigation, idTask }) => {
 
 }
 
-
 const bottomShadow = {
     shadowOffset: { width: 0, height: 0, },
     shadowColor: 'black',
@@ -391,15 +384,11 @@ const style = StyleSheet.create({
         height: '100%',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        // bottom: 10,
-        // backgroundColor: COLORS.beige
     },
     formContainer: {
         flex: 1,
         margin: 15,
-        // justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: COLORS.white
     },
     headerContainer: {
         alignItems: 'center',
@@ -407,7 +396,6 @@ const style = StyleSheet.create({
         alignSelf: 'stretch',
         flexDirection: 'row',
         paddingRight: 15,
-        // backgroundColor: COLORS.darkBlue
     },
     textTitle: {
         fontSize: 25,
@@ -428,9 +416,7 @@ const style = StyleSheet.create({
     dateTimeContainer: {
         alignSelf: 'stretch',
         justifyContent: 'center',
-        // alignItems: 'center',
         margin: 10,
-        // backgroundColor: COLORS.red
     },
     timeContainer: {
         width: 150,
@@ -449,11 +435,9 @@ const style = StyleSheet.create({
         width: 150,
         height: 50,
         padding: 10
-        // backgroundColor: COLORS.red
     },
     textClock: {
         fontSize: 20,
-        // color: COLORS.gray
     },
     iconClock: {
         width: 30,
@@ -498,7 +482,6 @@ const style = StyleSheet.create({
         flexDirection: 'row',
         marginLeft: 10,
         width: 220
-        // backgroundColor: COLORS.red
     },
     dependentButton: {
 
@@ -568,7 +551,6 @@ const style = StyleSheet.create({
         padding: 5
     },
     selectDependentsContainer: {
-        // backgroundColor: COLORS.red,
         alignSelf: 'stretch',
         marginTop: 10
 

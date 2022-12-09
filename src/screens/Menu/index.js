@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
 
-
 import style from "./style";
 import backgroundMenu from "../../assets/images/backgroundMenu.png";
 import { Close } from "../../components/Menu/Close.js";

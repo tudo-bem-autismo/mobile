@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, StatusBar, Text } from 'react-native';
+import { StatusBar, StyleSheet, View } from 'react-native';
 import { COLORS } from '../../assets/const/colors';
+import { ButtonGames } from '../../components/Button/ButtonGames';
 import { ImageGames } from '../../components/ImageGames';
 import { TextGames } from '../../components/TextGames';
-import { ButtonGames } from '../../components/Button/ButtonGames';
 import { ButtonGamesTwo } from '../Button/ButtonGamesTwo';
 
-export const ComponentGames = ({ firstStepImageGames, secondStepText, firstStepButton, firstStepButtonTwo, firstStepColor, correctStepFunction =()=>{}, incorrectStepFunction =()=>{}, firstStepCorrect }) => {
+export const ComponentGames = ({ firstStepImageGames, secondStepText, firstStepButton, firstStepButtonTwo, firstStepColor, correctStepFunction = () => { }, incorrectStepFunction = () => { }, firstStepCorrect }) => {
 
   return (
     <View style={styles.mainContainer}>
@@ -25,12 +25,11 @@ export const ComponentGames = ({ firstStepImageGames, secondStepText, firstStepB
           height={60}
           labelButton={firstStepButton}
           color={firstStepColor}
-          // onPress={() => { correctStepFunction()}}
-          onPress={()=>firstStepCorrect ? correctStepFunction() : incorrectStepFunction()}
+          onPress={() => firstStepCorrect ? correctStepFunction() : incorrectStepFunction()}
 
 
         />
-        
+
         <ButtonGamesTwo
           backgroundColor={COLORS.orange}
           borderRadius={30}
@@ -38,8 +37,7 @@ export const ComponentGames = ({ firstStepImageGames, secondStepText, firstStepB
           height={60}
           labelButton={firstStepButtonTwo}
           color={firstStepColor}
-          // onPress={() => { incorrectStepFunction()}}
-          onPress={()=>firstStepCorrect ? incorrectStepFunction() : correctStepFunction()}  
+          onPress={() => firstStepCorrect ? incorrectStepFunction() : correctStepFunction()}
         />
       </View>
 
@@ -71,14 +69,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: 'relative',
     marginTop: StatusBar.currentHeight,
-    // backgroundColor:COLORS.yellowContainer,
   },
   textContainer: {
     flex: 1,
-    // backgroundColor: COLORS.red,
-    // height:70,
     position: 'absolute',
-    // top:-30,
   }
 
 });

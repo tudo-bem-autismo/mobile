@@ -3,18 +3,16 @@ import { Image, ImageBackground, ScrollView, Text, TouchableOpacity, View } from
 
 import styles from './style.js';
 
-import { NavigationContainer } from '@react-navigation/native';
-import { MainHeader } from '../../components/Header/MainHeader.js';
-import { Dependent, SessionResponsible } from '../../components/index.js';
+import { Dependent } from '../../components/index.js';
 
+import { COLORS } from '../../assets/const/colors.js';
 import clouds from '../../assets/images/clouds.png';
 import profileResponsible from "../../assets/images/profileResponsible.png";
-import { COLORS } from '../../assets/const/colors.js';
-import { getKidService } from '../../services/kid.js';
-import { Loading } from '../Loading/index.js';
-import { getMedalsDependent } from '../../services/medal.js';
 import { MainHeaderDependent } from '../../components/Header/MainHeaderDependent.js';
+import { getKidService } from '../../services/kid.js';
+import { getMedalsDependent } from '../../services/medal.js';
 import { getData } from '../../utils/storage/index.js';
+import { Loading } from '../Loading/index.js';
 
 export const DependentProfile = ({ navigation }) => {
 

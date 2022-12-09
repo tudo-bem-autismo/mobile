@@ -1,19 +1,8 @@
 import React from "react";
-import { View, ImageBackground, StyleSheet, Image, Text } from "react-native";
+import { ImageBackground, StyleSheet, View } from "react-native";
 import styles from "./style.js";
-import {
-    BackButton,
-    Google,
-    Header,
-    Login,
-    LoginDescription,
-    Title,
-    Form,
-    DataInput
-} from "../../components";
 
-import background from '../../assets/images/background.png';
-import headerImg from '../../assets/images/gg.png'
+import headerImg from '../../assets/images/gg.png';
 import { FormDependentRegister } from "../../components";
 
 export function DependentRegister({ navigation }) {

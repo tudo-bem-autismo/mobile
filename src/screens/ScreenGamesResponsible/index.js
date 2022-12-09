@@ -1,21 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, StatusBar } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StatusBar, StyleSheet, View } from 'react-native';
+import { ComponentGamesTwo } from '../../components';
 import { ComponentGames } from '../../components/ComponentGames';
-import { ButtonAlert, ButtonGames, ButtonImage, ComponentGamesTwo } from '../../components';
 import { getStepGames } from '../../services/game';
-import { getReports } from '../../services';
 import { Loading } from '../Loading';
-import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
-import { COLORS } from '../../assets/const';
-import { CongratulationsScreen } from '../CongratulationsScreen';
-import { MedalScreen } from '../MedalScreen';
-import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
 
 export function ScreenGamesResponsible({ route, navigation }) {
 
     let { idGames } = route.params;
-
-    // console.log(idGames, '------gameRRRR')
 
     const [gameLoaded, setGameLoaded] = useState(false)
 
@@ -49,8 +41,11 @@ export function ScreenGamesResponsible({ route, navigation }) {
         ]
 
     }])
+
     const [currentStep, setCurrenteStep] = useState(0)
+
     const [isLoading, setIsLoading] = useState(true)
+
     const [currentGame, setCurrentGame] = useState({
         "id": 0,
         "ordem": 1,
@@ -87,9 +82,7 @@ export function ScreenGamesResponsible({ route, navigation }) {
         setCurrentGame(result.data[0])
         setGameLoaded(true)
         setIsLoading(false)
-
     }
-
 
     const clearGame = () => {
 
@@ -179,7 +172,6 @@ export function ScreenGamesResponsible({ route, navigation }) {
 
     }
 
-
     useEffect(() => {
         getGames()
     }, [gameLoaded])
@@ -224,7 +216,6 @@ export function ScreenGamesResponsible({ route, navigation }) {
                     </View>
 
                 )
-                // : (<Loading />)
             )}
 
 

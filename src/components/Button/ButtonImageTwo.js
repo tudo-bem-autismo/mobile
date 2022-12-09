@@ -1,33 +1,22 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import React from 'react';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 
-import {COLORS, FONT} from '../../assets/const';
+import { COLORS } from '../../assets/const';
 
-import { getStepGames } from '../../services';
 
-export const ButtonImageTwo = ({source, borderRadius, widht, height, srcImage, onPress= ()=>{}}) =>{
+export const ButtonImageTwo = ({ source, borderRadius, widht, height, srcImage, onPress = () => { } }) => {
 
-    // const [image2, setImage2] = useState(null);
-
-    // const getImages = async () =>{
-    //     const result = await getStepGames()
-    //     //setImage2(result.dataTwo.imagemDois)
-    // }
-    // useEffect(() =>{
-    //     getImages()
-    // }, [])
-
-    return(
-        <View style = {styles.container}>
-             <View style = {styles.containerImage}>
-                <TouchableOpacity 
-                style = {{...styles.buttonImage, borderRadius, widht, height}}
-                onPress={onPress}
+    return (
+        <View style={styles.container}>
+            <View style={styles.containerImage}>
+                <TouchableOpacity
+                    style={{ ...styles.buttonImage, borderRadius, widht, height }}
+                    onPress={onPress}
                 >
-                 <Image
-                    style = {styles.image}
-                    source={{uri: srcImage ? srcImage : null}}
-                />
+                    <Image
+                        style={styles.image}
+                        source={{ uri: srcImage ? srcImage : null }}
+                    />
                 </TouchableOpacity>
             </View>
         </View>
@@ -44,33 +33,33 @@ const imageShadow = {
 
 const styles = StyleSheet.create({
 
-    container:{
+    container: {
         flexDirection: 'row',
         width: 70,
         height: 10,
-        alignItems:'center',
-    
+        alignItems: 'center',
+
     },
-    containerImage:{
-        display:'flex',
-        alignItems:'center',
-        marginLeft:'170%',
-        marginBottom:'425%'
+    containerImage: {
+        display: 'flex',
+        alignItems: 'center',
+        marginLeft: '170%',
+        marginBottom: '425%'
     },
-    buttonImage:{
-        width:150,
-        height:149,
-        backgroundColor:COLORS.yellow,
-        borderRadius:50,
-        alignItems:'center',
-        justifyContent:'center',
-        marginBottom:'10%',
+    buttonImage: {
+        width: 150,
+        height: 149,
+        backgroundColor: COLORS.yellow,
+        borderRadius: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: '10%',
         ...imageShadow
     },
-    image:{
-        width:150,
-        height:149,
-        borderRadius:80
+    image: {
+        width: 150,
+        height: 149,
+        borderRadius: 80
     }
 
 

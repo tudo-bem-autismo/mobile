@@ -2,16 +2,16 @@
 import React, { useEffect, useState } from 'react';
 import { ImageBackground, ScrollView, Text, View } from 'react-native';
 import { COLORS } from '../../assets/const';
+import backgroundSchedule from '../../assets/images/backgroundSchedule.png';
 import { Button, Dependent } from '../../components';
 import { MainHeader } from '../../components/Header/MainHeader';
 import { ModalCreateSchedule } from '../../components/Modal/ModalCreateSchedule';
-import backgroundSchedule from '../../assets/images/backgroundSchedule.png';
 
-import styles from './style';
-import { Loading } from '../Loading';
-import { getResponsibleDependentsService } from '../../services';
 import { ButtonSchedule } from '../../components/Button/ButtonSchedule';
 import { ModalListingSchedule } from '../../components/Modal/ModalListingSchedule';
+import { getResponsibleDependentsService } from '../../services';
+import { Loading } from '../Loading';
+import styles from './style';
 
 export const ScheduleResponsible = ({ navigation }) => {
 

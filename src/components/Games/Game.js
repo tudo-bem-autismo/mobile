@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { Button, Image, Pressable, ScrollView, StyleSheet, Text, Touchable, TouchableHighlight, TouchableHighlightComponent, TouchableNativeFeedback, TouchableOpacity, View } from 'react-native';
-import { TouchableRipple } from 'react-native-paper';
+import React from 'react';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { COLORS, FONTS } from '../../assets/const';
 
 export const Game = ({ titleGame, gifGame, onPress, navigation }) => {

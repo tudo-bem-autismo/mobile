@@ -1,8 +1,5 @@
 import * as yup from 'yup';
 
-const min = '1900-01-01';
-const max = new Date();
-
 export const kidRegisterDataSchema = yup.object().shape({
     name: yup
         .string()
@@ -10,10 +7,7 @@ export const kidRegisterDataSchema = yup.object().shape({
         .max(20, 'No máximo 20 caracteres')
         .required('Insira seu nome'),
     date: yup
-        .date()
-        .default(new Date(max))
-        .min(min, `Insira uma data acima de ${min}`)
-        .max(new Date(max), `Insira uma data de nascimento válida`)
+        .string()
         .required('Insira sua data de nascimento'),
 
 })
