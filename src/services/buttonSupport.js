@@ -18,7 +18,7 @@ export const registerButtonSupport = async (data) => {
     formData.append("imagem", data.photo5);
     formData.append("id_crianca", data.idCrianca);
 
-    console.log(formData)
+    // console.log(formData)
     const result = await api.post("/botaoApoio", formData, options);
 
     const success = result.status === 201;
@@ -30,7 +30,7 @@ export const registerButtonSupport = async (data) => {
 
   } catch (error) {
     showErrorToast(error.response.data.message);
-    console.log(error)
+    // console.log(error)
 
     return {
       success: false,

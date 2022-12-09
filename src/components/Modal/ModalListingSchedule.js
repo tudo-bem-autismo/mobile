@@ -63,6 +63,7 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
     }
 
     const handleEditTask = (idTask) => {
+        console.log(idTask)
         setShowEditTaskModal(true)
         setSelectedIdTask(idTask)
     }

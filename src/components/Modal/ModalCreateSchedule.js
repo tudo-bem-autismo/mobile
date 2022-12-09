@@ -324,21 +324,25 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
                                                         label="Selecionar dias"
                                                         value={[]}
                                                         style={style.item}
+                                                        key='1'
                                                     />
                                                     <Picker.Item
                                                         label="Todos os dias"
                                                         value={DAYS_OFF_WEEK}
                                                         style={style.item}
+                                                        key='2'
                                                     />
                                                     <Picker.Item
                                                         label="Seg a sex"
                                                         value={WORKING_DAYS}
                                                         style={style.item}
+                                                        key='3'
                                                     />
                                                     <Picker.Item
                                                         label="Final de semana"
                                                         value={WEEKEND_DAYS}
                                                         style={style.item}
+                                                        key='4'
                                                     />
 
                                                 </Picker>
@@ -354,9 +358,9 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
                                             days.map(item => (
 
                                                 <TouchableOpacity
+                                                    key={item.id}
                                                     style={selectedDays.includes(item.id) ? style.selectedDayButton : style.dayButton}
                                                     onPress={() => manageDays(item.id)}
-                                                    key={item.id}
                                                 >
                                                     <Text style={style.dayText}>{item.initial}</Text>
                                                 </TouchableOpacity>
@@ -397,6 +401,7 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
                                                     dependents.map(item => (
 
                                                         <Dependent
+                                                            key={item.id}
                                                             name={item.name}
                                                             photo={item.photo}
                                                             selected={selectedDependents.includes(item.id)}

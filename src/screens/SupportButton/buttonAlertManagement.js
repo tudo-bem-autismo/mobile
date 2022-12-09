@@ -13,7 +13,13 @@ import styles from './style';
 
 export const SupportButtonManagement = ({ navigation, route }) => {
 
+<<<<<<< HEAD
+    let {idDependents} = route.params;
+
+    // console.log(idDependents);
+=======
     let { idDependents } = route.params;
+>>>>>>> 9c5305ff9024c5e69736634810fc29971654bbf5
 
     const [modal, setModal] = useState(false);
 
@@ -55,7 +61,11 @@ export const SupportButtonManagement = ({ navigation, route }) => {
 
     const getDependents = async () => {
         const result = await getButtonSupportDependent(idDependents)
+<<<<<<< HEAD
+        // console.log(result)
+=======
 
+>>>>>>> 9c5305ff9024c5e69736634810fc29971654bbf5
         const file = result.data
 
         const images = file.filter(item => item.tipoMidia === 'Imagens')

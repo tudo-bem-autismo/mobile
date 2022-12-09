@@ -4,6 +4,8 @@ import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react
 import { FONTS } from "../../assets/const";
 
 export const Dependent = ({ name, photo, onPress, selected }) => {
+    const defaultKidImage = 'https://firebasestorage.googleapis.com/v0/b/tudo-bem-autismo.appspot.com/o/DefaultKidImage%2Favatar%20(1).png?alt=media&token=d0a18754-bffc-4f82-af36-9d719b3e8b85'
+
 
     return (
 
@@ -14,7 +16,7 @@ export const Dependent = ({ name, photo, onPress, selected }) => {
             <ImageBackground
                 style={style.dependent}
                 imageStyle={style.dependent}
-                source={{ uri: photo }}
+                source={{ uri: `${photo ? photo : defaultKidImage}` }}
             >
                 <View style={selected ? style.selectedDependent : style.dependent}></View>
             </ImageBackground>

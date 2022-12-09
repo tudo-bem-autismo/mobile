@@ -8,11 +8,19 @@ export const ButtonImage = ({ source, borderRadius, widht, height, srcImage, onP
 
     return (
 
+<<<<<<< HEAD
+        // <View style = {styles.container}>
+              <View style = {styles.imageContainer}>
+                <TouchableOpacity 
+                style = {{...styles.buttonImage, borderRadius, widht, height}}
+                onPress={onPress}
+=======
         <View style={styles.container}>
             <View style={styles.imageContainer}>
                 <TouchableOpacity
                     style={{ ...styles.buttonImage, borderRadius, widht, height }}
                     onPress={onPress}
+>>>>>>> 9c5305ff9024c5e69736634810fc29971654bbf5
                 >
                     <Image
                         style={styles.image}
@@ -21,7 +29,7 @@ export const ButtonImage = ({ source, borderRadius, widht, height, srcImage, onP
                     />
                 </TouchableOpacity>
             </View>
-        </View>
+        // </View>
     );
 }
 
@@ -37,6 +45,34 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'row',
+<<<<<<< HEAD
+        alignItems:'center',
+        marginRight:'45%',
+        marginBottom:'1%',
+    },
+    imageContainer:{
+        width: 150,
+        height: 149,
+        display:'flex',
+        alignItems:'center',
+        justifyContent: 'center'
+        // backgroundColor:COLORS.clearRed 
+    },
+    buttonImage:{
+        width:150,
+        height:149,
+        backgroundColor:COLORS.white,
+        borderRadius:50,
+        alignItems:'center',
+        justifyContent:'center',
+        // marginBottom:'100%',
+        ...imageShadow
+    },
+    image:{
+        width:'100%',
+        height:'100%',
+        borderRadius:80
+=======
         width: 150,
         height: 149,
         alignItems: 'center',
@@ -62,6 +98,7 @@ const styles = StyleSheet.create({
         width: 150,
         height: 149,
         borderRadius: 80
+>>>>>>> 9c5305ff9024c5e69736634810fc29971654bbf5
     }
 
 
