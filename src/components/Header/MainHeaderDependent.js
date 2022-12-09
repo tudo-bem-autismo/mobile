@@ -5,7 +5,6 @@ import { COLORS } from '../../assets/const';
 import attackButton from '../../assets/icons/botao-crise.png';
 
 export const MainHeaderDependent = ({ screenName, navigation }) => {
-    1
     return (
         <View style={styles.headerContainer}>
 

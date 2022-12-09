@@ -36,6 +36,11 @@ export const ScheduleResponsible = ({ navigation }) => {
         setIsLoading(false)
     }, [])
 
+    useEffect(() => {
+        getDependents()
+        setIsLoading()
+    }, [dependents])
+
     return (
 
         <View style={styles.container}>

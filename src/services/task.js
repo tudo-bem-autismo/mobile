@@ -208,10 +208,6 @@ export const updateTaskService = async (data) => {
         }
 
     } catch (error) {
-<<<<<<< HEAD
-        // console.log(error)
-=======
->>>>>>> 9c5305ff9024c5e69736634810fc29971654bbf5
         showErrorToast(error.response.data.message)
         return {
             success: false,

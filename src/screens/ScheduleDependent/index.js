@@ -14,6 +14,7 @@ import { getKidService } from "../../services";
 import { getTasksService, taskIsDoneService } from "../../services/task";
 import { getTodayInitials } from "../../utils/date/days";
 import { getData } from "../../utils/storage";
+import Toast from "react-native-toast-message";
 
 export const ScheduleDependent = ({ close, show, navigation }) => {
 
@@ -43,7 +44,7 @@ export const ScheduleDependent = ({ close, show, navigation }) => {
 
     const manageDoneTask = async (idTask) => {
 
-        const doneTaskExist = dailyTasks?.find(doneTaskId => doneTaskId === idTask)
+        const doneTaskExist = dailyTasks?.find(doneTaskId => doneTaskId.idTask === idTask)
 
         if (doneTaskExist?.isDone)
             return
@@ -60,15 +61,13 @@ export const ScheduleDependent = ({ close, show, navigation }) => {
         const result = await taskIsDoneService(data)
 
         if (result.success) {
+            await getTasks()
             return Toast.show({
                 type: 'success',
                 text1: 'Sucesso!',
-                text2: 'Tarefa criada com sucesso!'
+                text2: 'Tarefa concluída!'
             })
         }
-
-        await getTasks()
-
     }
 
     const getDependent = async () => {

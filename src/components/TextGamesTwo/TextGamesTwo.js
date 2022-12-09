@@ -15,17 +15,8 @@ export const TextGamesTwo = ({ labelText }) => {
 }
 
 const styles = StyleSheet.create({
-<<<<<<< HEAD
     textContainer:{
-        // flex:1,
         padding:'5%',
-        // marginBottom:'44%',
-=======
-    textContainer: {
-        flex: 1,
-        padding: 8,
-        marginBottom: '44%',
->>>>>>> 9c5305ff9024c5e69736634810fc29971654bbf5
     },
     text: {
         fontSize: 40,

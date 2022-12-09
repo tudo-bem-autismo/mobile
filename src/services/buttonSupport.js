@@ -18,7 +18,6 @@ export const registerButtonSupport = async (data) => {
     formData.append("imagem", data.photo5);
     formData.append("id_crianca", data.idCrianca);
 
-    // console.log(formData)
     const result = await api.post("/botaoApoio", formData, options);
 
     const success = result.status === 201;
@@ -40,11 +39,44 @@ export const registerButtonSupport = async (data) => {
 };
 
 export const getButtonSupportDependent = async () => {
+  
   try {
 
     const id = await getData('@idDependent')
 
     const result = await api.get(`/botaoApoio/${id}`)
+
+    const success = result.status === 200
+    
+    const formattedData = result.data.map(item => {
+      return {
+          id: item.id,
+          midia: item.midia,
+          nomeOriginal: item.nome_original,
+          tipoMidia: item.tbl_tipo_midia.tipo
+      }
+  })
+
+    return {
+      success,
+      data: formattedData
+    }
+
+
+  } catch (error) {
+    showErrorToast(error.response.data.message)
+    return {
+      success: false,
+      data: error.response.data
+    }
+  }
+}
+
+export const getButtonSupportDependentForResponsible = async (idDependent) => {
+  
+  try {
+
+    const result = await api.get(`/botaoApoio/${idDependent}`)
 
     const success = result.status === 200
     

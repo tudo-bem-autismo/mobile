@@ -53,7 +53,7 @@ export const DependentProfile = ({ navigation }) => {
 
                 <View style={styles.mainContainer}>
 
-                    <MainHeaderDependent screenName="MEU PERFIL" />
+                    <MainHeaderDependent navigation={navigation} screenName="MEU PERFIL" />
 
                     <View style={styles.container}>
 

@@ -173,6 +173,7 @@ export const ModalEditTask = ({ close, navigation, idTask }) => {
             {isLoading ? (
                 <Loading />
             ) : (
+
                 <Formik
                     validationSchema={scheduleEditTaskDataSchema}
                     initialValues={initialValues}
@@ -181,16 +182,23 @@ export const ModalEditTask = ({ close, navigation, idTask }) => {
                     {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
                         <>
 
+
                             <View style={style.formContainer}>
 
                                 <View style={style.headerContainer}>
 
-                                    <TouchableOpacity onPress={close}>
+                                    <TouchableOpacity
+                                        style={style.backButton}
+                                        onPress={close}
+                                    >
 
                                         <MaterialIcons
-                                            name="close"
-                                            size={40}
+                                            name='chevron-left'
+                                            size={35}
                                         />
+
+                                        <Text style={style.textBackButton}>Voltar</Text>
+
 
                                     </TouchableOpacity>
 
@@ -362,9 +370,7 @@ export const ModalEditTask = ({ close, navigation, idTask }) => {
                 </Formik>
             )}
         </View>
-
     );
-
 }
 
 const bottomShadow = {
@@ -379,6 +385,18 @@ const style = StyleSheet.create({
     container: {
         height: '100%',
         width: '100%',
+    },
+    backButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginRight: 40,
+        marginBottom: 10,
+        position: 'absolute',
+        top: -100,
+        left: -10
+    },
+    textBackButton: {
+        fontSize: 20,
     },
     modalContainer: {
         width: '100%',

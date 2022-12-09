@@ -1,4 +1,3 @@
-
 import { FontAwesome } from '@expo/vector-icons';
 import { Video } from 'expo-av';
 import React, { useEffect, useRef, useState } from 'react';
@@ -7,19 +6,13 @@ import Toast from "react-native-toast-message";
 import { COLORS, FONTS } from '../../assets/const';
 import { ModalButtonSuportImage, ModalDeleteData } from '../../components';
 import { MainHeader } from '../../components/Header/MainHeader';
-import { deleteMidiaButtonSupport, getButtonSupportDependent } from '../../services';
+import { deleteMidiaButtonSupport, getButtonSupportDependentForResponsible } from '../../services';
 import { Loading } from '../Loading';
 import styles from './style';
 
 export const SupportButtonManagement = ({ navigation, route }) => {
 
-<<<<<<< HEAD
-    let {idDependents} = route.params;
-
-    // console.log(idDependents);
-=======
     let { idDependents } = route.params;
->>>>>>> 9c5305ff9024c5e69736634810fc29971654bbf5
 
     const [modal, setModal] = useState(false);
 
@@ -46,10 +39,16 @@ export const SupportButtonManagement = ({ navigation, route }) => {
     const deleteVideo = async (id) => {
 
         setModalDelete(false)
+        setIsLoading(true)
+
 
         const result = await deleteMidiaButtonSupport(id)
 
         if (result.success) {
+
+            setIsLoading(false)
+            getDependents()
+
             return Toast.show({
                 type: 'success',
                 text1: 'Vídeo deletado com sucesso',
@@ -59,13 +58,26 @@ export const SupportButtonManagement = ({ navigation, route }) => {
 
     }
 
-    const getDependents = async () => {
-        const result = await getButtonSupportDependent(idDependents)
-<<<<<<< HEAD
-        // console.log(result)
-=======
+    const deleteImage = async () => {
 
->>>>>>> 9c5305ff9024c5e69736634810fc29971654bbf5
+        setModal(false)
+        setIsLoading(true)
+        const result = await deleteMidiaButtonSupport(idMidia)
+
+        if (result.success) {
+            setIsLoading(false)
+            getDependents()
+            return Toast.show({
+                type: 'success',
+                text1: 'Imagem deletada com sucesso',
+            }
+            );
+        }
+
+    }
+
+    const getDependents = async () => {
+        const result = await getButtonSupportDependentForResponsible(idDependents)
         const file = result.data
 
         const images = file.filter(item => item.tipoMidia === 'Imagens')
@@ -114,16 +126,25 @@ export const SupportButtonManagement = ({ navigation, route }) => {
                         >
 
                             {
-                                image.map(item => (
+                                image.length ? (
 
-                                    <TouchableOpacity key={item.id} style={{ alignItems: 'center', justifyContent: 'center', marginRight: 20, }}
-                                        onPress={() => getImage(item.midia, item.id)}>
-                                        <Image source={{ uri: item.midia }} style={{ width: 300, height: 240 }} />
+                                    image.map(item => (
 
-                                    </TouchableOpacity>
+                                        <TouchableOpacity key={item.id} style={{ alignItems: 'center', justifyContent: 'center', marginRight: 20, }}
+                                            onPress={() => getImage(item.midia, item.id)}>
+                                            <Image source={{ uri: item.midia }} style={{ width: 300, height: 240 }} />
+
+                                        </TouchableOpacity>
 
 
-                                ))
+                                    ))
+                                ) : (
+                                    <Text>
+                                        Nenhuma imagem cadastrada
+                                    </Text>
+                                )
+
+
                             }
                         </ScrollView>
 
@@ -136,47 +157,45 @@ export const SupportButtonManagement = ({ navigation, route }) => {
                             style={{ marginVertical: 0 }}
                         >
                             {
-                                video.map(item => (
-                                    <View key={item.id} style={{ backgroundColor: COLORS.black, alignItems: 'center', marginRight: 20 }}>
-                                        <Video
-                                            ref={videoR}
-                                            useNativeControls
-                                            source={{ uri: item.midia }} style={{ width: 200, height: 200 }}
-                                            resizeMode="contain"
-                                            isLooping
-                                            onPlaybackStatusUpdate={status => setStatus(() => status)} />
-                                        <TouchableOpacity
-                                            onPress={() => status.isPlaying ? videoR.current.pauseAsync() : video.current.playAsync()}
-                                        >
-                                            <TouchableOpacity onPress={() => { setModalDelete(true); getVideo(item.id) }}>
-                                                <FontAwesome style={{ fontSize: 24, color: COLORS.white }} name="trash" />
+
+                                video.length?(
+                                    video.map(item => (
+                                        <View key={item.id} style={{ backgroundColor: COLORS.black, alignItems: 'center', marginRight: 20 }}>
+                                            <Video
+                                                ref={videoR}
+                                                useNativeControls
+                                                source={{ uri: item.midia }} style={{ width: 200, height: 200 }}
+                                                resizeMode="contain"
+                                                isLooping
+                                                onPlaybackStatusUpdate={status => setStatus(() => status)} />
+                                            <TouchableOpacity
+                                                onPress={() => status.isPlaying ? videoR.current.pauseAsync() : video.current.playAsync()}
+                                            >
+                                                <TouchableOpacity onPress={() => { setModalDelete(true); getVideo(item.id) }}>
+                                                    <FontAwesome style={{ fontSize: 24, color: COLORS.white }} name="trash" />
+                                                </TouchableOpacity>
+    
                                             </TouchableOpacity>
+                                        </View>
 
-                                        </TouchableOpacity>
+                                    ))
 
+                                ):(
+                                    <Text>
+                                        Nenhum vídeo cadastrado
+                                    </Text>
+                                )
 
-
-
-
-                                    </View>
-
-
-                                ))
                             }
                         </ScrollView>
-
-
-
-
-
                     </View>
 
                     {modal && (
                         <ModalButtonSuportImage
                             close={() => setModal(false)}
                             midia={image1}
-                            idImg={idMidia}
                             show={modal}
+                            deleteImage={() => deleteImage()}
                         />
                     )}
 

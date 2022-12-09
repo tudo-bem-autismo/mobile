@@ -313,7 +313,7 @@ const style = StyleSheet.create({
     },
     listingScheduleContainer: {
         width: '95%',
-        height: '88%',
+        height: '89%',
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
         borderWidth: 1,

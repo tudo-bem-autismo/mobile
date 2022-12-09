@@ -24,6 +24,8 @@ import { BackButton } from "../Button";
 
 export const FormManagementDependent = ({ navigation, idDependent }) => {
 
+  const defaultKidImage = 'https://firebasestorage.googleapis.com/v0/b/tudo-bem-autismo.appspot.com/o/DefaultKidImage%2Favatar%20(1).png?alt=media&token=d0a18754-bffc-4f82-af36-9d719b3e8b85'
+
   const [showModal, setShowModal] = useState(false);
   const [showModalSaveData, setShowModalSaveData] = useState(false);
   const [kid, setKid] = useState({});
@@ -163,7 +165,7 @@ export const FormManagementDependent = ({ navigation, idDependent }) => {
                     {image ? (
                       <Image source={{ uri: image }} style={styles.foto} />
                     ) : (
-                      <Image source={{ uri: values.photo }} style={styles.foto} />
+                      <Image source={{ uri: `${values.photo ? values.photo : defaultKidImage}` }} style={styles.foto} />
                     )}
                   </TouchableOpacity>
 

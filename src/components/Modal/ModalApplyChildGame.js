@@ -13,12 +13,6 @@ import { Button } from "../Button";
 import { PlayButton } from "../Button/PlayButton";
 import { Dependent } from "../DependentListing";
 import { Game } from "../Games/Game";
-<<<<<<< HEAD
-import clothes from "../../assets/images/clothes.gif";
-// import Navigation from '../../navigation/navigation';
-// import profileKidImage from '../../assets/images/profile-kid.png'
-=======
->>>>>>> 9c5305ff9024c5e69736634810fc29971654bbf5
 
 const { height } = Dimensions.get('window')
 

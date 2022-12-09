@@ -14,27 +14,28 @@ import { ModalDeleteData } from "./ModalDeleteData";
 
 const { height } = Dimensions.get("window");
 
-export const ModalButtonSuportImage = ({ label, close, show, del, updateChart, setChartIsLoading, midia, idImg }) => {
+export const ModalButtonSuportImage = ({ label, close, show, del, updateChart, setChartIsLoading, midia, idImg, deleteImage }) => {
 
   const [isLoading, setIsLoading] = useState(true);
 
   const [modal, setModal] = useState(false);
 
-  const deleteImage = async () => {
+  // const deleteImage = async () => {
 
-    setModal(false)
+  //   setModal(false)
+  //   setIsLoading(true)
+  //   const result = await deleteMidiaButtonSupport(idImg)
 
-    const result = await deleteMidiaButtonSupport(idImg)
+  //   if (result.success) {
+  //     setIsLoading(false)
+  //     return Toast.show({
+  //       type: 'success',
+  //       text1: 'Imagem deletada com sucesso',
+  //     },
+  //       close());
+  //   }
 
-    if (result.success) {
-      return Toast.show({
-        type: 'success',
-        text1: 'Imagem deletada com sucesso',
-      },
-        close());
-    }
-
-  }
+  // }
 
   const [state, setState] = useState({
     opacity: new Animated.Value(0),
