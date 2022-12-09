@@ -9,7 +9,7 @@ export const SessionCompany = ({ image, label }) => {
         <TouchableOpacity
             style={style.sessionContainer}
             onPress={() => {
-                Linking.openURL('https://thankful-sky-04f43b810.2.azurestaticapps.net');
+                Linking.openURL('https://lukasvenancio.github.io/tudobemautismoweb/');
             }}
         >
             <Image

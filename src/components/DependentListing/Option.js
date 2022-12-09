@@ -16,7 +16,7 @@ export const Option = ({ onPress, navigation, idDependent }) => {
             <TouchableOpacity
                 style={style.button}
                 onPress={async() => {
-                        await storeData(idDependent,'@idDependente')
+                        await storeData(idDependent,'@idDependent')
                         navigation.navigate('TabsDependent')
                     }
                 }
