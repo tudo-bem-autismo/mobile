@@ -140,7 +140,7 @@ export const ModalHistoryTasks = ({ close, idDependent, navigation }) => {
                             completedTask ? completedTask.map(item => (
                                 <CardScheduleHistory
                                     image={item.tbl_tarefa.tbl_icone.icone}
-                                    title={item.tbl_tarefa.tbl_icone.titulo}
+                                    title={item.tbl_tarefa.titulo}
                                     hour={item.data}
                                     key={item.id}
                                 />

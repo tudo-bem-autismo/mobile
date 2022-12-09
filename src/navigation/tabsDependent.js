@@ -16,10 +16,6 @@ export const TabsDependent = ({ route, navigation }) => {
 
     const Tab = createBottomTabNavigator()
 
-    let { idDependent } = route.params;
-
-    let id = storeData(idDependent, '@idDependent')
-
     return (
 
         <Tab.Navigator

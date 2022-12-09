@@ -55,7 +55,7 @@ export const getHistoryTask = async (idDependent, period) => {
             const date = fullDate[0].split('-')
             const time = fullDate[1].split(':')
 
-            task.data = date[2] + '/' + date[1] + '/' + date[0] + ' ' + time[0] + ':' + time[1]
+            task.data = date[2] + '/' + date[1] + '/' + date[0] + ' ' + (time[0] - 3)  + ':' + time[1]
         })
 
         return {
@@ -197,6 +197,8 @@ export const deleteTaskService = async (idTask) => {
 export const updateTaskService = async (data) => {
     try {
 
+        console.log(data)
+
         const formattedData = {
             id_crianca: data.selectedDependents,
             id_tarefa: data.idTask,
@@ -206,7 +208,7 @@ export const updateTaskService = async (data) => {
             id_icone: data.idIcon
         }
 
-        const result = await api.post("/tarefa", formattedData);
+        const result = await api.put("/tarefa", formattedData);
 
         const success = result.status === 201
 
@@ -216,7 +218,7 @@ export const updateTaskService = async (data) => {
         }
 
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         showErrorToast(error.response.data.message)
 
         return {

@@ -15,6 +15,7 @@ import { Dependent } from "../DependentListing";
 import { Game } from "../Games/Game";
 import clothes from "../../assets/images/clothes.gif";
 // import Navigation from '../../navigation/navigation';
+// import profileKidImage from '../../assets/images/profile-kid.png'
 
 const { height } = Dimensions.get('window')
 

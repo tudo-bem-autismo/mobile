@@ -3,37 +3,18 @@ import { View, Image, Text, TouchableOpacity } from 'react-native';
 import { ButtonAlert, Button } from '../../components';
 import styles from './style.js';
 import { Loading } from '../Loading';
-import { getMedalsDependent } from '../../services/medal';
-import { GamesDependent } from '../GamesDependent';
-import { getReports } from '../../services';
+// import { getMedalsDependent } from '../../services/medal';
+// import { GamesDependent } from '../GamesDependent';
+// import { getReports } from '../../services';
+import { getData } from '../../utils/storage';
 
-export function MedalScreen({ route, navigation }) {
-
+export const MedalScreen = ({ route, navigation }) => {
+    
+    let { nome, medalha } = route.params.data
+    let { idGames } = route.params
     const [isLoading, setIsLoading] = useState(true);
-    // const [medals, setMedals] = useState([]);
-    // const [medal, setMedal] = useState()
-
-    // const [kidData, setKidData] = useState({
-    //     "acertos": 3,
-    //     "erros": 2,
-    //     "data": "2022-9-17 00:00:00",
-    //     "id_mini_jogo": 1,
-    //     "id_crianca": "4"
-    // })
-
-    // const getMedals = async () => {
-    //     const result = await getMedalsDependent()
-    //     setMedals(result.data)
-    //     // console.log(medals)
-    // }
-
-    // const getMedal = async () => {
-    //    const result = await getReports(kidData.acertos, kidData.erros, kidData.data, kidData.id_mini_jogo, kidData.id_crianca)
-    //    setMedal(result)
-    // //console.log(medal)
-
-    // }
-
+    // const idDependent = await getData('@idDependent')
+    // console.log(idDependent)
 
     useEffect(() => {
         if (medalha)
@@ -41,8 +22,6 @@ export function MedalScreen({ route, navigation }) {
 
     }, [])
 
-    let { nome, medalha } = route.params.data
-    let { idGames } = route.params
 
     return (
         <>

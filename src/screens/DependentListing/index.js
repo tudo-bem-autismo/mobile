@@ -100,15 +100,12 @@ export const DependentListing = ({ navigation }) => {
                             </View>
 
                             {
-
                                 option && (
                                     <Option
                                         navigation={navigation}
                                         idDependent={idDependents}
                                     />
                                 )
-
-
                             }
 
                         </View>

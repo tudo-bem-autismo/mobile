@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { COLORS, FONTS } from "../../assets/const";
+import { storeData } from "../../utils/storage";
 
 
 export const Option = ({ onPress, navigation, idDependent }) => {
@@ -14,7 +15,11 @@ export const Option = ({ onPress, navigation, idDependent }) => {
 
             <TouchableOpacity
                 style={style.button}
-                onPress={() => navigation.navigate('TabsDependent', { idDependent })}
+                onPress={async() => {
+                        await storeData(idDependent,'@idDependente')
+                        navigation.navigate('TabsDependent')
+                    }
+                }
             >
                 <Text style={style.textButton}>ENTRAR</Text>
             </TouchableOpacity>

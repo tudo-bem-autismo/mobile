@@ -19,7 +19,7 @@ export const ButtonImage = ({source, borderRadius, widht, height, srcImage, onPr
     
     return(
 
-        <View style = {styles.container}>
+        // <View style = {styles.container}>
               <View style = {styles.imageContainer}>
                 <TouchableOpacity 
                 style = {{...styles.buttonImage, borderRadius, widht, height}}
@@ -32,7 +32,7 @@ export const ButtonImage = ({source, borderRadius, widht, height, srcImage, onPr
                 />
                 </TouchableOpacity>
             </View>
-        </View>
+        // </View>
     );
 }
 
@@ -48,30 +48,31 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         flexDirection: 'row',
-        width: 150,
-        height: 149,
         alignItems:'center',
         marginRight:'45%',
         marginBottom:'1%',
     },
     imageContainer:{
+        width: 150,
+        height: 149,
         display:'flex',
         alignItems:'center',
-    
+        justifyContent: 'center'
+        // backgroundColor:COLORS.clearRed 
     },
     buttonImage:{
         width:150,
         height:149,
-        backgroundColor:COLORS.yellow,
+        backgroundColor:COLORS.white,
         borderRadius:50,
         alignItems:'center',
         justifyContent:'center',
-        marginBottom:'100%',
+        // marginBottom:'100%',
         ...imageShadow
     },
     image:{
-        width:150,
-        height:149,
+        width:'100%',
+        height:'100%',
         borderRadius:80
     }
 

@@ -29,9 +29,9 @@ export const TextGamesTwo = ({labelText}) => {
 
 const styles = StyleSheet.create({
     textContainer:{
-        flex:1,
-        padding:8,
-        marginBottom:'44%',
+        // flex:1,
+        padding:'5%',
+        // marginBottom:'44%',
     },
     text:{
         fontSize:40,

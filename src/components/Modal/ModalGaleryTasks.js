@@ -127,9 +127,9 @@ export const ModalGaleryTasks = ({ close, show, setIdIcon, setImageTask, navigat
                                     {
                                         tasks.map(item => (
                                             <TaskSchedule
+                                                key={item.id}
                                                 image={{ uri: item.icon }}
                                                 title={item.title}
-                                                key={item.id}
                                                 onPress={() =>
                                                     selectedTask(item.id)}
                                             />

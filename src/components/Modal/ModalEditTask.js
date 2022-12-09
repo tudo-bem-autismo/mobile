@@ -142,7 +142,8 @@ export const ModalEditTask = ({ close, navigation, idTask }) => {
             alarmHour,
             selectedDays: selectedDaysIds,
             selectedDependents,
-            idIcon
+            idIcon,
+            idTask
         };
 
         const result = await updateTaskService(newData)
