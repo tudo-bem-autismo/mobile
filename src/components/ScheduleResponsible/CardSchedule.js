@@ -1,15 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Checkbox, DarkTheme } from 'react-native-paper';
 
 import { COLORS, FONTS } from "../../assets/const";
 
 import exclude from "../../assets/icons/exclude.png";
 import manage from "../../assets/icons/manage.png";
-import done from "../../assets/icons/done.png";
-import button from "../../assets/icons/button.png";
-import { ModalCongratulationsTask } from "../Modal/ModalCongratulationsTask";
-import { ModalExludeTask } from "../Modal/ModalExcludeTask";
 
 export const CardSchedule = ({ title, hour, image, selected, onPress, deleteTask, editTask }) => {
 
@@ -56,22 +51,6 @@ export const CardSchedule = ({ title, hour, image, selected, onPress, deleteTask
                         />
                     </TouchableOpacity>
 
-                    {/* <TouchableOpacity
-                        onPress={() => onPress()}
-                        style={style.button}>
-
-                        {
-                            selected && (
-                                <Image
-                                    source={done}
-                                    style={style.imageDoneButton}
-                                />
-                            )
-
-                        }
-
-                    </TouchableOpacity> */}
-
                 </View>
 
             </View>
@@ -93,7 +72,6 @@ const style = StyleSheet.create({
     container: {
         width: '100%',
         height: 110,
-        // backgroundColor: COLORS.black,
     },
     card: {
         width: '92%',
@@ -111,7 +89,6 @@ const style = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingLeft: 10,
-        // backgroundColor: COLORS.red,
     },
     imageInfoTask: {
         width: '17%',
@@ -122,7 +99,6 @@ const style = StyleSheet.create({
         alignSelf: 'stretch',
         justifyContent: 'center',
         paddingLeft: 10,
-        // backgroundColor: COLORS.red,
     },
     textTitleInfoTask: {
         fontFamily: FONTS.text,
@@ -137,7 +113,6 @@ const style = StyleSheet.create({
         flexDirection: 'row',
         top: 60,
         right: 30,
-        // backgroundColor: COLORS.pink
     },
     button: {
         width: 30,
@@ -183,6 +158,5 @@ const style = StyleSheet.create({
         borderWidth: 8,
         borderColor: '#15dbc4',
         borderRadius: 50,
-        // backgroundColor: COLORS.blue
     }
 });

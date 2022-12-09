@@ -42,10 +42,8 @@ const style = StyleSheet.create({
         left: 130,
         marginTop: 20,
         flexDirection: 'row',
-        // backgroundColor: COLORS.red,
     },
     backButton: {
-        // backgroundColor: COLORS.red,
         flexDirection: 'row',
         alignItems: 'center',
         marginRight: 40,
@@ -53,16 +51,13 @@ const style = StyleSheet.create({
     },
     textBackButton: {
         fontSize: 20,
-
     },
     dependentContainer: {
         alignSelf: 'stretch',
-        // backgroundColor: COLORS.pink,
     },
     listingContainer: {
         flex: 1,
         marginTop: 70,
-        // backgroundColor: COLORS.white,
         alignSelf: 'stretch'
     },
     selectedDayButton: {
@@ -99,11 +94,10 @@ const style = StyleSheet.create({
         height: 350,
     },
     tasksContainer: {
-        // paddingBottom: 50,
-        // backgroundColor: COLORS.yellowBold
+
     },
     cardsContainer: {
-        // backgroundColor: COLORS.red
+
     },
     cardInvisible: {
         width: '92%',
@@ -115,7 +109,6 @@ const style = StyleSheet.create({
         height: 300,
         alignItems: 'center',
         justifyContent: 'center',
-        // backgroundColor: COLORS.red
     },
     textNotFoundCard: {
         fontFamily: FONTS.text,
@@ -125,7 +118,6 @@ const style = StyleSheet.create({
     imageNotFoundCard: {
         width: '50%',
         height: '50%',
-        // backgroundColor: COLORS.purple
     }
 });
 

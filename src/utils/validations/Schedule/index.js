@@ -1,5 +1,4 @@
 import * as yup from 'yup';
-import { yupToFormErrors } from 'formik';
 
 export const scheduleCreateTaskDataSchema = yup.object().shape({
     title: yup

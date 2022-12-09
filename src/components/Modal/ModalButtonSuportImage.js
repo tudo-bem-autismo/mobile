@@ -1,36 +1,21 @@
+import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import { BlurView } from "expo-blur";
 import React, { useEffect, useState } from "react";
 import {
-  ImageBackground,
-  View,
-  StyleSheet,
-  TouchableOpacity,
   Animated,
-  Dimensions,
-  Text,
-  Image,
-  ScrollView,
-  ScrollViewBase
+  Dimensions, Image, StyleSheet,
+  TouchableOpacity, View
 } from "react-native";
-import { BlurView } from "expo-blur";
-import { FONTS, COLORS } from "../../assets/const";
-import { BackButton, Button } from "../Button";
-import { MaterialIcons } from "@expo/vector-icons";
-import { Loading } from "../../screens/Loading";
-import { Picker } from "@react-native-picker/picker";
-import * as ImagePicker from "expo-image-picker";
-import { showErrorToast } from "../../utils/errors";
-import file from '../../assets/images/addIcon.png'
-import { colors } from "react-native-swiper-flatlist/src/themes";
-import { registerButtonSupport } from "../../services";
 import Toast from "react-native-toast-message";
-import { FontAwesome } from '@expo/vector-icons';
-import { ModalDeleteData } from "./ModalDeleteData";
+import { COLORS } from "../../assets/const";
+import { Loading } from "../../screens/Loading";
 import { deleteMidiaButtonSupport } from "../../services";
-
+import { ModalDeleteData } from "./ModalDeleteData";
 
 const { height } = Dimensions.get("window");
 
 export const ModalButtonSuportImage = ({ label, close, show, del, updateChart, setChartIsLoading, midia, idImg }) => {
+
   const [isLoading, setIsLoading] = useState(true);
 
   const [modal, setModal] = useState(false);
@@ -42,14 +27,14 @@ export const ModalButtonSuportImage = ({ label, close, show, del, updateChart, s
     const result = await deleteMidiaButtonSupport(idImg)
 
     if (result.success) {
-        return Toast.show({
-            type: 'success',
-            text1: 'Imagem deletada com sucesso',
-        },
+      return Toast.show({
+        type: 'success',
+        text1: 'Imagem deletada com sucesso',
+      },
         close());
     }
 
-}
+  }
 
   const [state, setState] = useState({
     opacity: new Animated.Value(0),
@@ -97,14 +82,10 @@ export const ModalButtonSuportImage = ({ label, close, show, del, updateChart, s
     ]).start();
   };
 
-        
   useEffect(() => {
     if (show) {
-      //gerarRelatorio();
-      //   gerarRelatorio();
       openModal();
       setIsLoading(false);
-      // defineMidia();
     } else {
       closeModal();
     }
@@ -145,14 +126,14 @@ export const ModalButtonSuportImage = ({ label, close, show, del, updateChart, s
                 </View>
 
                 <View style={style.dependentsContainer}>
-                  <Image style={{ height: 300, width: 300, marginBottom: 15}} source={{uri: midia}} resizeMode="contain"/>
+                  <Image style={{ height: 300, width: 300, marginBottom: 15 }} source={{ uri: midia }} resizeMode="contain" />
                   <TouchableOpacity
-                    onPress={()=>setModal(true)}>
-                    <FontAwesome name="trash" style={{fontSize: 28}}/>
+                    onPress={() => setModal(true)}>
+                    <FontAwesome name="trash" style={{ fontSize: 28 }} />
                   </TouchableOpacity>
-                  
+
                 </View>
-      
+
               </View>
             </BlurView>
           </Animated.View>
@@ -160,16 +141,15 @@ export const ModalButtonSuportImage = ({ label, close, show, del, updateChart, s
       )}
 
       {modal && (
-                  <View style={style.modalContainer}>
-                    <ModalDeleteData
-                      label="Tem certeza que quer excluir a imagem?"
-                      close={() => setModal(false)}
-                      show={modal}
-                      del={() => deleteImage()}
-                      //navigation={navigation}
-                    />
-                  </View>
-                )}
+        <View style={style.modalContainer}>
+          <ModalDeleteData
+            label="Tem certeza que quer excluir a imagem?"
+            close={() => setModal(false)}
+            show={modal}
+            del={() => deleteImage()}
+          />
+        </View>
+      )}
 
     </View>
   );
@@ -184,19 +164,16 @@ const style = StyleSheet.create({
     left: 0,
     alignItems: "center",
     justifyContent: "center",
-    //backgroundColor: COLORS.red
   },
   container: {
     width: "100%",
     height: "70%",
     alignItems: "center",
     justifyContent: "center",
-    //backgroundColor: COLORS.blue
   },
   modalContainer: {
     height: "100%",
     width: "100%",
-    //backgroundColor: COLORS.blue
   },
   blurContainer: {
     position: "absolute",
@@ -229,7 +206,6 @@ const style = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "stretch",
-    // backgroundColor: COLORS.pink
   },
   dependentsList: {
     flexDirection: "row",
@@ -240,7 +216,6 @@ const style = StyleSheet.create({
     justifyContent: "flex-start",
     alignSelf: "stretch",
     position: "relative",
-    // backgroundColor: COLORS.red
   },
   closeModalIconContainer: {
     flex: 1,
@@ -248,24 +223,19 @@ const style = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "stretch",
     paddingRight: 10,
-    // backgroundColor: COLORS.darkBlue
   },
   closeModalIcon: {
-    // flex: .5,
-    // margin: 5,
-    // backgroundColor: COLORS.blue
+
   },
   buttonContainer: {
     flex: 1.5,
-    // marginBottom: 5,
-    // backgroundColor: COLORS.darkBlue
+
   },
   text: {
     textAlign: "center",
     fontSize: 20,
     margin: 10,
     fontWeight: "bold",
-    // backgroundColor: COLORS.darkBlue
   },
   containerList: {
     flex: 1,
@@ -275,7 +245,6 @@ const style = StyleSheet.create({
   },
   picker: {
     width: 180,
-    //backgroundColor: COLORS.red
   },
   contentImg: {
     width: 140,

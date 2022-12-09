@@ -15,7 +15,7 @@ export function Onboarding({ navigation }) {
         const hasId = await getData('@id')
 
         if (hasId) {
-           return ( navigation.navigate('TabsResponsible') )
+            return (navigation.navigate('TabsResponsible'))
         }
 
         verifyAlreadyLoggedIn()
@@ -26,7 +26,7 @@ export function Onboarding({ navigation }) {
 
         if (alreadyLoggedIn) {
             navigation.navigate('Login')
-        } 
+        }
     }
 
     useEffect(() => {

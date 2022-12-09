@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
     },
     dependentsContainer: {
         flex: 3,
-        // backgroundColor: COLORS.pink,
         flexDirection: 'row',
         alignItems: 'flex-end',
         paddingLeft: 20,
@@ -33,33 +32,22 @@ const styles = StyleSheet.create({
     },
     noDependentsContainer: {
         flex: 3,
-        // backgroundColor: COLORS.red,
         alignItems: 'flex-end',
         justifyContent: 'center',
-        // paddingLeft: 20,
-        // paddingBottom: 0,
     },
     noDependentsText: {
-        // backgroundColor: COLORS.pink,
         marginTop: 20,
         fontSize: 15,
     },
     noDependentsButton: {
         height: 100,
-        // alignItems: 'flex-end',
-        // justifyContent: 'center',
         alignSelf: 'stretch',
-        // backgroundColor: COLORS.pink,
     },
-    // scroll:{
-    //     width:'1%'
-    // }
     buttonContainer: {
         flex: 2.5,
         alignItems: 'flex-end',
         justifyContent: 'center',
         paddingRight: 50,
-        // backgroundColor: COLORS.red
     },
     modalContainer: {
         position: 'absolute',
@@ -71,16 +59,15 @@ const styles = StyleSheet.create({
         zIndex: 5,
     },
     textSelectGame: {
+
     },
     listGames: {
         width: '100%',
-
     },
     listGamesContainer: {
         alignItems: 'center',
         justifyContent: 'center',
     },
-
 
 });
 

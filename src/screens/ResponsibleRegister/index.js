@@ -2,8 +2,7 @@ import React from "react";
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import {
-    BackButton, FormSwiper, Google,
-    Header, Login, Title
+    BackButton, FormSwiper, Header, Title
 } from "../../components";
 import styles from "./style.js";
 
@@ -35,8 +34,8 @@ export function ResponsiveRegister({ navigation }) {
                     </View>
 
                     <View style={styles.loginContainer}>
-                        <Login label="ou entre com" />
-                        <Google />
+                        {/* <Login label="ou entre com" />
+                        <Google /> */}
 
                         <View style={style.loginDescriptionContainer}>
                             <Text style={style.loginQuestionText}>Você já tem uma conta?</Text>
@@ -62,8 +61,9 @@ const style = StyleSheet.create({
         flex: 1,
         alignSelf: 'stretch',
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'flex-end',
         justifyContent: 'center',
+        paddingBottom: 40,
     },
     loginQuestionText: {
         fontSize: 17,

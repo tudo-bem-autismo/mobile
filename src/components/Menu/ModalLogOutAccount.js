@@ -98,7 +98,6 @@ const style = StyleSheet.create({
         position: 'absolute',
         alignItems: 'center',
         justifyContent: 'flex-end',
-        // backgroundColor: COLORS.darkBlue,
     },
     modalContainer: {
         width: 300,

@@ -19,7 +19,6 @@ export const LoginDataForm = ({ responsibleData, navigation }) => {
             ...data
         }
 
-        // Chama a api enviando os dados do formulário, "data" são os "values"
         const result = await responsibleRegisterService(responsible)
 
         if (result.success) {
@@ -31,7 +30,6 @@ export const LoginDataForm = ({ responsibleData, navigation }) => {
 
     }
 
-    // Todos os campos irão iniciar com esses valores, ou seja, vazios
     const initialValues = {
         email: '',
         password: '',
@@ -44,15 +42,10 @@ export const LoginDataForm = ({ responsibleData, navigation }) => {
             <Formik
                 validateOnChange={false}
                 validateOnBlur={false}
-                // Informa como deve ser o formato dos dados
                 validationSchema={responsibleRegisterLoginDataSchema}
-                // Informa com quais dados o formulário irá iniciar
                 initialValues={initialValues}
-                // Evento de quando o formulário é enviado
-                // Ele recebe todos os dados dos inputs na variável "values"
                 onSubmit={values => handleForm(values)}
             >
-                {/* Mais propriedades do Formik para manipular o formulário */}
                 {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
                     <>
                         <View style={styles.inputsContainer}>

@@ -7,14 +7,12 @@ import attackButton from '../../assets/icons/botao-crise.png';
 
 export const MainHeader = ({ screenName, navigation }) => {
 
-    // console.log(navigation)
-
     return (
         <View style={styles.headerContainer}>
 
-            <TouchableOpacity 
-            style={styles.buttonMenu}
-            onPress={() => navigation.navigate('Menu')}
+            <TouchableOpacity
+                style={styles.buttonMenu}
+                onPress={() => navigation.navigate('Menu')}
             >
                 <MaterialIcons
                     name="notes"
@@ -27,7 +25,7 @@ export const MainHeader = ({ screenName, navigation }) => {
                 <Text style={styles.screenName}>{screenName}</Text>
             </View>
 
-            <TouchableOpacity 
+            <TouchableOpacity
                 style={styles.buttonAlert}
                 onPress={() => navigation.navigate('SupportButton')}
             >

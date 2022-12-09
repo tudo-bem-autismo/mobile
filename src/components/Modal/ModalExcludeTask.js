@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text } from "react-native";
+import React from "react";
+import { Dimensions, StyleSheet, Text, View } from "react-native";
 
-import modalBackground from '../../assets/images/modalBackground.png';
-import { FONTS, COLORS } from "../../assets/const";
+import { COLORS, FONTS } from "../../assets/const";
 import { Button } from "../Button";
-
 
 const { height } = Dimensions.get('window')
 
@@ -85,7 +83,6 @@ const style = StyleSheet.create({
         alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: COLORS.blue,
     },
     questionText: {
         fontSize: 22,
@@ -99,7 +96,6 @@ const style = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'space-evenly',
         flexDirection: 'row',
-        // backgroundColor: COLORS.purple,
     },
 
 });

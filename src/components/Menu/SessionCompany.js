@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, StyleSheet, Image, Text, Linking  } from "react-native";
+import { TouchableOpacity, StyleSheet, Image, Text, Linking } from "react-native";
 import { COLORS, FONTS } from "../../assets/const";
 
 export const SessionCompany = ({ image, label }) => {
@@ -33,7 +33,7 @@ const style = StyleSheet.create({
         borderBottomWidth: 1,
     },
     profileIcon: {
-        width: '15%',
+        width: '17%',
         height: '50%'
 
     },

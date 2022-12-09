@@ -1,5 +1,3 @@
-import { format } from "date-fns";
-import { da } from "date-fns/locale";
 import { showErrorToast } from "../utils/errors";
 import { getData } from "../utils/storage";
 import api from "./api";
@@ -78,8 +76,6 @@ export const getKidService = async (idDependent) => {
 
     }
 
-    // console.log(formattedData)
-
     return {
       success,
       data: formattedData
@@ -96,8 +92,6 @@ export const getKidService = async (idDependent) => {
 }
 
 export const updateKidService = async (data) => {
-
-
   try {
 
     const options = {
@@ -111,8 +105,6 @@ export const updateKidService = async (data) => {
     const dateY = data.date.split('/')[2]
 
     const dataFinal = dateY + '-' + dateM + '-' + dateD
-    //const dateY = date.split('/')[0]
-    //console.log(dateY)
     const idResponsible = await getData('@id')
 
     const formData = new FormData();
@@ -123,11 +115,7 @@ export const updateKidService = async (data) => {
     formData.append("id_nivel_autismo", data.autismLevelId);
     formData.append("id_responsavel", idResponsible);
 
-    // console.log(formData)
-
     const result = await api.put(`/crianca/${data.idDependent}`, formData, options);
-
-    // console.log(result)
 
     const success = result.status === 200
 

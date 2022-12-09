@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { COLORS, FONTS } from "../../assets/const";
 
@@ -14,7 +14,7 @@ export const CardScheduleHistory = ({ title, hour, image, selected, onPress, del
                 <View style={style.infoTaskContainer}>
 
                     <Image
-                        source={{uri : image}}
+                        source={{ uri: image }}
                         style={style.imageInfoTask}
                     />
 
@@ -44,7 +44,6 @@ const style = StyleSheet.create({
     container: {
         width: '100%',
         height: 110,
-        // backgroundColor: COLORS.black,
     },
     card: {
         width: '92%',
@@ -62,7 +61,6 @@ const style = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingLeft: 10,
-        // backgroundColor: COLORS.red,
     },
     imageInfoTask: {
         width: '17%',
@@ -73,7 +71,6 @@ const style = StyleSheet.create({
         alignSelf: 'stretch',
         justifyContent: 'center',
         paddingLeft: 10,
-        // backgroundColor: COLORS.red,
     },
     textTitleInfoTask: {
         fontFamily: FONTS.text,
@@ -88,7 +85,6 @@ const style = StyleSheet.create({
         flexDirection: 'row',
         top: 60,
         right: 30,
-        // backgroundColor: COLORS.pink
     },
     button: {
         width: 30,
@@ -98,7 +94,6 @@ const style = StyleSheet.create({
         borderRadius: 50,
         margin: 5,
         backgroundColor: COLORS.white,
-
     },
     imageExcludeButton: {
         width: '80%',
@@ -134,6 +129,5 @@ const style = StyleSheet.create({
         borderWidth: 8,
         borderColor: '#15dbc4',
         borderRadius: 50,
-        // backgroundColor: COLORS.blue
     }
 });

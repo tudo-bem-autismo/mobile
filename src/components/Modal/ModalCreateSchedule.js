@@ -1,26 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text, DatePickerIOSBase, Image, ScrollView } from "react-native";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
-import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { format } from "date-fns";
+import React, { useEffect, useState } from "react";
+import { Animated, Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Toast from "react-native-toast-message";
 
-import modalBackground from '../../assets/images/modalBackground.png';
-import clock from '../../assets/icons/clock.png';
-import { FONTS, COLORS } from "../../assets/const";
-import { BackButton, Button } from "../Button";
-import { Formik } from "formik";
-import { Input, MaskedInput } from "../Input";
-import { Picker } from "@react-native-picker/picker";
-import { getResponsibleDependentsService } from "../../services";
-import { Dependent } from "../DependentListing/Dependent";
 import { MaterialIcons } from "@expo/vector-icons";
-import { ModalGaleryTasks } from "./ModalGaleryTasks";
-import { scheduleCreateTaskDataSchema } from "../../utils/validations/Schedule";
-import { InputGaleryTasks } from "../Input/InputGaleryTasks";
+import { Picker } from "@react-native-picker/picker";
+import { Formik } from "formik";
+import { COLORS, FONTS } from "../../assets/const";
+import clock from '../../assets/icons/clock.png';
+import { getResponsibleDependentsService } from "../../services";
 import { getDaysService } from "../../services/day";
-import { getTasksService } from "../../services/task";
 import { taskRegisterService } from "../../services/schedule";
+import { scheduleCreateTaskDataSchema } from "../../utils/validations/Schedule";
+import { Dependent } from "../DependentListing/Dependent";
+import { Input } from "../Input";
+import { InputGaleryTasks } from "../Input/InputGaleryTasks";
+import { ModalGaleryTasks } from "./ModalGaleryTasks";
 
 const { height } = Dimensions.get('window')
 
@@ -91,8 +87,6 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
             idDay
         ])
 
-        // console.log(selectedDays);
-
     }
 
     const manageDependents = (dependent) => {
@@ -110,7 +104,6 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
             dependent
         ])
 
-        // console.log(selectedDependents);
 
     }
 
@@ -378,7 +371,6 @@ export const ModalCreateSchedule = ({ close, show, navigation }) => {
                                     </View>
 
                                     <InputGaleryTasks
-                                        // image={{uri : imageTask}}
                                         onPress={() => setModalGaleryTasks(true)}
                                         hasError={galeryHasError}
                                     />
@@ -459,19 +451,14 @@ const style = StyleSheet.create({
         width: '100%',
         height: '100%',
         position: 'absolute',
-        // backgroundColor: COLORS.red
     },
     modalContainer: {
         width: '100%',
         height: '100%',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        // bottom: 10,
-        // backgroundColor: COLORS.beige
     },
     scheduleContainer: {
-        // bottom: 0,
-        // position: 'absolute',
         height: '100%',
         width: '100%',
         borderTopLeftRadius: 50,
@@ -483,9 +470,7 @@ const style = StyleSheet.create({
     formContainer: {
         flex: 1,
         margin: 15,
-        // justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: COLORS.white
     },
     headerContainer: {
         position: 'absolute',
@@ -496,8 +481,6 @@ const style = StyleSheet.create({
         flexDirection: 'row',
         paddingLeft: 15,
         zIndex: 2,
-        // paddingRight: 20,
-        // backgroundColor: COLORS.darkBlue
     },
     textTitle: {
         fontSize: 25,
@@ -518,9 +501,7 @@ const style = StyleSheet.create({
     dateTimeContainer: {
         alignSelf: 'stretch',
         justifyContent: 'center',
-        // alignItems: 'center',
         margin: 10,
-        // backgroundColor: COLORS.red
     },
     timeContainer: {
         width: 160,
@@ -539,7 +520,6 @@ const style = StyleSheet.create({
         width: 150,
         height: 50,
         padding: 10
-        // backgroundColor: COLORS.red
     },
     textClock: {
         fontSize: 20,
@@ -588,7 +568,6 @@ const style = StyleSheet.create({
         flexDirection: 'row',
         marginLeft: 10,
         width: 250
-        // backgroundColor: COLORS.red
     },
     dependentButton: {
 
@@ -658,7 +637,6 @@ const style = StyleSheet.create({
         padding: 5
     },
     selectDependentsContainer: {
-        // backgroundColor q: COLORS.red,
         alignSelf: 'stretch',
         marginTop: 10
 
@@ -669,7 +647,7 @@ const style = StyleSheet.create({
         left: 280,
     },
     closeModalIcon: {
-        // paddingLeft: 300,
+
     }
 });
 

@@ -7,6 +7,8 @@ import { storeData } from "../../utils/storage";
 
 export const Option = ({ onPress, navigation, idDependent }) => {
 
+    storeData(idDependent, '@idDependent')
+
     return (
         <View
             style={style.buttonContainer}
@@ -15,11 +17,15 @@ export const Option = ({ onPress, navigation, idDependent }) => {
 
             <TouchableOpacity
                 style={style.button}
+<<<<<<< HEAD
                 onPress={async() => {
                         await storeData(idDependent,'@idDependent')
                         navigation.navigate('TabsDependent')
                     }
                 }
+=======
+                onPress={() => navigation.navigate('TabsDependent')}
+>>>>>>> 9c5305ff9024c5e69736634810fc29971654bbf5
             >
                 <Text style={style.textButton}>ENTRAR</Text>
             </TouchableOpacity>

@@ -1,8 +1,7 @@
 import * as yup from 'yup';
-import { yupToFormErrors } from 'formik';
 
 const phoneMask = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
-// Variável que cria um Schema para descrever tais tipos de dados a serem requiridos para cada campo
+
 export const responsibleRegisterPersonalDataSchema = yup.object().shape({
     name: yup
         .string()

@@ -133,6 +133,7 @@ const styles = StyleSheet.create({
   },
   input: {
     borderColor: COLORS.black,
+    backgroundColor: COLORS.white,
     width: "75%",
     height: 50,
     textAlign: "center",
@@ -152,6 +153,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     borderColor: COLORS.red,
+    backgroundColor: COLORS.white,
     padding: 10,
     fontSize: 17,
     color: COLORS.black,

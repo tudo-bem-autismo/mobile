@@ -13,9 +13,12 @@ import { Button } from "../Button";
 import { PlayButton } from "../Button/PlayButton";
 import { Dependent } from "../DependentListing";
 import { Game } from "../Games/Game";
+<<<<<<< HEAD
 import clothes from "../../assets/images/clothes.gif";
 // import Navigation from '../../navigation/navigation';
 // import profileKidImage from '../../assets/images/profile-kid.png'
+=======
+>>>>>>> 9c5305ff9024c5e69736634810fc29971654bbf5
 
 const { height } = Dimensions.get('window')
 
@@ -258,14 +261,6 @@ export const ModalApplyChildGame = ({ close, show, selectedGameId, navigation })
 
 }
 
-const bottomShadow = {
-    shadowOffset: { width: 0, height: 0, },
-    shadowColor: 'black',
-    shadowOpacity: 1,
-    shadowRadius: 5,
-    elevation: 5,
-}
-
 const style = StyleSheet.create({
     mainContainer: {
         width: '100%',
@@ -275,20 +270,16 @@ const style = StyleSheet.create({
         left: 0,
         alignItems: 'center',
         justifyContent: 'center',
-        // backgroundColor: COLORS.red
     },
     container: {
         width: '100%',
         height: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-        // backgroundColor: COLORS.blue
-
     },
     modalContainer: {
         height: '100%',
         width: '100%',
-        // backgroundColor: COLORS.blue
     },
     blurContainer: {
         position: 'absolute',
@@ -321,13 +312,11 @@ const style = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'stretch',
-        // backgroundColor: COLORS.pink
     },
     dependentsList: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        // backgroundColor: COLORS.pink
     },
     scrollList: {
     },
@@ -337,7 +326,6 @@ const style = StyleSheet.create({
         justifyContent: 'flex-start',
         alignSelf: 'stretch',
         position: 'relative',
-        // backgroundColor: COLORS.red
     },
     closeModalIconContainer: {
         flex: 1,
@@ -345,23 +333,17 @@ const style = StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'stretch',
         paddingRight: 10,
-        // backgroundColor: COLORS.darkBlue
     },
     closeModalIcon: {
-        // flex: .5,
-        // margin: 5,
-        // backgroundColor: COLORS.blue
+
     },
     buttonContainer: {
         flex: 1,
         marginBottom: 20,
-        // backgroundColor: COLORS.darkBlue
     },
     text: {
         textAlign: 'center',
         fontSize: 20,
         marginTop: 15,
-        // backgroundColor: COLORS.darkBlue
-
     }
 });

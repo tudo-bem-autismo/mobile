@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
 import { COLORS, FONTS } from "../../assets/const";
 
@@ -8,7 +8,7 @@ export const ButtonSchedule = ({ label, borderColor, onPress }) => {
     return (
 
         <TouchableOpacity
-            style={{ ...style.buttonContainer, borderColor}}
+            style={{ ...style.buttonContainer, borderColor }}
             onPress={() => onPress()}
         >
             <Text style={style.textButton}>{label}</Text>

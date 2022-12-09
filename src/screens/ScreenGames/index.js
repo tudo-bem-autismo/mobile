@@ -1,15 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, StatusBar } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StatusBar, StyleSheet, View } from 'react-native';
+import { ButtonAlert, ComponentGamesTwo } from '../../components';
 import { ComponentGames } from '../../components/ComponentGames';
-import { ButtonAlert, ButtonGames, ButtonImage, ComponentGamesTwo } from '../../components';
-import { getStepGames } from '../../services/game';
 import { getReports } from '../../services';
+import { getStepGames } from '../../services/game';
 import { Loading } from '../Loading';
-import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
-import { COLORS } from '../../assets/const';
-import { CongratulationsScreen } from '../CongratulationsScreen';
-import { MedalScreen } from '../MedalScreen';
-import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
 
 export function ScreenGames({ route, navigation }) {
 
@@ -47,10 +42,15 @@ export function ScreenGames({ route, navigation }) {
         ]
 
     }])
+
     const [currentStep, setCurrenteStep] = useState(0)
+
     const [isLoading, setIsLoading] = useState(true)
+
     const [hits, setHits] = useState(0)
+
     const [mistakes, setMistakes] = useState(0)
+
     const [currentGame, setCurrentGame] = useState({
         "id": 0,
         "ordem": 1,
@@ -104,8 +104,6 @@ export function ScreenGames({ route, navigation }) {
         } else {
             navigation.navigate('CongratulationsScreen', { idGames })
         }
-
-        // setIsLoading(true)
 
         setTimeout(() => {
             clearGame()
@@ -205,12 +203,7 @@ export function ScreenGames({ route, navigation }) {
     }
 
     useEffect(() => {
-
-        // if(game[0].id == 0){
-
         getGames()
-        // }
-        // setCurrentGame(game[0])
     }, [gameLoaded])
 
     return (
@@ -256,7 +249,6 @@ export function ScreenGames({ route, navigation }) {
                     </View>
 
                 )
-                // : (<Loading />)
             )}
 
 

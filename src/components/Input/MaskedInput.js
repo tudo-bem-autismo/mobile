@@ -24,7 +24,7 @@ export const MaskedInput = ({
 
             <Text style={styles.inputText}>{title}</Text>
 
-            <View>
+            <View style={styles.container}>
                 <FontAwesome
                     name={hasError ? "times-circle" : iconName}
                     style={hasError ? styles.errorIcon : styles.icon}
@@ -56,6 +56,9 @@ const styles = StyleSheet.create({
         position: 'relative',
         justifyContent: 'flex-start',
         padding: 10,
+    },
+    container: {
+        backgroundColor: COLORS.white
     },
     icon: {
         position: 'absolute',

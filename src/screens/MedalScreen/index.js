@@ -1,27 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { View, Image, Text, TouchableOpacity } from 'react-native';
-import { ButtonAlert, Button } from '../../components';
-import styles from './style.js';
+import React, { useEffect, useState } from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { ButtonAlert } from '../../components';
 import { Loading } from '../Loading';
-// import { getMedalsDependent } from '../../services/medal';
-// import { GamesDependent } from '../GamesDependent';
-// import { getReports } from '../../services';
-import { getData } from '../../utils/storage';
+import styles from './style.js';
 
-export const MedalScreen = ({ route, navigation }) => {
-    
+export function MedalScreen({ route, navigation }) {
+
     let { nome, medalha } = route.params.data
     let { idGames } = route.params
+
     const [isLoading, setIsLoading] = useState(true);
-    // const idDependent = await getData('@idDependent')
-    // console.log(idDependent)
 
     useEffect(() => {
         if (medalha)
             setIsLoading(false)
-
     }, [])
-
 
     return (
         <>

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text } from "react-native";
+import { Animated, Dimensions, ImageBackground, StyleSheet, Text, View } from "react-native";
 
+import { COLORS, FONTS } from "../../assets/const";
 import modalBackground from '../../assets/images/modalBackground.png';
-import { FONTS, COLORS } from "../../assets/const";
 import { Button } from "../Button";
 
 
@@ -58,14 +58,11 @@ export const ModalSaveData = ({ label, close, show, save }) => {
                 }]}
             >
 
-                {/* <View style={style.modal}> */}
                 <ImageBackground
                     source={modalBackground}
                     style={style.modalBackground}
                     resizeMode="cover"
                 >
-                    {/* <View style={style.modalContainer}> */}
-
 
                     <View style={style.questionContainer}>
                         <Text style={style.questionText}>{label}</Text>
@@ -91,9 +88,8 @@ export const ModalSaveData = ({ label, close, show, save }) => {
                             onPress={save}
                         />
                     </View>
-                    {/* </View> */}
+
                 </ImageBackground>
-                {/* </View> */}
 
             </Animated.View>
         </Animated.View >
@@ -133,14 +129,12 @@ const style = StyleSheet.create({
         height: '100%',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        // backgroundColor: COLORS.darkBlue,
     },
     modalBackground: {
         width: '100%',
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: COLORS.gray
     },
     questionContainer: {
         flex: 1,
@@ -148,10 +142,8 @@ const style = StyleSheet.create({
         alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
-        // marginTop: 20,
         top: 50,
         marginLeft: 30,
-        // backgroundColor: COLORS.blue,
     },
     questionText: {
         fontSize: 25,
@@ -168,15 +160,12 @@ const style = StyleSheet.create({
         paddingHorizontal: 15,
         marginBottom: 100,
         margin: 35,
-        // backgroundColor: COLORS.purple,
     },
     buttonContainer: {
         flex: 2,
         alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'center',
-        // paddingBottom: 150,
-        // backgroundColor: COLORS.darkBlue,
     },
     button: {
         width: 100,

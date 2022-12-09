@@ -1,10 +1,8 @@
 import { showErrorToast } from "../utils/errors";
-// import { getData } from "../utils/storage";
 import api from "./api";
 
 export const getTasksService = async (idDependent) => {
     try {
-
 
         const result = await api.get(`/tarefa/crianca/${idDependent}`)
 
@@ -31,7 +29,6 @@ export const getTasksService = async (idDependent) => {
 
     } catch (error) {
         console.log(error);
-
         showErrorToast(error.response.data.message)
         return {
             success: false,
@@ -75,7 +72,6 @@ export const getHistoryTask = async (idDependent, period) => {
 export const getTaskByIdService = async (idTask) => {
     try {
 
-
         const result = await api.get(`/tarefa/${idTask}`)
 
         const success = result.status === 200
@@ -95,8 +91,6 @@ export const getTaskByIdService = async (idTask) => {
             icon: result.data.id_icone,
         }
 
-        // console.log(formattedData)
-
         return {
             success,
             data: formattedData
@@ -105,7 +99,6 @@ export const getTaskByIdService = async (idTask) => {
 
     } catch (error) {
         console.log(error);
-
         showErrorToast(error.response.data.message)
         return {
             success: false,
@@ -154,7 +147,7 @@ export const taskIsDoneService = async (data) => {
 
         const result = await api.post("/tarefa/realizacao", formattedData);
 
-        const success = result.status === 200
+        const success = result.status === 201
 
         return {
             success,
@@ -162,9 +155,7 @@ export const taskIsDoneService = async (data) => {
         }
 
     } catch (error) {
-        // console.log(error)
         showErrorToast(error.response.data.message)
-
         return {
             success: false,
             data: error.response.data
@@ -185,7 +176,6 @@ export const deleteTaskService = async (idTask) => {
         }
 
     } catch (error) {
-        // console.log(error)
         showErrorToast(error.response.data.message)
         return {
             success: false,
@@ -218,9 +208,11 @@ export const updateTaskService = async (data) => {
         }
 
     } catch (error) {
+<<<<<<< HEAD
         // console.log(error)
+=======
+>>>>>>> 9c5305ff9024c5e69736634810fc29971654bbf5
         showErrorToast(error.response.data.message)
-
         return {
             success: false,
             data: error.response.data

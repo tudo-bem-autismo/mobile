@@ -1,21 +1,20 @@
+import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Toast from 'react-native-toast-message';
-import { Formik } from "formik";
 
-
-import { BackButton, Button, Input, LoginDescription, MaskedInput } from "../../components";
-import style from "./style.js";
+import { FONTS } from "../../assets/const";
 import { COLORS } from "../../assets/const/colors.js";
 import backgroundManagement from '../../assets/images/backgroundManagement.png';
+import { BackButton, Button, Input, MaskedInput } from "../../components";
 import { ModalDeleteData } from "../../components/Modal/ModalDeleteData.js";
 import { ModalSaveData } from "../../components/Modal/ModalSaveData";
 import { Profile } from "../../components/ResponsibleManagement/Profile.js";
 import { deleteResponsibleService, getResponsibleService, updateResponsibleService } from "../../services/responsible.js";
+import { clearData } from "../../utils/storage";
 import { responsibleUpdateSchema } from "../../utils/validations/responsible/index.js";
 import { Loading } from "../Loading";
-import { FONTS } from "../../assets/const";
-import { clearData } from "../../utils/storage";
+import style from "./style.js";
 
 export function ResponsibleManagement({ navigation }) {
 
@@ -43,9 +42,12 @@ export function ResponsibleManagement({ navigation }) {
 
         setShowModalSaveData(false)
 
+        setIsLoading(true)
+
         const result = await updateResponsibleService(data)
 
         if (result.success) {
+            setIsLoading(false)
             return Toast.show({
                 type: 'success',
                 text1: 'Dados atualizados com sucesso',

@@ -2,7 +2,6 @@ import { StatusBar, StyleSheet } from "react-native";
 
 import { COLORS, FONTS } from "../../assets/const";
 
-
 const style = StyleSheet.create({
     loadingContainer: {
         flex: 2,

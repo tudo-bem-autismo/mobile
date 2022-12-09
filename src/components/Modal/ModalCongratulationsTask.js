@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { ImageBackground, View, StyleSheet, TouchableOpacity, Animated, Dimensions, Text, Image } from "react-native";
+import React from "react";
+import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 
-import { FONTS, COLORS } from "../../assets/const";
-import { Button } from "../Button";
+import { COLORS, FONTS } from "../../assets/const";
 import congratulations from "../../assets/images/congratulations.gif";
+import { Button } from "../Button";
 
 const { height } = Dimensions.get('window')
 
@@ -52,7 +52,6 @@ export const ModalCongratulationsTask = ({ close, show, navigation }) => {
 
 }
 
-
 const bottomShadow = {
     shadowOffset: { width: 0, height: 0, },
     shadowColor: 'black',
@@ -86,7 +85,6 @@ const style = StyleSheet.create({
         alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: COLORS.blue,
     },
     questionText: {
         fontSize: 20,
@@ -96,7 +94,6 @@ const style = StyleSheet.create({
     imageContainer: {
         flex: 2,
         alignSelf: 'stretch',
-        // backgroundColor: COLORS.red
     },
     image: {
         width: '100%',
@@ -108,15 +105,12 @@ const style = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'space-evenly',
         flexDirection: 'row',
-        // backgroundColor: COLORS.purple,
     },
     buttonContainer: {
         flex: 2,
         alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'center',
-        // paddingBottom: 150,
-        // backgroundColor: COLORS.darkBlue,
     },
     button: {
         width: 100,

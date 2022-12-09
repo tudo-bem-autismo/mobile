@@ -34,7 +34,7 @@ export const Input = ({
                 />
 
             </View>
-            
+
             {hasError && (
                 <Text style={styles.errorText}>
                     {errorMessage}
@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
         position: 'relative',
         justifyContent: 'flex-start',
         padding: 10,
-        // backgroundColor: COLORS.blue
     },
     icon: {
         position: 'absolute',

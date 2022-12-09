@@ -10,7 +10,6 @@ const shadow = {
   elevation: 20,
 }
 
-
 const style = StyleSheet.create({
   mainContainer: {
     display: 'flex',

@@ -10,10 +10,9 @@ import { Button } from "../Button";
 import { Dependent } from "../DependentListing/Dependent";
 
 import notFoundTask from '../../assets/images/notFoundTask.gif';
-import { deleteTaskService, getTasksService, taskIsDoneService } from "../../services/task";
+import { deleteTaskService, getTasksService } from "../../services/task";
 import { DAYS_OFF_WEEK, getTodayInitials } from '../../utils/date/days';
 import { CardSchedule } from "../ScheduleResponsible/CardSchedule";
-import { ModalCongratulationsTask } from "./ModalCongratulationsTask";
 import { ModalEditTask } from "./ModalEditTask";
 import { ModalExludeTask } from "./ModalExcludeTask";
 import { ModalHistoryTasks } from "./ModalHistoryTasks";
@@ -80,12 +79,10 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
 
         const initialDailyTasks = result.data.filter((item) => item.day === selectedDay);
         setDailyTasks(initialDailyTasks);
-        // console.log(dailyTasks)
     }
 
     const handleDailyTasks = (day) => {
         const newDailyTasks = tasks.filter((item) => item.day === day);
-
         setDailyTasks(newDailyTasks);
         setSelectedDay(day);
     }
@@ -275,7 +272,6 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
                                                         )
                                                     }
 
-
                                                     <View style={style.cardInvisible}></View>
 
                                                 </ScrollView>
@@ -301,14 +297,6 @@ export const ModalListingSchedule = ({ close, show, navigation, idDependent }) =
 
     );
 
-}
-
-const bottomShadow = {
-    shadowOffset: { width: 0, height: 0, },
-    shadowColor: 'black',
-    shadowOpacity: 1,
-    shadowRadius: 5,
-    elevation: 5,
 }
 
 const style = StyleSheet.create({
@@ -339,10 +327,8 @@ const style = StyleSheet.create({
         top: -100,
         marginTop: 20,
         flexDirection: 'row',
-        // backgroundColor: COLORS.red,
     },
     backButton: {
-        // backgroundColor: COLORS.red,
         flexDirection: 'row',
         alignItems: 'center',
         marginRight: 40,
@@ -350,15 +336,13 @@ const style = StyleSheet.create({
     },
     textBackButton: {
         fontSize: 20,
-
     },
     dependentContainer: {
-        // backgroundColor: COLORS.pink,
+
     },
     listingContainer: {
         flex: 1,
         marginTop: 70,
-        // backgroundColor: COLORS.white,
         alignSelf: 'stretch'
     },
     selectedDayButton: {
@@ -395,11 +379,10 @@ const style = StyleSheet.create({
         height: 350,
     },
     tasksContainer: {
-        // paddingBottom: 50,
-        // backgroundColor: COLORS.yellowBold
+
     },
     cardsContainer: {
-        // backgroundColor: COLORS.red
+
     },
     cardInvisible: {
         width: '92%',
@@ -411,7 +394,6 @@ const style = StyleSheet.create({
         height: 300,
         alignItems: 'center',
         justifyContent: 'center',
-        // backgroundColor: COLORS.red
     },
     textNotFoundCard: {
         fontFamily: FONTS.text,
@@ -421,7 +403,6 @@ const style = StyleSheet.create({
     imageNotFoundCard: {
         width: '50%',
         height: '50%',
-        // backgroundColor: COLORS.purple
     }
 });
 

@@ -1,14 +1,23 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, StatusBar, Text } from 'react-native';
 import { COLORS } from '../../assets/const/colors';
+=======
+import React from 'react';
+import { StatusBar, StyleSheet, View } from 'react-native';
+>>>>>>> 9c5305ff9024c5e69736634810fc29971654bbf5
 import { ButtonImage } from '../../components/Button/ButtonImage';
-import { ButtonImageTwo } from '../Button/ButtonImageTwo';
 import { TextGamesTwo } from '../../components/TextGamesTwo';
+<<<<<<< HEAD
 import { FONTS } from '../../assets/const';
+=======
+import { ButtonImageTwo } from '../Button/ButtonImageTwo';
+>>>>>>> 9c5305ff9024c5e69736634810fc29971654bbf5
 
 export const ComponentGamesTwo = ({ firstStepImage, secondStepImage, firstStepText, correctStepFunction = () => { }, incorrectStepFunction = () => { }, firstStepCorrect }) => {
     return (
         <View style={styles.mainContainer}>
+<<<<<<< HEAD
             <View style={styles.buttonsContainer}>
 
                 <ButtonImage
@@ -27,6 +36,22 @@ export const ComponentGamesTwo = ({ firstStepImage, secondStepImage, firstStepTe
                     onPress={() => firstStepCorrect ? incorrectStepFunction() : correctStepFunction()}
                 />
             </View>
+=======
+            <ButtonImage
+                borderRadius={80}
+                widht={150}
+                height={149}
+                srcImage={firstStepImage}
+                onPress={() => firstStepCorrect ? correctStepFunction() : incorrectStepFunction()}
+            />
+            <ButtonImageTwo
+                borderRadius={80}
+                widht={150}
+                height={149}
+                srcImage={secondStepImage}
+                onPress={() => firstStepCorrect ? incorrectStepFunction() : correctStepFunction()}
+            />
+>>>>>>> 9c5305ff9024c5e69736634810fc29971654bbf5
             <TextGamesTwo
                 labelText={firstStepText}
             />
@@ -42,6 +67,7 @@ export const ComponentGamesTwo = ({ firstStepImage, secondStepImage, firstStepTe
 const styles = StyleSheet.create({
     mainContainer: {
         display: 'flex',
+<<<<<<< HEAD
         // flex: 2,
         width: '100%',
         height:'100%',
@@ -49,8 +75,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         // position: 'relative',
+=======
+        flex: 2,
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+>>>>>>> 9c5305ff9024c5e69736634810fc29971654bbf5
         marginTop: StatusBar.currentHeight,
-        // backgroundColor:COLORS.purpleContainer,
     },
     buttonsContainer:{
         width:'100%',

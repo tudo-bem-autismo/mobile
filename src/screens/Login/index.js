@@ -2,9 +2,7 @@ import React from "react";
 import { ImageBackground, SafeAreaView, View } from "react-native";
 
 import {
-    FormLogin, Google,
-    Header, Login,
-    LoginDescription,
+    FormLogin, Header, LoginDescription,
     Title
 } from "../../components";
 import styles from "./style.js";
@@ -42,8 +40,8 @@ export function ResponsiveLogin({ navigation }) {
                     </View>
 
                     <View style={styles.loginContainer}>
-                        <Login label="ou entre com" />
-                        <Google />
+                        {/* <Login label="ou entre com" />
+                        <Google /> */}
                         <LoginDescription
                             question="Não tem uma conta?"
                             answer="Cadastre-se"

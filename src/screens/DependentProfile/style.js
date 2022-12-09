@@ -21,19 +21,16 @@ const styles = StyleSheet.create({
         flex: 2,
         margin: 20,
         alignSelf: 'stretch',
-        // backgroundColor: COLORS.red
     },
     dependentContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        // backgroundColor: COLORS.darkBlue,
     },
     cardsContainer: {
         flex: 6,
         alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        // backgroundColor: COLORS.blue
     },
     cardContainer: {
         width: '85%',
@@ -53,7 +50,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 25,
         fontFamily: FONTS.mandali,
-        // backgroundColor: COLORS.beige
     },
     medalsContainer: {
         flex: 2,
@@ -61,14 +57,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'stretch',
         flexDirection: 'row',
-        // backgroundColor: COLORS.gray,
     },
     medalContainer: {
         flex: 2,
         marginBottom: 30,
         alignItems: 'center',
         justifyContent: 'center',
-        // backgroundColor: COLORS.white
     },
     imageMedal: {
         width: 60,
@@ -85,13 +79,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'stretch',
-        // backgroundColor: COLORS.white
     },
     aboutContainer: {
         padding: 10,
         alignItems: 'center',
         justifyContent: 'center',
-        // backgroundColor: COLORS.red,
     },
     titleAbout: {
         fontSize: 22,

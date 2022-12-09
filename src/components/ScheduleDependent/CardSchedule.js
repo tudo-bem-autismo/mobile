@@ -4,7 +4,6 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { COLORS, FONTS } from "../../assets/const";
 
 import done from "../../assets/icons/done.png";
-import block from "../../assets/icons/block.png";
 
 export const CardScheduleDependent = ({ title, hour, image, selected, onPress, isToday }) => {
 
@@ -34,7 +33,6 @@ export const CardScheduleDependent = ({ title, hour, image, selected, onPress, i
                     <TouchableOpacity
                         onPress={() => onPress()}
                         style={!isToday || selected ? style.doneButton : style.button}
-                    // disabled={!isToday || selected}
                     >
 
                         {
@@ -70,7 +68,6 @@ const style = StyleSheet.create({
     container: {
         width: '100%',
         height: 110,
-        // backgroundColor: COLORS.black,
     },
     card: {
         width: '92%',
@@ -88,7 +85,6 @@ const style = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingLeft: 10,
-        // backgroundColor: COLORS.red,
     },
     imageInfoTask: {
         width: '17%',
@@ -99,7 +95,6 @@ const style = StyleSheet.create({
         alignSelf: 'stretch',
         justifyContent: 'center',
         paddingLeft: 10,
-        // backgroundColor: COLORS.red,
     },
     textTitleInfoTask: {
         fontFamily: FONTS.text,
@@ -114,7 +109,6 @@ const style = StyleSheet.create({
         flexDirection: 'row',
         top: 60,
         right: 30,
-        // backgroundColor: COLORS.pink
     },
     button: {
         width: 30,
@@ -129,7 +123,6 @@ const style = StyleSheet.create({
     doneButton: {
         width: 30,
         height: 30,
-        // backgroundColor: COLORS.pink,
     },
     blockedButton: {
         width: 30,
@@ -179,6 +172,5 @@ const style = StyleSheet.create({
         borderWidth: 8,
         borderColor: '#15dbc4',
         borderRadius: 50,
-        // backgroundColor: COLORS.blue
     }
 });

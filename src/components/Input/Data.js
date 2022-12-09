@@ -62,7 +62,6 @@ export function DataInput({ date, setDate, hasError, value }) {
                         mode='date'
                         display='default'
                         maximumDate={new Date()}
-                        //timeZoneOffsetInMinutes={-7}
                         onChange={handleDate} />
                 )}
             </View>

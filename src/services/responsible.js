@@ -23,7 +23,6 @@ export const responsibleRegisterService = async (data) => {
         }
 
     } catch (error) {
-        // console.log(error)
         showErrorToast(error.response.data.message)
 
         return {

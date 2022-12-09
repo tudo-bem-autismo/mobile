@@ -24,7 +24,6 @@ export const responsibleLoginService = async (data) => {
             data: formattedResultData
         }
     } catch (error) {
-        // console.log(error)
         showErrorToast(error.response.data.message)
         return {
             sucess: false,
